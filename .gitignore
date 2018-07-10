@@ -2,6 +2,7 @@
 .cache
 .DS_Store
 .sass-cache
+.tmp/
 build/
 vendor/bundle
 node_modules

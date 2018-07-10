@@ -14,8 +14,9 @@ set :layouts_dir, 'layouts'
 
 activate :external_pipeline,
   name: :gulp,
-  command: build? ? './node_modules/gulp/bin/gulp.js' : './node_modules/gulp/bin/gulp.js watch',
-  source: "source"
+  command: build? ? './node_modules/gulp/bin/gulp.js build' : './node_modules/gulp/bin/gulp.js watch',
+  source: ".tmp/dist",
+  latency: 0.25
 
 # Layouts
 # https://middlemanapp.com/basics/layouts/
@@ -57,11 +58,9 @@ page '/*.txt', layout: false
 
 
 configure :build do
-  activate :minify_css
-  activate :minify_javascript
   activate :asset_host, :host => "/mapprint"
-  ignore 'stylesheets/*'
-  ignore 'javascripts/*'
+  ignore /stylesheets\/.*\.scss/
+  ignore /javascripts\/(?!bundle).*\.js/
 end
 
 activate :deploy do |deploy|

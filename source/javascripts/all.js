@@ -22,7 +22,7 @@ $(function(){
         }
     ).addTo( map );
 
-    $.getJSON('/images/water-supply.geojson', function (data) {
+    $.getJSON('./images/water-supply.geojson', function (data) {
         var geojson = L.geoJson(data, {
           onEachFeature: function (feature, layer) {
             var field = '名称: '+feature.properties.name+ '<br>'+

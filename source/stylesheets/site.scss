@@ -29,10 +29,13 @@ a {
 #list {
   text-align: left;
   width: 100%;
-  .id {
-    width: 10%;
-  }
-  .value {
-    width: 50%;
+  table {
+    width: 100%;
+    .id {
+      width: 10%;
+    }
+    .value {
+      width: 50%;
+    }
   }
 }

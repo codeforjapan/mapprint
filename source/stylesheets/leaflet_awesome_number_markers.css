@@ -1,6 +1,6 @@
 /* Marker setup */
 .awesome-number-marker {
-  background: url('images/markers-soft.png') no-repeat 0 0;
+  background: url('../images/markers-soft.png') no-repeat 0 0;
   width: 35px;
   height: 46px;
   position:absolute;

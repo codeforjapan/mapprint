@@ -54,6 +54,9 @@ $(function(){
                             if (index % 2 == 1){
                                 $('#list').append('</tr>');
                             }
+                            layer.setIcon(new L.AwesomeNumberMarkers({
+                                number: index, 
+                                markerColor: "blue"}));
                             //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
                             index += 1;
                         }

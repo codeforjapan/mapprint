@@ -28,14 +28,19 @@ a {
 }
 #list {
   text-align: left;
-  width: 100%;
+  width: 100vw;
   table {
-    width: 100%;
-    .id {
-      width: 10%;
-    }
-    .value {
-      width: 50%;
-    }
+    width: 100vw;
+  }
+  td {
+    border-collapse: collapse;
+    border:1px solid #333;
+    padding: 2px;
+  }
+  td.id {
+    width: 5vw;
+  }
+  td.value {
+    width: 45vw;
   }
 }

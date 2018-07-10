@@ -47,7 +47,8 @@ configure :build do
 end
 activate :deploy do |deploy|
   deploy.build_before = true
-  deploy.method = :git
+  deploy.deploy_method = :git
+  deploy.remote = 'git@github.com:codeforjapan/mapprint.git'
   deploy.branch = 'gh-pages'
 end
 

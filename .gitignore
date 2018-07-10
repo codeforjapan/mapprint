@@ -4,3 +4,4 @@
 .sass-cache
 build/
 vendor/bundle
+node_modules

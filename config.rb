@@ -5,6 +5,18 @@ activate :autoprefixer do |prefix|
   prefix.browsers = "last 2 versions"
 end
 
+ignore 'REAMDME.md'
+
+set :css_dir, 'stylesheets'
+set :js_dir, 'javascripts'
+set :images_dir, 'images'
+set :layouts_dir, 'layouts'
+
+activate :external_pipeline,
+  name: :gulp,
+  command: build? ? './node_modules/gulp/bin/gulp.js' : './node_modules/gulp/bin/gulp.js watch',
+  source: "source"
+
 # Layouts
 # https://middlemanapp.com/basics/layouts/
 set :haml, { :format => :html5 }
@@ -48,6 +60,8 @@ configure :build do
   activate :minify_css
   activate :minify_javascript
   activate :asset_host, :host => "/mapprint"
+  ignore 'stylesheets/*'
+  ignore 'javascripts/*'
 end
 
 activate :deploy do |deploy|

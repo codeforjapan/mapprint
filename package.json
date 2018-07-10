@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codeforjapan/mapprint/issues"
   },
-  "homepage": "https://github.com/codeforjapan/mapprint#readme"
+  "homepage": "https://github.com/codeforjapan/mapprint#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }

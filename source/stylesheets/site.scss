@@ -26,3 +26,13 @@ a {
   width: 100%;
   height: 600px;
 }
+#list {
+  text-align: left;
+  width: 100%;
+  .id {
+    width: 10%;
+  }
+  .value {
+    width: 50%;
+  }
+}

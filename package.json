@@ -19,6 +19,8 @@
   "devDependencies": {
     "browserify": "^16.2.2",
     "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1",
+    "node-neat": "^2.0.0-beta.0",
     "vinyl-source-stream": "^2.0.0"
   }
 }

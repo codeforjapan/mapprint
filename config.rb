@@ -7,6 +7,9 @@ end
 
 # Layouts
 # https://middlemanapp.com/basics/layouts/
+set :haml, { :format => :html5 }
+Haml::TempleEngine.disable_option_validator!
+
 
 # Per-page layout changes
 page '/*.xml', layout: false
@@ -40,11 +43,13 @@ page '/*.txt', layout: false
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
+
 configure :build do
   activate :minify_css
   activate :minify_javascript
   activate :asset_host, :host => "/mapprint"
 end
+
 activate :deploy do |deploy|
   deploy.build_before = true
   deploy.deploy_method = :git

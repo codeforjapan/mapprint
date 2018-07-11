@@ -1,6 +1,6 @@
 
 var L = require('leaflet');
-var $ = require('jQuery');
+var $ = require('jquery');
 var numberIcon = require('./leaflet_awesome_number_markers');
 
 $(function(){

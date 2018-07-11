@@ -16,7 +16,17 @@
 
 [Issues](https://github.com/codeforjapan/mapprint/issues) にあるいろいろな修正にご協力いただけると嬉しいです。プロジェクトに関する議論は主にGithubのIssueで行っています。是非ご参加ください！
 
+上がっている Issue で、対応できるものがあるという方は、ぜひ Pull Request を送ってください。
+
+開発環境の構築手順については、[README](/README.md)を確認してください。
+
+手元環境で修正できたら、[Pull Request の送り方](https://qiita.com/Commander-Aipa/items/d61d21988a36a4d0e58b) を参考にPull Requestを送ってみましょう！
+
+まずは↓に自分のアカウントを加えてみては？
+
 ## 現在の参加者
+
+[halsk](https://github.com/halsk)
 
 ## プロジェクトサポート
 

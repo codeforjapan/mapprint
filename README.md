@@ -51,5 +51,10 @@ bundle exec middleman build
 bundle exec middleman deploy
 ```
 
+### test
+```
+npm test
+```
+
 このリポジトリへの push 権限が必要。
 github pages で作られているので、gh-pages ブランチが更新されます。

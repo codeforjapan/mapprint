@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/jasmine/bin/jasmine.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "browserify": "^16.2.2",
     "gulp": "^3.9.1",
     "gulp-sass": "^4.0.1",
+    "jasmine": "^3.1.0",
     "node-neat": "^2.0.0-beta.0",
     "vinyl-source-stream": "^2.0.0"
   },

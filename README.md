@@ -13,6 +13,7 @@ https://codeforjapan.github.io/mapprint/
 ## Help Wanted!!
 
 Issues にあるいろいろな修正にご協力いただけると嬉しいです。
+詳しくは[こちら](./CONTRIBUTE.md)
 
 ## 開発環境の構築方法
 

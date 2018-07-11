@@ -22,8 +22,15 @@ $(function(){
           maxZoom: 18
         }
     ).addTo( map );
+
+    // 説明の表示/非表示
     $('#close').on('click', function(){
-        $('#explain').hide()
+        $('.explain-container').toggle()
+        if ($('#close').text() == '閉じる') {
+          $('#close').text('開く')
+        } else {
+          $('#close').text('閉じる')
+        }
     });
 
     $.ajax('./images/water-supply.kml').done(function (data) {
@@ -35,7 +42,7 @@ $(function(){
           onEachFeature: function (feature, layer) {
             var field = '名称: '+feature.properties.name+ '<br>'+
             '詳細: '+feature.properties.description;
-    
+
             layer.bindPopup(field);
           }
         });
@@ -76,7 +83,7 @@ $(function(){
                                 marker = 'darkpuple';
                             }
                             layer.setIcon(new L.AwesomeNumberMarkers({
-                                number: index + 1, 
+                                number: index + 1,
                                 markerColor: marker
                             }));
                             //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
@@ -86,5 +93,5 @@ $(function(){
 				    //that._list.appendChild( that._createItem(layer) );
         });
         $('#list').append('</table>');
-    });      
+    });
 });

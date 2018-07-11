@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>給水所/お風呂/洗濯（ランドリー）マップ</name>
-    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 7月11日の給水について(市内17箇所)<br>7月11日（水曜日）7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]7月10日　19:00時点<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】7月10日23:30時点<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
+    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 7月11日の給水について(市内17箇所)<br>7月11日（水曜日）7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]7月11日　14:00時点<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】7月10日23:30時点<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
     <Style id="icon-1899-DB4436-normal">
       <IconStyle>
         <color>ff3644db</color>
@@ -285,12 +285,46 @@
         <styleUrl>#icon-seq2-1-5-7CB342-highlight</styleUrl>
       </Pair>
     </StyleMap>
+    <Style id="icon-seq2-1-6-7CB342-normal">
+      <IconStyle>
+        <color>ff42b37c</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-7.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-seq2-1-6-7CB342-highlight">
+      <IconStyle>
+        <color>ff42b37c</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-7.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-seq2-1-6-7CB342">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-1-6-7CB342-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-1-6-7CB342-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
     <Style id="icon-seq2-5-0-BDBDBD-normal">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-7.png</href>
+          <href>images/icon-8.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -302,7 +336,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-7.png</href>
+          <href>images/icon-8.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -324,7 +358,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-8.png</href>
+          <href>images/icon-9.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -336,7 +370,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-8.png</href>
+          <href>images/icon-9.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -358,7 +392,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-9.png</href>
+          <href>images/icon-10.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -370,7 +404,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-9.png</href>
+          <href>images/icon-10.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -392,7 +426,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-10.png</href>
+          <href>images/icon-11.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -407,7 +441,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-10.png</href>
+          <href>images/icon-11.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -432,7 +466,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-11.png</href>
+          <href>images/icon-12.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -447,7 +481,7 @@
         <color>ffbdbdbd</color>
         <scale>1</scale>
         <Icon>
-          <href>images/icon-11.png</href>
+          <href>images/icon-12.png</href>
         </Icon>
       </IconStyle>
       <LabelStyle>
@@ -995,10 +1029,10 @@
       </Placemark>
     </Folder>
     <Folder>
-      <name>東広島市（11日10:30時点）</name>
+      <name>東広島市（11日14:00時点）</name>
       <Placemark>
         <name>給水｜東広島市立 西志和小学校（飲用可/24時間）</name>
-        <description><![CDATA[＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>志和町 奥屋地区地域<br>志和町 別府地区<br>※水を入れる容器は各自でご用意くださいとのことです。]]></description>
+        <description><![CDATA[★★正門よりお入りください。★★<br><br>※24時間となっている場所は、屋外水栓からご自由にお取りください。門が閉まっている場合は、開けていただいてかまいません。学校については、午前中授業を行っているので、ご配慮ください。<br><br>※水を入れる容器は各自でご用意くださいとのことです。<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>志和町 奥屋地区地域<br>志和町 別府地区]]></description>
         <styleUrl>#icon-seq2-1-0-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -1018,7 +1052,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜東広島市立入野小学校（飲用可/24時間）</name>
-        <description><![CDATA[＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 入野地区<br>※水を入れる容器は各自でご用意くださいとのことです。]]></description>
+        <description><![CDATA[★★西門よりお入りください。★★<br><br>※24時間となっている場所は、屋外水栓からご自由にお取りください。門が閉まっている場合は、開けていただいてかまいません。学校については、午前中授業を行っているので、ご配慮ください。<br><br>※水を入れる容器は各自でご用意くださいとのことです。<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 入野地区]]></description>
         <styleUrl>#icon-seq2-1-2-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -1053,6 +1087,16 @@
         <Point>
           <coordinates>
             132.8869106,34.4457068,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>東広島市立 三津小学校（飲用可/24時間）</name>
+        <description><![CDATA[★★正門よりお入りください。★★<br><br>※24時間となっている場所は、屋外水栓からご自由にお取りください。門が閉まっている場合は、開けていただいてかまいません。学校については、午前中授業を行っているので、ご配慮ください。<br><br>※水を入れる容器は各自でご用意くださいとのことです。<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>安芸津町 三津地区]]></description>
+        <styleUrl>#icon-seq2-1-6-7CB342</styleUrl>
+        <Point>
+          <coordinates>
+            132.8177768,34.3257332,0
           </coordinates>
         </Point>
       </Placemark>

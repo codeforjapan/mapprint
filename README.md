@@ -18,13 +18,13 @@ Issues にあるいろいろな修正にご協力いただけると嬉しいで�
 
 ### Requirement
 
-- ruby
+- ruby >= 2.2.6
 - npm
 
 ### 環境構築
 
 ```
-clone git@github.com:codeforjapan/mapprint.git
+git clone git@github.com:codeforjapan/mapprint.git
 cd mapprint
 npm install
 bundle install --path=vendor/bundle

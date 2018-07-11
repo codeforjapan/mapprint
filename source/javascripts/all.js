@@ -27,11 +27,6 @@ $(function(){
       const d = new Date()
       return displayHelper.getPrintDate(d);
     });
-    $('#footer').append(
-        'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
-        + '<br>' 
-        + '最新の情報はウェブサイトからお確かめください。'
-    );
 
     // 説明の表示/非表示
     $('#close').on('click', function(){

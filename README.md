@@ -40,11 +40,6 @@ bundle exec middleman server
 ```
 http://localhost:4567 で見れるはず
 
-### ソースコードを編集したら
-```
-bundle exec middleman build
-```
-この辺、自動で反映されるようにしたい
 
 ### deploy
 ```

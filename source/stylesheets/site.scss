@@ -66,12 +66,12 @@ body {
         border-collapse: collapse;
         border:1px solid #333;
         padding: 2px;
-      }
-      td.id {
-        width:5%;
-      }
-      td.value {
-        width:45%;
+        &.id {
+          width: 5%;
+        }
+        &.value {
+          width: 45%;
+        }
       }
     }
   }

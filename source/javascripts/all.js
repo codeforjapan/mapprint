@@ -55,6 +55,7 @@ $(function(){
                         var name = layer.feature.properties.name;
                         var description = layer.feature.properties.description;
                         if (name !== undefined) {
+                            console.log(layer.feature.properties);
                             if (index % 2 == 0){
                                 $('#list').append('<tr>');
                             }

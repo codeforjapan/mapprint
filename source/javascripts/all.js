@@ -82,9 +82,9 @@ $(function(){
                         if (name !== undefined) {
                             console.log(layer.feature.properties);
                             if (index % 2 == 0){
-                                $('#list').append('<tr>');
+                                $('#list table').append('<tr>');
                             }
-                            $('#list').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>')
+                            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>')
                             if (index % 2 == 1){
                                 $('#list').append('</tr>');
                             }

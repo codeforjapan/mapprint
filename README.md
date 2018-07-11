@@ -10,7 +10,7 @@ https://codeforjapan.github.io/mapprint/
 
 
 
-## Help Wnated!!
+## Help Wanted!!
 
 Issues にあるいろいろな修正にご協力いただけると嬉しいです。
 

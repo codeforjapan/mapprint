@@ -56,6 +56,7 @@ page '/*.txt', layout: false
 # Build-specific configuration
 # https://middlemanapp.com/advanced/configuration/#environment-specific-settings
 
+activate :livereload
 
 configure :build do
   activate :asset_host, :host => "/mapprint"

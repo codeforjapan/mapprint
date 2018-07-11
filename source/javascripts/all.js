@@ -55,7 +55,7 @@ $(function(){
                                 $('#list').append('</tr>');
                             }
                             layer.setIcon(new L.AwesomeNumberMarkers({
-                                number: index, 
+                                number: index + 1, 
                                 markerColor: "blue"}));
                             //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
                             index += 1;

@@ -2,7 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
     <name>給水所/お風呂/洗濯（ランドリー）マップ</name>
-    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 7月11日の給水について(市内17箇所)<br>7月11日（水曜日）7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]7月11日　14:00時点<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】7月10日23:30時点<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
+    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 給水について(市内17箇所)<br>7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
     <Style id="icon-1899-DB4436-normal">
       <IconStyle>
         <color>ff3644db</color>
@@ -319,7 +319,7 @@
         <styleUrl>#icon-seq2-1-6-7CB342-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-0-BDBDBD-normal">
+    <Style id="icon-seq2-5-0-BDBDBD-nodesc-normal">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -330,8 +330,11 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-0-BDBDBD-highlight">
+    <Style id="icon-seq2-5-0-BDBDBD-nodesc-highlight">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -342,18 +345,21 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-5-0-BDBDBD">
+    <StyleMap id="icon-seq2-5-0-BDBDBD-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-0-BDBDBD-normal</styleUrl>
+        <styleUrl>#icon-seq2-5-0-BDBDBD-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-0-BDBDBD-highlight</styleUrl>
+        <styleUrl>#icon-seq2-5-0-BDBDBD-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-1-BDBDBD-normal">
+    <Style id="icon-seq2-5-1-BDBDBD-nodesc-normal">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -364,8 +370,11 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-1-BDBDBD-highlight">
+    <Style id="icon-seq2-5-1-BDBDBD-nodesc-highlight">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -376,136 +385,25 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
-    </Style>
-    <StyleMap id="icon-seq2-5-1-BDBDBD">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-seq2-5-1-BDBDBD-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-seq2-5-1-BDBDBD-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
-    <Style id="icon-seq2-5-2-BDBDBD-normal">
-      <IconStyle>
-        <color>ffbdbdbd</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-10.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-    </Style>
-    <Style id="icon-seq2-5-2-BDBDBD-highlight">
-      <IconStyle>
-        <color>ffbdbdbd</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-10.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-    </Style>
-    <StyleMap id="icon-seq2-5-2-BDBDBD">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-seq2-5-2-BDBDBD-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-seq2-5-2-BDBDBD-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
-    <Style id="icon-seq2-5-3-BDBDBD-nodesc-normal">
-      <IconStyle>
-        <color>ffbdbdbd</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-11.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
       <BalloonStyle>
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-3-BDBDBD-nodesc-highlight">
-      <IconStyle>
-        <color>ffbdbdbd</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-11.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-seq2-5-3-BDBDBD-nodesc">
+    <StyleMap id="icon-seq2-5-1-BDBDBD-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-3-BDBDBD-nodesc-normal</styleUrl>
+        <styleUrl>#icon-seq2-5-1-BDBDBD-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-3-BDBDBD-nodesc-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
-    <Style id="icon-seq2-5-4-BDBDBD-nodesc-normal">
-      <IconStyle>
-        <color>ffbdbdbd</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-12.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <Style id="icon-seq2-5-4-BDBDBD-nodesc-highlight">
-      <IconStyle>
-        <color>ffbdbdbd</color>
-        <scale>1</scale>
-        <Icon>
-          <href>images/icon-12.png</href>
-        </Icon>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-      <BalloonStyle>
-        <text><![CDATA[<h3>$[name]</h3>]]></text>
-      </BalloonStyle>
-    </Style>
-    <StyleMap id="icon-seq2-5-4-BDBDBD-nodesc">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-seq2-5-4-BDBDBD-nodesc-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-seq2-5-4-BDBDBD-nodesc-highlight</styleUrl>
+        <styleUrl>#icon-seq2-5-1-BDBDBD-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Folder>
       <name>尾道市給水所マップ</name>
       <Placemark>
         <name>給水｜尾道市総合福祉センター （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -515,7 +413,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道西公園 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -525,7 +423,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜水道局 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -535,7 +433,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道市立吉和小学校 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -545,7 +443,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜市役所本庁舎 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -555,7 +453,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道市立西藤小学校 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -565,7 +463,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道東公園 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -575,7 +473,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜サンボル尾道 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -585,7 +483,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜向島支所 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -595,7 +493,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜瀬戸田支所 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -615,7 +513,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜旧生口中学校 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -625,7 +523,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜御調支所 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -635,7 +533,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜芸予文化情報センター （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -645,7 +543,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜農村環境改善センター （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -655,7 +553,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜坊士浄水場 （飲用可/24時間体制）</name>
-        <description><![CDATA[給水対応日時：7月10日（火曜日）午後以降（24時間体制）<br><br>[坊士浄水場の利用について]<br>市内16カ所の応急給水拠点では21時まで給水可能ですが、21時以降でしか来られない人（昼間同様の水量12リットルでお願いします）また、企業で倉庫業など必要最小限の水を確保しないと今後の企業活動が困難となる等お困りの企業が対象となります。(道路が狭いので、2ｔ車以下でお願いします)<br><br>[問い合わせ先]<br>水道局庶務課<br>〒722-0046 広島県尾道市長江三丁目6番52号<br>庶務係<br>Tel：(0848)37-8700<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：24時間体制<br><br>[坊士浄水場の利用について]<br>市内17カ所の応急給水拠点では21時まで給水可能ですが、21時以降でしか来られない人（昼間同様の水量12リットルでお願いします）また、企業で倉庫業など必要最小限の水を確保しないと今後の企業活動が困難となる等お困りの企業が対象となります。(道路が狭いので、2ｔ車以下でお願いします)<br><br>[問い合わせ先]<br>水道局庶務課<br>〒722-0046 広島県尾道市長江三丁目6番52号<br>庶務係<br>Tel：(0848)37-8700<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -843,8 +741,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜因島フラワーセンター（7:00-21:00)</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>http://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <name>給水｜因島フラワーセンター（飲用可/7:00-21:00)</name>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>http://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -991,8 +889,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜向島運動公園（9:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）9時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <name>給水｜向島運動公園（7:00-21:00）</name>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1072,7 +970,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜東広島市 河内支所（飲用可/8:00-19:00）</name>
-        <description><![CDATA[▼給水時間<br>7月11日午前8時～午後7時予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 中河内地区<br>河内町 下河内地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
+        <description><![CDATA[▼給水時間<br>午前8時～午後7時予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 中河内地区<br>河内町 下河内地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
         <styleUrl>#icon-seq2-1-4-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -1082,7 +980,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜篁老人集会所（飲用可/9:00-15:30）</name>
-        <description><![CDATA[▼給水時間<br>7月11日　午前9時～午後3時30分予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 入野地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
+        <description><![CDATA[▼給水時間<br>午前9時～午後3時30分予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 入野地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
         <styleUrl>#icon-seq2-1-5-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -1105,7 +1003,7 @@
       <name>三原市(7月10日23:00時点)</name>
       <Placemark>
         <name>給水｜西野浄水場（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1115,7 +1013,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立 第二中学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1125,7 +1023,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市 東部共同調理場（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1135,7 +1033,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立幸崎中学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1145,7 +1043,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜本郷生涯学習センター（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1155,7 +1053,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜沼田東ダイヤハイツ内（飲用可/9:00-19:00）</name>
-        <description><![CDATA[<img src="https://lh5.googleusercontent.com/Ga4Gijdl0ob-2f-W54pTNz-lwJbGXWToVr7-EKf7p08fsSHnepuP156RTArpBPsq-PUzhcioyi4eECVf0Kl-QTtPeBDOU6fKkYjtG0zlj2G6wkge4WjNx0hpjB15X1O6aumB" height="200" width="auto" /><br><br>三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[<img src="https://lh5.googleusercontent.com/Ga4Gijdl0ob-2f-W54pTNz-lwJbGXWToVr7-EKf7p08fsSHnepuP156RTArpBPsq-PUzhcioyi4eECVf0Kl-QTtPeBDOU6fKkYjtG0zlj2G6wkge4WjNx0hpjB15X1O6aumB" height="200" width="auto" /><br><br>三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <ExtendedData>
           <Data name="gx_media_links">
@@ -1170,7 +1068,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原駅前市民広場（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1180,7 +1078,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立田野浦小学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1190,7 +1088,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立第四中学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1200,7 +1098,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜船木ふれあいセンター隣（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1210,7 +1108,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市 南方コミュニティセンター（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1220,7 +1118,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市 北方コミュニティセンター（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1253,7 +1151,7 @@
       </Placemark>
       <Placemark>
         <name>風呂｜尾道ふれあいの里（10:00-20:00）</name>
-        <description><![CDATA[▼FBページhttps://www.facebook.com/fureai.spa/<br>連絡先：0848-77-0177<br><br>7/11（水）も引き続き<br>特別営業させていただきます。<br><br>営業時間：10:00-20:00(最終受付19:30)<br>.<br>★無料シャトルバス臨時運行いたします。<br>東尾道経由8時55分発です。<br>「毎週金曜日は、向島支所8時20分発」<br>(尾道駅9番乗り場 9時20分)予定ですが、<br>交通状況により混雑も予想されます。<br>帰りは、ふれあいの里を12時に出発致します！<br>.<br>.<br>※トラブルなど状況に応じて、営業時間の変更および営業を終了する場合もございます。<br>※温泉水のみを使用するため、シャワーは利用できず、浴槽よりかけ湯をしていただきます。<br>※一部浴場は利用できません。<br>下記は利用不可となります。<br>・お食事処　・休憩場　・その他施設<br>※限定的にマッサージは営業させていただきます。<br>入浴料：300円<br>タオル・館内着は貸し出しできませんので、<br>必ずご持参ください。<br>翌日以降の営業については現時点で未定です。<br>スタッフも限られた人数の中、運営しております。<br>至らぬ点もあるかと思いますが、<br>ご理解のほどお願いいたします。]]></description>
+        <description><![CDATA[▼FBページhttps://www.facebook.com/fureai.spa/<br>連絡先：0848-77-0177<br><br>7/11(火)～【断水解除までの間 営業】予定<br>営業時間：10:00-20:00 最終受付19:30<br>.<br>★無料シャトルバス １便 臨時運行いたします。<br>(詳しくはご連絡下さい)<br>.<br>※トラブルなど状況に応じて、営業時間の変更および営業を終了する場合もございます。<br>※温泉水のみを使用するため、シャワーは利用できず、浴槽よりかけ湯をしていただきます。<br>※一部浴場は利用できません。<br>断水の為「トイレ・シャワー・食事」不可です。<br>.<br>下記は利用不可となります。<br>・お食事処　・休憩場　・その他施設<br>.<br>※限定的にマッサージは営業させていただきます。<br>入浴料：300円<br>タオル・館内着は貸し出しできませんので、必ずご持参ください。<br><br>被災にあわれた方　お悔やみ申し上げます。<br>スタッフも限られた人数の中、運営しております。<br>至らぬ点もあるかと思いますが、<br>ご理解のほどお願いいたします。<br><br>天然温泉 尾道ふれあいの里 公式サイト<br>http://onomichi-radon-onsen.co.jp/infomation/]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1347,6 +1245,66 @@
         <Point>
           <coordinates>
             133.2538905,34.449605,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜本郷生涯学習センター（15:00-23:00）</name>
+        <description><![CDATA[【自衛隊による仮設風呂のサービスを開始します】<br><br>避難所生活等で入浴できない地域の住民を対象に、陸上自衛隊が仮設風呂を設置し、入浴支援を行います。<br><br>期間：平成30年７月11日(水)から当面の間<br>時間：15時から23時まで<br>設備：男性用風呂１基，女性用風呂１基<br><br>※15時から本郷生涯学習センターへの避難者を優先して入場してもらいます。<br>※湯がなくなった場合，２時間程度の待ち時間がでます。<br>※駐車場は限りがあります。<br>※タオルや石鹸は各自で準備してください。<br><br>問い合わせ先：災害対策本部（℡0848・67・6868）]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            132.9832628,34.410632,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜まごころの湯（10:00-23:00）</name>
+        <description><![CDATA[・営業時間：10:00~23:00 (受付 22:30まで)<br>・施設連絡先：084-961-4126<br>・備考：タオルをお持ちください。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3849561,34.519908,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜福山オリエンタルホテル（15:00~深夜2:00）</name>
+        <description><![CDATA[・営業時間：15:00~深夜2:00<br>・施設連絡先：084-927-0995<br>・備考：事前連絡をしてください。<br>　　　：駐車場はありません。<br>　　　：タオルをご持参ください。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3642929,34.4909433,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜遊湯（月曜休み）</name>
+        <description><![CDATA[[施設連絡先]<br>084-927-0995<br>[備考]<br>・営業時間はお問い合わせください。<br> ・断水の期間は無料となります。<br>[休み]<br>月曜日]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.2515769,34.4487467,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜スーパー銭湯ゆらら（9:00~深夜1:00/第3水曜休み）</name>
+        <description><![CDATA[[施設連絡先]<br>084-926-2685<br>[営業時間]<br>9:00~深夜1:00<br>[備考]<br>・タオル、シャンプーをお持ちください。<br>[休み]<br>第3水曜日]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3510438,34.4863853,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜美福温泉（10:00~深夜1:00）</name>
+        <description><![CDATA[[施設連絡先]<br>084-957-0011<br>[営業時間]<br>10:00~深夜1:00<br>[備考]<br>・タオルをお持ちください。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3909594,34.469787,0
           </coordinates>
         </Point>
       </Placemark>
@@ -1532,38 +1490,8 @@
     <Folder>
       <name>洗濯（ランドリー）</name>
       <Placemark>
-        <name>洗濯｜みやもと企画 みつぎ店</name>
-        <description>洗濯機/乾燥機</description>
-        <styleUrl>#icon-seq2-5-0-BDBDBD</styleUrl>
-        <Point>
-          <coordinates>
-            133.1414401,34.5095602,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>洗濯｜みやもと企画 三成店</name>
-        <description>洗濯機/乾燥機</description>
-        <styleUrl>#icon-seq2-5-1-BDBDBD</styleUrl>
-        <Point>
-          <coordinates>
-            133.1964376,34.4456241,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>洗濯｜みやもと企画 因島せんたく村</name>
-        <description>洗濯機/乾燥機</description>
-        <styleUrl>#icon-seq2-5-2-BDBDBD</styleUrl>
-        <Point>
-          <coordinates>
-            133.152815,34.310924,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>洗濯｜久保１丁目３−３４（個人）</name>
-        <styleUrl>#icon-seq2-5-3-BDBDBD-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-5-0-BDBDBD-nodesc</styleUrl>
         <Point>
           <coordinates>
             133.2039302,34.4112976,0
@@ -1572,7 +1500,7 @@
       </Placemark>
       <Placemark>
         <name>洗濯｜ダイヤクリーニング春日西店（24時間）</name>
-        <styleUrl>#icon-seq2-5-4-BDBDBD-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-5-1-BDBDBD-nodesc</styleUrl>
         <Point>
           <coordinates>
             133.403323,34.5060447,0

@@ -14,6 +14,33 @@ var getNowYMD = function(dt){
     return result;
   };
   
+function showLegend(map) {
+    var legend = L.control({position: 'bottomright'});
+
+	  legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'legend'),
+          grades = [
+											{name: '風呂', color: 'red'},
+											{name: 'シャワー', color: 'orange'},
+											{name: '洗濯', color: 'green'},
+											{name: '井戸', color: 'purple'},
+											{name: 'プール', color: '#563c5c'},
+									 ],
+          labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<div class="legend-type">' +
+              '<i style="background:' + grades[i].color + '"></i><div class=poi-type> ' + grades[i].name + '</div></br>' +
+            '</div>'; 
+
+        }
+        return div;
+    }
+	  legend.addTo(map);
+};
+
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
@@ -66,6 +93,7 @@ $(function(){
         });
         geojson.addTo(map);
         map.fitBounds(geojson.getBounds());
+				showLegend(map);
       });
     map.on("moveend", function () {
         $('#list').html('<table>');
@@ -98,7 +126,7 @@ $(function(){
                             } else if (name.match(/^井戸/)) {
                                 marker = 'purple';
                             } else if (name.match(/^プール/)) {
-                                marker = 'darkpuple';
+                                marker = 'darkpurple';
                             }
                             layer.setIcon(new L.AwesomeNumberMarkers({
                                 number: index + 1,

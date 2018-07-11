@@ -75,7 +75,7 @@ $(function(){
         });
         // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
         var colors = {
-            'その他':'beige',
+            'その他':'black',
             'プール':'darkpuple',
             '井戸':'purple',
             '水道水':'cadetblue',

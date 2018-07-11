@@ -63,10 +63,22 @@ $(function(){
                             if (index % 2 == 1){
                                 $('#list').append('</tr>');
                             }
-                            var bath = name.match(/お風呂/g);
+                            var marker = 'blue';
+                            if (name.match(/^風呂/)) {
+                                marker = 'red';
+                            } else if (name.match(/^シャワー/) ) {
+                                marker = 'orange';
+                            } else if (name.match(/^洗濯/)) {
+                                marker = 'green';
+                            } else if (name.match(/^井戸/)) {
+                                marker = 'purple';
+                            } else if (name.match(/^プール/)) {
+                                marker = 'darkpuple';
+                            }
                             layer.setIcon(new L.AwesomeNumberMarkers({
                                 number: index + 1, 
-                                markerColor: bath ? "red" : "blue"}));
+                                markerColor: marker
+                            }));
                             //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
                             index += 1;
                         }

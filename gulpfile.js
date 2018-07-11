@@ -25,7 +25,7 @@ var b = browserify({
 gulp.task('default', ['build']);
 gulp.task('build', ['sass', 'bundle']);
 gulp.task('watch', function(){
-  //
+  gulp.watch([jsConf.srcPath], ['build']);
 });
 gulp.task('bundle', jsBundle);
 gulp.task('sass', sassPreCompile);

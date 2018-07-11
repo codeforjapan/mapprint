@@ -61,17 +61,23 @@ body {
       width: 100%;
       table {
         width: 100%;
-      }
-      td {
-        border-collapse: collapse;
-        border:1px solid #333;
-        padding: 2px;
-      }
-      td.id {
-        width:5%;
-      }
-      td.value {
-        width:45%;
+        border-spacing: 0;
+        th.category{
+          position: relative;
+          height: 44px;
+          vertical-align: bottom;
+          padding-left: 32px;        }
+        td {
+          border-collapse: collapse;
+          border:1px solid #333;
+          padding: 2px;
+        }
+        td.id {
+          width:5%;
+        }
+        td.value {
+          width:45%;
+        }
       }
     }
   }

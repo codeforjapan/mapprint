@@ -1,6 +1,7 @@
 
 var L = require('leaflet');
-var $ = require('jQuery');
+var $ = require('jquery');
+var tj = require('./togeojson');
 var numberIcon = require('./leaflet_awesome_number_markers');
 
 $(function(){
@@ -21,9 +22,16 @@ $(function(){
           maxZoom: 18
         }
     ).addTo( map );
+    $('#close').on('click', function(){
+        $('#explain').hide()
+    });
 
-    $.getJSON('./images/water-supply.geojson', function (data) {
-        var geojson = L.geoJson(data, {
+    $.ajax('./images/water-supply.kml').done(function (data) {
+        console.log(data)
+        var geojsondata = tj.kml(data);
+        console.log(geojsondata)
+
+        var geojson = L.geoJson(geojsondata, {
           onEachFeature: function (feature, layer) {
             var field = '名称: '+feature.properties.name+ '<br>'+
             '詳細: '+feature.properties.description;
@@ -47,6 +55,7 @@ $(function(){
                         var name = layer.feature.properties.name;
                         var description = layer.feature.properties.description;
                         if (name !== undefined) {
+                            console.log(layer.feature.properties);
                             if (index % 2 == 0){
                                 $('#list').append('<tr>');
                             }

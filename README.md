@@ -10,7 +10,7 @@ https://codeforjapan.github.io/mapprint/
 
 
 
-## Help Wnated!!
+## Help Wanted!!
 
 Issues にあるいろいろな修正にご協力いただけると嬉しいです。
 
@@ -29,6 +29,7 @@ git clone git@github.com:codeforjapan/mapprint.git
 cd mapprint
 npm install
 bundle install --path=vendor/bundle
+bundle exec middleman build
 ```
 
 ### 起動

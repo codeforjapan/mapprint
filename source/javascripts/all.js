@@ -3,28 +3,22 @@ var L = require('leaflet');
 var $ = require('jquery');
 var tj = require('./togeojson');
 var numberIcon = require('./leaflet_awesome_number_markers');
+var displayHelper = require('./displayHelper');
 
-var getNowYMD = function(dt){
-    var y = dt.getFullYear();
-    var m = ("00" + (dt.getMonth()+1)).slice(-2);
-    var d = ("00" + dt.getDate()).slice(-2);
-    var hh = ("00" + dt.getHours()).slice(-2);
-    var mm =  ("00" + dt.getMinutes()).slice(-2);
-    var result = y + "年" + m + "月" + d + "日" + hh + "時" + mm + "分";
-    return result;
-  };
-  
 function showLegend(map) {
     var legend = L.control({position: 'bottomright'});
 
 	  legend.onAdd = function () {
       var div = L.DomUtil.create('div', 'legend'),
           grades = [
+											{name: 'その他', color: 'black'},
+											{name: 'プール', color: '#563c5c'},
+											{name: '井戸', color: 'purple'},
+											{name: '水道水', color: 'cadetblue'},
+											{name: '洗濯', color: 'green'},
 											{name: '風呂', color: 'red'},
 											{name: 'シャワー', color: 'orange'},
-											{name: '洗濯', color: 'green'},
-											{name: '井戸', color: 'purple'},
-											{name: 'プール', color: '#563c5c'},
+											{name: '給水', color: 'green'},
 									 ],
           labels = [];
 
@@ -40,7 +34,6 @@ function showLegend(map) {
     }
 	  legend.addTo(map);
 };
-
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
@@ -61,7 +54,7 @@ $(function(){
 
     $('#date').text(() => {
       const d = new Date()
-      return `このマップは ${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日 ${d.getHours()}:${d.getMinutes()} に印刷しました。`;
+      return displayHelper.getPrintDate(d);
     });
 
     // 説明の表示/非表示
@@ -76,12 +69,10 @@ $(function(){
 
     $.ajax('./images/water-supply.kml').done(function (data, textStatus, jqXHR) {
         // データの最終更新日を表示（ローカルでは常に現在時刻となる）
-        var date = getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+        var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
         console.log(date);
         $('#datetime').html(date.toString());
-        console.log(data);
         var geojsondata = tj.kml(data);
-        console.log(geojsondata)
 
         var geojson = L.geoJson(geojsondata, {
           onEachFeature: function (feature, layer) {
@@ -98,7 +89,7 @@ $(function(){
     map.on("moveend", function () {
         $('#list').html('<table>');
         var index = 0;
-        console.log(map.getCenter().toString());
+        var targets = [];
         this.eachLayer(function(layer) {
 			if(layer instanceof L.Marker)
                 if( map.getBounds().contains(layer.getLatLng()) )
@@ -106,38 +97,67 @@ $(function(){
                         return false;
                     }else {
                         var name = layer.feature.properties.name;
-                        var description = layer.feature.properties.description;
                         if (name !== undefined) {
-                            console.log(layer.feature.properties);
-                            if (index % 2 == 0){
-                                $('#list table').append('<tr>');
-                            }
-                            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>')
-                            if (index % 2 == 1){
-                                $('#list').append('</tr>');
-                            }
-                            var marker = 'blue';
-                            if (name.match(/^風呂/)) {
-                                marker = 'red';
-                            } else if (name.match(/^シャワー/) ) {
-                                marker = 'orange';
-                            } else if (name.match(/^洗濯/)) {
-                                marker = 'green';
-                            } else if (name.match(/^井戸/)) {
-                                marker = 'purple';
-                            } else if (name.match(/^プール/)) {
-                                marker = 'darkpurple';
-                            }
-                            layer.setIcon(new L.AwesomeNumberMarkers({
-                                number: index + 1,
-                                markerColor: marker
-                            }));
-                            //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
-                            index += 1;
+                            targets.push(layer);
                         }
                     }
 				    //that._list.appendChild( that._createItem(layer) );
         });
-        $('#list').append('</table>');
+        // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
+        var colors = {
+            'その他':'black',
+            'プール':'darkpurple',
+            '井戸':'purple',
+            '水道水':'cadetblue',
+            '洗濯':'green',
+            '風呂':'red',
+            'シャワー':'orange',
+            '給水':'green'
+        };
+        // sort targets
+        var matchtexts =  Object.keys(colors);
+        var res = targets.sort(function(a,b){
+            var _a = a.feature.properties.name;
+            var _b = b.feature.properties.name;
+            var _a = matchtexts.indexOf(_a.split('｜')[0]);
+            var _b = matchtexts.indexOf(_b.split('｜')[0]);
+            if(_a > _b){
+                return -1;
+            }else if(_a < _b){
+                return 1;
+            }
+            return 0;
+        });
+        // display them
+        var lastCategory = "";
+        res.forEach(function(layer,index){
+            // get name
+            var name = layer.feature.properties.name;
+            // get category and marker type
+            var category = name.split('｜')[0];
+            if (matchtexts.indexOf(category) == -1)
+                category = 'その他';
+            var marker = colors[name.split('｜')[0]];
+            if (marker == undefined)
+                marker = colors['その他'];
+
+            if (category != lastCategory){
+                // display categories
+                $('#list table').append('<tr><th colspan="2" class="category"><icon class="awesome-number-marker awesome-number-marker-icon-' + marker + '"></icon>' + category + '</th></tr>');
+                lastCategory = category;
+                $('#list table').append('<tr>');
+            }else{
+                if (index % 2 == 0){
+                    $('#list table').append('<tr>');
+                }
+            }
+            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>');
+            // add markers to map
+            layer.setIcon(new L.AwesomeNumberMarkers({
+                number: index + 1,
+                markerColor: marker
+            }));
+            //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
+        });
     });
 });

@@ -77,18 +77,24 @@ body {
       width: 100%;
       table {
         width: 100%;
-        border-spacing: 0;
-      }
-      td {
-        border-collapse: collapse;
-        border:1px solid #333;
-        padding: 2px;
-      }
-      td.id {
-        width:5%;
-      }
-      td.value {
-        width:45%;
+        th.category{
+          position: relative;
+          height: 44px;
+          vertical-align: bottom;
+          padding-left: 32px;
+        }
+        td {
+          border-collapse: collapse;
+          border-spacing: 0;
+          border:1px solid #333;
+          padding: 2px;
+          &.id {
+            width: 5%;
+          }
+          &.value {
+            width: 45%;
+          }
+        }
       }
     }
   }

@@ -15,10 +15,18 @@ $(function(){
         shadowAnchor: [22, 94]
     });
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
+    // サーバ上の場合のみMIERUNE地図を使う
+    var tileserver = ( location.href == 'codeforjapan.github.io' ) ? 
+    'https://tile.cdn.mierune.co.jp/styles/normal/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k' :
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var attribution = ( location.href == 'codeforjapan.github.io' ) ? 
+    "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
+    'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
+
     var map = L.map('map').setView([41.3921, 2.1705], 13);
     L.tileLayer(
-        'https://tile.cdn.mierune.co.jp/styles/normal/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k', {
-          attribution: "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL.",
+        tileserver, {
+          attribution: attribution,
           maxZoom: 18
         }
     ).addTo( map );

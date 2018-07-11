@@ -8,6 +8,10 @@ body {
   text-align: center;
   -webkit-print-color-adjust: exact;
 }
+#header {
+  text-align: right;
+  width:210mm !important;
+}
 
 #content {
   position: relative;

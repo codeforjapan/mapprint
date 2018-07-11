@@ -4,16 +4,17 @@ var $ = require('jquery');
 var tj = require('./togeojson');
 var numberIcon = require('./leaflet_awesome_number_markers');
 
+var getNowYMD = function(dt){
+    var y = dt.getFullYear();
+    var m = ("00" + (dt.getMonth()+1)).slice(-2);
+    var d = ("00" + dt.getDate()).slice(-2);
+    var result = y + "年" + m + "月" + d + "日";
+    return result;
+  };
+  
 $(function(){
-    var myIcon = L.icon({
-        iconUrl: 'my-icon.png',
-        iconSize: [38, 95],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76],
-        shadowUrl: 'my-icon-shadow.png',
-        shadowSize: [68, 95],
-        shadowAnchor: [22, 94]
-    });
+    // 今日の表示
+    $('#today').html(getNowYMD(new Date()));
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
     var tileserver = ( location.href == 'codeforjapan.github.io' ) ? 
@@ -41,8 +42,11 @@ $(function(){
         }
     });
 
-    $.ajax('./images/water-supply.kml').done(function (data) {
-        console.log(data)
+    $.ajax('./images/water-supply.kml').done(function (data, textStatus, jqXHR) {
+        var date = getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+        console.log(date);
+        $('#datetime').html(date.toString());
+        console.log(data);
         var geojsondata = tj.kml(data);
         console.log(geojsondata)
 

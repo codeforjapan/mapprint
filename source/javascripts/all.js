@@ -13,8 +13,6 @@ var getNowYMD = function(dt){
   };
   
 $(function(){
-    // 今日の表示
-    $('#today').html(getNowYMD(new Date()));
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
     var tileserver = ( location.href == 'codeforjapan.github.io' ) ?

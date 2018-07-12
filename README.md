@@ -46,10 +46,12 @@ http://localhost:4567 で見れるはず
 bundle exec middleman deploy
 ```
 
+(このリポジトリへの push 権限が必要。
+github pages で作られているので、gh-pages ブランチが更新されます。)
+
+
+
 ### test
 ```
 npm test
 ```
-
-このリポジトリへの push 権限が必要。
-github pages で作られているので、gh-pages ブランチが更新されます。

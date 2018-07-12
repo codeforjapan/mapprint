@@ -4162,8 +4162,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>井戸｜常泉寺 （6:00-18:00）</name>
-        <description><![CDATA[墓地のそばの蛇口<br>6時〜18時]]></description>
+        <name>井戸｜浄泉寺 （6:00-18:00）</name>
+        <description><![CDATA[墓地のそばの蛇口<br>＊ご近所の高齢のや、墓参りに来られ方を優先させてください。よろしくお願いいたします。<br>時間：6時〜18時]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -4528,8 +4528,8 @@
     <Folder>
       <name>東広島市</name>
       <Placemark>
-        <name>給水｜東広島市立 西志和小学校（飲用可/24時間）</name>
-        <description><![CDATA[★★正門よりお入りください。★★<br><br>※24時間となっている場所は、屋外水栓からご自由にお取りください。門が閉まっている場合は、開けていただいてかまいません。学校については、午前中授業を行っているので、ご配慮ください。<br><br>※水を入れる容器は各自でご用意くださいとのことです。<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>志和町 奥屋地区地域<br>志和町 別府地区]]></description>
+        <name>給水｜東広島市立 西志和小学校（7/13から閉鎖）</name>
+        <description><![CDATA[＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html]]></description>
         <styleUrl>#icon-seq2-1-0-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -4538,8 +4538,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜東広島市 黒瀬支所（飲用可/24時間）</name>
-        <description><![CDATA[＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>黒瀬町 市飯田地区<br>※水を入れる容器は各自でご用意くださいとのことです。]]></description>
+        <name>給水｜東広島市 黒瀬支所（7/13から閉鎖）</name>
+        <description><![CDATA[＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html]]></description>
         <styleUrl>#icon-seq2-1-1-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -4971,6 +4971,16 @@
         <Point>
           <coordinates>
             133.4073872,34.465524,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜因島総合福祉保健センター（19:00-23:00）</name>
+        <description><![CDATA[自衛隊による仮設入浴施設<br><br>入浴時間：19時00分～23時00分<br>※明日以降の予定はわかり次第お知らせします。<br><br>[注意事項]<br>タオルをご持参ください。（せっけん、シャンプーは用意してあります。）<br><br>どなたでも入浴できますが、混雑が予想されますので、気を付けてお越しください。<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20367.html]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.1689948,34.3008086,0
           </coordinates>
         </Point>
       </Placemark>

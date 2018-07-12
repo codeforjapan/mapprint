@@ -138,6 +138,7 @@ $(function(){
         });
         // display them
         var lastCategory = "";
+        var categoryIndex = 0;
         res.forEach(function(layer,index){
             // get name
             var name = layer.feature.properties.name;
@@ -154,8 +155,9 @@ $(function(){
                 $('#list table').append('<tr><th colspan="2" class="category_separator"></th></tr>');
                 lastCategory = category;
                 $('#list table').append('<tr>');
-            }else{
-                if (index % 2 == 0){
+                categoryIndex = index;
+            } else {
+                if ((index - categoryIndex) % 2 == 0){
                     $('#list table').append('<tr>');
                 }
             }

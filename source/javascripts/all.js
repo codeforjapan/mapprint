@@ -5,32 +5,32 @@ require('./leaflet_awesome_number_markers').default();
 var displayHelper = require('./displayHelper');
 var _ = require('lodash');
 
+// アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
+// 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
+var colors = [
+    {name: 'その他', color: 'black'},
+    {name: 'プール', color: 'lightgreen'},
+    {name: '井戸', color: 'purple'},
+    {name: '水道水', color: 'cadetblue'},
+    {name: '洗濯', color: 'green'},
+    {name: '風呂', color: 'red'},
+    {name: 'シャワー', color: 'orange'},
+    {name: '給水', color: 'green'},
+    {name: 'トイレ', color: 'lightblue'},
+];
+
 function showLegend(map) {
     var legend = L.control({position: 'bottomright'});
 
-      legend.onAdd = function () {
-      var div = L.DomUtil.create('div', 'legend'),
-        //@todo 下の方 (var colors) にもあるので、1箇所にすべき！
-          grades = [
-            {name: 'その他', color: 'black'},
-            {name: 'プール', color: '#563c5c'},
-            {name: '井戸', color: 'purple'},
-            {name: '水道水', color: 'cadetblue'},
-            {name: '洗濯', color: 'green'},
-            {name: '風呂', color: 'red'},
-            {name: 'シャワー', color: 'orange'},
-            {name: '給水', color: 'green'},
-            {name: 'トイレ', color: '#addbe6'},
-          ],
-          labels = [];
+    legend.onAdd = function () {
+        var div = L.DomUtil.create('div', 'legend');
 
         // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < grades.length; i++) {
+        for (var i = 0; i < colors.length; i++) {
             div.innerHTML +=
             '<div class="legend-type">' +
-              '<i style="background:' + grades[i].color + '"></i><div class=poi-type> ' + grades[i].name + '</div></br>' +
-            '</div>';
-
+              '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
+            '</div>'; 
         }
         return div;
     };
@@ -110,20 +110,9 @@ $(function(){
                     }
                     //that._list.appendChild( that._createItem(layer) );
         });
-        // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
-        var colors = {
-            'その他':'black',
-            'プール':'darkpurple',
-            '井戸':'purple',
-            '水道水':'cadetblue',
-            '洗濯':'green',
-            '風呂':'red',
-            'シャワー':'orange',
-            '給水':'green',
-            'トイレ': 'lightblue',
-        };
-        // sort targets
-        var matchtexts =  Object.keys(colors);
+        var matchtexts = _.map(colors, (c) => {
+            return c.name;
+        });
         var res = targets.sort(function(a,b){
             var _a = a.feature.properties.name;
             var _b = b.feature.properties.name;
@@ -146,9 +135,12 @@ $(function(){
             var category = name.split('｜')[0];
             if (matchtexts.indexOf(category) == -1)
                 category = 'その他';
-            var marker = colors[name.split('｜')[0]];
-            if (_.isUndefined(marker))
-                marker = colors['その他'];
+
+            var c = _.find(colors, {'name': name.split('｜')[0]});
+            if (_.isUndefined(c)) {
+                c = _.find(colors, {'name': 'その他'})
+            }
+            var marker = c.color;
 
             if (category != lastCategory){
                 // display categories

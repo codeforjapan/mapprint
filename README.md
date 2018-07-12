@@ -22,6 +22,8 @@ Issues にあるいろいろな修正にご協力いただけると嬉しいで�
 - ruby >= 2.2.6
 - bundler
 - node.js >= 6.0.0
+  - OSXでbundler・node.jsがうまく入らな無い方は[](https://qiita.com/tokimari/items/feda1ed61f2d8b5b317c)や、[この辺](https://qiita.com/yn01/items/d1fa10dbe4850f7cd693)ご参照ください
+
 
 ### 環境構築
 

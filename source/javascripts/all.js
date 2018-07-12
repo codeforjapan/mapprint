@@ -1,8 +1,7 @@
-
 var L = require('leaflet');
 var $ = require('jquery');
-var tj = require('./togeojson');
-var numberIcon = require('./leaflet_awesome_number_markers');
+var tj = require('@mapbox/togeojson');
+require('./leaflet_awesome_number_markers').default();
 var displayHelper = require('./displayHelper');
 var _ = require('lodash');
 
@@ -120,11 +119,11 @@ $(function(){
         var res = targets.sort(function(a,b){
             var _a = a.feature.properties.name;
             var _b = b.feature.properties.name;
-            var _a = matchtexts.indexOf(_a.split('｜')[0]);
-            var _b = matchtexts.indexOf(_b.split('｜')[0]);
-            if(_a > _b){
+            var _a2 = matchtexts.indexOf(_a.split('｜')[0]);
+            var _b2 = matchtexts.indexOf(_b.split('｜')[0]);
+            if(_a2 > _b2){
                 return -1;
-            }else if(_a < _b){
+            }else if(_a2 < _b2){
                 return 1;
             }
             return 0;

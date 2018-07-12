@@ -111,6 +111,9 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     tilt (2.0.8)
+    typescript-node (1.6.2)
+      typescript-src (~> 1.6.2)
+    typescript-src (1.6.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -124,6 +127,7 @@ DEPENDENCIES
   middleman-autoprefixer (~> 2.7)
   middleman-deploy (~> 2.0.0.pre.alpha)
   middleman-livereload
+  typescript-node
   tzinfo-data
   wdm (~> 0.1)
 

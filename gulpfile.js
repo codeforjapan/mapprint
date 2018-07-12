@@ -31,9 +31,11 @@ gulp.task('bundle', jsBundle);
 gulp.task('sass', sassPreCompile);
 
 function jsBundle() {
-    return b.bundle()
-    .pipe(source(jsConf.destFileName))
-        .pipe(gulp.dest(jsConf.destPath));
+    return b
+      .plugin('tsify')
+      .bundle()
+      .pipe(source(jsConf.destFileName))
+      .pipe(gulp.dest(jsConf.destPath));
 }
 
 function sassPreCompile(){

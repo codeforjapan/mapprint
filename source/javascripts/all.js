@@ -20,7 +20,7 @@ function showLegend(map) {
             {name: '風呂', color: 'red'},
             {name: 'シャワー', color: 'orange'},
             {name: '給水', color: 'green'},
-            {name: 'トイレ', color: 'yellow'},
+            {name: 'トイレ', color: '#addbe6'},
           ],
           labels = [];
 
@@ -120,7 +120,7 @@ $(function(){
             '風呂':'red',
             'シャワー':'orange',
             '給水':'green',
-            'トイレ': 'yellow',
+            'トイレ': 'lightblue',
         };
         // sort targets
         var matchtexts =  Object.keys(colors);

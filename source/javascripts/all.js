@@ -10,6 +10,7 @@ function showLegend(map) {
 
       legend.onAdd = function () {
       var div = L.DomUtil.create('div', 'legend'),
+        //@todo 下の方 (var colors) にもあるので、1箇所にすべき！
           grades = [
             {name: 'その他', color: 'black'},
             {name: 'プール', color: '#563c5c'},
@@ -32,8 +33,8 @@ function showLegend(map) {
 
         }
         return div;
-    }
-      legend.addTo(map);
+    };
+    legend.addTo(map);
 };
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
@@ -57,6 +58,11 @@ $(function(){
       const d = new Date()
       return displayHelper.getPrintDate(d);
     });
+    $('#footer').append(
+        'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
+        + '<br>' 
+        + '最新の情報はウェブサイトからお確かめください。'
+    );
 
     // 説明の表示/非表示
     $('#close').on('click', function(){

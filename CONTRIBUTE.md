@@ -24,7 +24,8 @@
 
 開発に関する細かいコミュニーケーションについては、[Code for Japan のSlack](https://cfjslackin.herokuapp.com/) で行っています。
 上記リンクから加入いただき、#mapprint チャンネルに加入してください。
-[チャンネルへのダイレクトリンク](slack://channel?id=CBQAS1WH4&&team=T02FMV4EB) （Code for Japan の Slackアカウントが必要です。）
+
+チャンネルへのダイレクトリンク[slack://channel?id=CBQAS1WH4&&team=T02FMV4EB](slack://channel?id=CBQAS1WH4&&team=T02FMV4EB) （Code for Japan の Slackアカウントが必要です。）
 
 まずは↓に自分のアカウントを加えてみては？
 

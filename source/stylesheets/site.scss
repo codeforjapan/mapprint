@@ -50,7 +50,11 @@ body {
       font-size: 4mm;
       font-weight: bold;
       padding: 0.25em 0;
-      display: none;
+    }
+    #footer {
+      font-size: 4mm;
+      padding: 1em 0;
+      text-align: left;
     }
     #map {
       width: 100%;
@@ -82,17 +86,21 @@ body {
       }
     }
   }
-
+  
   @media print {
     // 印刷時のみ表示
-    #page {
-      #date {
+    .print_area {
         display: block;
-      }
     }
     // 印刷したくない領域
     .not_print_area {
         display: none;
+    }
+  }
+
+  @media screen {
+    .print_area {
+      display: none;
     }
   }
 }

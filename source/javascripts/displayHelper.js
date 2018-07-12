@@ -11,6 +11,6 @@ module.exports = {
   },
 
   getPrintDate: function(dt){
-    return `このマップは ${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日 ${dt.getHours()}:${dt.getMinutes()} に印刷しました。`;
+    return `このマップは ${getNowYMD(dt)} に印刷しました。`;
   }
 }

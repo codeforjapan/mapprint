@@ -4,6 +4,7 @@ var $ = require('jquery');
 var tj = require('./togeojson');
 var numberIcon = require('./leaflet_awesome_number_markers');
 var displayHelper = require('./displayHelper');
+var _ = require('lodash');
 
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
@@ -63,11 +64,11 @@ $(function(){
         this.eachLayer(function(layer) {
 			if(layer instanceof L.Marker)
                 if( map.getBounds().contains(layer.getLatLng()) )
-                    if (layer.feature === undefined) {
+                    if (_.isUndefined(layer.feature)) {
                         return false;
-                    }else {
+                    } else {
                         var name = layer.feature.properties.name;
-                        if (name !== undefined) {
+                        if (!_.isUndefined(name)) {
                             targets.push(layer);
                         }
                     }
@@ -108,7 +109,7 @@ $(function(){
             if (matchtexts.indexOf(category) == -1)
                 category = 'その他';
             var marker = colors[name.split('｜')[0]];
-            if (marker == undefined)
+            if (_.isUndefined(marker))
                 marker = colors['その他'];
 
             if (category != lastCategory){

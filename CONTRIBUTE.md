@@ -16,7 +16,27 @@
 
 [Issues](https://github.com/codeforjapan/mapprint/issues) にあるいろいろな修正にご協力いただけると嬉しいです。プロジェクトに関する議論は主にGithubのIssueで行っています。是非ご参加ください！
 
+上がっている Issue で、対応できるものがあるという方は、ぜひ Pull Request を送ってください。
+
+開発環境の構築手順については、[README](/README.md)を確認してください。
+
+手元環境で修正できたら、[Pull Request の送り方](https://qiita.com/Commander-Aipa/items/d61d21988a36a4d0e58b) を参考にPull Requestを送ってみましょう！
+
+開発に関する細かいコミュニーケーションについては、[Code for Japan のSlack](https://cfjslackin.herokuapp.com/) で行っています。
+リンクからCode for Japan Slack に加入いただき、#mapprint チャンネルに加入してください。
+
+チャンネルへのダイレクトリンク
+
+```
+slack://channel?id=CBQAS1WH4&&team=T02FMV4EB
+```
+
+（Code for Japan の Slackアカウントが必要です。）
+
+まずは↓に自分のアカウントを加えてみては？
+
 ## 現在の参加者
 
-## プロジェクトサポート
+[halsk](https://github.com/halsk)
 
+## プロジェクトサポート

@@ -62,6 +62,7 @@ configure :build do
   activate :asset_host, :host => "/mapprint"
   ignore /stylesheets\/.*\.scss/
   ignore /javascripts\/(?!bundle).*\.js/
+  ignore /javascripts\/(?!bundle).*\.ts/
 end
 
 activate :deploy do |deploy|
@@ -70,4 +71,3 @@ activate :deploy do |deploy|
   deploy.remote = 'git@github.com:codeforjapan/mapprint.git'
   deploy.branch = 'gh-pages'
 end
-

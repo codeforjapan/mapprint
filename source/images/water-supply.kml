@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
   <Document>
-    <name>給水所/お風呂/洗濯（ランドリー）マップ</name>
-    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 7月11日の給水について(市内17箇所)<br>7月11日（水曜日）7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]7月11日　14:00時点<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】7月10日23:30時点<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
+    <name>給水所/お風呂/洗濯/トイレ マップ</name>
+    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 給水について(市内17箇所)<br>7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
     <Style id="icon-1899-DB4436-normal">
       <IconStyle>
         <color>ff3644db</color>
@@ -319,7 +319,7 @@
         <styleUrl>#icon-seq2-1-6-7CB342-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-0-BDBDBD-normal">
+    <Style id="icon-seq2-5-0-BDBDBD-nodesc-normal">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -330,8 +330,11 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-0-BDBDBD-highlight">
+    <Style id="icon-seq2-5-0-BDBDBD-nodesc-highlight">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -342,18 +345,21 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-5-0-BDBDBD">
+    <StyleMap id="icon-seq2-5-0-BDBDBD-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-0-BDBDBD-normal</styleUrl>
+        <styleUrl>#icon-seq2-5-0-BDBDBD-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-0-BDBDBD-highlight</styleUrl>
+        <styleUrl>#icon-seq2-5-0-BDBDBD-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-1-BDBDBD-normal">
+    <Style id="icon-seq2-5-1-BDBDBD-nodesc-normal">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -364,8 +370,11 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-1-BDBDBD-highlight">
+    <Style id="icon-seq2-5-1-BDBDBD-nodesc-highlight">
       <IconStyle>
         <color>ffbdbdbd</color>
         <scale>1</scale>
@@ -376,20 +385,23 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-5-1-BDBDBD">
+    <StyleMap id="icon-seq2-5-1-BDBDBD-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-1-BDBDBD-normal</styleUrl>
+        <styleUrl>#icon-seq2-5-1-BDBDBD-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-1-BDBDBD-highlight</styleUrl>
+        <styleUrl>#icon-seq2-5-1-BDBDBD-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-2-BDBDBD-normal">
+    <Style id="icon-seq2-6-0-A52714-nodesc-normal">
       <IconStyle>
-        <color>ffbdbdbd</color>
+        <color>ff1427a5</color>
         <scale>1</scale>
         <Icon>
           <href>images/icon-10.png</href>
@@ -398,10 +410,13 @@
       <LabelStyle>
         <scale>0</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-2-BDBDBD-highlight">
+    <Style id="icon-seq2-6-0-A52714-nodesc-highlight">
       <IconStyle>
-        <color>ffbdbdbd</color>
+        <color>ff1427a5</color>
         <scale>1</scale>
         <Icon>
           <href>images/icon-10.png</href>
@@ -410,20 +425,23 @@
       <LabelStyle>
         <scale>1</scale>
       </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-5-2-BDBDBD">
+    <StyleMap id="icon-seq2-6-0-A52714-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-2-BDBDBD-normal</styleUrl>
+        <styleUrl>#icon-seq2-6-0-A52714-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-2-BDBDBD-highlight</styleUrl>
+        <styleUrl>#icon-seq2-6-0-A52714-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-3-BDBDBD-nodesc-normal">
+    <Style id="icon-seq2-6-1-A52714-nodesc-normal">
       <IconStyle>
-        <color>ffbdbdbd</color>
+        <color>ff1427a5</color>
         <scale>1</scale>
         <Icon>
           <href>images/icon-11.png</href>
@@ -436,9 +454,9 @@
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-3-BDBDBD-nodesc-highlight">
+    <Style id="icon-seq2-6-1-A52714-nodesc-highlight">
       <IconStyle>
-        <color>ffbdbdbd</color>
+        <color>ff1427a5</color>
         <scale>1</scale>
         <Icon>
           <href>images/icon-11.png</href>
@@ -451,19 +469,419 @@
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-5-3-BDBDBD-nodesc">
+    <StyleMap id="icon-seq2-6-1-A52714-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-3-BDBDBD-nodesc-normal</styleUrl>
+        <styleUrl>#icon-seq2-6-1-A52714-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-3-BDBDBD-nodesc-highlight</styleUrl>
+        <styleUrl>#icon-seq2-6-1-A52714-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Style id="icon-seq2-5-4-BDBDBD-nodesc-normal">
+    <Style id="icon-seq2-6-10-A52714-nodesc-normal">
       <IconStyle>
-        <color>ffbdbdbd</color>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-20.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-10-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-20.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-10-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-10-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-10-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-11-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-21.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-11-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-21.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-11-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-11-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-11-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-12-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-22.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-12-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-22.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-12-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-12-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-12-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-13-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-23.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-13-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-23.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-13-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-13-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-13-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-14-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-24.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-14-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-24.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-14-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-14-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-14-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-15-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-25.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-15-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-25.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-15-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-15-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-15-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-16-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-26.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-16-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-26.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-16-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-16-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-16-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-17-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-27.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-17-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-27.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-17-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-17-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-17-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-18-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-28.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-18-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-28.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-18-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-18-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-18-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-19-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-29.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-19-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-29.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-19-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-19-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-19-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-2-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
         <scale>1</scale>
         <Icon>
           <href>images/icon-12.png</href>
@@ -476,9 +894,9 @@
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <Style id="icon-seq2-5-4-BDBDBD-nodesc-highlight">
+    <Style id="icon-seq2-6-2-A52714-nodesc-highlight">
       <IconStyle>
-        <color>ffbdbdbd</color>
+        <color>ff1427a5</color>
         <scale>1</scale>
         <Icon>
           <href>images/icon-12.png</href>
@@ -491,21 +909,3101 @@
         <text><![CDATA[<h3>$[name]</h3>]]></text>
       </BalloonStyle>
     </Style>
-    <StyleMap id="icon-seq2-5-4-BDBDBD-nodesc">
+    <StyleMap id="icon-seq2-6-2-A52714-nodesc">
       <Pair>
         <key>normal</key>
-        <styleUrl>#icon-seq2-5-4-BDBDBD-nodesc-normal</styleUrl>
+        <styleUrl>#icon-seq2-6-2-A52714-nodesc-normal</styleUrl>
       </Pair>
       <Pair>
         <key>highlight</key>
-        <styleUrl>#icon-seq2-5-4-BDBDBD-nodesc-highlight</styleUrl>
+        <styleUrl>#icon-seq2-6-2-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-20-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-30.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-20-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-30.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-20-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-20-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-20-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-21-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-31.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-21-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-31.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-21-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-21-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-21-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-22-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-32.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-22-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-32.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-22-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-22-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-22-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-23-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-33.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-23-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-33.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-23-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-23-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-23-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-24-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-34.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-24-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-34.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-24-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-24-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-24-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-25-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-35.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-25-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-35.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-25-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-25-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-25-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-26-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-36.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-26-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-36.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-26-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-26-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-26-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-27-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-37.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-27-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-37.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-27-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-27-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-27-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-28-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-38.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-28-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-38.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-28-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-28-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-28-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-29-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-39.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-29-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-39.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-29-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-29-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-29-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-3-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-13.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-3-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-13.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-3-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-3-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-3-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-30-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-40.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-30-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-40.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-30-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-30-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-30-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-31-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-41.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-31-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-41.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-31-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-31-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-31-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-32-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-42.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-32-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-42.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-32-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-32-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-32-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-33-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-43.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-33-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-43.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-33-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-33-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-33-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-34-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-44.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-34-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-44.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-34-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-34-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-34-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-35-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-45.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-35-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-45.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-35-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-35-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-35-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-36-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-46.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-36-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-46.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-36-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-36-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-36-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-37-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-47.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-37-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-47.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-37-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-37-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-37-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-38-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-48.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-38-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-48.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-38-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-38-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-38-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-39-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-49.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-39-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-49.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-39-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-39-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-39-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-4-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-14.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-4-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-14.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-4-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-4-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-4-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-40-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-50.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-40-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-50.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-40-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-40-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-40-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-41-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-51.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-41-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-51.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-41-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-41-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-41-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-42-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-52.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-42-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-52.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-42-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-42-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-42-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-43-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-53.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-43-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-53.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-43-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-43-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-43-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-44-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-54.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-44-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-54.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-44-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-44-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-44-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-45-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-55.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-45-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-55.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-45-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-45-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-45-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-46-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-56.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-46-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-56.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-46-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-46-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-46-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-47-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-57.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-47-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-57.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-47-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-47-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-47-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-48-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-58.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-48-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-58.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-48-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-48-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-48-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-49-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-59.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-49-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-59.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-49-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-49-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-49-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-5-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-15.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-5-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-15.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-5-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-5-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-5-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-50-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-60.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-50-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-60.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-50-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-50-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-50-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-51-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-61.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-51-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-61.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-51-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-51-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-51-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-52-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-62.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-52-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-62.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-52-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-52-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-52-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-53-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-63.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-53-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-63.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-53-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-53-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-53-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-54-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-64.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-54-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-64.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-54-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-54-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-54-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-55-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-65.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-55-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-65.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-55-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-55-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-55-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-56-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-66.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-56-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-66.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-56-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-56-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-56-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-57-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-67.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-57-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-67.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-57-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-57-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-57-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-58-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-68.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-58-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-68.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-58-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-58-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-58-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-59-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-69.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-59-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-69.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-59-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-59-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-59-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-6-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-16.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-6-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-16.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-6-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-6-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-6-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-60-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-70.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-60-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-70.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-60-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-60-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-60-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-61-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-71.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-61-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-71.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-61-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-61-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-61-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-62-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-72.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-62-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-72.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-62-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-62-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-62-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-63-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-73.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-63-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-73.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-63-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-63-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-63-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-64-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-74.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-64-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-74.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-64-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-64-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-64-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-65-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-75.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-65-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-75.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-65-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-65-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-65-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-66-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-76.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-66-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-76.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-66-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-66-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-66-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-67-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-77.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-67-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-77.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-67-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-67-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-67-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-68-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-78.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-68-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-78.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-68-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-68-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-68-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-69-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-79.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-69-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-79.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-69-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-69-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-69-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-7-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-17.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-7-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-17.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-7-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-7-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-7-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-70-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-80.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-70-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-80.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-70-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-70-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-70-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-71-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-81.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-71-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-81.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-71-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-71-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-71-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-72-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-82.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-72-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-82.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-72-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-72-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-72-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-73-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-83.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-73-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-83.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-73-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-73-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-73-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-74-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-84.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-74-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-84.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-74-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-74-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-74-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-75-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-85.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-75-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-85.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-75-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-75-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-75-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-76-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-86.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-76-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-86.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-76-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-76-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-76-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-77-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-87.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-77-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-87.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-77-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-77-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-77-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-78-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-88.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-78-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-88.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-78-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-78-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-78-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-79-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-89.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-79-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-89.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-79-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-79-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-79-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-8-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-18.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-8-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-18.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-8-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-8-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-8-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-80-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-90.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-80-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-90.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-80-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-80-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-80-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-81-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-91.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-81-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-91.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-81-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-81-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-81-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-82-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-92.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-82-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-92.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-82-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-82-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-82-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-83-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-93.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-83-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-93.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-83-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-83-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-83-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-84-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-94.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-84-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-94.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-84-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-84-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-84-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-85-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-95.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-85-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-95.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-85-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-85-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-85-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-86-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-96.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-86-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-96.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-86-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-86-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-86-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-87-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-97.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-87-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-97.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-87-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-87-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-87-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-88-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-98.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-88-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-98.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-88-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-88-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-88-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-89-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-99.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-89-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-99.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-89-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-89-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-89-A52714-nodesc-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Style id="icon-seq2-6-9-A52714-nodesc-normal">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-19.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <Style id="icon-seq2-6-9-A52714-nodesc-highlight">
+      <IconStyle>
+        <color>ff1427a5</color>
+        <scale>1</scale>
+        <Icon>
+          <href>images/icon-19.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+      <BalloonStyle>
+        <text><![CDATA[<h3>$[name]</h3>]]></text>
+      </BalloonStyle>
+    </Style>
+    <StyleMap id="icon-seq2-6-9-A52714-nodesc">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-seq2-6-9-A52714-nodesc-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-seq2-6-9-A52714-nodesc-highlight</styleUrl>
       </Pair>
     </StyleMap>
     <Folder>
       <name>尾道市給水所マップ</name>
       <Placemark>
         <name>給水｜尾道市総合福祉センター （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -515,7 +4013,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道西公園 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -525,7 +4023,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜水道局 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -535,7 +4033,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道市立吉和小学校 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -545,7 +4043,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜市役所本庁舎 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -555,7 +4053,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道市立西藤小学校 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -565,7 +4063,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜尾道東公園 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -575,7 +4073,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜サンボル尾道 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -585,7 +4083,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜向島支所 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -595,7 +4093,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜瀬戸田支所 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -615,7 +4113,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜旧生口中学校 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -625,7 +4123,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜御調支所 （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -635,7 +4133,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜芸予文化情報センター （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -645,7 +4143,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜農村環境改善センター （飲用可/7:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -655,7 +4153,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜坊士浄水場 （飲用可/24時間体制）</name>
-        <description><![CDATA[給水対応日時：7月10日（火曜日）午後以降（24時間体制）<br><br>[坊士浄水場の利用について]<br>市内16カ所の応急給水拠点では21時まで給水可能ですが、21時以降でしか来られない人（昼間同様の水量12リットルでお願いします）また、企業で倉庫業など必要最小限の水を確保しないと今後の企業活動が困難となる等お困りの企業が対象となります。(道路が狭いので、2ｔ車以下でお願いします)<br><br>[問い合わせ先]<br>水道局庶務課<br>〒722-0046 広島県尾道市長江三丁目6番52号<br>庶務係<br>Tel：(0848)37-8700<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <description><![CDATA[給水対応日時：24時間体制<br><br>[坊士浄水場の利用について]<br>市内17カ所の応急給水拠点では21時まで給水可能ですが、21時以降でしか来られない人（昼間同様の水量12リットルでお願いします）また、企業で倉庫業など必要最小限の水を確保しないと今後の企業活動が困難となる等お困りの企業が対象となります。(道路が狭いので、2ｔ車以下でお願いします)<br><br>[問い合わせ先]<br>水道局庶務課<br>〒722-0046 広島県尾道市長江三丁目6番52号<br>庶務係<br>Tel：(0848)37-8700<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -783,8 +4281,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道渡し場 たまがんぞう（7/11以降不明）</name>
-        <description><![CDATA[水道水/無くなり次第終了<br>7/9、7/10]]></description>
+        <name>給水｜尾道渡し場 たまがんぞう</name>
+        <description><![CDATA[水道水/無くなり次第終了<br>7/12]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -843,8 +4341,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜因島フラワーセンター（7:00-21:00)</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>http://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <name>給水｜因島フラワーセンター（飲用可/7:00-21:00)</name>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>http://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -853,22 +4351,11 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>井戸｜明徳寺</name>
-        <description>井戸水</description>
-        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <name>給水｜満点酒家 あかぼし</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
         <Point>
           <coordinates>
-            133.188549,34.294834,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>井戸｜Cafe 夢ぅ</name>
-        <description>井戸水</description>
-        <styleUrl>#icon-1899-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            133.1689086,34.2994449,0
+            133.2592316,34.4498133,0
           </coordinates>
         </Point>
       </Placemark>
@@ -971,8 +4458,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道平原温泉 ぽっぽの湯（7/11 10:30:16:00/飲用不可）</name>
-        <description><![CDATA[11日（水）10:30～16:00<br>飲用不可/1人18ℓまで/先着500名様/容器持参]]></description>
+        <name>給水｜尾道平原温泉 ぽっぽの湯（7/12 10:30-16:00/飲用不可）</name>
+        <description><![CDATA[12日（木）10:30～16:00<br>飲用不可/1人18ℓまで/先着500名様/容器持参]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -991,8 +4478,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜向島運動公園（9:00-21:00）</name>
-        <description><![CDATA[給水対応日時：7月11日（水曜日）9時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
+        <name>給水｜向島運動公園（7:00-21:00）</name>
+        <description><![CDATA[給水対応日時：7月12日（木曜日）7時00分～21時00分<br><br>給水用の容器が必要です。お1人12リットルまでです。高齢者の方で、給水対応場所まで行くことが困難な場合は、ご近所や親族の方が代理で対応していただきますようお願いいたします。とのことです。<br><br>▼尾道市ホームページ(7/11掲載分)<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1019,7 +4506,7 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>井戸｜ハーツヘアー（飲用不可/トイレあり/シャンプー可）</name>
+        <name>井戸｜ハーツヘアー（飲用不可/7/12-7/13 8:00-16:30 /18L以内/トイレあり/シャンプー可）</name>
         <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
         <Point>
           <coordinates>
@@ -1027,9 +4514,19 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>給水｜メディアテック一心（9:00-17:00,1階正面玄関入口内線電話より“128”に内線）</name>
+        <description><![CDATA[給 水 場 所 ：一心グループビル(福山市赤坂町赤坂1276番地)<br>給 水 時 間 ：9:00～17:00<br>問い合わせ先：084-952-3000　メディアテック一心 総務部<br>　　　<br>※給水に来られた方は1階正面玄関入口の内線電話より“128”に内線をお願いします。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.304206,34.471675,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
-      <name>東広島市（11日14:00時点）</name>
+      <name>東広島市</name>
       <Placemark>
         <name>給水｜東広島市立 西志和小学校（飲用可/24時間）</name>
         <description><![CDATA[★★正門よりお入りください。★★<br><br>※24時間となっている場所は、屋外水栓からご自由にお取りください。門が閉まっている場合は、開けていただいてかまいません。学校については、午前中授業を行っているので、ご配慮ください。<br><br>※水を入れる容器は各自でご用意くださいとのことです。<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>志和町 奥屋地区地域<br>志和町 別府地区]]></description>
@@ -1072,7 +4569,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜東広島市 河内支所（飲用可/8:00-19:00）</name>
-        <description><![CDATA[▼給水時間<br>7月11日午前8時～午後7時予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 中河内地区<br>河内町 下河内地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
+        <description><![CDATA[▼給水時間<br>午前8時～午後7時予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 中河内地区<br>河内町 下河内地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
         <styleUrl>#icon-seq2-1-4-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -1082,7 +4579,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜篁老人集会所（飲用可/9:00-15:30）</name>
-        <description><![CDATA[▼給水時間<br>7月11日　午前9時～午後3時30分予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 入野地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
+        <description><![CDATA[▼給水時間<br>午前9時～午後3時30分予定<br><br>＊東広島市ホームページ<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>河内町 入野地区<br><br>※水を入れる容器は各自でご用意くださいとのことです]]></description>
         <styleUrl>#icon-seq2-1-5-7CB342</styleUrl>
         <Point>
           <coordinates>
@@ -1102,10 +4599,10 @@
       </Placemark>
     </Folder>
     <Folder>
-      <name>三原市(7月10日23:00時点)</name>
+      <name>三原市</name>
       <Placemark>
         <name>給水｜西野浄水場（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1115,7 +4612,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立 第二中学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1125,7 +4622,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市 東部共同調理場（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1135,7 +4632,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立幸崎中学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1145,7 +4642,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜本郷生涯学習センター（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1155,7 +4652,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜沼田東ダイヤハイツ内（飲用可/9:00-19:00）</name>
-        <description><![CDATA[<img src="https://lh5.googleusercontent.com/Ga4Gijdl0ob-2f-W54pTNz-lwJbGXWToVr7-EKf7p08fsSHnepuP156RTArpBPsq-PUzhcioyi4eECVf0Kl-QTtPeBDOU6fKkYjtG0zlj2G6wkge4WjNx0hpjB15X1O6aumB" height="200" width="auto" /><br><br>三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[<img src="https://lh5.googleusercontent.com/Ga4Gijdl0ob-2f-W54pTNz-lwJbGXWToVr7-EKf7p08fsSHnepuP156RTArpBPsq-PUzhcioyi4eECVf0Kl-QTtPeBDOU6fKkYjtG0zlj2G6wkge4WjNx0hpjB15X1O6aumB" height="200" width="auto" /><br><br>三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <ExtendedData>
           <Data name="gx_media_links">
@@ -1170,7 +4667,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原駅前市民広場（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1180,7 +4677,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立田野浦小学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1190,7 +4687,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市立第四中学校（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1200,7 +4697,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜船木ふれあいセンター隣（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1210,7 +4707,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市 南方コミュニティセンター（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1220,7 +4717,7 @@
       </Placemark>
       <Placemark>
         <name>給水｜三原市 北方コミュニティセンター（飲用可/9:00-19:00）</name>
-        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>11日(水曜日)９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき６リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
+        <description><![CDATA[三原市ホームページ<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html<br><br>▼給水対応日時<br>９時～19時<br><br>※ 給水用の容器をご持参ください。１人につき１２リットル程度までとさせていただきます。<br>※給水場所付近は，混雑が予想されます。<br>とのことです。<br><br>▼問合せ先<br>水道部<br>〒723-0065 広島県三原市西野5-14-1　<br>給水係<br>Tel：0848-64-2294]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1253,7 +4750,7 @@
       </Placemark>
       <Placemark>
         <name>風呂｜尾道ふれあいの里（10:00-20:00）</name>
-        <description><![CDATA[▼FBページhttps://www.facebook.com/fureai.spa/<br>連絡先：0848-77-0177<br><br>7/11（水）も引き続き<br>特別営業させていただきます。<br><br>営業時間：10:00-20:00(最終受付19:30)<br>.<br>★無料シャトルバス臨時運行いたします。<br>東尾道経由8時55分発です。<br>「毎週金曜日は、向島支所8時20分発」<br>(尾道駅9番乗り場 9時20分)予定ですが、<br>交通状況により混雑も予想されます。<br>帰りは、ふれあいの里を12時に出発致します！<br>.<br>.<br>※トラブルなど状況に応じて、営業時間の変更および営業を終了する場合もございます。<br>※温泉水のみを使用するため、シャワーは利用できず、浴槽よりかけ湯をしていただきます。<br>※一部浴場は利用できません。<br>下記は利用不可となります。<br>・お食事処　・休憩場　・その他施設<br>※限定的にマッサージは営業させていただきます。<br>入浴料：300円<br>タオル・館内着は貸し出しできませんので、<br>必ずご持参ください。<br>翌日以降の営業については現時点で未定です。<br>スタッフも限られた人数の中、運営しております。<br>至らぬ点もあるかと思いますが、<br>ご理解のほどお願いいたします。]]></description>
+        <description><![CDATA[▼FBページhttps://www.facebook.com/fureai.spa/<br>連絡先：0848-77-0177<br><br>7/11(火)～【断水解除までの間 営業】予定<br>営業時間：10:00-20:00 最終受付19:30<br>.<br>★無料シャトルバス １便 臨時運行いたします。<br>(詳しくはご連絡下さい)<br>.<br>※トラブルなど状況に応じて、営業時間の変更および営業を終了する場合もございます。<br>※温泉水のみを使用するため、シャワーは利用できず、浴槽よりかけ湯をしていただきます。<br>※一部浴場は利用できません。<br>断水の為「トイレ・シャワー・食事」不可です。<br>.<br>下記は利用不可となります。<br>・お食事処　・休憩場　・その他施設<br>.<br>※限定的にマッサージは営業させていただきます。<br>入浴料：300円<br>タオル・館内着は貸し出しできませんので、必ずご持参ください。<br><br>被災にあわれた方　お悔やみ申し上げます。<br>スタッフも限られた人数の中、運営しております。<br>至らぬ点もあるかと思いますが、<br>ご理解のほどお願いいたします。<br><br>天然温泉 尾道ふれあいの里 公式サイト<br>http://onomichi-radon-onsen.co.jp/infomation/]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1283,7 +4780,7 @@
       </Placemark>
       <Placemark>
         <name>風呂｜ぽっぽの湯（10:00-17:00）</name>
-        <description><![CDATA[FBのURL<br>https://www.facebook.com/poppo.info<br>【7月11日（水）特別営業】<br>11日も特別営業致します。<br><br>営業時間　10:00～17:00（最終受付16:00）<br>※トラブルなど状況に応じて、営業時間の短縮をする場合がございます。<br><br>下記は利用不可となります。<br>・サウナ　・つぼ湯　・大休憩室<br>・マンガコーナー　・お食事処<br><br>タオルセット・館内着はレンタル出来ません<br>販売用タオルを準備しております。<br>※数に限りがあります<br><br>入浴料は通常通り頂きます。<br>※館内の混乱を避ける為、通常通りの入浴料とさせて頂いております。ご理解とご協力のほどお願い申し上げます。<br><br>井戸水の持ち帰りは当館の特設給水所をご利用下さい。]]></description>
+        <description><![CDATA[FBのURL<br>https://www.facebook.com/poppo.info<br>7月12日（木）特別営業】<br>明日も特別営業致します。<br><br>営業時間　10:00～17:00（最終受付16:00）<br>※トラブルなど状況に応じて、営業時間の短縮をする場合ございます。<br><br>下記は利用不可となります。<br>・サウナ　・つぼ湯　・大休憩室<br>・マンガコーナー　・お食事処<br><br>タオルセット・館内着はレンタル出来ません<br>販売用タオルを準備しております。<br>※数に限りがあります<br><br>入浴料は通常通り頂きます。<br><br>※館内の混乱を避ける為、通常通りの入浴料とさせて頂いております。ご理解とご協力のほどお願い申し上げます。<br><br>井戸水の持ち帰りは当館の特設給水所をご利用下さい。<br>※給水時間10:30～16:00（予定）<br><br>電話での問い合わせが多数ありますが、スタッフが足りないため電話対応できかねますので、ご理解下さい。また、13日以降の営業は現時点では未定です。]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1302,7 +4799,7 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>風呂｜寿湯（15:00-21:00/日曜休み）</name>
+        <name>風呂｜寿湯（15:00-21:00/日曜休み/休止中の可能性あり）</name>
         <description><![CDATA[連絡先：0845-22-2966<br>営業時間：15:00~21:00<br>休み：日曜日]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
@@ -1312,8 +4809,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>風呂｜尾道市総合福祉センター（7/11 18:00-23:00）</name>
-        <description><![CDATA[自衛隊による仮設入浴施設<br><br>入浴時間：7月11日（水曜日）18時00分～23時00分<br>※明日以降の予定はわかり次第お知らせします。<br><br>[注意事項]<br>タオルをご持参ください。（せっけん、シャンプーは用意してあります。）<br><br>どなたでも入浴できますが、混雑が予想されますので、気を付けてお越しください。<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20367.html]]></description>
+        <name>風呂｜尾道市総合福祉センター（17:00-23:00）</name>
+        <description><![CDATA[自衛隊による仮設入浴施設<br><br>入浴時間：17時00分～23時00分<br>※明日以降の予定はわかり次第お知らせします。<br><br>[注意事項]<br>タオルをご持参ください。（せっけん、シャンプーは用意してあります。）<br><br>どなたでも入浴できますが、混雑が予想されますので、気を付けてお越しください。<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20367.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -1347,6 +4844,133 @@
         <Point>
           <coordinates>
             133.2538905,34.449605,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜本郷生涯学習センター（15:00-23:00）</name>
+        <description><![CDATA[【自衛隊による仮設風呂のサービスを開始します】<br><br>避難所生活等で入浴できない地域の住民を対象に、陸上自衛隊が仮設風呂を設置し、入浴支援を行います。<br><br>期間：平成30年７月11日(水)から当面の間<br>時間：15時から23時まで<br>設備：男性用風呂１基，女性用風呂１基<br><br>※15時から本郷生涯学習センターへの避難者を優先して入場してもらいます。<br>※湯がなくなった場合，２時間程度の待ち時間がでます。<br>※駐車場は限りがあります。<br>※タオルや石鹸は各自で準備してください。<br><br>問い合わせ先：災害対策本部（℡0848・67・6868）]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            132.9832628,34.410632,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜まごころの湯（10:00-23:00）</name>
+        <description><![CDATA[・営業時間：10:00~23:00 (受付 22:30まで)<br>・施設連絡先：084-961-4126<br>・備考：タオルをお持ちください。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3849561,34.519908,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜福山オリエンタルホテル（15:00~深夜2:00）</name>
+        <description><![CDATA[・営業時間：15:00~深夜2:00<br>・施設連絡先：084-927-0995<br>・備考：事前連絡をしてください。<br>　　　：駐車場はありません。<br>　　　：タオルをご持参ください。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3642929,34.4909433,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜遊湯（月曜休み）</name>
+        <description><![CDATA[[施設連絡先]<br>084-927-0995<br>[備考]<br>・営業時間はお問い合わせください。<br> ・断水の期間は無料となります。<br>[休み]<br>月曜日]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.2515769,34.4487467,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜スーパー銭湯ゆらら（9:00~深夜1:00/第3水曜休み）</name>
+        <description><![CDATA[[施設連絡先]<br>084-926-2685<br>[営業時間]<br>9:00~深夜1:00<br>[備考]<br>・タオル、シャンプーをお持ちください。<br>[休み]<br>第3水曜日]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3510438,34.4863853,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜美福温泉（10:00~深夜1:00）</name>
+        <description><![CDATA[[施設連絡先]<br>084-957-0011<br>[営業時間]<br>10:00~深夜1:00<br>[備考]<br>・タオルをお持ちください。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3909594,34.469787,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜養老温泉（10：00-21：00 / 水曜休み）</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1986427,34.449207,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜福山少年自然の家（7/12 10:00-21:30 , シャワーあり , 石鹸タオルなど持参）</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.288509,34.450594,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜瀬戸老人福祉センター（7/11-7/14 10:00-14:00/無料/要事前連絡084-951-1374）</name>
+        <description><![CDATA[利用する場合は、利用する施設に直接事前に連絡をしてください。<br><br>入浴の際には，タオル・石鹸・シャンプー等準備してください。<br><br>施設内には他の利用者がいますので、施設職員の指示に従ってください。<br><br>利用料は無料とします。<br><br>※必ずご利用の前に、利用予定の施設へご連絡の上、ご利用くださいますようよろしくお願いいたします。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3314205,34.4680148,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜春日老人福祉センター（7/11-7/14 10:00-14:00/無料/要事前連絡084-947-5319）</name>
+        <description><![CDATA[利用する場合は、利用する施設に直接事前に連絡をしてください。<br><br>入浴の際には，タオル・石鹸・シャンプー等準備してください。<br><br>施設内には他の利用者がいますので、施設職員の指示に従ってください。<br><br>利用料は無料とします。<br><br>※必ずご利用の前に、利用予定の施設へご連絡の上、ご利用くださいますようよろしくお願いいたします。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.4178631,34.5145829,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜老人福祉センター紫雲荘（7/11-7/14 10:00-14:00/無料/要事前連絡084-972-3009）</name>
+        <description><![CDATA[利用する場合は、利用する施設に直接事前に連絡をしてください。<br><br>入浴の際には，タオル・石鹸・シャンプー等準備してください。<br><br>施設内には他の利用者がいますので、施設職員の指示に従ってください。<br><br>利用料は無料とします。<br><br>※必ずご利用の前に、利用予定の施設へご連絡の上、ご利用くださいますようよろしくお願いいたします。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.344011,34.6091978,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜神辺老人福祉センター（7/11-7/14 10:00-14:00/無料/要事前連絡084-963-2611）</name>
+        <description><![CDATA[利用する場合は、利用する施設に直接事前に連絡をしてください。<br><br>入浴の際には，タオル・石鹸・シャンプー等準備してください。<br><br>施設内には他の利用者がいますので、施設職員の指示に従ってください。<br><br>利用料は無料とします。<br><br>※必ずご利用の前に、利用予定の施設へご連絡の上、ご利用くださいますようよろしくお願いいたします。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3834709,34.5567034,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜コロナの湯（9:00-24:00）</name>
+        <styleUrl>#icon-1899-DB4436-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.4073872,34.465524,0
           </coordinates>
         </Point>
       </Placemark>
@@ -1528,42 +5152,27 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>水道水｜尾道市立長江中学校（飲用可）</name>
+        <description><![CDATA[<img src="https://lh4.googleusercontent.com/W-QaxnaGggfk8sWE07uTNnpqH8QEDIcOLBMEHOH8YzyYMdKjeQNyvLzQgUVKDNWRrN5yJvz04gkaRsWekjrNvfczCejYW20fD1eAoh3y3GzBDqpxGzH1Wwp90N_mEdC7otGAKQ" height="200" width="auto" /><br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html<br><br>▼グラウンド北側の門から入り、体育館前の蛇口<br><br>断水に伴い、学校などの校庭の蛇口で水を提供します。<br>職員は不在のため、節度ある利用をお願いいたします。<br>※示している蛇口のみ使用可能とのことです。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <ExtendedData>
+          <Data name="gx_media_links">
+            <value>https://lh4.googleusercontent.com/W-QaxnaGggfk8sWE07uTNnpqH8QEDIcOLBMEHOH8YzyYMdKjeQNyvLzQgUVKDNWRrN5yJvz04gkaRsWekjrNvfczCejYW20fD1eAoh3y3GzBDqpxGzH1Wwp90N_mEdC7otGAKQ</value>
+          </Data>
+        </ExtendedData>
+        <Point>
+          <coordinates>
+            133.1973373,34.4195317,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>洗濯（ランドリー）</name>
       <Placemark>
-        <name>洗濯｜みやもと企画 みつぎ店</name>
-        <description>洗濯機/乾燥機</description>
-        <styleUrl>#icon-seq2-5-0-BDBDBD</styleUrl>
-        <Point>
-          <coordinates>
-            133.1414401,34.5095602,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>洗濯｜みやもと企画 三成店</name>
-        <description>洗濯機/乾燥機</description>
-        <styleUrl>#icon-seq2-5-1-BDBDBD</styleUrl>
-        <Point>
-          <coordinates>
-            133.1964376,34.4456241,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
-        <name>洗濯｜みやもと企画 因島せんたく村</name>
-        <description>洗濯機/乾燥機</description>
-        <styleUrl>#icon-seq2-5-2-BDBDBD</styleUrl>
-        <Point>
-          <coordinates>
-            133.152815,34.310924,0
-          </coordinates>
-        </Point>
-      </Placemark>
-      <Placemark>
         <name>洗濯｜久保１丁目３−３４（個人）</name>
-        <styleUrl>#icon-seq2-5-3-BDBDBD-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-5-0-BDBDBD-nodesc</styleUrl>
         <Point>
           <coordinates>
             133.2039302,34.4112976,0
@@ -1572,10 +5181,823 @@
       </Placemark>
       <Placemark>
         <name>洗濯｜ダイヤクリーニング春日西店（24時間）</name>
-        <styleUrl>#icon-seq2-5-4-BDBDBD-nodesc</styleUrl>
+        <styleUrl>#icon-seq2-5-1-BDBDBD-nodesc</styleUrl>
         <Point>
           <coordinates>
             133.403323,34.5060447,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+    <Folder>
+      <name>トイレ</name>
+      <Placemark>
+        <name>トイレ｜長江口ゆとりの広場（24時間）</name>
+        <styleUrl>#icon-seq2-6-0-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2026356,34.4105167,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜ロープウェイ山麓駅（下側の駅/8:30～17:00）</name>
+        <styleUrl>#icon-seq2-6-1-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2016218,34.4106981,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜瀬戸田サンセットビーチ（9:00-16:00）</name>
+        <styleUrl>#icon-seq2-6-2-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.0736743,34.2805972,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜多々羅大橋自転車道登り口公衆トイレ（24時間）</name>
+        <styleUrl>#icon-seq2-6-3-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.0677795,34.2660924,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜山波公民館</name>
+        <styleUrl>#icon-seq2-6-4-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.227486,34.415661,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立山波小学校</name>
+        <styleUrl>#icon-seq2-6-5-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.225372,34.4149358,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市役所</name>
+        <styleUrl>#icon-seq2-6-6-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2051609,34.4090042,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市教育会館</name>
+        <styleUrl>#icon-seq2-6-7-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2067556,34.4105355,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜いきいきサロン筒湯</name>
+        <styleUrl>#icon-seq2-6-8-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.208098,34.4119077,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立久保小学校</name>
+        <styleUrl>#icon-seq2-6-9-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2074387,34.4145306,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 青少年センター</name>
+        <styleUrl>#icon-seq2-6-10-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.209807,34.412922,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 人権文化センター北久保児童館</name>
+        <styleUrl>#icon-seq2-6-11-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.201138,34.422013,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 生きがい活動推進センター</name>
+        <styleUrl>#icon-seq2-6-12-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2101828,34.4230787,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立長江中学校</name>
+        <styleUrl>#icon-seq2-6-13-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1973373,34.4195317,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立美術館</name>
+        <styleUrl>#icon-seq2-6-14-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1957807,34.4099341,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 勤労青少年ホーム</name>
+        <styleUrl>#icon-seq2-6-15-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.194454,34.4104798,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜千光寺公園駐車場（かおり館付近）</name>
+        <styleUrl>#icon-seq2-6-16-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1951218,34.4109603,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜しまなみ交流館前広場</name>
+        <styleUrl>#icon-seq2-6-17-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1928939,34.4041479,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道駅前港湾緑地</name>
+        <styleUrl>#icon-seq2-6-18-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1938058,34.4038425,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜新浜県営上屋倉庫</name>
+        <styleUrl>#icon-seq2-6-19-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.185264,34.4005466,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市消防局尾道西消防署</name>
+        <styleUrl>#icon-seq2-6-20-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.186687,34.400999,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜吉和公民館</name>
+        <styleUrl>#icon-seq2-6-21-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.171116,34.402343,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立吉和小学校</name>
+        <styleUrl>#icon-seq2-6-22-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.170421,34.401124,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜日比崎公民館</name>
+        <styleUrl>#icon-seq2-6-23-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.188626,34.407395,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立日比崎中学校</name>
+        <styleUrl>#icon-seq2-6-24-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1828695,34.4077301,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜桜町妙見橋付近</name>
+        <styleUrl>#icon-seq2-6-25-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1874919,34.4111318,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市総合福祉センター</name>
+        <styleUrl>#icon-seq2-6-26-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1854228,34.4213743,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜いきいきサロン門田</name>
+        <styleUrl>#icon-seq2-6-27-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1793177,34.4185022,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立栗原北小学校</name>
+        <styleUrl>#icon-seq2-6-28-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1941916,34.4378725,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立中央公民館久山田分館</name>
+        <styleUrl>#icon-seq2-6-29-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1634418,34.423996,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜公立大学法人尾道市立大学</name>
+        <styleUrl>#icon-seq2-6-30-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1615719,34.4241612,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜栗原北公民館</name>
+        <styleUrl>#icon-seq2-6-31-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.197204,34.442111,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立美木中学校</name>
+        <styleUrl>#icon-seq2-6-32-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.177659,34.455241,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立美木原小学校</name>
+        <styleUrl>#icon-seq2-6-33-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1648266,34.4504286,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市消防局尾道消防署北出張所</name>
+        <styleUrl>#icon-seq2-6-34-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.181991,34.456214,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜中央公民館木ノ庄東分館</name>
+        <styleUrl>#icon-seq2-6-35-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1808585,34.4691455,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 農村環境改善センター</name>
+        <styleUrl>#icon-seq2-6-36-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.171078,34.459936,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜ＪＡ尾道市 原田出張所</name>
+        <styleUrl>#icon-seq2-6-37-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.209873,34.481881,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立西藤小学校</name>
+        <styleUrl>#icon-seq2-6-38-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2235945,34.4555715,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 東部公民館</name>
+        <styleUrl>#icon-seq2-6-39-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.228902,34.43594,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜大田ふれあい館</name>
+        <styleUrl>#icon-seq2-6-40-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2239962,34.4268535,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜いきいきサロン大元山</name>
+        <styleUrl>#icon-seq2-6-41-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2335403,34.438538,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市消防局</name>
+        <styleUrl>#icon-seq2-6-42-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.236041,34.427205,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 浄化センター</name>
+        <styleUrl>#icon-seq2-6-43-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2397402,34.4268242,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜衛生施設センター</name>
+        <styleUrl>#icon-seq2-6-44-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2414955,34.4259246,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜いきいきサロン新高山</name>
+        <styleUrl>#icon-seq2-6-45-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2153955,34.4182463,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜清掃事務所</name>
+        <styleUrl>#icon-seq2-6-46-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2121838,34.4380699,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 斎場</name>
+        <styleUrl>#icon-seq2-6-47-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.209956,34.448788,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜向東保育所</name>
+        <styleUrl>#icon-seq2-6-48-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.233242,34.404568,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜サンボル尾道</name>
+        <styleUrl>#icon-seq2-6-49-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.221091,34.399043,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 御調支所</name>
+        <styleUrl>#icon-seq2-6-50-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.145565,34.510771,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市役所 市公民館</name>
+        <styleUrl>#icon-seq2-6-51-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.14784,34.513474,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜御調体育センター</name>
+        <styleUrl>#icon-seq2-6-52-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.147423,34.513202,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市役所 みつぎ子ども図書館すくすく</name>
+        <styleUrl>#icon-seq2-6-53-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1442216,34.5118864,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜みつぎいきいきセンター</name>
+        <styleUrl>#icon-seq2-6-54-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1487142,34.5163819,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜河内公民館</name>
+        <styleUrl>#icon-seq2-6-55-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1258123,34.5011791,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜江奥コミュニティセンター</name>
+        <styleUrl>#icon-seq2-6-56-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2101588,34.3841076,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜江奥保育所</name>
+        <styleUrl>#icon-seq2-6-57-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.210239,34.389039,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立向島中学校</name>
+        <styleUrl>#icon-seq2-6-58-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1958576,34.3983492,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜田尻公民館</name>
+        <styleUrl>#icon-seq2-6-59-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2012249,34.3905321,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜川尻コミュニティセンター</name>
+        <styleUrl>#icon-seq2-6-60-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2003007,34.3869943,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道消防署 向島分署</name>
+        <styleUrl>#icon-seq2-6-61-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1972292,34.3913728,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 向島支所</name>
+        <styleUrl>#icon-seq2-6-62-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.198548,34.395702,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜愛ランド向島</name>
+        <styleUrl>#icon-seq2-6-63-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1860157,34.3808983,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜有井公民館</name>
+        <styleUrl>#icon-seq2-6-64-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1827185,34.392495,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜道越公民館</name>
+        <styleUrl>#icon-seq2-6-65-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1734815,34.3845934,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜コミュニティーセンター津部田</name>
+        <styleUrl>#icon-seq2-6-66-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1827753,34.3720629,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 岩子島農業構造改善センター</name>
+        <styleUrl>#icon-seq2-6-67-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.163111,34.382275,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜いきいきサロン立花 和</name>
+        <styleUrl>#icon-seq2-6-68-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2025841,34.3605085,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市役所 因島総合支所</name>
+        <styleUrl>#icon-seq2-6-69-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.169245,34.294576,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜土生公民館</name>
+        <styleUrl>#icon-seq2-6-70-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.175903,34.290643,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立因島南小学校</name>
+        <styleUrl>#icon-seq2-6-71-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.176661,34.293254,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜はっさく交流館（因島総合福祉保健センター）</name>
+        <styleUrl>#icon-seq2-6-72-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1689948,34.3008086,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 三庄公民館</name>
+        <styleUrl>#icon-seq2-6-73-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1940412,34.2924845,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市立 因北小学校</name>
+        <styleUrl>#icon-seq2-6-74-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.172877,34.328599,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜大浜公民館</name>
+        <styleUrl>#icon-seq2-6-75-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.174119,34.349304,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市南部清掃事務所</name>
+        <styleUrl>#icon-seq2-6-76-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.144668,34.321603,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜因島フラワーセンター</name>
+        <styleUrl>#icon-seq2-6-77-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1524034,34.3452344,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜重井公民館</name>
+        <styleUrl>#icon-seq2-6-78-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1458102,34.3409666,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜因島消防署</name>
+        <styleUrl>#icon-seq2-6-79-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1667864,34.3194934,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜因島ふれあいセンター</name>
+        <styleUrl>#icon-seq2-6-80-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.149547,34.3139563,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市役所 東生口公民館</name>
+        <styleUrl>#icon-seq2-6-81-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.138785,34.2832478,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市役所 瀬戸田支所</name>
+        <styleUrl>#icon-seq2-6-82-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.095227,34.306049,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜尾道市 瀬戸田福祉保健センター</name>
+        <styleUrl>#icon-seq2-6-83-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.102787,34.306116,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜瀬戸田市民会館</name>
+        <styleUrl>#icon-seq2-6-84-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.0892301,34.3062877,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜沢港</name>
+        <styleUrl>#icon-seq2-6-85-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.090288,34.31305,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜瀬戸田港</name>
+        <styleUrl>#icon-seq2-6-86-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.084252,34.304841,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜いきいきサロン高根潮香園</name>
+        <styleUrl>#icon-seq2-6-87-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.0833092,34.3136581,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜旧生口中学校</name>
+        <styleUrl>#icon-seq2-6-88-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.1230679,34.2783001,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>トイレ｜ひまわり認定こども園</name>
+        <styleUrl>#icon-seq2-6-89-A52714-nodesc</styleUrl>
+        <Point>
+          <coordinates>
+            133.2245241,34.4246813,0
           </coordinates>
         </Point>
       </Placemark>

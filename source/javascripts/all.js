@@ -1,25 +1,48 @@
-
 var L = require('leaflet');
 var $ = require('jquery');
-var tj = require('./togeojson');
-var numberIcon = require('./leaflet_awesome_number_markers');
+var tj = require('@mapbox/togeojson');
+require('./leaflet_awesome_number_markers').default();
+var displayHelper = require('./displayHelper');
+var _ = require('lodash');
 
+function showLegend(map) {
+    var legend = L.control({position: 'bottomright'});
+
+      legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'legend'),
+        //@todo 下の方 (var colors) にもあるので、1箇所にすべき！
+          grades = [
+            {name: 'その他', color: 'black'},
+            {name: 'プール', color: '#563c5c'},
+            {name: '井戸', color: 'purple'},
+            {name: '水道水', color: 'cadetblue'},
+            {name: '洗濯', color: 'green'},
+            {name: '風呂', color: 'red'},
+            {name: 'シャワー', color: 'orange'},
+            {name: '給水', color: 'green'},
+            {name: 'トイレ', color: '#addbe6'},
+          ],
+          labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<div class="legend-type">' +
+              '<i style="background:' + grades[i].color + '"></i><div class=poi-type> ' + grades[i].name + '</div></br>' +
+            '</div>'; 
+
+        }
+        return div;
+    };
+    legend.addTo(map);
+};
 $(function(){
-    var myIcon = L.icon({
-        iconUrl: 'my-icon.png',
-        iconSize: [38, 95],
-        iconAnchor: [22, 94],
-        popupAnchor: [-3, -76],
-        shadowUrl: 'my-icon-shadow.png',
-        shadowSize: [68, 95],
-        shadowAnchor: [22, 94]
-    });
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
-    var tileserver = ( location.href == 'codeforjapan.github.io' ) ? 
+    var tileserver = ( location.host == 'codeforjapan.github.io' ) ?
     'https://tile.cdn.mierune.co.jp/styles/normal/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k' :
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var attribution = ( location.href == 'codeforjapan.github.io' ) ? 
+    var attribution = ( location.host == 'codeforjapan.github.io' ) ?
     "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
     'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
 
@@ -31,6 +54,16 @@ $(function(){
         }
     ).addTo( map );
 
+    $('#date').text(() => {
+      const d = new Date()
+      return displayHelper.getPrintDate(d);
+    });
+    $('#footer').append(
+        'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
+        + '<br>' 
+        + '最新の情報はウェブサイトからお確かめください。'
+    );
+
     // 説明の表示/非表示
     $('#close').on('click', function(){
         $('.explain-container').toggle()
@@ -41,10 +74,12 @@ $(function(){
         }
     });
 
-    $.ajax('./images/water-supply.kml').done(function (data) {
-        console.log(data)
+    $.ajax('./images/water-supply.kml').done(function (data, textStatus, jqXHR) {
+        // データの最終更新日を表示（ローカルでは常に現在時刻となる）
+        var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+        console.log(date);
+        $('#datetime').html(date.toString());
         var geojsondata = tj.kml(data);
-        console.log(geojsondata)
 
         var geojson = L.geoJson(geojsondata, {
           onEachFeature: function (feature, layer) {
@@ -56,50 +91,83 @@ $(function(){
         });
         geojson.addTo(map);
         map.fitBounds(geojson.getBounds());
+                showLegend(map);
       });
     map.on("moveend", function () {
         $('#list').html('<table>');
         var index = 0;
-        console.log(map.getCenter().toString());
+        var targets = [];
         this.eachLayer(function(layer) {
-			if(layer instanceof L.Marker)
+            if(layer instanceof L.Marker)
                 if( map.getBounds().contains(layer.getLatLng()) )
-                    if (layer.feature === undefined) {
+                    if (_.isUndefined(layer.feature)) {
                         return false;
-                    }else {
+                    } else {
                         var name = layer.feature.properties.name;
-                        var description = layer.feature.properties.description;
-                        if (name !== undefined) {
-                            console.log(layer.feature.properties);
-                            if (index % 2 == 0){
-                                $('#list').append('<tr>');
-                            }
-                            $('#list').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>')
-                            if (index % 2 == 1){
-                                $('#list').append('</tr>');
-                            }
-                            var marker = 'blue';
-                            if (name.match(/^風呂/)) {
-                                marker = 'red';
-                            } else if (name.match(/^シャワー/) ) {
-                                marker = 'orange';
-                            } else if (name.match(/^洗濯/)) {
-                                marker = 'green';
-                            } else if (name.match(/^井戸/)) {
-                                marker = 'purple';
-                            } else if (name.match(/^プール/)) {
-                                marker = 'darkpuple';
-                            }
-                            layer.setIcon(new L.AwesomeNumberMarkers({
-                                number: index + 1,
-                                markerColor: marker
-                            }));
-                            //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
-                            index += 1;
+                        if (!_.isUndefined(name)) {
+                            targets.push(layer);
                         }
                     }
-				    //that._list.appendChild( that._createItem(layer) );
+                    //that._list.appendChild( that._createItem(layer) );
         });
-        $('#list').append('</table>');
+        // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
+        var colors = {
+            'その他':'black',
+            'プール':'darkpurple',
+            '井戸':'purple',
+            '水道水':'cadetblue',
+            '洗濯':'green',
+            '風呂':'red',
+            'シャワー':'orange',
+            '給水':'green',
+            'トイレ': 'lightblue',
+        };
+        // sort targets
+        var matchtexts =  Object.keys(colors);
+        var res = targets.sort(function(a,b){
+            var _a = a.feature.properties.name;
+            var _b = b.feature.properties.name;
+            var _a2 = matchtexts.indexOf(_a.split('｜')[0]);
+            var _b2 = matchtexts.indexOf(_b.split('｜')[0]);
+            if(_a2 > _b2){
+                return -1;
+            }else if(_a2 < _b2){
+                return 1;
+            }
+            return 0;
+        });
+        // display them
+        var lastCategory = "";
+        var categoryIndex = 0;
+        res.forEach(function(layer,index){
+            // get name
+            var name = layer.feature.properties.name;
+            // get category and marker type
+            var category = name.split('｜')[0];
+            if (matchtexts.indexOf(category) == -1)
+                category = 'その他';
+            var marker = colors[name.split('｜')[0]];
+            if (_.isUndefined(marker))
+                marker = colors['その他'];
+
+            if (category != lastCategory){
+                // display categories
+                $('#list table').append('<tr><th colspan="2" class="category_separator"></th></tr>');
+                lastCategory = category;
+                $('#list table').append('<tr>');
+                categoryIndex = index;
+            } else {
+                if ((index - categoryIndex) % 2 == 0){
+                    $('#list table').append('<tr>');
+                }
+            }
+            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>');
+            // add markers to map
+            layer.setIcon(new L.AwesomeNumberMarkers({
+                number: index + 1,
+                markerColor: marker
+            }));
+            //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
+        });
     });
 });

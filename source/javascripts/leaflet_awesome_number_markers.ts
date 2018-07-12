@@ -7,7 +7,9 @@
 
 /*global L*/
 
-(function (){
+declare var L: any; 
+
+export default function (){
   "use strict";
   L.AwesomeNumberMarkers = L.Icon.extend({
     options: {
@@ -20,9 +22,9 @@
       numberColor: 'white',
       number: ''
     },
-    
+
     createIcon: function () {
-      
+
       var div = document.createElement('div'),
           options = this.options;
 
@@ -34,9 +36,9 @@
 
     _createInner: function() {
         var iconColorStyle = "", options = this.options;
-            
+
         if(options.numberColor) {
-            iconColorStyle = "style='color: " + options.numberColor + "' ";          
+            iconColorStyle = "style='color: " + options.numberColor + "' ";
         }
 
       return "<i " + iconColorStyle + "><b>" + options.number + "</b></i>";
@@ -46,9 +48,9 @@
         var options = this.options,
             size = L.point(options['iconSize']),
             anchor = L.point(options.iconAnchor);
-        
+
         img.className = 'awesome-number-marker-' + name + ' ' + options.className;
-        
+
         if (anchor) {
           img.style.marginLeft = (-anchor.x) + 'px';
           img.style.marginTop  = (-anchor.y) + 'px';
@@ -61,5 +63,4 @@
     }
   });
 
-}());
-
+};

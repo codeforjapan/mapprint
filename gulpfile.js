@@ -25,15 +25,17 @@ var b = browserify({
 gulp.task('default', ['build']);
 gulp.task('build', ['sass', 'bundle']);
 gulp.task('watch', function(){
-  gulp.watch([jsConf.srcPath], ['build']);
+  gulp.watch([jsConf.srcPath, cssConf.srcPath], ['build']);
 });
 gulp.task('bundle', jsBundle);
 gulp.task('sass', sassPreCompile);
 
 function jsBundle() {
-    return b.bundle()
-    .pipe(source(jsConf.destFileName))
-        .pipe(gulp.dest(jsConf.destPath));
+    return b
+      .plugin('tsify')
+      .bundle()
+      .pipe(source(jsConf.destFileName))
+      .pipe(gulp.dest(jsConf.destPath));
 }
 
 function sassPreCompile(){

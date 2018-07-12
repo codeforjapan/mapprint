@@ -6,6 +6,35 @@ var numberIcon = require('./leaflet_awesome_number_markers');
 var displayHelper = require('./displayHelper');
 var _ = require('lodash');
 
+function showLegend(map) {
+    var legend = L.control({position: 'bottomright'});
+
+	  legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'legend'),
+          grades = [
+											{name: 'その他', color: 'black'},
+											{name: 'プール', color: '#563c5c'},
+											{name: '井戸', color: 'purple'},
+											{name: '水道水', color: 'cadetblue'},
+											{name: '洗濯', color: 'green'},
+											{name: '風呂', color: 'red'},
+											{name: 'シャワー', color: 'orange'},
+											{name: '給水', color: 'green'},
+									 ],
+          labels = [];
+
+        // loop through our density intervals and generate a label with a colored square for each interval
+        for (var i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<div class="legend-type">' +
+              '<i style="background:' + grades[i].color + '"></i><div class=poi-type> ' + grades[i].name + '</div></br>' +
+            '</div>'; 
+
+        }
+        return div;
+    }
+	  legend.addTo(map);
+};
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
@@ -56,6 +85,7 @@ $(function(){
         });
         geojson.addTo(map);
         map.fitBounds(geojson.getBounds());
+				showLegend(map);
       });
     map.on("moveend", function () {
         $('#list').html('<table>');
@@ -77,7 +107,7 @@ $(function(){
         // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
         var colors = {
             'その他':'black',
-            'プール':'darkpuple',
+            'プール':'darkpurple',
             '井戸':'purple',
             '水道水':'cadetblue',
             '洗濯':'green',

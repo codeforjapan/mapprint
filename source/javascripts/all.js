@@ -10,6 +10,7 @@ function showLegend(map) {
 
 	  legend.onAdd = function () {
       var div = L.DomUtil.create('div', 'legend'),
+        //@todo 下の方 (var colors) にもあるので、1箇所にすべき！
           grades = [
 											{name: 'その他', color: 'black'},
 											{name: 'プール', color: '#563c5c'},
@@ -31,9 +32,9 @@ function showLegend(map) {
 
         }
         return div;
-    }
+    };
 	  legend.addTo(map);
-};
+}
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う

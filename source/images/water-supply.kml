@@ -4984,6 +4984,16 @@
           </coordinates>
         </Point>
       </Placemark>
+      <Placemark>
+        <name>風呂｜尾道カントリークラブ宇根山コース（12:00-16:00、タオル、シャンプー等は施設にあります。）</name>
+        <description><![CDATA[[施設連絡先]<br>0847-22-2311<br>[営業時間]<br>12:00~16:00<br>[備考]<br>・料金650円 <br>・タオル、シャンプー等は施設にありま す。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.0787247,34.5549407,0
+          </coordinates>
+        </Point>
+      </Placemark>
     </Folder>
     <Folder>
       <name>尾道市の学校校庭等の蛇口(7月8日20:30時点)</name>

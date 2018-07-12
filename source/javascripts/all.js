@@ -8,19 +8,20 @@ var _ = require('lodash');
 function showLegend(map) {
     var legend = L.control({position: 'bottomright'});
 
-	  legend.onAdd = function () {
+      legend.onAdd = function () {
       var div = L.DomUtil.create('div', 'legend'),
         //@todo 下の方 (var colors) にもあるので、1箇所にすべき！
           grades = [
-											{name: 'その他', color: 'black'},
-											{name: 'プール', color: '#563c5c'},
-											{name: '井戸', color: 'purple'},
-											{name: '水道水', color: 'cadetblue'},
-											{name: '洗濯', color: 'green'},
-											{name: '風呂', color: 'red'},
-											{name: 'シャワー', color: 'orange'},
-											{name: '給水', color: 'green'},
-									 ],
+            {name: 'その他', color: 'black'},
+            {name: 'プール', color: '#563c5c'},
+            {name: '井戸', color: 'purple'},
+            {name: '水道水', color: 'cadetblue'},
+            {name: '洗濯', color: 'green'},
+            {name: '風呂', color: 'red'},
+            {name: 'シャワー', color: 'orange'},
+            {name: '給水', color: 'green'},
+            {name: 'トイレ', color: 'yellow'},
+          ],
           labels = [];
 
         // loop through our density intervals and generate a label with a colored square for each interval
@@ -33,8 +34,8 @@ function showLegend(map) {
         }
         return div;
     };
-	  legend.addTo(map);
-}
+    legend.addTo(map);
+};
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
@@ -90,14 +91,14 @@ $(function(){
         });
         geojson.addTo(map);
         map.fitBounds(geojson.getBounds());
-				showLegend(map);
+                showLegend(map);
       });
     map.on("moveend", function () {
         $('#list').html('<table>');
         var index = 0;
         var targets = [];
         this.eachLayer(function(layer) {
-			if(layer instanceof L.Marker)
+            if(layer instanceof L.Marker)
                 if( map.getBounds().contains(layer.getLatLng()) )
                     if (_.isUndefined(layer.feature)) {
                         return false;
@@ -107,7 +108,7 @@ $(function(){
                             targets.push(layer);
                         }
                     }
-				    //that._list.appendChild( that._createItem(layer) );
+                    //that._list.appendChild( that._createItem(layer) );
         });
         // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
         var colors = {
@@ -118,7 +119,8 @@ $(function(){
             '洗濯':'green',
             '風呂':'red',
             'シャワー':'orange',
-            '給水':'green'
+            '給水':'green',
+            'トイレ': 'yellow',
         };
         // sort targets
         var matchtexts =  Object.keys(colors);

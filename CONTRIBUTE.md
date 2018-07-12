@@ -23,7 +23,7 @@
 手元環境で修正できたら、[Pull Request の送り方](https://qiita.com/Commander-Aipa/items/d61d21988a36a4d0e58b) を参考にPull Requestを送ってみましょう！
 
 開発に関する細かいコミュニーケーションについては、[Code for Japan のSlack](https://cfjslackin.herokuapp.com/) で行っています。
-上記リンクから加入いただき、#mapprint チャンネルに加入してください。
+リンクからCode for Japan Slack に加入いただき、#mapprint チャンネルに加入してください。
 
 チャンネルへのダイレクトリンク
 

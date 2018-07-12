@@ -151,7 +151,7 @@ $(function(){
 
             if (category != lastCategory){
                 // display categories
-                $('#list table').append('<tr><th colspan="2" class="category"></th></tr>');
+                $('#list table').append('<tr><th colspan="2" class="category_separator"></th></tr>');
                 lastCategory = category;
                 $('#list table').append('<tr>');
             }else{

@@ -30,7 +30,7 @@ function showLegend(map) {
             div.innerHTML +=
             '<div class="legend-type">' +
               '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
-            '</div>'; 
+            '</div>';
         }
         return div;
     };
@@ -45,6 +45,20 @@ $(function(){
     var attribution = ( location.host == 'codeforjapan.github.io' ) ?
     "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
     'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
+
+    function serializeLatLng(latLng) {
+        return '' + latLng.lat + ',' + latLng.lng;
+    }
+    function serializeBounds(bounds) {
+        return serializeLatLng(bounds.getNorthWest()) + '-' +
+            serializeLatLng(bounds.getSouthEast());
+    }
+    function deserializeLatLng(s) {
+        return L.latLng(s.split(',', 2).map(function(d) {return +d;}));
+    }
+    function deserializeBounds(s) {
+        return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
+    }
 
     var map = L.map('map').setView([41.3921, 2.1705], 13);
     L.tileLayer(
@@ -90,10 +104,20 @@ $(function(){
           }
         });
         geojson.addTo(map);
-        map.fitBounds(geojson.getBounds());
-                showLegend(map);
+        try {
+          var bounds = deserializeBounds(window.location.hash.substr(1));
+          map.fitBounds(bounds);
+        } catch(e) {
+          map.fitBounds(geojson.getBounds());
+        };
+        showLegend(map);
       });
     map.on("moveend", function () {
+        var bounds = map.getBounds();
+        var s = serializeBounds(bounds);
+        var path = location.pathname;
+        window.history.pushState('', '', path + '#' + s);
+
         $('#list').html('<table>');
         var index = 0;
         var targets = [];

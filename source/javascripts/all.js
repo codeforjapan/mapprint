@@ -31,7 +31,6 @@ function showLegend(map) {
             '<div class="legend-type">' +
               '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
             '</div>'; 
-
         }
         return div;
     };
@@ -56,12 +55,12 @@ $(function(){
     ).addTo( map );
 
     $('#date').text(() => {
-      const d = new Date()
+      const d = new Date();
       return displayHelper.getPrintDate(d);
     });
     $('#footer').append(
         'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
-        + '<br>' 
+        + '<br>'
         + '最新の情報はウェブサイトからお確かめください。'
     );
 

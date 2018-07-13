@@ -6,11 +6,6 @@ body {
   line-height: 1.5em;
 }
 
-#header {
-  text-align: right;
-  width: 210mm !important;
-}
-
 .sheet {
   float: left;
   text-align: center;
@@ -37,6 +32,11 @@ body {
   margin: 3mm;
 }
 
+#header {
+  font-size: 3.5mm;
+  text-align: right;
+}
+
 #content {
   position: relative;
   max-width: 1200px;
@@ -58,11 +58,6 @@ body {
       font-size: 4mm;
       font-weight: bold;
       padding: 0.25em 0;
-    }
-    #footer {
-      font-size: 4mm;
-      padding: 1em 0;
-      text-align: left;
     }
     #map {
       width: 100%;
@@ -118,6 +113,12 @@ body {
       }
     }
   }
+}
+
+#footer {
+  font-size: 4mm;
+  padding: 1em 0;
+  text-align: left;
 }
 
 @media print {

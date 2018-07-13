@@ -11,7 +11,7 @@ https://codeforjapan.github.io/mapprint/
 ## おばあちゃんの手に届くまで
 このプロジェクトで作られたデータは、さまざまな人々の手を経て、困っているおばあちゃんのところに届きます。
 
-![kamimap_180713.png](kamimap_180713.png)
+![kamimap_180713.png](source/images/kamimap_180713.png)
 
 
 ## Help Wnated!!

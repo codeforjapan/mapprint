@@ -138,6 +138,19 @@ body {
   .awesome-number-marker {
     border: 1px solid #333;
   }
+  .awesome-number-marker:after {
+    content:'';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-top: solid 1.5mm #333;
+    border-left: solid 1.5mm transparent;
+    border-right: solid 1.5mm transparent;
+  }
 }
 
 @media screen {

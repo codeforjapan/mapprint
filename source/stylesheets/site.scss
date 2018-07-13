@@ -97,6 +97,8 @@ body {
           padding: 2px;
           &.id {
             width: 5%;
+            text-align: center;
+            font-weight: bold;
           }
           &.value {
             width: 45%;
@@ -105,26 +107,29 @@ body {
       }
     }
   }
-  
-  @media print {
-    // 印刷時のみ表示
-    .print_area {
-        display: block;
-    }
-    // 印刷したくない領域
-    .not_print_area {
-        display: none;
-    }
-  }
+}
 
-  @media screen {
-    .print_area {
+@media print {
+  body {
+    width: 190mm;
+  }
+  // 印刷時のみ表示
+  .print_area {
+      display: block;
+  }
+  // 印刷したくない領域
+  .not_print_area {
       display: none;
-    }
   }
 }
 
+@media screen {
+  .print_area {
+    display: none;
+  }
+}
 
 @page {
   size: A4;
+  margin: 10mm;
 }

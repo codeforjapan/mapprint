@@ -4975,8 +4975,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>風呂｜因島総合福祉保健センター（19:00-23:00）</name>
-        <description><![CDATA[自衛隊による仮設入浴施設<br><br>入浴時間：19時00分～23時00分<br>※明日以降の予定はわかり次第お知らせします。<br><br>[注意事項]<br>タオルをご持参ください。（せっけん、シャンプーは用意してあります。）<br><br>どなたでも入浴できますが、混雑が予想されますので、気を付けてお越しください。<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20367.html]]></description>
+        <name>風呂｜因島総合福祉保健センター（18:00-23:00）</name>
+        <description><![CDATA[自衛隊による仮設入浴施設<br><br>入浴時間：18時00分～23時00分<br>※明日以降の予定はわかり次第お知らせします。<br><br>[注意事項]<br>タオルをご持参ください。（せっけん、シャンプーは用意してあります。）<br><br>どなたでも入浴できますが、混雑が予想されますので、気を付けてお越しください。<br><br>[尾道市のホームページ]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20367.html]]></description>
         <styleUrl>#icon-1899-DB4436</styleUrl>
         <Point>
           <coordinates>
@@ -4991,6 +4991,16 @@
         <Point>
           <coordinates>
             133.0787247,34.5549407,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>風呂｜福山乳児院（3歳未満の子どもがいる家庭/1日3組まで/10:00-16:00）</name>
+        <description><![CDATA[【対象者】<br>3歳未満の子どもがいる家庭（1日　3組まで）<br>【入浴可能時間】<br>午前10時～午後16時<br>【その他】<br>家族で入浴することができます。<br>7月21日（土曜日）16時までの期間で実施予定です。<br>【尾道市のホームページ】<br>https://www.city.onomichi.hiroshima.jp/soshiki/23/20591.html]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.3250376,34.4657456,0
           </coordinates>
         </Point>
       </Placemark>

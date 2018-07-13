@@ -87,6 +87,9 @@ body {
           vertical-align: bottom;
           padding-left: 32px;
         }
+        tr {
+          page-break-inside: avoid;
+        }
         td {
           border-collapse: collapse;
           border-spacing: 0;

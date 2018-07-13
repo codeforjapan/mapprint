@@ -110,6 +110,9 @@ body {
           }
           &.value {
             width: 45%;
+            border-top: none;
+            border-left: none;
+            border-right: none;
           }
         }
       }

@@ -1,16 +1,40 @@
 body {
   color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir",
-    "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans",
-    "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu",
-    "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", sans-serif;
-  padding: 1vh 1rem;
-  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Arial, "メイリオ", Meiryo, sans-serif;
+  // padding: 1vh 1rem;
   -webkit-print-color-adjust: exact;
+  line-height: 1.5em;
 }
+
 #header {
   text-align: right;
   width: 210mm !important;
+}
+
+.sheet {
+  float: left;
+  text-align: center;
+  width:210mm !important;
+  min-height:297mm !important;
+}
+
+#explain {
+  button {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 0.25em;
+    margin-bottom: 1em;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  min-height: 100%;
+  position: absolute;
+  text-align: left;
+  width: 240px;
+  z-index: 500;
+  right: 80px;
+  margin: 3mm;
 }
 
 #content {
@@ -25,23 +49,7 @@ body {
     }
   }
 
-  #explain {
-    text-align: left;
-    button {
-      text-align: right;
-    }
-    top: 100px;
-    min-height: 100%;
-    position: absolute;
-    width: 240px;
-    z-index: 500;
-    right: 80px;
-    background-color: rgba(255,255,255,0.7)
-  }
   #page {
-    float: left;
-    width:210mm !important;
-    height:297mm !important;
     h1 {
       font-size: 7mm;
       margin: 0 auto 0.25em;
@@ -112,6 +120,7 @@ body {
 @media print {
   body {
     width: 190mm;
+    color: #000;
   }
   // 印刷時のみ表示
   .print_area {
@@ -124,6 +133,16 @@ body {
 }
 
 @media screen {
+  body {
+    background-color: #eee;
+    color: #000;
+  }
+  .sheet {
+    background-color: #fff;
+    box-shadow: 0 .5mm 2mm rgba(0,0,0,.3);
+    padding: 10mm;
+    margin: 3mm;
+  }
   .print_area {
     display: none;
   }

@@ -70,4 +70,5 @@ activate :deploy do |deploy|
   deploy.deploy_method = :git
   deploy.remote = 'git@github.com:codeforjapan/mapprint.git'
   deploy.branch = 'gh-pages'
+  deploy.commit_message = "[ci skip] Automated commit at #{Time.now.utc} by middleman-deploy #{Middleman::Deploy::PACKAGE} #{Middleman::Deploy::VERSION}"
 end

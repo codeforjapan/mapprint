@@ -1,7 +1,10 @@
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
-    working_directory: ~/ssr # directory where steps will run
+    branches:
+      ignore:
+        - gh-pages
+    working_directory: ~/mapprint # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/ruby:2.4-node # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
@@ -41,6 +44,13 @@ jobs: # a collection of steps
       - run:
           name: npm Install
           command: npm install
+          
+      # Store npm cache
+      - save_cache:
+          key: npm-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+          
 
       - run:
           name: build middleman
@@ -57,5 +67,8 @@ jobs: # a collection of steps
           name: start master deploy
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                git config --global user.email info@code4japan.org
+                git config --global user.name circleci
+                git fetch origin gh-pages
                 bundle exec middleman deploy
             fi

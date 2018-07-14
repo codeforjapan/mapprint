@@ -61,14 +61,9 @@ $(function(){
     function deserializeBounds(s) {
         return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
     };
-    function addQRCodeLayer(map) {
-        var container = L.control({position: 'bottomleft'});
-        container.onAdd = function() {
-            var div = L.DomUtil.create('div');
-            $(div).append('<canvas id="qrcode"></canvas>');
-            return div;
-        };
-        container.addTo(map);
+    function addQRCodeLayer() {
+        $('#qrcodecontainer')
+            .append('<canvas id="qrcode"></canvas>');
     };
     function renewQRCode() {
         var canvas = document.getElementById('qrcode');
@@ -87,7 +82,7 @@ $(function(){
         }
     ).addTo( map );
 
-    addQRCodeLayer(map);
+    addQRCodeLayer();
     $('#date').text(() => {
       const d = new Date();
       return displayHelper.getPrintDate(d);

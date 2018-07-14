@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/codeforjapan/socialhackday/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/socialhackday/tree/master)
+
+
 給水所/お風呂/洗濯（ランドリー）マップ 印刷向け
 ===
 

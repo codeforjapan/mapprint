@@ -1,6 +1,8 @@
 var L = require('leaflet');
 var $ = require('jquery');
 var tj = require('@mapbox/togeojson');
+var QRCode = require('qrcode')
+
 require('./leaflet_awesome_number_markers').default();
 var displayHelper = require('./displayHelper');
 var _ = require('lodash');
@@ -48,17 +50,29 @@ $(function(){
 
     function serializeLatLng(latLng) {
         return '' + latLng.lat + ',' + latLng.lng;
-    }
+    };
     function serializeBounds(bounds) {
         return serializeLatLng(bounds.getNorthWest()) + '-' +
             serializeLatLng(bounds.getSouthEast());
-    }
+    };
     function deserializeLatLng(s) {
         return L.latLng(s.split(',', 2).map(function(d) {return +d;}));
-    }
+    };
     function deserializeBounds(s) {
         return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
-    }
+    };
+    function addQRCodeLayer() {
+        $('#qrcodecontainer')
+            .append('<canvas id="qrcode"></canvas>');
+    };
+    function renewQRCode() {
+        var canvas = document.getElementById('qrcode');
+
+        QRCode.toCanvas(canvas, window.location.href, function (error) {
+        if (error) console.error(error);
+        console.log(window.location.href);
+        })
+    };
 
     var map = L.map('map').setView([41.3921, 2.1705], 13);
     L.tileLayer(
@@ -68,6 +82,7 @@ $(function(){
         }
     ).addTo( map );
 
+    addQRCodeLayer();
     $('#date').text(() => {
       const d = new Date();
       return displayHelper.getPrintDate(d);
@@ -120,7 +135,7 @@ $(function(){
         var s = serializeBounds(bounds);
         var path = location.pathname;
         window.history.pushState('', '', path + '#' + s);
-
+        renewQRCode();
         $('#list').html('<table>');
         var index = 0;
         var targets = [];

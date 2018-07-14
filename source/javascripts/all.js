@@ -93,9 +93,6 @@ $(function(){
         + '最新の情報はウェブサイトからお確かめください。'
     );
 
-    $('#print').on('click', () => {
-      window.print();
-    });
     // 説明の表示/非表示
     $('#close').on('click', function(){
         $('.explain-container').toggle()

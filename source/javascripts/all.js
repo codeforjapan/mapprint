@@ -41,10 +41,10 @@ function showLegend(map) {
 $(function(){
     // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
-    var tileserver = ( location.host == 'codeforjapan.github.io' ) ?
+    var tileserver = ( location.host === 'codeforjapan.github.io' ) ?
     'https://tile.cdn.mierune.co.jp/styles/normal/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k' :
     'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var attribution = ( location.host == 'codeforjapan.github.io' ) ?
+    var attribution = ( location.host === 'codeforjapan.github.io' ) ?
     "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
     'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
 
@@ -99,7 +99,7 @@ $(function(){
     // 説明の表示/非表示
     $('#close').on('click', function(){
         $('.explain-container').toggle()
-        if ($('#close').text() == '閉じる') {
+        if ($('#close').text() === '閉じる') {
           $('#close').text('開く')
         } else {
           $('#close').text('閉じる')
@@ -175,7 +175,7 @@ $(function(){
             var name = layer.feature.properties.name;
             // get category and marker type
             var category = name.split('｜')[0];
-            if (matchtexts.indexOf(category) == -1)
+            if (matchtexts.indexOf(category) === -1)
                 category = 'その他';
 
             var c = _.find(colors, {'name': name.split('｜')[0]});
@@ -191,7 +191,7 @@ $(function(){
                 $('#list table').append('<tr>');
                 categoryIndex = index;
             } else {
-                if ((index - categoryIndex) % 2 == 0){
+                if ((index - categoryIndex) % 2 === 0){
                     $('#list table').append('<tr>');
                 }
             }

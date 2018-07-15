@@ -1,13 +1,23 @@
 ---
-title: 給水所/お風呂/洗濯（ランドリー）マップ 
----        
-#content
-    #page
-        %h1 給水所/お風呂/洗濯（ランドリー）マップ 
-        #map
-        #list
-    #explain.not_print_area
-        %button#close 閉じる
+title: 給水所/お風呂/洗濯（ランドリー）マップ
+---
+%section.sheet
+    #header
+        #qrcodecontainer
+        データ最終更新日：
+        %span#datetime
+    #content
+        #page
+            %h1 給水所/お風呂/洗濯（ランドリー）マップ
+            #date.print_area
+            #map
+            #list
+    #footer.print_area
+#explain.not_print_area
+    %button#print 印刷する（A4タテ）
+    %br
+    %button#close 閉じる
+    .explain-container
         %h2 このサイトについて
         %p
             このサイトは、尾道の洪水被害に対して、SNSで流れる給水所などの情報や、行政発信の情報を見れていない地域の人たちにも伝えるために、情報をA4にまとめて印刷してくばれるように情報を最適化しています。

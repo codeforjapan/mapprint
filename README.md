@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/codeforjapan/mapprint/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint/tree/master)
+
+
 給水所/お風呂/洗濯（ランドリー）マップ 印刷向け
 ===
 
@@ -8,11 +11,16 @@ https://codeforjapan.github.io/mapprint/
 
 から実際のページを確認できます。
 
+## おばあちゃんの手に届くまで
+このプロジェクトで作られたデータは、さまざまな人々の手を経て、困っているおばあちゃんのところに届きます。
+
+![kamimap_180713.png](source/images/kamimap_180713.png)
 
 
-## Help Wnated!!
+## Help Wanted!!
 
 Issues にあるいろいろな修正にご協力いただけると嬉しいです。
+詳しくは[こちら](./CONTRIBUTE.md)
 
 ## 開発環境の構築方法
 
@@ -21,6 +29,8 @@ Issues にあるいろいろな修正にご協力いただけると嬉しいで�
 - ruby >= 2.2.6
 - bundler
 - node.js >= 6.0.0
+  - OSXでbundlerがうまく入らな無い方は[この辺](https://qiita.com/tokimari/items/feda1ed61f2d8b5b317c)を、node.jsが入らない方は[この辺](https://qiita.com/yn01/items/d1fa10dbe4850f7cd693)などをご参照ください
+
 
 ### 環境構築
 
@@ -39,16 +49,18 @@ bundle exec middleman server
 ```
 http://localhost:4567 で見れるはず
 
-### ソースコードを編集したら
-```
-bundle exec middleman build
-```
-この辺、自動で反映されるようにしたい
 
 ### deploy
 ```
 bundle exec middleman deploy
 ```
 
-このリポジトリへの push 権限が必要。
-github pages で作られているので、gh-pages ブランチが更新されます。
+(このリポジトリへの push 権限が必要。
+github pages で作られているので、gh-pages ブランチが更新されます。)
+
+
+
+### test
+```
+npm test
+```

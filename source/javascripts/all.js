@@ -137,7 +137,6 @@ $(function(){
         window.history.pushState('', '', path + '#' + s);
         renewQRCode();
         $('#list').html('<table>');
-        var index = 0;
         var targets = [];
         this.eachLayer(function(layer) {
             if(layer instanceof L.Marker)

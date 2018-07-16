@@ -37,9 +37,9 @@ function showLegend(map) {
         return div;
     };
     legend.addTo(map);
-};
+}
 $(function(){
-    // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/　でのみ表示される）
+    // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/ でのみ表示される）
     // サーバ上の場合のみMIERUNE地図を使う
     var tileserver = ( location.host == 'codeforjapan.github.io' ) ?
     'https://tile.cdn.mierune.co.jp/styles/bright/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k' :
@@ -50,21 +50,21 @@ $(function(){
 
     function serializeLatLng(latLng) {
         return '' + latLng.lat + ',' + latLng.lng;
-    };
+    }
     function serializeBounds(bounds) {
         return serializeLatLng(bounds.getNorthWest()) + '-' +
             serializeLatLng(bounds.getSouthEast());
-    };
+    }
     function deserializeLatLng(s) {
         return L.latLng(s.split(',', 2).map(function(d) {return +d;}));
-    };
+    }
     function deserializeBounds(s) {
         return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
-    };
+    }
     function addQRCodeLayer() {
         $('#qrcodecontainer')
             .append('<canvas id="qrcode"></canvas>');
-    };
+    }
     function renewQRCode() {
         var canvas = document.getElementById('qrcode');
 
@@ -72,7 +72,7 @@ $(function(){
         if (error) console.error(error);
         console.log(window.location.href);
         })
-    };
+    }
 
     var map = L.map('map').setView([41.3921, 2.1705], 13);
     L.tileLayer(
@@ -127,7 +127,7 @@ $(function(){
           map.fitBounds(bounds);
         } catch(e) {
           map.fitBounds(geojson.getBounds());
-        };
+        }
         showLegend(map);
       });
     map.on("moveend", function () {

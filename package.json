@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/jasmine/bin/jasmine.js"
+    "test": "./node_modules/jasmine/bin/jasmine.js",
+    "lint": "eslint source/javascripts/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
     "@mapbox/togeojson": "^0.16.0",
     "brfs": "^2.0.0",
     "browserify": "^16.2.2",
+    "eslint": "^5.1.0",
     "gulp": "^3.9.1",
     "gulp-sass": "^4.0.1",
     "jasmine": "^3.1.0",

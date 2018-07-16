@@ -14,11 +14,18 @@ var colors = [
     {name: 'プール', color: 'lightgreen'},
     {name: '井戸', color: 'purple'},
     {name: '水道水', color: 'cadetblue'},
-    {name: '洗濯', color: 'green'},
-    {name: '風呂', color: 'red'},
+    {name: '洗濯', color: 'sentaku'},
+    {name: '風呂', color: 'ohuro'},
     {name: 'シャワー', color: 'orange'},
-    {name: '給水', color: 'green'},
-    {name: 'トイレ', color: 'lightblue'},
+    {name: '給水', color: 'kyusui'},
+    {name: 'トイレ', color: 'toile'},
+];
+
+var icons = [
+    'ohuro',
+    'toile',
+    'sentaku',
+    'kyusui'
 ];
 
 function showLegend(map) {
@@ -29,10 +36,17 @@ function showLegend(map) {
 
         // loop through our density intervals and generate a label with a colored square for each interval
         for (var i = 0; i < colors.length; i++) {
-            div.innerHTML +=
-            '<div class="legend-type">' +
-              '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
-            '</div>';
+            if (icons.indexOf(colors[i].color) !== -1) {
+                div.innerHTML +=
+                '<div class="legend-type">' +
+                  '<img src="./images/' + colors[i].color + '.png" align="left" width="18px" height="24px"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
+                '</div>';
+            } else {
+                div.innerHTML +=
+                '<div class="legend-type">' +
+                  '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
+                '</div>';
+            }
         }
         return div;
     };

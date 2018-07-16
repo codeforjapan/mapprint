@@ -39,7 +39,7 @@ function showLegend(map) {
             if (icons.indexOf(colors[i].color) !== -1) {
                 div.innerHTML +=
                 '<div class="legend-type">' +
-                  '<img src="/images/' + colors[i].color + '.png" align="left" width="18px" height="24px"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
+                  '<img src="./images/' + colors[i].color + '.png" align="left" width="18px" height="24px"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
                 '</div>';
             } else {
                 div.innerHTML +=

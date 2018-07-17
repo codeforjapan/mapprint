@@ -52,16 +52,33 @@ function showLegend(map) {
     };
     legend.addTo(map);
 }
-$(function(){
-    // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/ でのみ表示される）
-    // サーバ上の場合のみMIERUNE地図を使う
-    var tileserver = ( location.host === 'codeforjapan.github.io' ) ?
-    'https://tile.cdn.mierune.co.jp/styles/bright/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k' :
-    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    var attribution = ( location.host === 'codeforjapan.github.io' ) ?
-    "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
-    'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
 
+function tileServerUrl(mapStyle){
+  // 地図の色はnormal,grey, mono, bright, blueが選択できる。
+  // 印刷時の視認性の高さからカラーはbright、白黒にはgrayを使用する。
+  var styleCode;
+  if(mapStyle === 'color'){
+    styleCode = 'bright';
+  } else if(mapStyle === 'mono'){
+    styleCode = 'gray';
+  } else {
+    styleCode = 'normal';
+  }
+  // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/mapprint/ でのみ表示される）
+  // サーバ上の場合のみMIERUNE地図を使う
+  return ( location.host !== 'codeforjapan.github.io' ) ?
+  'https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=0Y_ktb4DaMAm1ULxQudU4cFMQ5zx_Q1-PGF7DXf07WLwf5F2OpY6cr8OvJSqmQbIwTl61KCMi5Uc-GwruiSicdPyutwtvyZ_wuCEHO3GoQgrMd4k' :
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+}
+
+function tileServerAttribution(){
+  return ( location.host === 'codeforjapan.github.io' ) ?
+  "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
+  'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
+
+}
+
+$(function(){
     function serializeLatLng(latLng) {
         return '' + latLng.lat + ',' + latLng.lng;
     }
@@ -89,12 +106,13 @@ $(function(){
     }
 
     var map = L.map('map').setView([41.3921, 2.1705], 13);
-    L.tileLayer(
-        tileserver, {
-          attribution: attribution,
+    var tileLayer = L.tileLayer(
+        tileServerUrl($('input[name=mapStyle]:checked').val()), {
+          attribution: tileServerAttribution(),
           maxZoom: 18
         }
-    ).addTo( map );
+    );
+    tileLayer.addTo( map );
 
     addQRCodeLayer();
     $('#date').text(() => {
@@ -110,6 +128,12 @@ $(function(){
     $('#print').on('click', () => {
       window.print();
     });
+
+    // 背景地図の切り替え
+    $('input[name="mapStyle"]:radio').change( function() {
+      tileLayer.setUrl(tileServerUrl($(this).val()));
+    })
+
     // 説明の表示/非表示
     $('#close').on('click', function(){
         $('.explain-container').toggle()

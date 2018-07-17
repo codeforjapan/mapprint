@@ -39,6 +39,8 @@ git clone git@github.com:codeforjapan/mapprint.git
 cd mapprint
 npm install
 bundle install --path=vendor/bundle
+npm run lint
+npm test
 bundle exec middleman build
 ```
 

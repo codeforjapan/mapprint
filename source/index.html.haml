@@ -16,6 +16,14 @@ title: 給水所/お風呂/洗濯（ランドリー）マップ
 #explain.not_print_area
     %button#print 印刷する（A4タテ）
     %br
+    %div
+        %b 地図選択
+        %br
+        %input{:type => "radio", :name => "mapStyle", :id => "color", :value => "color", :checked => true}
+        %label{:for => "color"} カラー
+        %input{:type => "radio", :name => "mapStyle", :id => "mono", :value => "mono"}
+        %label{:for => "mono"} 白黒
+    %br
     %button#close 閉じる
     .explain-container
         %h2 このサイトについて

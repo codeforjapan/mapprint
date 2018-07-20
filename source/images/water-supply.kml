@@ -11736,14 +11736,9 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道市立浦崎小学校（飲用可）</name>
-        <description><![CDATA[<img src="https://lh4.googleusercontent.com/proxy/VCPQnVd1uK-osScC8VPJoJ31kIlXsBmr4zdvV6HIMio8OVMzs-h599AHsM1QK7ZJo8e05_MoyzuLRgVfrRsPWBGwK-FHZTMD_VkosdX9rXcUlGmJhzK8B-KYPp5tfXI8d9mkM2uoUf8K25b-EfDwxoVtXztVx4mrr3qahQiITurrBWbf4pw6IQ5bNT7JbuyHr8ZmpITpKXphjbD1w2BKoyseO8TWsQgMNDnNQVU6CQBkFWNDcHxPNoD3Iog" height="200" width="auto" /><br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html<br><br>断水に伴い、学校などの校庭の蛇口で水を提供します。<br>職員は不在のため、節度ある利用をお願いいたします。<br>※示している蛇口のみ使用可能とのことです。<br><br>▼グラウンド側の門から入り、正面つきあたりの蛇口]]></description>
+        <name>給水｜尾道市立浦崎小学校（提供終了）</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-52-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="gx_media_links">
-            <value>https://lh4.googleusercontent.com/proxy/VCPQnVd1uK-osScC8VPJoJ31kIlXsBmr4zdvV6HIMio8OVMzs-h599AHsM1QK7ZJo8e05_MoyzuLRgVfrRsPWBGwK-FHZTMD_VkosdX9rXcUlGmJhzK8B-KYPp5tfXI8d9mkM2uoUf8K25b-EfDwxoVtXztVx4mrr3qahQiITurrBWbf4pw6IQ5bNT7JbuyHr8ZmpITpKXphjbD1w2BKoyseO8TWsQgMNDnNQVU6CQBkFWNDcHxPNoD3Iog</value>
-          </Data>
-        </ExtendedData>
         <Point>
           <coordinates>
             133.275648,34.404364,0
@@ -11751,14 +11746,9 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道市立浦崎中学校（飲用可）</name>
-        <description><![CDATA[<img src="https://lh6.googleusercontent.com/proxy/QXk842unOCMs6uTWdSkAmbYfjLDf8PJkZL7TPk_gKiBEhmCONp9p1SdtH6vSnrMMHubdUqXlyUXl2Xs2u6dv58pxqMEl4ymgbAkDCUeE0B-CkpofOw1_GyoNA0PE8w2WnOBqoOKRngP5M3EN429yECCdnXFFgPtZuXWUElA253NiaohdWsYhuZ5i3Yx9AxJxpd8rUWrMmJ7PA2gKCprVAQgo8SpzghFopKCb2xSnE8LMv4Is1gM6ouekZa4" height="200" width="auto" /><br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html<br><br>断水に伴い、学校などの校庭の蛇口で水を提供します。<br>職員は不在のため、節度ある利用をお願いいたします。<br>※示している蛇口のみ使用可能とのことです。<br><br>▼正門から入り、校舎前にある蛇口]]></description>
+        <name>給水｜尾道市立浦崎中学校（提供終了）</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-53-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="gx_media_links">
-            <value>https://lh6.googleusercontent.com/proxy/QXk842unOCMs6uTWdSkAmbYfjLDf8PJkZL7TPk_gKiBEhmCONp9p1SdtH6vSnrMMHubdUqXlyUXl2Xs2u6dv58pxqMEl4ymgbAkDCUeE0B-CkpofOw1_GyoNA0PE8w2WnOBqoOKRngP5M3EN429yECCdnXFFgPtZuXWUElA253NiaohdWsYhuZ5i3Yx9AxJxpd8rUWrMmJ7PA2gKCprVAQgo8SpzghFopKCb2xSnE8LMv4Is1gM6ouekZa4</value>
-          </Data>
-        </ExtendedData>
         <Point>
           <coordinates>
             133.276844,34.400688,0
@@ -11766,8 +11756,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道市立浦崎認定こども園（飲用可）</name>
-        <description><![CDATA[▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html<br><br>断水に伴い、学校などの校庭の蛇口で水を提供します。<br>職員は不在のため、節度ある利用をお願いいたします。<br>※示している蛇口のみ使用可能とのことです。<br><br>▼門を入って右手の園舎側の蛇口]]></description>
+        <name>給水｜尾道市立浦崎認定こども園（提供終了）</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-54-0288D1</styleUrl>
         <Point>
           <coordinates>
@@ -11821,14 +11811,9 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道市立 因北小学校（飲用不可）　</name>
-        <description><![CDATA[<img src="https://lh4.googleusercontent.com/proxy/gQp0qPRbvZI4_KNglc34Ofiski8BBfws5Gb4bh-habIv5evY6kAU706sA_DApb_Tv6kQ6oOf6o4W_9MSV2Au6QubaqcHuNDw74nE3vhrgSWs8K4diObTbVbNbC5iPJQXWxL_lx5jKAUsqYw-Yf5Yms1e3KOjSqC9elrK7Qf-U4rTdYzI6fkjhJeviCTP4QhsEMlYnvSOJnHt9NSVzMx0N9KqVxmUAERmDFEemhTOR2IE8A-3mS0DbZAuIVs" height="200" width="auto" /><br><br>★★飲用不可★★/出入口付近<br><br>※示している蛇口のみ使用可能とのことです。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
+        <name>給水｜尾道市立 因北小学校（提供終了）　</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-58-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="gx_media_links">
-            <value>https://lh4.googleusercontent.com/proxy/gQp0qPRbvZI4_KNglc34Ofiski8BBfws5Gb4bh-habIv5evY6kAU706sA_DApb_Tv6kQ6oOf6o4W_9MSV2Au6QubaqcHuNDw74nE3vhrgSWs8K4diObTbVbNbC5iPJQXWxL_lx5jKAUsqYw-Yf5Yms1e3KOjSqC9elrK7Qf-U4rTdYzI6fkjhJeviCTP4QhsEMlYnvSOJnHt9NSVzMx0N9KqVxmUAERmDFEemhTOR2IE8A-3mS0DbZAuIVs</value>
-          </Data>
-        </ExtendedData>
         <Point>
           <coordinates>
             133.172877,34.328599,0
@@ -11851,14 +11836,9 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜瀬戸田市民会館（飲用不可）　</name>
-        <description><![CDATA[<img src="https://lh6.googleusercontent.com/proxy/qSurl6pAgrvfwWc6bxifmTf1AAV79XiJtKa4FdU7N4857s3fIIrTg30zURkIqVmdrYoPEbxDrEO2i6F33hQ_Cg8PB3WBIJiFKf3UviGvRcmorYwEX5x3jBk02pPECiZFqEiUTLUgi3Pt2jf-6QO5sLstUlJPkqw08x5_w2F9B6FP_XbVBjJzAW5bpI47Wy03u4rBPJY320166KIDutjAs3yZMnEt7iQedU4XBCoI8_7LjEch_KiNJy18" height="200" width="auto" /><br><br>★★飲用不可★★/瀬戸田市民会館前の広場（2ヶ所）<br><br>※示している蛇口のみ使用可能とのことです。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
+        <name>給水｜瀬戸田市民会館（提供終了）　</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-60-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="gx_media_links">
-            <value>https://lh6.googleusercontent.com/proxy/qSurl6pAgrvfwWc6bxifmTf1AAV79XiJtKa4FdU7N4857s3fIIrTg30zURkIqVmdrYoPEbxDrEO2i6F33hQ_Cg8PB3WBIJiFKf3UviGvRcmorYwEX5x3jBk02pPECiZFqEiUTLUgi3Pt2jf-6QO5sLstUlJPkqw08x5_w2F9B6FP_XbVBjJzAW5bpI47Wy03u4rBPJY320166KIDutjAs3yZMnEt7iQedU4XBCoI8_7LjEch_KiNJy18</value>
-          </Data>
-        </ExtendedData>
         <Point>
           <coordinates>
             133.08923,34.306288,0
@@ -11911,14 +11891,9 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜尾道市立長江中学校（飲用可）</name>
-        <description><![CDATA[<img src="https://lh5.googleusercontent.com/proxy/xK1DVPX2Q6WNgMrv7AJ4riFu8CoM5R5Xx1t9KuPMxXqfNQzxUiRkG04W-cmkDMJnV12B_0_Mb7IJ3JEPIV58CGNxzThCMCoyxRPBVmKNRjSR0a9z76f8XvjO8Rn-jceoxPzkcHZsvqP8zupiR1h14WFvlo5zGbRpjxGr0nufLvMOrtBiehEYiZr69eUjYcPneKRmxrDqtSyTtCZ9Sn1qg7XWZwWBE-1hxo2cRvmweZJthFLIonl58bTFnNY" height="200" width="auto" /><br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html<br><br>▼グラウンド北側の門から入り、体育館前の蛇口<br><br>断水に伴い、学校などの校庭の蛇口で水を提供します。<br>職員は不在のため、節度ある利用をお願いいたします。<br>※示している蛇口のみ使用可能とのことです。]]></description>
+        <name>給水｜尾道市立長江中学校（提供終了）</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-65-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="gx_media_links">
-            <value>https://lh5.googleusercontent.com/proxy/xK1DVPX2Q6WNgMrv7AJ4riFu8CoM5R5Xx1t9KuPMxXqfNQzxUiRkG04W-cmkDMJnV12B_0_Mb7IJ3JEPIV58CGNxzThCMCoyxRPBVmKNRjSR0a9z76f8XvjO8Rn-jceoxPzkcHZsvqP8zupiR1h14WFvlo5zGbRpjxGr0nufLvMOrtBiehEYiZr69eUjYcPneKRmxrDqtSyTtCZ9Sn1qg7XWZwWBE-1hxo2cRvmweZJthFLIonl58bTFnNY</value>
-          </Data>
-        </ExtendedData>
         <Point>
           <coordinates>
             133.197337,34.419532,0
@@ -11926,14 +11901,9 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜久保中学校（飲用可）</name>
-        <description><![CDATA[<img src="https://lh3.googleusercontent.com/proxy/T0Vf5emPHV3YjyvqVOWZp57WUct0pLStnbUBY62TyHp-oMGJNgkENh70_SU7yCHwOIWZJ3qVSLghgNuTmLgoLnNbmXnhCx8IS7Y19mk5Hnb6y49584mLXp5wlQJ7gqHQRp0dQK4KebszRlC9XAID3baoVcFJmw0ARqJTbeUz1e1jRQAzZxz6ChXDTe2bBsruxUFF_1hRyUTG-MYaC8uJ94leJY5nDHwhGUcaFiUq-Hlx7SmiyyyO06_JKJU" height="200" width="auto" /><br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html<br><br>▼テニスコート南側駐車場、校舎側の蛇口<br><br>断水に伴い、学校などの校庭の蛇口で水を提供します。<br>職員は不在のため、節度ある利用をお願いいたします。<br>※示している蛇口のみ使用可能とのことです。]]></description>
+        <name>給水｜久保中学校（提供終了）</name>
+        <description><![CDATA[提供を終了しました。<br><br>▼尾道市より<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-66-0288D1</styleUrl>
-        <ExtendedData>
-          <Data name="gx_media_links">
-            <value>https://lh3.googleusercontent.com/proxy/T0Vf5emPHV3YjyvqVOWZp57WUct0pLStnbUBY62TyHp-oMGJNgkENh70_SU7yCHwOIWZJ3qVSLghgNuTmLgoLnNbmXnhCx8IS7Y19mk5Hnb6y49584mLXp5wlQJ7gqHQRp0dQK4KebszRlC9XAID3baoVcFJmw0ARqJTbeUz1e1jRQAzZxz6ChXDTe2bBsruxUFF_1hRyUTG-MYaC8uJ94leJY5nDHwhGUcaFiUq-Hlx7SmiyyyO06_JKJU</value>
-          </Data>
-        </ExtendedData>
         <Point>
           <coordinates>
             133.204416,34.420908,0
@@ -11951,8 +11921,8 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜因島南小学校（飲用不可）/7:00-20:00</name>
-        <description><![CDATA[[小学校のプールの水を提供します]<br>小学校のプールの水を家庭用の雑用水（トイレ用の水など）として提供します。<br>★★飲用には適しません。★★<br><br>[尾道市のホームページ]<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
+        <name>給水｜因島南小学校（提供終了）</name>
+        <description><![CDATA[提供を終了しました。<br><br>[尾道市のホームページ]<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-68-0288D1</styleUrl>
         <Point>
           <coordinates>
@@ -11961,22 +11931,22 @@
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜向東小学校（提供終了）</name>
-        <description><![CDATA[7月17日（火曜日）20時00分で終了しました。<br><br>[尾道市のホームページ]<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
+        <name>給水｜とよの郷（飲用可）</name>
+        <description><![CDATA[給水情報です。<br><br>本郷駅近くの「とよの郷」<br>（三原市本郷北3丁目4番5号）<br>施設の右横を奥に進んでいくと水場があります。<br><br>・8:00-17:00<br>・おひとりさま10リットルまで<br>・問い合わせ先：0848-86-2227<br><br>施設長より：<br>生活用水としてご利用下さい。きれいな水ですが、浸水の後なので、飲料水としては、煮沸して下さい。<br>私たちも、麦茶にして飲んでます。]]></description>
         <styleUrl>#icon-seq2-3-69-0288D1</styleUrl>
         <Point>
           <coordinates>
-            133.220113,34.400487,0
+            132.99311,34.409253,0
           </coordinates>
         </Point>
       </Placemark>
       <Placemark>
-        <name>給水｜とよの郷（飲用可）</name>
-        <description><![CDATA[給水情報です。<br><br>本郷駅近くの「とよの郷」<br>（三原市本郷北3丁目4番5号）<br>施設の右横を奥に進んでいくと水場があります。<br><br>・8:00-17:00<br>・おひとりさま10リットルまで<br>・問い合わせ先：0848-86-2227<br><br>施設長より：<br>生活用水としてご利用下さい。きれいな水ですが、浸水の後なので、飲料水としては、煮沸して下さい。<br>私たちも、麦茶にして飲んでます。]]></description>
+        <name>給水｜向東小学校（提供終了）</name>
+        <description><![CDATA[7月17日（火曜日）20時00分で終了しました。<br><br>[尾道市のホームページ]<br>http://www.city.onomichi.hiroshima.jp/soshiki/8/20368.html]]></description>
         <styleUrl>#icon-seq2-3-70-0288D1</styleUrl>
         <Point>
           <coordinates>
-            132.99311,34.409253,0
+            133.220113,34.400487,0
           </coordinates>
         </Point>
       </Placemark>
@@ -18703,14 +18673,14 @@ http://www.city.onomichi.hiroshima.jp/soshiki/32/20610.html</value>
       </Placemark>
       <Placemark>
         <name>トイレ｜尾道市立長江中学校</name>
-        <description><![CDATA[経度: 133.1973373<br>緯度: 34.4195317<br>詳細: ]]></description>
+        <description><![CDATA[経度: 133.1971603<br>緯度: 34.4195184<br>詳細: ]]></description>
         <styleUrl>#icon-seq2-7-13-757575</styleUrl>
         <ExtendedData>
           <Data name="経度">
-            <value>133.1973373</value>
+            <value>133.1971603</value>
           </Data>
           <Data name="緯度">
-            <value>34.4195317</value>
+            <value>34.4195184</value>
           </Data>
           <Data name="詳細">
             <value/>
@@ -18718,7 +18688,7 @@ http://www.city.onomichi.hiroshima.jp/soshiki/32/20610.html</value>
         </ExtendedData>
         <Point>
           <coordinates>
-            133.1973373,34.4195317,0
+            133.1971603,34.4195184,0
           </coordinates>
         </Point>
       </Placemark>

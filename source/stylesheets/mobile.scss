@@ -1,0 +1,61 @@
+@media (max-width: 1024px) {
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #explain {
+    display: flex;
+    flex-wrap: wrap;
+    width: auto !important;
+    margin: 0;
+
+    #print {
+      width: auto;
+      flex-basis: 30%;
+      flex: 1;
+      padding-right: 1rem;
+    }
+
+    .map_controls {
+      width: auto;
+      flex-basis: 60%;
+      flex: 1;
+      text-align: right;
+    }
+
+    #close {
+      flex-basis: 100%;
+      width: 100%;
+      margin-bottom: 0;
+      margin-top: 1rem;
+    }
+
+    .explain-container {
+      flex-basis: 100%;
+      border: 1px solid lightgray;
+      padding: 0.5rem;
+    }
+  }
+
+  #header {
+    position: relative;
+    width: auto !important;
+    height: 4rem;
+
+    #qrcodecontainer {
+      left: 0 !important;
+    }
+  }
+
+  .sheet {
+    width: auto !important;
+    padding: 1rem;
+    font-size: 3vw;
+    margin: 1rem 0 0 0;
+  }
+
+  #content #page h1 {
+    font-size: 4vw;
+  }
+}

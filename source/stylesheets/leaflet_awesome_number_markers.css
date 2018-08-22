@@ -21,6 +21,46 @@
   color: #fff;
 }
 
+.awesome-number-marker-icon-ohuro {
+  background-image: url('../images/ohuro.png');
+  background-size: 35px 46px;
+}
+
+.awesome-number-marker-icon-ohuro i {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.awesome-number-marker-icon-sentaku {
+  background-image: url('../images/sentaku.png');
+  background-size: 35px 46px;
+}
+
+.awesome-number-marker-icon-sentaku i {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.awesome-number-marker-icon-toile {
+  background-image: url('../images/toile.png');
+  background-size: 35px 46px;
+}
+
+.awesome-number-marker-icon-toile i {
+  margin-top: 26px;
+  font-size: 12px;
+}
+
+.awesome-number-marker-icon-kyusui {
+  background-image: url('../images/kyusui.png');
+  background-size: 35px 46px;
+}
+
+.awesome-number-marker-icon-kyusui i {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
 /* Colors */
 .awesome-number-marker-icon-red {
   background-position: 0 0;

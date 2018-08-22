@@ -188,6 +188,13 @@ body {
   }
 }
 
+@media (max-width: 1248px) {
+  #explain {
+    width:210mm;
+    position: static;
+  }
+}
+
 @page {
   size: A4;
   margin: 10mm;

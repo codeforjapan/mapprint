@@ -236,16 +236,12 @@ $(function(){
             // get name
             var name = layer.feature.properties.name;
             // get category and marker type
-            var category = layer.category.data;
-            var c = _.find(colors, {'name': category });
-            if (!_.isUndefined(c)) {
-              var marker = c.color;
-            }
-
-            if (category !== lastCategory){
+            var category = layer.category;
+            var marker = category.color;
+            if (category.name !== lastCategory){
                 // display categories
-                $('#list table').append('<tr><th colspan="2" class="category_separator"></th></tr>');
-                lastCategory = category;
+                $('#list table').append('<tr><td colspan="4" class="category_separator">' + category.name + '</td></tr>');
+                lastCategory = category.name;
                 $('#list table').append('<tr>');
                 categoryIndex = index;
             } else {
@@ -253,13 +249,12 @@ $(function(){
                     $('#list table').append('<tr>');
                 }
             }
-            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>');
+            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
             // add markers to map
             layer.setIcon(new L.AwesomeNumberMarkers({
                 number: index + 1,
-                markerColor: marker
+                markerColor: category.color.toLowerCase()
             }));
-            //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
         });
     });
 });

@@ -36,9 +36,13 @@ body {
   font-size: 3.5mm;
   text-align: right;
   width: 210mm !important;
-
+  #logo {
+    float:left;
+    width:200px;
+  }
   #qrcodecontainer {
     float: left;
+    margin-left: 200px;
     display: inline-block;
     transform-origin: 0 0;
     transform: scale(0.35);

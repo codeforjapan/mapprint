@@ -1,34 +1,35 @@
-*.swp
 *.bak
+*.swp
 *.tmp
 
-.cache
+.cache/
 .tmp/
+
 build/
 
-# Sass
-.sass-cache/
-
-# Ignore bundler config and downloaded libraries.
-/.bundle
-/vendor/bundle
-
-# Node.js dependency directories
+# Node.js
+.node-version
 node_modules/
 
-# for a library or gem, you might want to ignore these files since the code is
-# intended to run in multiple environments; otherwise, check them in:
-# Gemfile.lock
+## Ruby
 .ruby-version
+# Gemfile.lock
 # .ruby-gemset
+/.bundle
+/vendor/bundle
+/lib/bundler/man/
+
+## Sass
+.sass-cache/
 
 # Ignore IDE files
+.code/
 .idea/
 .vscode/
 
-# =========================
-# Operating System Files
-# =========================
+## =========================
+## Operating System Files
+## =========================
 
 # OSX
 # =========================

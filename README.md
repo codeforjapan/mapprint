@@ -1,3 +1,6 @@
+[![CircleCI](https://circleci.com/gh/codeforjapan/mapprint/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint/tree/master)
+
+
 給水所/お風呂/洗濯（ランドリー）マップ 印刷向け
 ===
 
@@ -8,6 +11,10 @@ https://codeforjapan.github.io/mapprint/
 
 から実際のページを確認できます。
 
+## おばあちゃんの手に届くまで
+このプロジェクトで作られたデータは、さまざまな人々の手を経て、困っているおばあちゃんのところに届きます。
+
+![kamimap_180713.png](source/images/kamimap_180713.png)
 
 
 ## Help Wanted!!
@@ -32,6 +39,8 @@ git clone git@github.com:codeforjapan/mapprint.git
 cd mapprint
 npm install
 bundle install --path=vendor/bundle
+npm run lint
+npm test
 bundle exec middleman build
 ```
 
@@ -40,20 +49,22 @@ bundle exec middleman build
 ```
 bundle exec middleman server
 ```
+
 http://localhost:4567 で見れるはず
 
 
 ### deploy
+
 ```
 bundle exec middleman deploy
 ```
 
-(このリポジトリへの push 権限が必要。
-github pages で作られているので、gh-pages ブランチが更新されます。)
+`gh-pages` ブランチが自動的に更新されます。
 
 
 
 ### test
+
 ```
 npm test
 ```

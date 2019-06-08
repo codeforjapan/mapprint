@@ -10,22 +10,13 @@ var _ = require('lodash');
 // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
 // 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
 var colors = [
-    {name: 'その他', color: 'black'},
-    {name: 'プール', color: 'lightgreen'},
-    {name: '井戸', color: 'purple'},
-    {name: '水道水', color: 'cadetblue'},
-    {name: '洗濯', color: 'sentaku'},
-    {name: '風呂', color: 'ohuro'},
-    {name: 'シャワー', color: 'orange'},
-    {name: '給水', color: 'kyusui'},
-    {name: 'トイレ', color: 'toile'},
-];
-
-var icons = [
-    'ohuro',
-    'toile',
-    'sentaku',
-    'kyusui'
+    {name: '尾道市給水所マップ', color: 'lightgreen'},
+    {name: '東広島市', color: 'purple'},
+    {name: '三原市', color: 'cadetblue'},
+    {name: 'お風呂', color: 'green'},
+    {name: '尾道市の学校校庭等の蛇口(7月8日20:30時点)', color: 'red'},
+    {name: '洗濯（ランドリー）', color: 'orange'},
+    {name: 'トイレ', color: 'lightblue'},
 ];
 
 function showLegend(map) {
@@ -149,15 +140,26 @@ $(function(){
         var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
         console.log(date);
         $('#datetime').html(date.toString());
-        var geojsondata = tj.kml(data);
 
-        var geojson = L.geoJson(geojsondata, {
-          onEachFeature: function (feature, layer) {
-            var field = '名称: '+feature.properties.name+ '<br>'+
-            '詳細: '+feature.properties.description;
-
-            layer.bindPopup(field);
-          }
+        var folders = data.getElementsByTagName('Folder');
+        _.forEach(folders, (folder) => {
+            var category = folder.childNodes[1].firstChild;
+            var geojsondata = tj.kml(folder);
+            var geojson = L.geoJson(geojsondata, {
+                onEachFeature: function (feature, layer) {
+                  var field = '名称: '+feature.properties.name+ '<br>'+
+                  '詳細: '+feature.properties.description;
+                  layer.category = category;
+                  layer.bindPopup(field);
+                }
+            });
+            geojson.addTo(map);
+            try {
+                var bounds = deserializeBounds(window.location.hash.substr(1));
+                map.fitBounds(bounds);
+            } catch(e) {
+                map.fitBounds(geojson.getBounds());
+            };
         });
         geojson.addTo(map);
         try {
@@ -167,6 +169,7 @@ $(function(){
           map.fitBounds(geojson.getBounds());
         }
         showLegend(map);
+        
       });
     map.on("moveend", function () {
         var bounds = map.getBounds();
@@ -177,8 +180,8 @@ $(function(){
         $('#list').html('<table>');
         var targets = [];
         this.eachLayer(function(layer) {
-            if(layer instanceof L.Marker)
-                if( map.getBounds().contains(layer.getLatLng()) )
+            if(layer instanceof L.Marker) {
+                if( map.getBounds().contains(layer.getLatLng()) ) {
                     if (_.isUndefined(layer.feature)) {
                         return false;
                     } else {
@@ -187,7 +190,9 @@ $(function(){
                             targets.push(layer);
                         }
                     }
-                    //that._list.appendChild( that._createItem(layer) );
+                }
+            }
+           //that._list.appendChild( that._createItem(layer) );
         });
         var matchtexts = _.map(colors, (c) => {
             return c.name;
@@ -211,14 +216,8 @@ $(function(){
             // get name
             var name = layer.feature.properties.name;
             // get category and marker type
-            var category = name.split('｜')[0];
-            if (matchtexts.indexOf(category) === -1)
-                category = 'その他';
-
-            var c = _.find(colors, {'name': name.split('｜')[0]});
-            if (_.isUndefined(c)) {
-                c = _.find(colors, {'name': 'その他'})
-            }
+            var category = layer.category.data;
+            var c = _.find(colors, {'name': category });
             var marker = c.color;
 
             if (category !== lastCategory){

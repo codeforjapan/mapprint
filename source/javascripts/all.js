@@ -19,6 +19,13 @@ var colors = [
     {name: 'トイレ', color: 'lightblue'},
 ];
 
+var icons = [
+    'ohuro',
+    'toile',
+    'sentaku',
+    'kyusui'
+];
+
 function showLegend(map) {
     var legend = L.control({position: 'bottomright'});
 
@@ -161,15 +168,6 @@ $(function(){
                 map.fitBounds(geojson.getBounds());
             };
         });
-        geojson.addTo(map);
-        try {
-          var bounds = deserializeBounds(window.location.hash.substr(1));
-          map.fitBounds(bounds);
-        } catch(e) {
-          map.fitBounds(geojson.getBounds());
-        }
-        showLegend(map);
-        
       });
     map.on("moveend", function () {
         var bounds = map.getBounds();

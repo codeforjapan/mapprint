@@ -77,6 +77,23 @@ function tileServerAttribution(){
 }
 
 $(function(){
+    function loadJsonData(orgdata){
+      var data = JSON.parse(orgdata);
+      _.forEach(data.layers, (layer)=> {
+        var category = layer._umap_options
+        _.forEach(layer.features, (feature) => {
+          console.log(feature);
+          var geojson = L.geoJson(feature, {
+              onEachFeature: function (feature, layer) {
+                var field = '名称: '+feature.properties.name+ '<br>'+
+                '詳細: '+feature.properties.description;
+                layer.category = category;
+                layer.bindPopup(field);
+              }
+            }).addTo(map);
+        });
+      });
+    }
     function loadKMLData(data){
       var folders = data.getElementsByTagName('Folder');
       if (folders.length == 0) {
@@ -167,16 +184,16 @@ $(function(){
         }
     });
 
-    $.ajax('./images/uMap.kml').done(function (data, textStatus, jqXHR) {
+    $.ajax('./images/data.umap').done(function (data, textStatus, jqXHR) {
         // データの最終更新日を表示（ローカルでは常に現在時刻となる）
         var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
         console.log(date);
         $('#datetime').html(date.toString());
         if (data.contentType == 'text/xml'){
           loadKMLData(data);
+        }else{ // it must be json data
+          loadJsonData(data);
         }
-
-
       });
     map.on("moveend", function () {
         var bounds = map.getBounds();

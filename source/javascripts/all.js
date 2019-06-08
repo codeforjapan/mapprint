@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var L = require('leaflet');
 var $ = require('jquery');
 var tj = require('@mapbox/togeojson');
@@ -77,20 +78,29 @@ function tileServerAttribution(){
 }
 
 $(function(){
+    function addMarker(feature, category){
+      var geojson = L.geoJson(feature, {
+        onEachFeature: function (feature, layer) {
+          var field = '名称: '+feature.properties.name+ '<br>'+
+          '詳細: '+feature.properties.description;
+          layer.category = category;
+          layer.bindPopup(field);
+        }
+      }).addTo(map);
+      try {
+        var bounds = deserializeBounds(window.location.hash.substr(1));
+        map.fitBounds(bounds);
+      } catch(e) {
+          map.fitBounds(geojson.getBounds());
+      }
+    }
     function loadJsonData(orgdata){
       var data = JSON.parse(orgdata);
       _.forEach(data.layers, (layer)=> {
         var category = layer._umap_options
         _.forEach(layer.features, (feature) => {
           console.log(feature);
-          var geojson = L.geoJson(feature, {
-              onEachFeature: function (feature, layer) {
-                var field = '名称: '+feature.properties.name+ '<br>'+
-                '詳細: '+feature.properties.description;
-                layer.category = category;
-                layer.bindPopup(field);
-              }
-            }).addTo(map);
+          addMarker(feature, category);
         });
       });
     }
@@ -102,21 +112,7 @@ $(function(){
       _.forEach(folders, (folder) => {
           var category = folder.childNodes[1].firstChild;
           var geojsondata = tj.kml(folder);
-          var geojson = L.geoJson(geojsondata, {
-              onEachFeature: function (feature, layer) {
-                var field = '名称: '+feature.properties.name+ '<br>'+
-                '詳細: '+feature.properties.description;
-                layer.category = category;
-                layer.bindPopup(field);
-              }
-          });
-          geojson.addTo(map);
-          try {
-              var bounds = deserializeBounds(window.location.hash.substr(1));
-              map.fitBounds(bounds);
-          } catch(e) {
-              map.fitBounds(geojson.getBounds());
-          };
+          addMarker(geojsondata, category);
       });
     }
     function serializeLatLng(latLng) {

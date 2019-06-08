@@ -149,6 +149,9 @@ $(function(){
         $('#datetime').html(date.toString());
 
         var folders = data.getElementsByTagName('Folder');
+        if (folders !== undefined) {
+          folders = data.getElementsByTagName('Document');
+        }
         _.forEach(folders, (folder) => {
             var category = folder.childNodes[1].firstChild;
             var geojsondata = tj.kml(folder);

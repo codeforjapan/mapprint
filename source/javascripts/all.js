@@ -216,7 +216,9 @@ $(function(){
             // get category and marker type
             var category = layer.category.data;
             var c = _.find(colors, {'name': category });
-            var marker = c.color;
+            if (c !== undefined) {
+              var marker = c.color;
+            }
 
             if (category !== lastCategory){
                 // display categories

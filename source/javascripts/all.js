@@ -142,14 +142,14 @@ $(function(){
         }
     });
 
-    $.ajax('./images/water-supply.kml').done(function (data, textStatus, jqXHR) {
+    $.ajax('./images/uMap.kml').done(function (data, textStatus, jqXHR) {
         // データの最終更新日を表示（ローカルでは常に現在時刻となる）
         var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
         console.log(date);
         $('#datetime').html(date.toString());
 
         var folders = data.getElementsByTagName('Folder');
-        if (folders !== undefined) {
+        if (folders.length == 0) {
           folders = data.getElementsByTagName('Document');
         }
         _.forEach(folders, (folder) => {
@@ -219,7 +219,7 @@ $(function(){
             // get category and marker type
             var category = layer.category.data;
             var c = _.find(colors, {'name': category });
-            if (c !== undefined) {
+            if (!_.isUndefined(c)) {
               var marker = c.color;
             }
 

@@ -77,6 +77,31 @@ function tileServerAttribution(){
 }
 
 $(function(){
+    function loadKMLData(data){
+      var folders = data.getElementsByTagName('Folder');
+      if (folders.length == 0) {
+        folders = data.getElementsByTagName('Document');
+      }
+      _.forEach(folders, (folder) => {
+          var category = folder.childNodes[1].firstChild;
+          var geojsondata = tj.kml(folder);
+          var geojson = L.geoJson(geojsondata, {
+              onEachFeature: function (feature, layer) {
+                var field = '名称: '+feature.properties.name+ '<br>'+
+                '詳細: '+feature.properties.description;
+                layer.category = category;
+                layer.bindPopup(field);
+              }
+          });
+          geojson.addTo(map);
+          try {
+              var bounds = deserializeBounds(window.location.hash.substr(1));
+              map.fitBounds(bounds);
+          } catch(e) {
+              map.fitBounds(geojson.getBounds());
+          };
+      });
+    }
     function serializeLatLng(latLng) {
         return '' + latLng.lat + ',' + latLng.lng;
     }
@@ -147,30 +172,11 @@ $(function(){
         var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
         console.log(date);
         $('#datetime').html(date.toString());
-
-        var folders = data.getElementsByTagName('Folder');
-        if (folders.length == 0) {
-          folders = data.getElementsByTagName('Document');
+        if (data.contentType == 'text/xml'){
+          loadKMLData(data);
         }
-        _.forEach(folders, (folder) => {
-            var category = folder.childNodes[1].firstChild;
-            var geojsondata = tj.kml(folder);
-            var geojson = L.geoJson(geojsondata, {
-                onEachFeature: function (feature, layer) {
-                  var field = '名称: '+feature.properties.name+ '<br>'+
-                  '詳細: '+feature.properties.description;
-                  layer.category = category;
-                  layer.bindPopup(field);
-                }
-            });
-            geojson.addTo(map);
-            try {
-                var bounds = deserializeBounds(window.location.hash.substr(1));
-                map.fitBounds(bounds);
-            } catch(e) {
-                map.fitBounds(geojson.getBounds());
-            };
-        });
+
+
       });
     map.on("moveend", function () {
         var bounds = map.getBounds();

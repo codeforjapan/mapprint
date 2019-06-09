@@ -107,6 +107,9 @@ body {
         tr {
           page-break-inside: avoid;
         }
+        .category_separator {
+          border: none;
+        }
         td {
           border-collapse: collapse;
           border-spacing: 0;

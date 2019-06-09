@@ -10,15 +10,7 @@ var _ = require('lodash');
 
 // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
 // 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
-var colors = [
-    {name: '尾道市給水所マップ', color: 'lightgreen'},
-    {name: '東広島市', color: 'purple'},
-    {name: '三原市', color: 'cadetblue'},
-    {name: 'お風呂', color: 'green'},
-    {name: '尾道市の学校校庭等の蛇口(7月8日20:30時点)', color: 'red'},
-    {name: '洗濯（ランドリー）', color: 'orange'},
-    {name: 'トイレ', color: 'lightblue'},
-];
+var legends = [];
 
 var icons = [
     'ohuro',
@@ -34,18 +26,11 @@ function showLegend(map) {
         var div = L.DomUtil.create('div', 'legend');
 
         // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < colors.length; i++) {
-            if (icons.indexOf(colors[i].color) !== -1) {
-                div.innerHTML +=
-                '<div class="legend-type">' +
-                  '<img src="./images/' + colors[i].color + '.png" align="left" width="18px" height="24px"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
-                '</div>';
-            } else {
-                div.innerHTML +=
-                '<div class="legend-type">' +
-                  '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
-                '</div>';
-            }
+        for (var i = 0; i < legends.length; i++) {
+          div.innerHTML +=
+          '<div class="legend-type">' +
+            '<i style="background:' + legends[i].color + '"></i><div class=poi-type> ' + legends[i].name + '</div></br>' +
+          '</div>';
         }
         return div;
     };
@@ -92,6 +77,11 @@ $(function(){
         map.fitBounds(bounds);
       } catch(e) {
           map.fitBounds(geojson.getBounds());
+      }
+      if (!_.find(legends,function(legend)  {
+        return legend.name == category.name;
+      })){
+        legends.push({name:category.name, color:category.color});
       }
     }
     function loadJsonData(orgdata){
@@ -190,6 +180,7 @@ $(function(){
         }else{ // it must be json data
           loadJsonData(data);
         }
+        showLegend(map);
       });
     map.on("moveend", function () {
         var bounds = map.getBounds();
@@ -214,14 +205,11 @@ $(function(){
             }
            //that._list.appendChild( that._createItem(layer) );
         });
-        var matchtexts = _.map(colors, (c) => {
-            return c.name;
-        });
         var res = targets.sort(function(a,b){
             var _a = a.feature.properties.name;
             var _b = b.feature.properties.name;
-            var _a2 = matchtexts.indexOf(_a.split('｜')[0]);
-            var _b2 = matchtexts.indexOf(_b.split('｜')[0]);
+            var _a2 = a.category.name;
+            var _b2 = b.category.name;
             if(_a2 > _b2){
                 return -1;
             }else if(_a2 < _b2){

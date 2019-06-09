@@ -89,7 +89,6 @@ $(function(){
       _.forEach(data.layers, (layer)=> {
         var category = layer._umap_options
         _.forEach(layer.features, (feature) => {
-          console.log(feature);
           addMarker(feature, category);
         });
       });
@@ -127,7 +126,6 @@ $(function(){
 
         QRCode.toCanvas(canvas, window.location.href, function (error) {
         if (error) console.error(error);
-        console.log(window.location.href);
         })
     }
 

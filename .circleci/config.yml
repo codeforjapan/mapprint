@@ -18,6 +18,10 @@ jobs: # a collection of steps
       - run:
           name: Which bundler?
           command: bundle -v
+      # Which version of node?
+      - run:
+          name: Check current version of node
+          command: node -v
 
       # Restore bundle cache
       - restore_cache:
@@ -44,13 +48,13 @@ jobs: # a collection of steps
       - run:
           name: npm Install
           command: npm install
-          
+
       # Store npm cache
       - save_cache:
           key: npm-{{ checksum "package.json" }}
           paths:
             - node_modules
-          
+
 
       - run:
           name: build middleman

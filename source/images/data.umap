@@ -1,0 +1,507 @@
+{
+  "type": "umap",
+  "uri": "http://umap.openstreetmap.fr/ja/map/map_335218",
+  "properties": {
+    "easing": true,
+    "embedControl": true,
+    "fullscreenControl": true,
+    "searchControl": true,
+    "datalayersControl": true,
+    "zoomControl": true,
+    "slideshow": {},
+    "captionBar": false,
+    "limitBounds": {},
+    "tilelayer": {},
+    "licence": "",
+    "description": "",
+    "name": "名称未定マップ",
+    "displayPopupFooter": false,
+    "miniMap": false,
+    "moreControl": true,
+    "scaleControl": true,
+    "scrollWheelZoom": true,
+    "zoom": 10
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      128.06952595710757,
+      26.186606822324563
+    ]
+  },
+  "layers": [
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "おんなの駅なかゆくい市場"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.794567,
+              26.436041
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "道の駅いとまん"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.661541,
+              26.138343
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "道の駅おおぎみ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.107914,
+              26.690113
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "道の駅ぎのざ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.951756,
+              26.474011
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "道の駅許田"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.969335,
+              26.551934
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "道の駅豊崎"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.655806,
+              26.157788
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "南の駅やえせ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.742747,
+              26.121771
+            ]
+          }
+        }
+      ],
+      "_umap_options": {
+        "displayOnLoad": true,
+        "browsable": true,
+        "remoteData": {},
+        "name": "道の駅",
+        "id": 895298,
+        "color": "Chocolate",
+        "iconUrl": "/uploads/pictogram/parking-garage-24_1.png"
+      }
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "アダンビーチ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.312824,
+              26.821332
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "いへや愛ランドよねざき"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.936531,
+              26.997282
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "ネイチャーみらい館"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.942314,
+              26.454149
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "ヒーピィービーチ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.000357,
+              26.491969
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "伊江村青少年旅行村"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.826958,
+              26.712264
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "沖縄県県民の森"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.910535,
+              26.503683
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "沖縄県総合運動公園オートキャンプ場",
+            "description": "沖縄県総合運動公園オートキャンプ場の概要です。"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.825713,
+              26.304265
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "屋我地ビーチ（Yagaji beach）"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.033016,
+              26.648466
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "乙羽岳森林公園キャンプ場（Oppadake）"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.963965,
+              26.670125
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "久高島キャンプ場"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.884464,
+              26.156382
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "幸喜ビーチ公園"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.948387,
+              26.539126
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "国頭村環境教育センターやんばる学びの森"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.264759,
+              26.72269
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "国頭村森林公園"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.190773,
+              26.733365
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "東村村民の森つつじエコパーク"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.159085,
+              26.639883
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "比地大滝キャンプ場（Hijiootaki）"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.179132,
+              26.719106
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "米崎キャンプ場"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.936593,
+              26.99809
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "北中城村あやかりの杜キャンプ場"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.79078,
+              26.306996
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "明地原公園キャンプ場"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.92194,
+              26.931856
+            ]
+          }
+        }
+      ],
+      "_umap_options": {
+        "displayOnLoad": true,
+        "browsable": true,
+        "remoteData": {},
+        "name": "キャンプ場",
+        "id": 895288,
+        "color": "DarkGreen",
+        "iconUrl": "/uploads/pictogram/campsite-24-white.png"
+      }
+    },
+    {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "むらさきむらビーチ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.71688,
+              26.405703
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "伊江川"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.316665,
+              26.807257
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "嘉陽ビーチ（Kayou Beach）"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.108611,
+              26.54999
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "慶佐次ウッパマビーチ（Kesaji Uppama beach）"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              128.15084,
+              26.599877
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "長浜ビーチ（Nagahama Beach）"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.946048,
+              26.7059
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "百名ビーチ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.79299,
+              26.135617
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "浜比嘉ビーチ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.951584,
+              26.324595
+            ]
+          }
+        },
+        {
+          "type": "Feature",
+          "properties": {
+            "name": "北名城ビーチ"
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              127.661326,
+              26.108395
+            ]
+          }
+        }
+      ],
+      "_umap_options": {
+        "displayOnLoad": true,
+        "browsable": true,
+        "remoteData": {},
+        "name": "天然ビーチ",
+        "id": 895299,
+        "color": "SkyBlue",
+        "iconClass": "Default",
+        "iconUrl": "/uploads/pictogram/swimming-24.png"
+      }
+    }
+  ]
+}

@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 var L = require('leaflet');
 var $ = require('jquery');
 var tj = require('@mapbox/togeojson');
@@ -9,15 +10,7 @@ var _ = require('lodash');
 
 // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
 // 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
-var colors = [
-    {name: '尾道市給水所マップ', color: 'lightgreen'},
-    {name: '東広島市', color: 'purple'},
-    {name: '三原市', color: 'cadetblue'},
-    {name: 'お風呂', color: 'green'},
-    {name: '尾道市の学校校庭等の蛇口(7月8日20:30時点)', color: 'red'},
-    {name: '洗濯（ランドリー）', color: 'orange'},
-    {name: 'トイレ', color: 'lightblue'},
-];
+var legends = [];
 
 var icons = [
     'ohuro',
@@ -33,18 +26,11 @@ function showLegend(map) {
         var div = L.DomUtil.create('div', 'legend');
 
         // loop through our density intervals and generate a label with a colored square for each interval
-        for (var i = 0; i < colors.length; i++) {
-            if (icons.indexOf(colors[i].color) !== -1) {
-                div.innerHTML +=
-                '<div class="legend-type">' +
-                  '<img src="./images/' + colors[i].color + '.png" align="left" width="18px" height="24px"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
-                '</div>';
-            } else {
-                div.innerHTML +=
-                '<div class="legend-type">' +
-                  '<i style="background:' + colors[i].color + '"></i><div class=poi-type> ' + colors[i].name + '</div></br>' +
-                '</div>';
-            }
+        for (var i = 0; i < legends.length; i++) {
+          div.innerHTML +=
+          '<div class="legend-type">' +
+            '<i style="background:' + legends[i].color + '"></i><div class=poi-type> ' + legends[i].name + '</div></br>' +
+          '</div>';
         }
         return div;
     };
@@ -77,6 +63,47 @@ function tileServerAttribution(){
 }
 
 $(function(){
+    function addMarker(feature, category, map){
+      var geojson = L.geoJson(feature, {
+        onEachFeature: function (feature, layer) {
+          var field = '名称: '+feature.properties.name+ '<br>'+
+          '詳細: '+feature.properties.description;
+          layer.category = category;
+          layer.bindPopup(field);
+        }
+      }).addTo(map);
+      try {
+        var bounds = deserializeBounds(window.location.hash.substr(1));
+        map.fitBounds(bounds);
+      } catch(e) {
+          map.fitBounds(geojson.getBounds());
+      }
+      if (!_.find(legends,function(legend)  {
+        return legend.name == category.name;
+      })){
+        legends.push({name:category.name, color:category.color});
+      }
+    }
+    function loadJsonData(orgdata, map){
+      var data = JSON.parse(orgdata);
+      _.forEach(data.layers, (layer)=> {
+        var category = layer._umap_options
+        _.forEach(layer.features, (feature) => {
+          addMarker(feature, category, map);
+        });
+      });
+    }
+    function loadKMLData(data, map){
+      var folders = data.getElementsByTagName('Folder');
+      if (folders.length == 0) {
+        folders = data.getElementsByTagName('Document');
+      }
+      _.forEach(folders, (folder) => {
+          var category = folder.childNodes[1].firstChild;
+          var geojsondata = tj.kml(folder);
+          addMarker(geojsondata, category. map);
+      });
+    }
     function serializeLatLng(latLng) {
         return '' + latLng.lat + ',' + latLng.lng;
     }
@@ -95,149 +122,129 @@ $(function(){
             .append('<canvas id="qrcode"></canvas>');
     }
     function renewQRCode() {
+        if($('#qrcode')[0] == undefined) return;
         var canvas = document.getElementById('qrcode');
 
         QRCode.toCanvas(canvas, window.location.href, function (error) {
         if (error) console.error(error);
-        console.log(window.location.href);
         })
     }
-
-    var map = L.map('map').setView([41.3921, 2.1705], 13);
-    var tileLayer = L.tileLayer(
-        tileServerUrl($('input[name=mapStyle]:checked').val()), {
-          attribution: tileServerAttribution(),
-          maxZoom: 18
-        }
-    );
-    tileLayer.addTo( map );
-
-    addQRCodeLayer();
-    $('#date').text(() => {
-      const d = new Date();
-      return displayHelper.getPrintDate(d);
-    });
-    $('#footer').append(
-        'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
-        + '<br>'
-        + '最新の情報はウェブサイトからお確かめください。'
-    );
-
-    $('#print').on('click', () => {
-      window.print();
-    });
-
-    // 背景地図の切り替え
-    $('input[name="mapStyle"]:radio').change( function() {
-      tileLayer.setUrl(tileServerUrl($(this).val()));
-    })
-
-    // 説明の表示/非表示
-    $('#close').on('click', function(){
-        $('.explain-container').toggle()
-        if ($('#close').text() === '閉じる') {
-          $('#close').text('開く')
-        } else {
-          $('#close').text('閉じる')
-        }
-    });
-
-    $.ajax('./images/water-supply.kml').done(function (data, textStatus, jqXHR) {
-        // データの最終更新日を表示（ローカルでは常に現在時刻となる）
-        var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
-        console.log(date);
-        $('#datetime').html(date.toString());
-
-        var folders = data.getElementsByTagName('Folder');
-        _.forEach(folders, (folder) => {
-            var category = folder.childNodes[1].firstChild;
-            var geojsondata = tj.kml(folder);
-            var geojson = L.geoJson(geojsondata, {
-                onEachFeature: function (feature, layer) {
-                  var field = '名称: '+feature.properties.name+ '<br>'+
-                  '詳細: '+feature.properties.description;
-                  layer.category = category;
-                  layer.bindPopup(field);
-                }
-            });
-            geojson.addTo(map);
-            try {
-                var bounds = deserializeBounds(window.location.hash.substr(1));
-                map.fitBounds(bounds);
-            } catch(e) {
-                map.fitBounds(geojson.getBounds());
-            };
-        });
+    function initMap() {
+      var map = L.map('map').setView([41.3921, 2.1705], 13);
+      var tileLayer = L.tileLayer(
+          tileServerUrl($('input[name=mapStyle]:checked').val()), {
+            attribution: tileServerAttribution(),
+            maxZoom: 18
+          }
+      );
+      tileLayer.addTo( map );
+      if($('#qrcode')[0]) {
+        addQRCodeLayer();
+      }
+      $('#date').text(() => {
+        const d = new Date();
+        return displayHelper.getPrintDate(d);
       });
-    map.on("moveend", function () {
-        var bounds = map.getBounds();
-        var s = serializeBounds(bounds);
-        var path = location.pathname;
-        window.history.pushState('', '', path + '#' + s);
-        renewQRCode();
-        $('#list').html('<table>');
-        var targets = [];
-        this.eachLayer(function(layer) {
-            if(layer instanceof L.Marker) {
-                if( map.getBounds().contains(layer.getLatLng()) ) {
-                    if (_.isUndefined(layer.feature)) {
-                        return false;
-                    } else {
-                        var name = layer.feature.properties.name;
-                        if (!_.isUndefined(name)) {
-                            targets.push(layer);
-                        }
-                    }
-                }
-            }
-           //that._list.appendChild( that._createItem(layer) );
-        });
-        var matchtexts = _.map(colors, (c) => {
-            return c.name;
-        });
-        var res = targets.sort(function(a,b){
-            var _a = a.feature.properties.name;
-            var _b = b.feature.properties.name;
-            var _a2 = matchtexts.indexOf(_a.split('｜')[0]);
-            var _b2 = matchtexts.indexOf(_b.split('｜')[0]);
-            if(_a2 > _b2){
-                return -1;
-            }else if(_a2 < _b2){
-                return 1;
-            }
-            return 0;
-        });
-        // display them
-        var lastCategory = "";
-        var categoryIndex = 0;
-        res.forEach(function(layer,index){
-            // get name
-            var name = layer.feature.properties.name;
-            // get category and marker type
-            var category = layer.category.data;
-            var c = _.find(colors, {'name': category });
-            if (c !== undefined) {
-              var marker = c.color;
-            }
+      $('#footer').append(
+          'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
+          + '<br>'
+          + '最新の情報はウェブサイトからお確かめください。'
+      );
 
-            if (category !== lastCategory){
-                // display categories
-                $('#list table').append('<tr><th colspan="2" class="category_separator"></th></tr>');
-                lastCategory = category;
-                $('#list table').append('<tr>');
-                categoryIndex = index;
-            } else {
-                if ((index - categoryIndex) % 2 === 0){
-                    $('#list table').append('<tr>');
-                }
-            }
-            $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td>');
-            // add markers to map
-            layer.setIcon(new L.AwesomeNumberMarkers({
-                number: index + 1,
-                markerColor: marker
-            }));
-            //$('#list').append('<tr><td class="id">' + (index + 1) + '</td><td class="value">' + name + '</td><td class="description">' + description + '</td></tr>')
+      $('#print').on('click', () => {
+        window.print();
+      });
+
+      // 背景地図の切り替え
+      $('input[name="mapStyle"]:radio').change( function() {
+        tileLayer.setUrl(tileServerUrl($(this).val()));
+      })
+
+      // 説明の表示/非表示
+      $('#close').on('click', function(){
+          $('.explain-container').toggle()
+          if ($('#close').text() === '閉じる') {
+            $('#close').text('開く')
+          } else {
+            $('#close').text('閉じる')
+          }
+      });
+
+      $.ajax('./images/data.umap').done(function (data, textStatus, jqXHR) {
+          // データの最終更新日を表示（ローカルでは常に現在時刻となる）
+          var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+          console.log(date);
+          $('#datetime').html(date.toString());
+          if (data.contentType == 'text/xml'){
+            loadKMLData(data, map);
+          }else{ // it must be json data
+            loadJsonData(data, map);
+          }
+          showLegend(map);
         });
-    });
+      map.on("moveend", function () {
+          var bounds = map.getBounds();
+          var s = serializeBounds(bounds);
+          var path = location.pathname;
+          window.history.pushState('', '', path + '#' + s);
+          renewQRCode();
+          $('#list').html('<table>');
+          var targets = [];
+          this.eachLayer(function(layer) {
+              if(layer instanceof L.Marker) {
+                  if( map.getBounds().contains(layer.getLatLng()) ) {
+                      if (_.isUndefined(layer.feature)) {
+                          return false;
+                      } else {
+                          var name = layer.feature.properties.name;
+                          if (!_.isUndefined(name)) {
+                              targets.push(layer);
+                          }
+                      }
+                  }
+              }
+            //that._list.appendChild( that._createItem(layer) );
+          });
+          var res = targets.sort(function(a,b){
+              var _a = a.feature.properties.name;
+              var _b = b.feature.properties.name;
+              var _a2 = a.category.name;
+              var _b2 = b.category.name;
+              if(_a2 > _b2){
+                  return -1;
+              }else if(_a2 < _b2){
+                  return 1;
+              }
+              return 0;
+          });
+          // display them
+          var lastCategory = "";
+          var categoryIndex = 0;
+          res.forEach(function(layer,index){
+              // get name
+              var name = layer.feature.properties.name;
+              // get category and marker type
+              var category = layer.category;
+              var marker = category.color;
+              if (category.name !== lastCategory){
+                  // display categories
+                  $('#list table').append('<tr><td colspan="4" class="category_separator">' + category.name + '</td></tr>');
+                  lastCategory = category.name;
+                  $('#list table').append('<tr>');
+                  categoryIndex = index;
+              } else {
+                  if ((index - categoryIndex) % 2 === 0){
+                      $('#list table').append('<tr>');
+                  }
+              }
+              $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
+              // add markers to map
+              layer.setIcon(new L.AwesomeNumberMarkers({
+                  number: index + 1,
+                  markerColor: category.color.toLowerCase()
+              }));
+          });
+      });
+    }
+    initMap();
 });

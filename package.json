@@ -35,6 +35,7 @@
     "leaflet": "^1.3.1",
     "lodash": "^4.17.10",
     "qrcode": "^1.2.0",
-    "xmldom": "^0.1.27"
+    "xmldom": "^0.1.27",
+    "natives": "latest"
   }
 }

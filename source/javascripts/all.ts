@@ -2,7 +2,7 @@
 declare function require(path: string): any;
 
 
-var L = require('leaflet');
+var L = require ('leaflet');
 var $ = require('jquery');
 var tj = require('@mapbox/togeojson');
 var QRCode = require('qrcode')
@@ -147,7 +147,7 @@ $(function(){
           }
       );
       tileLayer.addTo( map );
-      if($('#qrcode')[0]) {
+      if($('#qrcodecontainer')[0]) {
         addQRCodeLayer();
       }
       $('#date').text(() => {

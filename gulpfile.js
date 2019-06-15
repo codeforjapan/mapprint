@@ -22,8 +22,8 @@ var b = browserify({
     packageCache: {}
 });
 
-gulp.task('default', ['build']);
-gulp.task('build', ['sass', 'bundle']);
+gulp.task('default', 'build');
+gulp.task('build', gulp.series( gulp.parallel('sass', 'bundle')));
 gulp.task('watch', function(){
   gulp.watch([jsConf.srcPath, cssConf.srcPath], ['build']);
 });

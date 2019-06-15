@@ -1,4 +1,7 @@
 /*jshint esversion: 6 */
+declare function require(path: string): any;
+
+
 var L = require('leaflet');
 var $ = require('jquery');
 var tj = require('@mapbox/togeojson');
@@ -8,9 +11,15 @@ require('./leaflet_awesome_number_markers').default();
 var displayHelper = require('./displayHelper');
 var _ = require('lodash');
 
+import Marker from 'leaflet';
+
 // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
 // 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
-var legends = [];
+interface Legend {
+  color: string;
+  name: string;
+}
+var legends: Legend[] = [];
 
 var icons = [
     'ohuro',
@@ -101,7 +110,7 @@ $(function(){
       _.forEach(folders, (folder) => {
           var category = folder.childNodes[1].firstChild;
           var geojsondata = tj.kml(folder);
-          addMarker(geojsondata, category. map);
+          addMarker(geojsondata, category, map);
       });
     }
     function serializeLatLng(latLng) {
@@ -189,8 +198,8 @@ $(function(){
           window.history.pushState('', '', path + '#' + s);
           renewQRCode();
           $('#list').html('<table>');
-          var targets = [];
-          this.eachLayer(function(layer) {
+          var targets:Marker[] = [];
+          this.eachLayer(function(layer:any) {
               if(layer instanceof L.Marker) {
                   if( map.getBounds().contains(layer.getLatLng()) ) {
                       if (_.isUndefined(layer.feature)) {

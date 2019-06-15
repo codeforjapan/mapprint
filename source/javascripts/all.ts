@@ -8,7 +8,7 @@ var tj = require('@mapbox/togeojson');
 var QRCode = require('qrcode')
 
 require('./leaflet_awesome_number_markers').default();
-var displayHelper = require('./displayHelper');
+import * as DisplayHelper from './displayHelper';
 var _ = require('lodash');
 
 import Marker from 'leaflet';
@@ -152,7 +152,7 @@ $(function(){
       }
       $('#date').text(() => {
         const d = new Date();
-        return displayHelper.getPrintDate(d);
+        return DisplayHelper.getPrintDate(d);
       });
       $('#footer').append(
           'この地図は、https://codeforjapan.github.io/mapprint/ を印刷したものです。'
@@ -181,7 +181,7 @@ $(function(){
 
       $.ajax('./images/data.umap').done(function (data, textStatus, jqXHR) {
           // データの最終更新日を表示（ローカルでは常に現在時刻となる）
-          var date = displayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+          var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
           console.log(date);
           $('#datetime').html(date.toString());
           if (data.contentType == 'text/xml'){

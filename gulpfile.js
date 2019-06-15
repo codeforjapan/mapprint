@@ -25,7 +25,6 @@ function sassCompile(){
   .src(cssConf.srcPath, {
     since: gulp.lastRun(sassCompile)
   })
-  .pipe(sourcemaps.init())
   .pipe(plumber({
 //    errorHandler: notify.onError('Error: <%= error.message %>')
   }))

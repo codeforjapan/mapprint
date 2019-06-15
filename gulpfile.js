@@ -3,8 +3,6 @@ var source = require('vinyl-source-stream');
 var browserify = require('browserify');
 var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
-var changed = require('gulp-changed');
-var sourcemaps = require('gulp-sourcemaps');
 var neat = require('node-neat');
 var notify  = require('gulp-notify');
 
@@ -22,8 +20,11 @@ var cssConf = {
 
 
 //sass
-gulp.task('sass',function(){
-  return gulp.src(cssConf.srcPath)
+function sassCompile(){
+  return gulp
+  .src(cssConf.srcPath, {
+    since: gulp.lastRun(sassCompile)
+  })
   .pipe(sourcemaps.init())
   .pipe(plumber({
 //    errorHandler: notify.onError('Error: <%= error.message %>')
@@ -32,11 +33,10 @@ gulp.task('sass',function(){
     style : 'expanded',
     includePaths: cssConf.destFileName
   }))
-  .pipe(sourcemaps.write())
-  .pipe(changed(cssConf.destPath))
   .pipe(gulp.dest(cssConf.destPath));
-});
+}
 
+gulp.task('sass', sassCompile);
 
 var b = browserify({
     entries: jsConf.srcPath,
@@ -54,7 +54,7 @@ function jsBundle() {
       .pipe(gulp.dest(jsConf.destPath));
 }
 
-gulp.task('build', gulp.series( gulp.parallel('sass', 'bundle')));
+gulp.task('build', gulp.series('sass', 'bundle'));
 gulp.task('watch', function(){
   gulp.watch([jsConf.srcPath, cssConf.srcPath], gulp.task('build'));
 });

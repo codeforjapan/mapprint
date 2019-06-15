@@ -1,0 +1,78 @@
+version: 2 # use CircleCI 2.0
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    branches:
+      ignore:
+        - gh-pages
+    working_directory: ~/mapprint # directory where steps will run
+    docker: # run the steps with Docker
+      - image: circleci/ruby:2.4-node # ...with this image as the primary container; this is where all `steps` will run
+        environment: # environment variables for primary container
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+    steps: # a collection of executable commands
+      - checkout # special step to check out source code to working directory
+
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      # Which version of node?
+      - run:
+          name: Check current version of node
+          command: node -v
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - bundle-v2-{{ checksum "Gemfile.lock" }}
+            - bundle-v2-
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      # Store bundle cache
+      - save_cache:
+          key: bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      # Only necessary if app uses webpacker or yarn in some other way
+      - restore_cache:
+          keys:
+            - npm-{{ checksum "package.json" }}
+            - npm-
+
+      - run:
+          name: npm Install
+          command: npm install
+
+      # Store npm cache
+      - save_cache:
+          key: npm-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+
+      - run:
+          name: build middleman
+          command: |
+            bundle exec middleman build
+
+      - run:
+          name: run test
+          command: |
+            npm test
+
+      - add_ssh_keys
+      - deploy:
+          name: start master deploy
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                git config --global user.email info@code4japan.org
+                git config --global user.name circleci
+                git fetch origin gh-pages
+                bundle exec middleman deploy
+            fi

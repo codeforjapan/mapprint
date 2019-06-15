@@ -19,7 +19,7 @@ describe('displayHelper', function() {
 
       var formattedDate = displayHelper.getPrintDate(stubDate)
 
-      expect(formattedDate).toBe('このマップは 2018年1月1日 11:11 に印刷しました。')
+      expect(formattedDate).toBe('このマップは 2018年01月01日11時11分 に印刷しました。')
     })
   })
 })

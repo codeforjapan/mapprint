@@ -1,10 +1,76 @@
-.bundle
-.cache
-.DS_Store
-.sass-cache
-.tmp/
-build/
-vendor/bundle
-node_modules
-.ruby-version
+*.bak
+*.swp
+*.tmp
 
+.cache/
+.tmp/
+
+build/
+
+# Node.js
+.node-version
+node_modules/
+
+## Ruby
+.ruby-version
+# Gemfile.lock
+# .ruby-gemset
+/.bundle
+/vendor/bundle
+/lib/bundler/man/
+
+## Sass
+.sass-cache/
+
+# Ignore IDE files
+.code/
+.idea/
+.vscode/
+
+## =========================
+## Operating System Files
+## =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+# =========================
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp

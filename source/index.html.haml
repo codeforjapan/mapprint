@@ -1,30 +1,19 @@
 ---
-title: 給水所/お風呂/洗濯（ランドリー）マップ
+title: 沖縄キャンプマップ
 ---
-#header
-    データ最終更新日：
-    %span#datetime
-#content
+- content_for(:header) do
+  = stylesheet_link_tag "index"
+%section.sheet
+  #header
+    %img{:src=>"images/logo.jpg", :id=>"logo"}
+  #content
+    %p Printable customized map + lists for people who wants to know about where you are.
     #page
-        %h1 給水所/お風呂/洗濯（ランドリー）マップ
-        #date
-        #map
-        #list
-    #explain.not_print_area
-        %button#close 閉じる
-        .explain-container
-            %h2 このサイトについて
-            %p
-                このサイトは、尾道の洪水被害に対して、SNSで流れる給水所などの情報や、行政発信の情報を見れていない地域の人たちにも伝えるために、情報をA4にまとめて印刷してくばれるように情報を最適化しています。
-                %br
-                元データは、こちらの
-                %a{:href=>"https://www.google.com/maps/d/u/0/viewer?mid=17BQwZDvJhDQ9OKZfakI-2PsyIaGdDtRx&ll=34.395888541511006%2C132.9701334&z=11", :target => "_blank"} 給水所/お風呂/洗濯（ランドリー）マップ
-                のものを使っています。
-                %br
-                表示されている地図の範囲内にある情報のみがリストに表示されますので、自由に印刷して配って使ってください。
-                %br
-            %h2 お手伝い募集中！
-            %p
-                このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
-                %a{:href=>"https://github.com/codeforjapan/mapprint"} Code for Japan の Github リポジトリ
-                から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
+    %a Create new map
+    %h2 Maps people created
+    %h3
+      %a{:href=>"map.html#27.274339918107938,126.79892867803575-25.97304154404734,128.97971481084826"} 沖縄キャンプマップ（沖縄）
+    #map
+    %h3 給水所/お風呂/洗濯（ランドリー）マップ（広島）
+    %img{:src=>"images/sample.png", :width=>"1200px;"}
+

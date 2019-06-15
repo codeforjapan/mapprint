@@ -68,6 +68,7 @@ end
 activate :deploy do |deploy|
   deploy.build_before = true
   deploy.deploy_method = :git
-  deploy.remote = 'git@github.com:codeforjapan/mapprint.git'
-  deploy.branch = 'gh-pages'
+  deploy.remote = ENV['DEPLOY_REMOTE'] || 'origin'
+  deploy.branch = ENV['DEPLOY_BRANCH'] || 'gh-pages'
+  deploy.commit_message = "[ci skip] Automated commit at #{Time.now.utc} by middleman-deploy #{Middleman::Deploy::PACKAGE} #{Middleman::Deploy::VERSION}"
 end

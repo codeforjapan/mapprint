@@ -26,7 +26,7 @@ gulp.task('sass',function(){
   return gulp.src(cssConf.srcPath)
   .pipe(sourcemaps.init())
   .pipe(plumber({
-    errorHandler: notify.onError('Error: <%= error.message %>')
+//    errorHandler: notify.onError('Error: <%= error.message %>')
   }))
   .pipe(sass({
     style : 'expanded',
@@ -34,12 +34,7 @@ gulp.task('sass',function(){
   }))
   .pipe(sourcemaps.write())
   .pipe(changed(cssConf.destPath))
-  .pipe(gulp.dest(cssConf.destPath))
-  .pipe(notify({
-    title: 'compiled Sass',
-    message: new Date(),
-    sound: 'Tink'
-  }));
+  .pipe(gulp.dest(cssConf.destPath));
 });
 
 

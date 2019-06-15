@@ -7,3 +7,4 @@ gem 'wdm', '~> 0.1', platforms: [:mswin, :mingw]
 gem 'middleman-deploy', '~> 2.0.0.pre.alpha'
 gem 'middleman-livereload'
 gem 'typescript-node'
+gem 'rack' , ">= 2.0.6"

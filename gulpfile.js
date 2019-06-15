@@ -7,16 +7,16 @@ var neat = require('node-neat');
 var notify  = require('gulp-notify');
 
 var jsConf = {
-  srcPath: 'source/javascripts/all.js',
+  srcPath: 'source/javascripts/all.ts',
   destFileName: 'javascripts/bundle.js',
   destPath: '.tmp/dist/'
-}
+};
 
 var cssConf = {
   srcPath: 'source/stylesheets/**/*.scss',
   destFileName: 'site',
   destPath: '.tmp/dist/stylesheets'
-}
+};
 
 
 //sass

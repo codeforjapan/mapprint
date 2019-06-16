@@ -4,4 +4,7 @@ describe('tileServerAttribution', () => {
   it('returns openstreetmap license for testing environment', function() {
     expect(mapHelper.tileServerAttribution('localhost:4567')).toBe('Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>');
   });
+  it('returns MIERUNE license for production environment', function() {
+    expect(mapHelper.tileServerAttribution('codeforjapan.github.io')).toBe("Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL.");
+  });
 });

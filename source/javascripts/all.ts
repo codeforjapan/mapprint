@@ -9,6 +9,7 @@ var QRCode = require('qrcode')
 
 require('./leaflet_awesome_number_markers').default();
 import * as DisplayHelper from './displayHelper';
+import * as MapHelper from './mapHelper';
 var _ = require('lodash');
 
 import Marker from 'leaflet';
@@ -64,12 +65,6 @@ function tileServerUrl(mapStyle){
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 }
 
-function tileServerAttribution(){
-  return ( location.host === 'codeforjapan.github.io' ) ?
-  "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
-  'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
-
-}
 
 $(function(){
     function addMarker(feature, category, map){
@@ -142,7 +137,7 @@ $(function(){
       var map = L.map('map').setView([41.3921, 2.1705], 13);
       var tileLayer = L.tileLayer(
           tileServerUrl($('input[name=mapStyle]:checked').val()), {
-            attribution: tileServerAttribution(),
+            attribution: MapHelper.tileServerAttribution(location.host),
             maxZoom: 18
           }
       );

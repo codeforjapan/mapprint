@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node_modules/karma/bin/karma --silent --no-color start karma.conf.js",
+    "watch": "node_modules/karma/bin/karma --auto-watch --no-single-run start karma.conf.js",
     "lint": "eslint source/javascripts/*.js"
   },
   "repository": {

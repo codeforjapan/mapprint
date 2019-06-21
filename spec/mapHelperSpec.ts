@@ -38,9 +38,15 @@ describe('Load map', () => {
     document.body.innerHTML = '<div id="map"/>';
     // document.body.innerHTML = __html__["source/map.html.haml"] //@todo to be fixed. somehow this doesn’t work...
   });
-  it ('load map class', function() {
+  it ('load map class using OpenStreetMap', function() {
     let map = new PrintableMap("localhost:4567", "map");
-    console.log(document.body.innerHTML);
-    //$("map")
+    expect($("#map").hasClass("leaflet-container")).toBe(true);
+    expect($("#map").text()).toMatch(/.*OpenStreetMap.*/);
+  });
+  it ('load map class using Mierune Map', function() {
+    let map = new PrintableMap(SITE_URL, "map");
+    console.log($("#map").text())
+    expect($("#map").hasClass("leaflet-container")).toBe(true);
+    expect($("#map").text()).toMatch(/.*MIERUNE.*/);
   });
 })

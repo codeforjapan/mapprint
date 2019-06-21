@@ -10,7 +10,7 @@ export default class PrintableMap implements IPrintableMap{
     this.map = L.map('map').setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
       tileServerUrl(host, $('input[name=mapStyle]:checked').val()), {
-        attribution: tileServerAttribution(location.host),
+        attribution: tileServerAttribution(host),
         maxZoom: 18
       }
     );

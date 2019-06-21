@@ -1,4 +1,7 @@
+/// <reference path="./html2js.d.ts" />
 import mapHelper = require('../source/javascripts/mapHelper');
+import $ from "jquery";
+import PrintableMap from '../source/javascripts/mapHelper';
 
 const SITE_URL = 'codeforjapan.github.io';
 const MIERUNE_KEY = 'KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC';
@@ -30,3 +33,14 @@ describe('tileServerUrl', () => {
   });
 })
 
+describe('Load map', () => {
+  beforeEach(function() {
+    document.body.innerHTML = '<div id="map"/>';
+    // document.body.innerHTML = __html__["source/map.html.haml"] //@todo to be fixed. somehow this doesn’t work...
+  });
+  it ('load map class', function() {
+    let map = new PrintableMap("localhost:4567", "map");
+    console.log(document.body.innerHTML);
+    //$("map")
+  });
+})

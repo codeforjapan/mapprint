@@ -17,7 +17,8 @@ module.exports = function(config) {
     files: [
       'source/javascripts/displayHelper.ts',
       'source/javascripts/mapHelper.ts',
-      { pattern: 'spec/**/*.ts'}
+      { pattern: 'spec/**/*.ts'},
+      { pattern: 'source/map.html.haml'}
     ],
 
 
@@ -29,7 +30,8 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      "**/*.ts": ["karma-typescript", "sourcemap"]
+      "**/*.ts": ["karma-typescript", "sourcemap"],
+      "source/map.html.haml": ["haml", "html2js"]
     },
     karmaTypescriptConfig: {
       tsconfig: "./tsconfig.json"

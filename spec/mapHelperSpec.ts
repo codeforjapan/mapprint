@@ -33,11 +33,22 @@ describe('tileServerUrl', () => {
   });
 })
 
+describe('Map contractor', () => {
+  it ('throw error when no divid', function(){
+    expect(function(){new PrintableMap('localhost:4567', 'mapid');}).toThrowError('Map container not found.');
+  });
+})
+
 describe('Load map', () => {
   beforeEach(function() {
     document.body.innerHTML = '<div id="map"/>';
     // document.body.innerHTML = __html__["source/map.html.haml"] //@todo to be fixed. somehow this doesn’t work...
   });
+  it ('initialize properties', function(){
+    let map = new PrintableMap('localhost:4567', 'map');
+    expect(map.host).toBe('localhost:4567');
+    expect(map.divid).toBe('map');
+  })
   it ('load map class using OpenStreetMap', function() {
     let map = new PrintableMap("localhost:4567", "map");
     expect($("#map").hasClass("leaflet-container")).toBe(true);

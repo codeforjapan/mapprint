@@ -6,7 +6,7 @@ export interface IPrintableMap {
 
 export default class PrintableMap implements IPrintableMap{
   map:L.Map;
-  constructor (host:string, divid :string){
+  constructor (public host:string, public divid :string){
     this.map = L.map('map').setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
       tileServerUrl(host, $('input[name=mapStyle]:checked').val()), {

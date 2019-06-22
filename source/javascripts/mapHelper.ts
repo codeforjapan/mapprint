@@ -7,7 +7,7 @@ export interface IPrintableMap {
 export default class PrintableMap implements IPrintableMap{
   map:L.Map;
   constructor (public host:string, public divid :string){
-    this.map = L.map('map').setView([41.3921, 2.1705], 13);
+    this.map = L.map(divid).setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
       tileServerUrl(host, $('input[name=mapStyle]:checked').val()), {
         attribution: tileServerAttribution(host),
@@ -24,7 +24,7 @@ export function tileServerAttribution(host:string):string{
   'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
 }
 
-export function tileServerUrl(host:string, mapStyle:string):string{
+export function tileServerUrl(mapStyle:string, host:string):string{
   // 地図の色はnormal,grey, mono, bright, blueが選択できる。
   // 印刷時の視認性の高さからカラーはbright、白黒にはgrayを使用する。
   var styleCode;

@@ -168,6 +168,7 @@ describe('Load map', () => {
     let umapdata:string;
     let map:PrintableMap;
     let mapSpy;
+    const testDate = new Date();
     beforeEach(function() {
       // read test data
       jasmine.getFixtures().fixturesPath = 'base/spec/fixtures/';
@@ -182,6 +183,7 @@ describe('Load map', () => {
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
         contentType:"application/octet-stream",
+        responseHeaders: {"date":testDate.toString()},
         responseText:umapdata
       })
       map = new PrintableMap("localhost:4567", "map");

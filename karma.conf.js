@@ -17,7 +17,7 @@ module.exports = function(config) {
       'source/javascripts/mapHelper.ts',
       { pattern: 'spec/**/*.ts'},
       { pattern: 'source/map.html.haml'},
-      { pattern: 'spec/data/*',
+      { pattern: 'spec/fixtures/**',
         watched: true,
         served:  true,
         included: false}

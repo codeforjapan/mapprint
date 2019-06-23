@@ -165,38 +165,32 @@ describe('Load map', () => {
     expect(after - before).toBe(2);
   })
   describe('load file', function() {
+    let umapdata:string;
+    let map:PrintableMap;
+    let mapSpy;
     beforeEach(function() {
       // read test data
       jasmine.getFixtures().fixturesPath = 'base/spec/fixtures/';
-      let umapdata = readFixtures('data.umap')
+      umapdata = readFixtures('data.umap')
       document.body.innerHTML = '<div id="map"/>';
-
       jasmine.Ajax.install();
     });
     afterEach(function(){
       jasmine.Ajax.uninstall();
     })
     it ("load umapfile", function(){
-      let map = new PrintableMap("localhost:4567", "map");
-      //console.log(umapData);
-      let before = 0;
-      map.map.eachLayer(function(layer:L.Layer){
-        if (layer.getPopup() != undefined){
-          before = before+1;
-        }
-      });
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
-        responseText:""
+        contentType:"application/octet-stream",
+        responseText:umapdata
       })
+      map = new PrintableMap("localhost:4567", "map");
+      mapSpy = spyOn(map, "addMarker");
       map.loadFile(dataUrl);
-      let after = 0;
-      map.map.eachLayer(function(layer:L.Layer){
-        if (layer.getPopup() != undefined){
-          after = after+1;
-        }
-      });
-      expect(after - before).toBe(39);
+      // it should add 39 markers. Needed to check after adding all markers.
+      spyOn(map, "showLegend").and.callFake(() =>{
+        expect(mapSpy.calls.count()).toBe(39);
+      })
     })
   });
 })

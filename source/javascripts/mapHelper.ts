@@ -52,6 +52,7 @@ export default class PrintableMap implements IPrintableMap{
    * @param category Category of the feacures
    */
   addMarker(feature:geoJson.Feature, category:Category): void{
+    console.log('addMarker:' + feature);
     let geojson = L.geoJSON(feature, {
       onEachFeature: function (feature, layer:MyLayer) {
         var field = '名称: '+feature.properties.name+ '<br>'+
@@ -76,10 +77,10 @@ export default class PrintableMap implements IPrintableMap{
   }
   /**
    * Load file and add markers
-   * @param path file path
+   * @param url file path
    */
-  loadFile(path:string):void{
-    $.ajax('./images/data.umap').then((data, textStatus, jqXHR)=> {
+  loadFile(url:string):void{
+    $.ajax(url).then((data, textStatus, jqXHR)=> {
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
       //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
       //console.log(date);
@@ -91,11 +92,14 @@ export default class PrintableMap implements IPrintableMap{
       }else{ // it must be json data
         this.loadUmapJsonData(data);
       }
-      //showLegend(map);
+      this.showLegend();
     }).catch((jqXHR, textStatus, errorThrown) => {
       console.log('error:' + errorThrown);
       throw new Error(errorThrown);
     });
+  }
+  showLegend():void{
+
   }
 }
 

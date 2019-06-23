@@ -1,7 +1,8 @@
 /// <reference path="./html2js.d.ts" />
+/// <reference path="../node_modules/@types/jasmine-ajax/index.d.ts"/>
 import * as mapHelper from '../source/javascripts/mapHelper';
 import * as L from 'leaflet';
-import $ from "jquery";
+import * as $ from 'jquery';
 import PrintableMap from '../source/javascripts/mapHelper';
 import * as geoJson from 'geojson';
 
@@ -45,10 +46,16 @@ describe('Map contractor', () => {
 })
 
 describe('Load map', () => {
+  const dataUrl = "./data/data.umap";
   beforeEach(function() {
     document.body.innerHTML = '<div id="map"/>';
     // document.body.innerHTML = __html__["source/map.html.haml"] //@todo to be fixed. somehow this doesn’t work...
+    jasmine.Ajax.install();
+    jasmine.getFixtures().fixturesPath = 'base/spec/data/*';
   });
+  afterEach(function(){
+    jasmine.Ajax.uninstall();
+  })
   it ('initialize properties', function(){
     let map = new PrintableMap('localhost:4567', 'map');
     expect(map.host).toBe('localhost:4567');
@@ -170,7 +177,11 @@ describe('Load map', () => {
         before = before+1;
       }
     });
-    map.loadFile("./data/data.umap");
+    jasmine.Ajax.stubRequest(dataUrl).andReturn({
+      status:200,
+      responseText:""
+    })
+    map.loadFile(dataUrl);
     let after = 0;
     map.map.eachLayer(function(layer:L.Layer){
       if (layer.getPopup() != undefined){

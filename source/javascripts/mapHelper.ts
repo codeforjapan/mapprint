@@ -39,7 +39,7 @@ export default class PrintableMap implements IPrintableMap{
   constructor (public host:string, public divid :string){
     this.map = L.map(divid).setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
-      tileServerUrl(host, $('input[name=mapStyle]:checked').val()), {
+      tileServerUrl('mono', host ), {
         attribution: tileServerAttribution(host),
         maxZoom: 18
       }
@@ -83,7 +83,7 @@ export default class PrintableMap implements IPrintableMap{
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
       //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
       //console.log(date);
-      this.updated = new Date(jqXHR.getResponseHeader('date'));
+      this.updated = new Date(jqXHR.getResponseHeader('date')!);
       console.log(this.updated);
       //$('#datetime').html(date.toString());
       if (data.contentType == 'text/xml'){

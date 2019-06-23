@@ -10,15 +10,17 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['jasmine',  "karma-typescript"],
-
-
+    frameworks: ['jasmine-ajax', 'jasmine-jquery', 'jasmine', "karma-typescript"],
     // list of files / patterns to load in the browser
     files: [
       'source/javascripts/displayHelper.ts',
       'source/javascripts/mapHelper.ts',
       { pattern: 'spec/**/*.ts'},
-      { pattern: 'source/map.html.haml'}
+      { pattern: 'source/map.html.haml'},
+      { pattern: 'spec/data/*',
+        watched: true,
+        served:  true,
+        included: false}
     ],
 
 

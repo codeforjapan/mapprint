@@ -133,7 +133,7 @@ $(function(){
         addQRCodeLayer();
       }
       $('#date').text(() => {
-        const d = new Date();
+        let d = new Date();
         return DisplayHelper.getPrintDate(d);
       });
       $('#footer').append(

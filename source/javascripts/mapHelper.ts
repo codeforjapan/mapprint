@@ -19,6 +19,11 @@ export interface IPrintableMap {
   updated:Date;
   addMarker(feature:geoJson.Feature, category:Category): void;
 }
+export interface Legend {
+  color: string;
+  name: string;
+}
+
 /**
  * extend L.Layer to store category data
  */
@@ -31,6 +36,7 @@ export interface MyLayer extends L.Layer {
 export default class PrintableMap implements IPrintableMap{
   map:L.Map;
   updated:Date;
+  legends: Legend[] = [];
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -60,6 +66,11 @@ export default class PrintableMap implements IPrintableMap{
         layer.bindPopup(field);
       }
     }).addTo(this.map);
+    if (!this.legends.some((legend) =>{
+      return legend.name == category.name;
+    })){
+      this.legends.push({name:category.name, color:category.color!});
+    }
   }
   /**
    * load Json String based on umap file

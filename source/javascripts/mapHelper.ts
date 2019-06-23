@@ -30,7 +30,14 @@ export default class PrintableMap implements IPrintableMap{
     tileLayer.addTo( this.map );
   }
   addMarker(feature:geoJson.Feature, category:Category): void{
-
+    let geojson = L.geoJSON(feature, {
+      onEachFeature: function (feature, layer) {
+        var field = '名称: '+feature.properties.name+ '<br>'+
+        '詳細: '+feature.properties.description;
+        //layer.category = category;
+        layer.bindPopup(field);
+      }
+    }).addTo(this.map);
   }
 }
 

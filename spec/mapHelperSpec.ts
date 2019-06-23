@@ -1,5 +1,6 @@
 /// <reference path="./html2js.d.ts" />
 import * as mapHelper from '../source/javascripts/mapHelper';
+import * as L from 'leaflet';
 import $ from "jquery";
 import PrintableMap from '../source/javascripts/mapHelper';
 import * as geoJson from 'geojson';
@@ -85,14 +86,19 @@ describe('Load map', () => {
       "color": "DarkGreen",
       "iconUrl": "/uploads/pictogram/campsite-24-white.png"
     }
-
+    let before = 0;
+    map.map.eachLayer(function(layer:L.Layer){
+      if (layer.getPopup() != undefined){
+        before = before+1;
+      }
+    });
     map.addMarker(feature, category);
-    expect(function(){
-      let i = 0;
-      map.map.eachLayer(function(){
-        i = i+1;
-      });
-      return i;
-    }).toBe(1);
+    let after = 0;
+    map.map.eachLayer(function(layer:L.Layer){
+      if (layer.getPopup() != undefined){
+        after = after+1;
+      }
+    });
+    expect(after - before).toBe(1);
   })
 })

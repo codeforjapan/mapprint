@@ -135,8 +135,7 @@ describe('Load map', () => {
                 26.138343
               ]
             }
-          }
-        },
+          }],
         "_umap_options": {
           "displayOnLoad": true,
           "browsable": true,
@@ -146,15 +145,15 @@ describe('Load map', () => {
           "color": "Chocolate",
           "iconUrl": "/uploads/pictogram/parking-garage-24_1.png"
         }
-      }
-    ]}`
+      }]
+    }`
     let before = 0;
     map.map.eachLayer(function(layer:L.Layer){
       if (layer.getPopup() != undefined){
         before = before+1;
       }
     });
-    map.loadJsonData(json);
+    map.loadUmapJsonData(json);
     let after = 0;
     map.map.eachLayer(function(layer:L.Layer){
       if (layer.getPopup() != undefined){

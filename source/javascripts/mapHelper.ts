@@ -59,6 +59,20 @@ export default class PrintableMap implements IPrintableMap{
       }
     }).addTo(this.map);
   }
+  /**
+   * load Json String based on umap file
+   * @param umapJsonData umap style geojson string
+   */
+  loadUmapJsonData(umapJsonData:string){
+    var data = JSON.parse(umapJsonData);
+    data.layers.forEach( (layer) => {
+      let category:Category = layer._umap_options
+      layer.features.forEach((feature:geoJson.Feature) => {
+        this.addMarker(feature, category);
+      });
+    });
+  }
+
 }
 
 export function tileServerAttribution(host:string):string{

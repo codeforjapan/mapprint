@@ -52,7 +52,6 @@ export default class PrintableMap implements IPrintableMap{
    * @param category Category of the feacures
    */
   addMarker(feature:geoJson.Feature, category:Category): void{
-    console.log('addMarker:' + feature);
     let geojson = L.geoJSON(feature, {
       onEachFeature: function (feature, layer:MyLayer) {
         var field = '名称: '+feature.properties.name+ '<br>'+

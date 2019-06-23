@@ -16,6 +16,7 @@ export interface Category {
 }
 export interface IPrintableMap {
   map:L.Map;
+  updated:Date;
   addMarker(feature:geoJson.Feature, category:Category): void;
 }
 /**
@@ -29,6 +30,7 @@ export interface MyLayer extends L.Layer {
  */
 export default class PrintableMap implements IPrintableMap{
   map:L.Map;
+  updated:Date;
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -63,7 +65,7 @@ export default class PrintableMap implements IPrintableMap{
    * load Json String based on umap file
    * @param umapJsonData umap style geojson string
    */
-  loadUmapJsonData(umapJsonData:string){
+  loadUmapJsonData(umapJsonData:string):void{
     var data = JSON.parse(umapJsonData);
     data.layers.forEach( (layer) => {
       let category:Category = layer._umap_options
@@ -72,7 +74,29 @@ export default class PrintableMap implements IPrintableMap{
       });
     });
   }
-
+  /**
+   * Load file and add markers
+   * @param path file path
+   */
+  loadFile(path:string):void{
+    $.ajax('./images/data.umap').then((data, textStatus, jqXHR)=> {
+      // データの最終更新日を表示（ローカルでは常に現在時刻となる）
+      //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+      //console.log(date);
+      this.updated = new Date(jqXHR.getResponseHeader('date'));
+      console.log(this.updated);
+      //$('#datetime').html(date.toString());
+      if (data.contentType == 'text/xml'){
+        //loadKMLData(data, map);
+      }else{ // it must be json data
+        this.loadUmapJsonData(data);
+      }
+      //showLegend(map);
+    }).catch((jqXHR, textStatus, errorThrown) => {
+      console.log('error:' + errorThrown);
+      throw new Error(errorThrown);
+    });
+  }
 }
 
 export function tileServerAttribution(host:string):string{

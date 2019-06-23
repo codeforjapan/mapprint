@@ -16,9 +16,24 @@ export interface Category {
 }
 export interface IPrintableMap {
   map:L.Map;
+  addMarker(feature:geoJson.Feature, category:Category): void;
 }
+/**
+ * extend L.Layer to store category data
+ */
+export interface myLayer extends L.Layer {
+  category:Category;
+}
+/**
+ * main class of PrintableMap
+ */
 export default class PrintableMap implements IPrintableMap{
   map:L.Map;
+  /**
+   * constructor
+   * @param host host string of application, like codeforjapan.github.io
+   * @param divid div id of a map container.
+   */
   constructor (public host:string, public divid :string){
     this.map = L.map(divid).setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
@@ -29,12 +44,17 @@ export default class PrintableMap implements IPrintableMap{
     );
     tileLayer.addTo( this.map );
   }
+  /**
+   *
+   * @param feature Feature object based on GeoJson
+   * @param category Category of the feacures
+   */
   addMarker(feature:geoJson.Feature, category:Category): void{
     let geojson = L.geoJSON(feature, {
-      onEachFeature: function (feature, layer) {
+      onEachFeature: function (feature, layer:myLayer) {
         var field = '名称: '+feature.properties.name+ '<br>'+
         '詳細: '+feature.properties.description;
-        //layer.category = category;
+        layer.category = category;
         layer.bindPopup(field);
       }
     }).addTo(this.map);

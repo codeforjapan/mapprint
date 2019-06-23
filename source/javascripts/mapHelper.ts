@@ -1,9 +1,22 @@
+/// <reference path="../../node_modules/@types/leaflet/index.d.ts" />
+/// <reference path="../../node_modules/@types/geojson/index.d.ts" />
 import * as L from 'leaflet';
 import * as $ from 'jquery';
+
+import * as geoJson from 'geojson';
+
+export interface Category {
+  displayOnLoad?: boolean,
+  browsable?: boolean,
+  remoteData?: {},
+  name: string,
+  id?: number,
+  color?: string,
+  iconUrl?: string
+}
 export interface IPrintableMap {
   map:L.Map;
 }
-
 export default class PrintableMap implements IPrintableMap{
   map:L.Map;
   constructor (public host:string, public divid :string){
@@ -15,6 +28,9 @@ export default class PrintableMap implements IPrintableMap{
       }
     );
     tileLayer.addTo( this.map );
+  }
+  addMarker(feature:geoJson.Feature, category:Category): void{
+
   }
 }
 

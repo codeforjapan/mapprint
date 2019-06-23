@@ -10,9 +10,13 @@ var QRCode = require('qrcode')
 require('./leaflet_awesome_number_markers').default();
 import * as DisplayHelper from './displayHelper';
 import * as MapHelper from './mapHelper';
+interface Marker extends L.Marker{
+  category:{
+    name:string,
+    color:string
+  }
+}
 var _ = require('lodash');
-
-import Marker from 'leaflet';
 
 // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
 // 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
@@ -193,8 +197,8 @@ $(function(){
             //that._list.appendChild( that._createItem(layer) );
           });
           var res = targets.sort(function(a,b){
-              var _a = a.feature.properties.name;
-              var _b = b.feature.properties.name;
+              var _a = a.feature ? a.feature.properties.name : null;
+              var _b = b.feature ? b.feature.properties.name : null;
               var _a2 = a.category.name;
               var _b2 = b.category.name;
               if(_a2 > _b2){
@@ -209,7 +213,7 @@ $(function(){
           var categoryIndex = 0;
           res.forEach(function(layer,index){
               // get name
-              var name = layer.feature.properties.name;
+              var name = layer.feature ? layer.feature.properties.name : "";
               // get category and marker type
               var category = layer.category;
               var marker = category.color;

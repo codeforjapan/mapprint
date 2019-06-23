@@ -1,7 +1,8 @@
 /// <reference path="./html2js.d.ts" />
-import mapHelper = require('../source/javascripts/mapHelper');
+import * as mapHelper from '../source/javascripts/mapHelper';
 import $ from "jquery";
 import PrintableMap from '../source/javascripts/mapHelper';
+import * as geoJson from 'geojson';
 
 const SITE_URL = 'codeforjapan.github.io';
 const MIERUNE_KEY = 'KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC';
@@ -63,4 +64,35 @@ describe('Load map', () => {
     expect($("#map").hasClass("leaflet-container")).toBe(true);
     expect($("#map").text()).toMatch(/.*MIERUNE.*/);
   });
+  it ('add Marker', function() {
+    let map = new PrintableMap("localhost:4567", "map");
+    let feature:geoJson.Feature = {
+      "type": "Feature",
+      "properties": {
+        "name": "おんなの駅なかゆくい市場"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          127.794567,
+          26.436041
+        ]
+      }
+    };
+    let category:mapHelper.Category = {
+      "name": "キャンプ場",
+      "id": 895288,
+      "color": "DarkGreen",
+      "iconUrl": "/uploads/pictogram/campsite-24-white.png"
+    }
+
+    map.addMarker(feature, category);
+    expect(function(){
+      let i = 0;
+      map.map.eachLayer(function(){
+        i = i+1;
+      });
+      return i;
+    }).toBe(1);
+  })
 })

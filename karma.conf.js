@@ -26,6 +26,10 @@ module.exports = function(config) {
     exclude: [
     ],
 
+    include: [
+      "./node_modules/geojson/**/*",
+    ],
+
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor

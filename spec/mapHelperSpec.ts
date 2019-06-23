@@ -188,11 +188,13 @@ describe('Load map', () => {
       })
       map = new PrintableMap("localhost:4567", "map");
       mapSpy = spyOn(map, "addMarker");
+      spyOn(map, "showLegend").and.callThrough().and.callFake(() =>{
+        expect(mapSpy.calls.count()).toBe(39);
+        expect($("#map .legend-type").length).toBe(3);
+      });
       map.loadFile(dataUrl);
       // it should add 39 markers. Needed to check after adding all markers.
-      spyOn(map, "showLegend").and.callFake(() =>{
-        expect(mapSpy.calls.count()).toBe(39);
-      })
+
     })
   });
 })

@@ -162,4 +162,22 @@ describe('Load map', () => {
     });
     expect(after - before).toBe(2);
   })
+  it ("load umapfile", function(){
+    let map = new PrintableMap("localhost:4567", "map");
+    let before = 0;
+    map.map.eachLayer(function(layer:L.Layer){
+      if (layer.getPopup() != undefined){
+        before = before+1;
+      }
+    });
+    map.loadFile("./data/data.umap");
+    let after = 0;
+    map.map.eachLayer(function(layer:L.Layer){
+      if (layer.getPopup() != undefined){
+        after = after+1;
+      }
+    });
+    expect(after - before).toBe(39);
+  })
+
 })

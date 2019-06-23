@@ -21,7 +21,7 @@ export interface IPrintableMap {
 /**
  * extend L.Layer to store category data
  */
-export interface myLayer extends L.Layer {
+export interface MyLayer extends L.Layer {
   category:Category;
 }
 /**
@@ -51,7 +51,7 @@ export default class PrintableMap implements IPrintableMap{
    */
   addMarker(feature:geoJson.Feature, category:Category): void{
     let geojson = L.geoJSON(feature, {
-      onEachFeature: function (feature, layer:myLayer) {
+      onEachFeature: function (feature, layer:MyLayer) {
         var field = '名称: '+feature.properties.name+ '<br>'+
         '詳細: '+feature.properties.description;
         layer.category = category;

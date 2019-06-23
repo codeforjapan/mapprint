@@ -94,11 +94,73 @@ describe('Load map', () => {
     });
     map.addMarker(feature, category);
     let after = 0;
+    map.map.eachLayer(function(layer:mapHelper.MyLayer){
+      if (layer.getPopup() != undefined){
+        after = after+1;
+        expect(layer.category).toEqual(category);
+      }
+    });
+    expect(after - before).toBe(1);
+  })
+  it ("load Jsondata", function(){
+    let map = new PrintableMap("localhost:4567", "map");
+    const json = `
+    {
+    "layers": [
+      {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "おんなの駅なかゆくい市場"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                127.794567,
+                26.436041
+              ]
+            }
+          },
+          {
+            "type": "Feature",
+            "properties": {
+              "name": "道の駅いとまん"
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                127.661541,
+                26.138343
+              ]
+            }
+          }
+        },
+        "_umap_options": {
+          "displayOnLoad": true,
+          "browsable": true,
+          "remoteData": {},
+          "name": "道の駅",
+          "id": 895298,
+          "color": "Chocolate",
+          "iconUrl": "/uploads/pictogram/parking-garage-24_1.png"
+        }
+      }
+    ]}`
+    let before = 0;
+    map.map.eachLayer(function(layer:L.Layer){
+      if (layer.getPopup() != undefined){
+        before = before+1;
+      }
+    });
+    map.loadJsonData(json);
+    let after = 0;
     map.map.eachLayer(function(layer:L.Layer){
       if (layer.getPopup() != undefined){
         after = after+1;
       }
     });
-    expect(after - before).toBe(1);
+    expect(after - before).toBe(2);
   })
 })

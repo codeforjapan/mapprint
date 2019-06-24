@@ -197,7 +197,7 @@ describe('Load map', () => {
     });
     it ("fit bounds", function() {
       map = new PrintableMap("localhost:4567", "map");
-      let geojson = L.geoJSON(JSON.parse(umapdata));
+      let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds");
       map.loadUmapJsonData(umapdata);
       expect(fitBoundsFunc).toHaveBeenCalledWith(geojson.getBounds());

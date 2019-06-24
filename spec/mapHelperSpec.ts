@@ -188,18 +188,21 @@ describe('Load map', () => {
       })
       map = new PrintableMap("localhost:4567", "map");
       mapSpy = spyOn(map, "addMarker");
+      let fitBoundsFunc = spyOn(map.map, "fitBounds");
       spyOn(map, "showLegend").and.callThrough().and.callFake(() =>{
         // it should add 39 markers. Needed to check after adding all markers.
         expect(mapSpy.calls.count()).toBe(39);
         expect($("#map .legend-type").length).toBe(3);
+        expect(fitBoundsFunc).toHaveBeenCalled();
       });
       map.loadFile(dataUrl);
     });
     it ("fit bounds", function() {
       map = new PrintableMap("localhost:4567", "map");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
-      let fitBoundsFunc = spyOn(map.map, "fitBounds");
+      let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
       map.loadUmapJsonData(umapdata);
+      map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(geojson.getBounds());
     });
   });

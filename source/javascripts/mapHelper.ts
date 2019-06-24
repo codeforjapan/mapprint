@@ -34,9 +34,10 @@ export interface MyLayer extends L.Layer {
  * main class of PrintableMap
  */
 export default class PrintableMap implements IPrintableMap{
-  map:L.Map;
-  updated:Date;
-  legends: Legend[] = [];
+  map:L.Map;   //map object
+  updated:Date;  // last updated
+  legends: Legend[] = [];  // legends data
+  layers: L.GeoJSON;   // layers of markers
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -78,6 +79,7 @@ export default class PrintableMap implements IPrintableMap{
    */
   loadUmapJsonData(umapJsonData:string):void{
     var data = JSON.parse(umapJsonData);
+    this.layers = L.geoJSON(data.layers);
     data.layers.forEach( (layer) => {
       let category:Category = layer._umap_options
       layer.features.forEach((feature:geoJson.Feature) => {
@@ -103,11 +105,15 @@ export default class PrintableMap implements IPrintableMap{
         this.loadUmapJsonData(data);
       }
       this.showLegend();
+      this.fitBounds();
     }).catch((jqXHR, textStatus, errorThrown) => {
       console.log('error:' + errorThrown);
       throw new Error(errorThrown);
     });
   }
+  /**
+   * show legends data
+   */
   showLegend():void{
     var legend = new L.Control({position: 'bottomright'});
     legend.onAdd = () => {
@@ -123,6 +129,12 @@ export default class PrintableMap implements IPrintableMap{
       return div;
     };
     this.map.addControl(legend);
+  }
+  /**
+   * fit bounds to layers
+   */
+  fitBounds():void {
+    this.map.fitBounds(this.layers.getBounds());
   }
 }
 

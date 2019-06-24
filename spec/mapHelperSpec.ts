@@ -205,5 +205,14 @@ describe('Load map', () => {
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(geojson.getBounds());
     });
+    it ("set initial bounds of URL parameters" , function() {
+      map = new PrintableMap("localhost:4567", "map");
+      spyOn(map, "getLocationHash").and.returnValue("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003");
+      let geojson = L.geoJSON(JSON.parse(umapdata).layers);
+      let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
+      map.loadUmapJsonData(umapdata);
+      map.fitBounds();
+      expect(fitBoundsFunc).toHaveBeenCalledWith(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
+    });
   });
 })

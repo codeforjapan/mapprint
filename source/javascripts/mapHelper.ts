@@ -134,7 +134,15 @@ export default class PrintableMap implements IPrintableMap{
    * fit bounds to layers
    */
   fitBounds():void {
-    this.map.fitBounds(this.layers.getBounds());
+    try {
+      var bounds = deserializeBounds(this.getLocationHash());
+      this.map.fitBounds(bounds);
+    } catch(e) {
+      this.map.fitBounds(this.layers.getBounds());
+    }
+  }
+  getLocationHash():string{
+    return window.location.hash.substr(1);
   }
 }
 
@@ -160,4 +168,10 @@ export function tileServerUrl(mapStyle:string, host:string):string{
   return ( host === 'codeforjapan.github.io' ) ?
   'https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC' :
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+}
+export function deserializeLatLng(s) {
+  return L.latLng(s.split(',', 2).map(function(d) {return +d;}));
+}
+export function deserializeBounds(s) {
+  return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
 }

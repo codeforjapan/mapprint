@@ -164,7 +164,7 @@ describe('Load map', () => {
     });
     expect(after - before).toBe(2);
   })
-  describe('load file', function() {
+  describe('from umap file', function() {
     let umapdata:string;
     let map:PrintableMap;
     let mapSpy;
@@ -175,12 +175,12 @@ describe('Load map', () => {
       umapdata = readFixtures('data.umap')
       document.body.innerHTML = '<div id="map"/>';
       jasmine.Ajax.install();
-      map = new PrintableMap("localhost:4567", "map");
     });
     afterEach(function(){
       jasmine.Ajax.uninstall();
     })
-    it ("load umapfile", function(){
+    it ("loads umapfile", function(){
+      map = new PrintableMap("localhost:4567", "map");
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
         contentType:"application/octet-stream",
@@ -197,14 +197,16 @@ describe('Load map', () => {
       });
       map.loadFile(dataUrl);
     });
-    it ("fit bounds", function() {
+    it ("fits bounds to all loaded points ", function() {
+      map = new PrintableMap("localhost:4567", "map");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
       map.loadUmapJsonData(umapdata);
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(geojson.getBounds());
     });
-    it ("set initial bounds of URL parameters" , function() {
+    it ("sets initial bounds from URL parameters" , function() {
+      map = new PrintableMap("localhost:4567", "map");
       spyOn(map, "getLocationHash").and.returnValue("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
@@ -212,7 +214,8 @@ describe('Load map', () => {
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
     });
-    it ("move map to get targets", function() {
+    it ("get targets in specified bounds", function() {
+      map = new PrintableMap("localhost:4567", "map");
       map.loadUmapJsonData(umapdata);
       map.fitBounds();
       map.map.panInsideBounds(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));

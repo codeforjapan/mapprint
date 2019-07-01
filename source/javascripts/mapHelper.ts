@@ -1,12 +1,11 @@
 /// <reference path="../../node_modules/@types/leaflet/index.d.ts" />
 /// <reference path="../../node_modules/@types/geojson/index.d.ts" />
 /// <reference path="../@types/leaflet_awesome_number_markers.d.ts" />
-declare function require(path: string): any;
 
 import * as L from 'leaflet';
 import * as $ from 'jquery';
 import * as geoJson from 'geojson';
-const leaflet_awesome_number_markers = require('./leaflet_awesome_number_markers');
+import * as leaflet_awesome_number_markers from './leaflet_awesome_number_markers';
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -20,6 +19,7 @@ export interface Category {
 export interface IPrintableMap {
   map:L.Map;
   updated:Date;
+  targets: L.Marker[];
   addMarker(feature:geoJson.Feature, category:Category): void;
 }
 export interface Legend {
@@ -66,10 +66,10 @@ export default class PrintableMap implements IPrintableMap{
       this.eachLayer((layer:any) => {
           if(layer instanceof L.Marker) {
               if( this.getBounds().contains(layer.getLatLng()) ) {
-                  if (layer.feature === undefined) {
+                if (layer.feature === undefined) {
                       return false;
                   } else {
-                      var name = layer.feature.properties.name;
+                    var name = layer.feature.properties.name;
                       if (name !== undefined) {
                           this.targets.push(layer);
                       }
@@ -77,6 +77,7 @@ export default class PrintableMap implements IPrintableMap{
               }
           }
       });
+      console.log('target number is '  + this.targets.length );
       //sort targets
       var res = this.targets.sort(function(a,b){
           var _a = a.feature ? a.feature.properties.name : null;

@@ -15,6 +15,7 @@ module.exports = function(config) {
     files: [
       'source/javascripts/displayHelper.ts',
       'source/javascripts/mapHelper.ts',
+      'source/javascripts/leaflet_awesome_number_markers.ts',
       { pattern: 'spec/**/*.ts'},
       { pattern: 'source/map.html.haml'},
       { pattern: 'spec/fixtures/**',

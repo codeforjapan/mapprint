@@ -214,12 +214,32 @@ describe('Load map', () => {
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
     });
+  });
+  describe('to check event ', function() {
+    let umapdata:string;
+    let map:PrintableMap;
+    let mapSpy;
+    const testDate = new Date();
+    beforeEach(function() {
+      // read test data
+      jasmine.getFixtures().fixturesPath = 'base/spec/fixtures/';
+      umapdata = readFixtures('data.umap')
+      document.body.innerHTML = '<div id="map"/>';
+      jasmine.Ajax.install();
+    });
+    afterEach(function(){
+      jasmine.Ajax.uninstall();
+    })
     it ("get targets in specified bounds", function() {
-      map = new PrintableMap("localhost:4567", "map");
+      var listener:mapHelper.IPrintableMapListener = {
+        POIFiltered(targets) {
+          console.log("filtered!!!");
+        }
+      }
+      map = new PrintableMap("localhost:4567", "map", listener);
       map.loadUmapJsonData(umapdata);
-      map.fitBounds();
       map.map.panInsideBounds(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
-      expect(map.targets.length).toBe(6);
+
     });
   });
 })

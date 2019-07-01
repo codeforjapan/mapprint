@@ -19,8 +19,10 @@ export interface Category {
 export interface IPrintableMap {
   map:L.Map;
   updated:Date;
-  targets: L.Marker[];
   addMarker(feature:geoJson.Feature, category:Category): void;
+}
+export interface IPrintableMapListener {
+  POIFiltered(targets:L.Marker[]):void;
 }
 export interface Legend {
   color: string;
@@ -41,13 +43,13 @@ export default class PrintableMap implements IPrintableMap{
   updated:Date;  // last updated
   legends: Legend[] = [];  // legends data
   layers: L.GeoJSON;   // layers of markers
-  targets: L.Marker[];
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
    * @param divid div id of a map container.
+   * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
-  constructor (public host:string, public divid :string){
+  constructor (public host:string, public divid :string, public listener?: IPrintableMapListener){
     leaflet_awesome_number_markers.default();
     this.map = L.map(divid).setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
@@ -56,6 +58,7 @@ export default class PrintableMap implements IPrintableMap{
         maxZoom: 18
       }
     );
+    var that = this;
     this.map.on("moveend", function(){
       this.targets = [];
       let bounds = this.getBounds();
@@ -77,7 +80,6 @@ export default class PrintableMap implements IPrintableMap{
               }
           }
       });
-      console.log('target number is '  + this.targets.length );
       //sort targets
       var res = this.targets.sort(function(a,b){
           var _a = a.feature ? a.feature.properties.name : null;
@@ -99,6 +101,10 @@ export default class PrintableMap implements IPrintableMap{
           markerColor: category.color.toLowerCase()
         }));
       });
+      if (that.listener !== undefined){
+        console.log('call listener function')
+        that.listener.POIFiltered(res);
+      }
     });
     tileLayer.addTo( this.map );
   }

@@ -1,9 +1,12 @@
 /// <reference path="../../node_modules/@types/leaflet/index.d.ts" />
 /// <reference path="../../node_modules/@types/geojson/index.d.ts" />
+/// <reference path="../@types/leaflet_awesome_number_markers.d.ts" />
+declare function require(path: string): any;
+
 import * as L from 'leaflet';
 import * as $ from 'jquery';
-
 import * as geoJson from 'geojson';
+const leaflet_awesome_number_markers = require('./leaflet_awesome_number_markers');
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -38,12 +41,14 @@ export default class PrintableMap implements IPrintableMap{
   updated:Date;  // last updated
   legends: Legend[] = [];  // legends data
   layers: L.GeoJSON;   // layers of markers
+  targets: L.Marker[];
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
    * @param divid div id of a map container.
    */
   constructor (public host:string, public divid :string){
+    leaflet_awesome_number_markers.default();
     this.map = L.map(divid).setView([41.3921, 2.1705], 13);
     var tileLayer = L.tileLayer(
       tileServerUrl('mono', host ), {
@@ -51,6 +56,49 @@ export default class PrintableMap implements IPrintableMap{
         maxZoom: 18
       }
     );
+    this.map.on("moveend", function(){
+      this.targets = [];
+      let bounds = this.getBounds();
+      let s = serializeBounds(bounds);
+      let path = location.pathname;
+      window.history.pushState('', '', path + '#' + s);
+      //$('#list').html('<table>');
+      this.eachLayer((layer:any) => {
+          if(layer instanceof L.Marker) {
+              if( this.getBounds().contains(layer.getLatLng()) ) {
+                  if (layer.feature === undefined) {
+                      return false;
+                  } else {
+                      var name = layer.feature.properties.name;
+                      if (name !== undefined) {
+                          this.targets.push(layer);
+                      }
+                  }
+              }
+          }
+      });
+      //sort targets
+      var res = this.targets.sort(function(a,b){
+          var _a = a.feature ? a.feature.properties.name : null;
+          var _b = b.feature ? b.feature.properties.name : null;
+          var _a2 = a.category.name;
+          var _b2 = b.category.name;
+          if(_a2 > _b2){
+              return -1;
+          }else if(_a2 < _b2){
+              return 1;
+          }
+          return 0;
+      });
+      res.forEach(function(layer,index){
+        var category = layer.category;
+        // add markers to map
+        layer.setIcon(new L.AwesomeNumberMarkers({
+          number: index + 1,
+          markerColor: category.color.toLowerCase()
+        }));
+      });
+    });
     tileLayer.addTo( this.map );
   }
   /**
@@ -168,6 +216,13 @@ export function tileServerUrl(mapStyle:string, host:string):string{
   return ( host === 'codeforjapan.github.io' ) ?
   'https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC' :
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+}
+function serializeLatLng(latLng) {
+  return '' + latLng.lat + ',' + latLng.lng;
+}
+function serializeBounds(bounds) {
+  return serializeLatLng(bounds.getNorthWest()) + '-' +
+      serializeLatLng(bounds.getSouthEast());
 }
 export function deserializeLatLng(s) {
   return L.latLng(s.split(',', 2).map(function(d) {return +d;}));

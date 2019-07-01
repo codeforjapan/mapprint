@@ -7,7 +7,7 @@
 
 /*global L*/
 
-declare var L: any; 
+declare var L: any ;
 
 export default function (){
   "use strict";

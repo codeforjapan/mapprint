@@ -20,7 +20,7 @@
   },
   "include": [
     "./source/javascripts/**/*.ts",
-    "./spec/**/*Spec.ts"
+    "./spec/**/*Spec.ts", "source/@types/leaflet_awesome_number_markers.d.ts"
   ],
   "exclude": [
     "node_modules",

@@ -175,6 +175,7 @@ describe('Load map', () => {
       umapdata = readFixtures('data.umap')
       document.body.innerHTML = '<div id="map"/>';
       jasmine.Ajax.install();
+      map = new PrintableMap("localhost:4567", "map");
     });
     afterEach(function(){
       jasmine.Ajax.uninstall();
@@ -186,7 +187,6 @@ describe('Load map', () => {
         responseHeaders: {"date":testDate.toString()},
         responseText:umapdata
       })
-      map = new PrintableMap("localhost:4567", "map");
       mapSpy = spyOn(map, "addMarker");
       let fitBoundsFunc = spyOn(map.map, "fitBounds");
       spyOn(map, "showLegend").and.callThrough().and.callFake(() =>{
@@ -198,7 +198,6 @@ describe('Load map', () => {
       map.loadFile(dataUrl);
     });
     it ("fit bounds", function() {
-      map = new PrintableMap("localhost:4567", "map");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
       map.loadUmapJsonData(umapdata);
@@ -206,13 +205,18 @@ describe('Load map', () => {
       expect(fitBoundsFunc).toHaveBeenCalledWith(geojson.getBounds());
     });
     it ("set initial bounds of URL parameters" , function() {
-      map = new PrintableMap("localhost:4567", "map");
       spyOn(map, "getLocationHash").and.returnValue("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
       map.loadUmapJsonData(umapdata);
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
+    });
+    it ("move map to get targets", function() {
+      map.loadUmapJsonData(umapdata);
+      map.fitBounds();
+      map.map.panInsideBounds(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
+      expect(map.targets.length).toBe(6);
     });
   });
 })

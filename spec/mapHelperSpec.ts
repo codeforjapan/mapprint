@@ -63,7 +63,6 @@ describe('Load map', () => {
   });
   it ('load map class using Mierune Map', function() {
     let map = new PrintableMap(SITE_URL, "map");
-    console.log($("#map").text())
     expect($("#map").hasClass("leaflet-container")).toBe(true);
     expect($("#map").text()).toMatch(/.*MIERUNE.*/);
   });
@@ -199,6 +198,7 @@ describe('Load map', () => {
     });
     it ("fits bounds to all loaded points ", function() {
       map = new PrintableMap("localhost:4567", "map");
+      spyOn(map, "getLocationHash").and.returnValue("");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
       map.loadUmapJsonData(umapdata);
@@ -234,6 +234,7 @@ describe('Load map', () => {
       var listener:mapHelper.IPrintableMapListener = {
         POIFiltered(targets) {
           console.log("filtered!!!");
+          console.log(targets.length);
         }
       }
       map = new PrintableMap("localhost:4567", "map", listener);

@@ -215,6 +215,40 @@ describe('Load map', () => {
       expect(fitBoundsFunc).toHaveBeenCalledWith(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
     });
   });
+  describe('from KML file', function() {
+    let kmldata:string;
+    let map:PrintableMap;
+    let mapSpy;
+    const testDate = new Date();
+    beforeEach(function() {
+      // read test data
+      jasmine.getFixtures().fixturesPath = 'base/spec/fixtures/';
+      kmldata = readFixtures('data.kml')
+      document.body.innerHTML = '<div id="map"/>';
+      jasmine.Ajax.install();
+    });
+    afterEach(function(){
+      jasmine.Ajax.uninstall();
+    })
+    it ("loads KML file", function(){
+      map = new PrintableMap("localhost:4567", "map");
+      jasmine.Ajax.stubRequest(dataUrl).andReturn({
+        status:200,
+        contentType:"application/octet-stream",
+        responseHeaders: {"date":testDate.toString()},
+        responseText:kmldata
+      })
+      mapSpy = spyOn(map, "addMarker");
+      let fitBoundsFunc = spyOn(map.map, "fitBounds");
+      spyOn(map, "showLegend").and.callThrough().and.callFake(() =>{
+        // it should add 39 markers. Needed to check after adding all markers.
+        expect(mapSpy.calls.count()).toBe(389);
+        expect($("#map .legend-type").length).toBe(8);
+        expect(fitBoundsFunc).toHaveBeenCalled();
+      });
+      map.loadFile(dataUrl);
+    });
+  });
   describe('to check event ', function() {
     let umapdata:string;
     let map:PrintableMap;

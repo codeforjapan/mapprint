@@ -233,14 +233,12 @@ describe('Load map', () => {
     it ("get targets in specified bounds", function() {
       var listener:mapHelper.IPrintableMapListener = {
         POIFiltered(targets) {
-          console.log("filtered!!!");
-          console.log(targets.length);
+          expect(targets.length).toBe(8);
         }
       }
       map = new PrintableMap("localhost:4567", "map", listener);
       map.loadUmapJsonData(umapdata);
-      map.map.panInsideBounds(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
-
+      map.map.fitBounds(mapHelper.deserializeBounds("26.67781931519818,127.9319886425601-26.515420330689124,128.20458690916166"));
     });
   });
 })

@@ -67,18 +67,18 @@ export default class PrintableMap implements IPrintableMap{
       window.history.pushState('', '', path + '#' + s);
       //$('#list').html('<table>');
       this.eachLayer((layer:any) => {
-          if(layer instanceof L.Marker) {
-              if( this.getBounds().contains(layer.getLatLng()) ) {
-                if (layer.feature === undefined) {
-                      return false;
-                  } else {
-                    var name = layer.feature.properties.name;
-                      if (name !== undefined) {
-                          this.targets.push(layer);
-                      }
-                  }
+        if(layer instanceof L.Marker) {
+          if( this.getBounds().contains(layer.getLatLng()) ) {
+            if (layer.feature === undefined) {
+              return false;
+            } else {
+              var name = layer.feature.properties.name;
+              if (name !== undefined) {
+                this.targets.push(layer);
               }
+            }
           }
+        }
       });
       //sort targets
       var res = this.targets.sort(function(a,b){
@@ -101,8 +101,8 @@ export default class PrintableMap implements IPrintableMap{
           markerColor: category.color.toLowerCase()
         }));
       });
+      // call listener function if an instance is specified.
       if (that.listener !== undefined){
-        console.log('call listener function')
         that.listener.POIFiltered(res);
       }
     });
@@ -190,6 +190,7 @@ export default class PrintableMap implements IPrintableMap{
    */
   fitBounds():void {
     try {
+      const boundsstr = this.getLocationHash();
       var bounds = deserializeBounds(this.getLocationHash());
       this.map.fitBounds(bounds);
     } catch(e) {

@@ -165,9 +165,6 @@ describe('Load map', () => {
   })
   describe('from umap file', function() {
     let umapdata:string;
-    let map:PrintableMap;
-    let mapSpy:jasmine.Spy;
-    let fitBoundsFunc:jasmine.Spy;
     const testDate = new Date();
     beforeEach(function() {
       // read test data
@@ -180,21 +177,19 @@ describe('Load map', () => {
       jasmine.Ajax.uninstall();
     })
     it ("loads umapfile", function(done){
-      map = new PrintableMap("localhost:4567", "map");
+      let map = new PrintableMap("localhost:4567", "map");
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
         contentType:"application/octet-stream",
         responseHeaders: {"date":testDate.toString()},
         responseText:umapdata
       })
-      mapSpy = spyOn(map, "addMarker");
-      fitBoundsFunc = spyOn(map.map, "fitBounds");
+      let mapSpy = spyOn(map, "addMarker");
       spyOn(map, 'fitBounds').and.callFake(()=>{
-        // it should add 39 markers. Needed to check after adding all markers.
+        // it should add 33 markers. Needed to check after adding all markers.
         expect(mapSpy.calls.count()).toBe(33);
-        expect(fitBoundsFunc).toHaveBeenCalled();
         done();
-      }).and.callThrough();
+      });
       map.loadFile(dataUrl);
     });
   });

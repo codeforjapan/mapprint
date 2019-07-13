@@ -177,7 +177,7 @@ describe('Load map', () => {
     afterEach(function(){
       jasmine.Ajax.uninstall();
     })
-    it ("loads umapfile", function(done){
+    it ("loads umapdata", function(done){
       let map = new PrintableMap("localhost:4567", "map");
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
@@ -259,72 +259,79 @@ describe('Load map', () => {
       });
       map.loadFile(kmlUrl);
     });
-    it ('build Category object from KML file', function(done){
-      let testdata = `
-      <?xml version="1.0" encoding="UTF-8"?>
+  });
+});
+describe('XML function ', () => {
+  beforeEach(function() {
+    document.body.innerHTML = '<div id="map"/>';
+    // document.body.innerHTML = __html__["source/map.html.haml"] //@todo to be fixed. somehow this doesn’t work...
+  });
+  it ('build Category object from KML file', function(){
+    let testdata = `<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
-  <Document>
-    <name>給水所/お風呂/洗濯/トイレ マップ</name>
-    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 給水について<br>7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
-    <Style id="icon-1899-DB4436-normal">
-      <IconStyle>
-        <color>ff3644db</color>
-        <scale>1</scale>
-        <Icon>
-          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>0</scale>
-      </LabelStyle>
-    </Style>
-    <Style id="icon-1899-DB4436-highlight">
-      <IconStyle>
-        <color>ff3644db</color>
-        <scale>1</scale>
-        <Icon>
-          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
-        </Icon>
-        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
-      </IconStyle>
-      <LabelStyle>
-        <scale>1</scale>
-      </LabelStyle>
-    </Style>
-    <StyleMap id="icon-1899-DB4436">
-      <Pair>
-        <key>normal</key>
-        <styleUrl>#icon-1899-DB4436-normal</styleUrl>
-      </Pair>
-      <Pair>
-        <key>highlight</key>
-        <styleUrl>#icon-1899-DB4436-highlight</styleUrl>
-      </Pair>
-    </StyleMap>
-    <Folder>
-      <name>お風呂</name>
-      <Placemark>
-        <name>風呂｜天然温泉 尾道みなと館（6:00-9:30、12:00-24:00）</name>
-        <description><![CDATA[日帰り温泉の営業<br>http://onomichi-minatokan.com/index.html<br>連絡先：0848-20-8222<br><br>営業時間：6:00~9:30、12:00~24:00 (受付は23:00まで)<br><br>タオルをお持ちください。 施設には駐車場はありません。 おむつの取れていない乳幼児のご利 用はお断りすることがあります。]]></description>
-        <styleUrl>#icon-1899-DB4436</styleUrl>
-        <Point>
-          <coordinates>
-            133.2038963,34.4109999,0
-          </coordinates>
-        </Point>
-      </Placemark>
-    </Folder>
-  </Document>
+<Document>
+  <name>給水所/お風呂/洗濯/トイレ マップ</name>
+  <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 給水について<br>7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
+  <Style id="icon-1899-DB4436-normal">
+    <IconStyle>
+      <color>ff3644db</color>
+      <scale>1</scale>
+      <Icon>
+        <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+      </Icon>
+      <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+    </IconStyle>
+    <LabelStyle>
+      <scale>0</scale>
+    </LabelStyle>
+  </Style>
+  <Style id="icon-1899-DB4436-highlight">
+    <IconStyle>
+      <color>ff3644db</color>
+      <scale>1</scale>
+      <Icon>
+        <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+      </Icon>
+      <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+    </IconStyle>
+    <LabelStyle>
+      <scale>1</scale>
+    </LabelStyle>
+  </Style>
+  <StyleMap id="icon-1899-DB4436">
+    <Pair>
+      <key>normal</key>
+      <styleUrl>#icon-1899-DB4436-normal</styleUrl>
+    </Pair>
+    <Pair>
+      <key>highlight</key>
+      <styleUrl>#icon-1899-DB4436-highlight</styleUrl>
+    </Pair>
+  </StyleMap>
+  <Folder>
+    <name>お風呂</name>
+    <Placemark>
+      <name>風呂｜天然温泉 尾道みなと館（6:00-9:30、12:00-24:00）</name>
+      <description><![CDATA[日帰り温泉の営業<br>http://onomichi-minatokan.com/index.html<br>連絡先：0848-20-8222<br><br>営業時間：6:00~9:30、12:00~24:00 (受付は23:00まで)<br><br>タオルをお持ちください。 施設には駐車場はありません。 おむつの取れていない乳幼児のご利 用はお断りすることがあります。]]></description>
+      <styleUrl>#icon-1899-DB4436</styleUrl>
+      <Point>
+        <coordinates>
+          133.2038963,34.4109999,0
+        </coordinates>
+      </Point>
+    </Placemark>
+  </Folder>
+</Document>
 </kml>
 `
-      var data = new DOMParser().parseFromString(testdata, 'text/xml');
-      map = new PrintableMap("localhost:4567", "map");
-      let folders = data.getElementsByTagName('Folder');
-      let category:mapHelper.Category = {name:"お風呂", color:"ff3644db", iconUrl:"http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png" }
-      expect(map.readCategoryOfFolder(folders[0], data)).toBe(category);
-    });
+    var data = new DOMParser().parseFromString(testdata, 'text/xml');
+    let map = new PrintableMap("localhost:4567", "map");
+    let folders = data.getElementsByTagName('Folder');
+    let category:mapHelper.Category = {name:"お風呂", color:"ff3644db", iconUrl:"http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png" }
+    expect(mapHelper.readCategoryOfFolder(folders[0], data)).toEqual(category);
   });
+});
+describe('Map controller ', () => {
   describe('to check event ', function() {
     let umapdata:string;
     let map:PrintableMap;
@@ -335,11 +342,7 @@ describe('Load map', () => {
       jasmine.getFixtures().fixturesPath = 'base/spec/fixtures/';
       umapdata = readFixtures('data.umap')
       document.body.innerHTML = '<div id="map"/>';
-      jasmine.Ajax.install();
     });
-    afterEach(function(){
-      jasmine.Ajax.uninstall();
-    })
     it ("get targets in specified bounds", function(done) {
       var listener:mapHelper.IPrintableMapListener = {
         POIFiltered(targets) {

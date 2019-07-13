@@ -254,3 +254,29 @@ export function deserializeLatLng(s) {
 export function deserializeBounds(s) {
   return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
 }
+/**
+ * return Category object
+ * @param folder
+ * @param document
+ */
+export function readCategoryOfFolder(folder:Element, document:Document):Category{
+  let catname:string = folder.getElementsByTagName("name")[0].textContent!;
+  let color:string = "red";
+  let iconUrl;
+  let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;
+  if (styleUrl){
+    let styles:NodeListOf<Element> = document.querySelectorAll(styleUrl + " Pair")!;
+    if (styles.length > 0) {
+      Array.prototype.forEach.call( styles, (elem) => {
+        let key = elem.querySelector("key");
+        if (key && key.textContent == "normal"){
+          let styleUrl = elem.querySelector("styleUrl").textContent;
+          let style = document.querySelector(styleUrl);
+          color = style.querySelector("IconStyle color").textContent;
+          iconUrl = style.querySelector("IconStyle Icon href").textContent;
+        }
+      });
+    }
+  }
+  return {name:catname, color:color, iconUrl: iconUrl};
+}

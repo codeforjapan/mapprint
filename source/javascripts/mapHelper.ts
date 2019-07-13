@@ -132,8 +132,8 @@ export default class PrintableMap implements IPrintableMap{
    * load Json String based on umap file
    * @param umapJsonData umap style geojson string
    */
-  loadUmapJsonData(umapJsonData:string):void{
-    var data = JSON.parse(umapJsonData);
+  loadUmapJsonData(data:any):void{
+    //let data = JSON.parse(jsonstring)
     this.layers = L.geoJSON(data.layers);
     data.layers.forEach( (layer) => {
       let category:Category = layer._umap_options
@@ -150,14 +150,16 @@ export default class PrintableMap implements IPrintableMap{
     $.ajax(url).then((data, textStatus, jqXHR)=> {
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
       //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
-      //console.log(date);
       this.updated = new Date(jqXHR.getResponseHeader('date')!);
-      console.log(this.updated);
-      //$('#datetime').html(date.toString());
-      if (data.contentType == 'text/xml'){
+      if (jqXHR.responseXML){
+        console.log("call XML data")
         //loadKMLData(data, map);
-      }else{ // it must be json data
+      }else if(jqXHR.responseJSON){ // it must be json data
+        console.log("call JSON data")
         this.loadUmapJsonData(data);
+      }else{
+        // it may be json
+        this.loadUmapJsonData(JSON.parse(data));
       }
       this.showLegend();
       this.fitBounds();

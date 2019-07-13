@@ -154,7 +154,7 @@ describe('Load map', () => {
         before = before+1;
       }
     });
-    map.loadUmapJsonData(json);
+    map.loadUmapJsonData(JSON.parse(json));
     let after = 0;
     map.map.eachLayer(function(layer:L.Layer){
       if (layer.getPopup() != undefined){
@@ -180,8 +180,9 @@ describe('Load map', () => {
       let map = new PrintableMap("localhost:4567", "map");
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
-        contentType:"application/octet-stream",
-        responseHeaders: {"date":testDate.toString()},
+        contentType:"application/json",
+        responseHeaders: {"date":testDate.toString(),
+                          "content-type":"application/json"},
         responseText:umapdata
       })
       let mapSpy = spyOn(map, "addMarker");
@@ -211,7 +212,7 @@ describe('Load map', () => {
       spyOn(map, "getLocationHash").and.returnValue("");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
-      map.loadUmapJsonData(umapdata);
+      map.loadUmapJsonData(JSON.parse(umapdata));
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(geojson.getBounds());
     });
@@ -220,7 +221,7 @@ describe('Load map', () => {
       spyOn(map, "getLocationHash").and.returnValue("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003");
       let geojson = L.geoJSON(JSON.parse(umapdata).layers);
       let fitBoundsFunc = spyOn(map.map, "fitBounds").and.callThrough();
-      map.loadUmapJsonData(umapdata);
+      map.loadUmapJsonData(JSON.parse(umapdata));
       map.fitBounds();
       expect(fitBoundsFunc).toHaveBeenCalledWith(mapHelper.deserializeBounds("27.27416111737468,126.79870605468751-25.975329851614575,128.97949218750003"));
     });
@@ -240,12 +241,12 @@ describe('Load map', () => {
     afterEach(function(){
       jasmine.Ajax.uninstall();
     })
-    xit ("loads KML file", function(){
+    it ("loads KML file", function(done){
       map = new PrintableMap("localhost:4567", "map");
       jasmine.Ajax.stubRequest(dataUrl).andReturn({
         status:200,
-        contentType:"application/octet-stream",
-        responseHeaders: {"date":testDate.toString()},
+        contentType:"text/xml",
+        responseHeaders: {"date":testDate.toString(), "content-type":"text/xml"},
         responseText:kmldata
       })
       mapSpy = spyOn(map, "addMarker");
@@ -256,6 +257,7 @@ describe('Load map', () => {
         expect(mapSpy.calls.count()).toBe(389);
         expect($("#map .legend-type").length).toBe(8);
         expect(fitBoundsFunc).toHaveBeenCalled();
+        done();
       });
       map.loadFile(dataUrl);
       expect(showLegendSpy).toHaveBeenCalled();
@@ -284,7 +286,7 @@ describe('Load map', () => {
         }
       }
       map = new PrintableMap("localhost:4567", "map", listener);
-      map.loadUmapJsonData(umapdata);
+      map.loadUmapJsonData(JSON.parse(umapdata));
       // This bounds contains 8 POIs.
       map.map.fitBounds(mapHelper.deserializeBounds("26.67781931519818,127.9319886425601-26.515420330689124,128.20458690916166"));
     });

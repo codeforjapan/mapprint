@@ -242,32 +242,93 @@ describe('Load map', () => {
     afterEach(function(){
       jasmine.Ajax.uninstall();
     })
-    it ("loads KML file", function(done){
-      map = new PrintableMap("localhost:4567", "map");
+    xit ("loads KML file", function(done){
       jasmine.Ajax.stubRequest(kmlUrl).andReturn({
         status:200,
         contentType:'text/xml;charset=UTF-8',
         responseHeaders: {"date":testDate.toString(), "content-type":'text/xml;charset=UTF-8'},
         responseText:kmldata
       })
+      map = new PrintableMap("localhost:4567", "map");
       mapSpy = spyOn(map, "addMarker");
-      let fitBoundsFunc = spyOn(map.map, "fitBounds");
-      let showLegendSpy = spyOn(map, "showLegend").and.callThrough().and.callFake(() =>{
-        // it should add 39 markers. Needed to check after adding all markers.
-        console.log("*****************showLegendSpy")
-        expect(mapSpy.calls.count()).toBe(389);
+      spyOn(map, "fitBounds").and.callThrough().and.callFake(() =>{
+        // it should have 8 folders (categories)
+        expect(mapSpy.calls.count()).toBe(8);
         expect($("#map .legend-type").length).toBe(8);
-        expect(fitBoundsFunc).toHaveBeenCalled();
         done();
       });
       map.loadFile(kmlUrl);
-      expect(showLegendSpy).toHaveBeenCalled();
+    });
+    it ('build Category object from KML file', function(done){
+      let testdata = `
+      <?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>給水所/お風呂/洗濯/トイレ マップ</name>
+    <description><![CDATA[断水に伴う応急給水拠点について<br>各市からの連絡で随時更新が発生します。ご了承ください。掲載情報と実際のタイムラグが発生した場合等もご理解いただけますと。<br>＊井戸情報も含め全ての情報は掲載出来ておりません。ご了承ください。<br><br>尾道周辺のお風呂情報も分かる範囲で載せております。<br><br>【尾道市】-------------------------<br>[尾道市役所の給水所情報] 給水について<br>7時00分～21時00分<br>https://www.city.onomichi.hiroshima.jp/soshiki/64/20391.html<br><br>[尾道市災害対応の情報一覧]<br>https://www.city.onomichi.hiroshima.jp/soshiki/8/20190.html<br><br>【東広島市】-------------------------<br>[東広島市の給水所情報]<br>http://www.city.higashihiroshima.lg.jp/soshiki/suido/1/1/17943.html<br><br>【東広島市から節水のお願い】<br>現在、入野地区で水が不足しています。<br>今後、水が出にくくなるかもしれません。<br>節水にご協力ください。よろしくお願いします。<br><br><br>【三原市】-------------------------<br>【三原市の給水所情報】<br>http://www.city.mihara.hiroshima.jp/soshiki/49/kyusui.html]]></description>
+    <Style id="icon-1899-DB4436-normal">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+    </Style>
+    <Style id="icon-1899-DB4436-highlight">
+      <IconStyle>
+        <color>ff3644db</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png</href>
+        </Icon>
+        <hotSpot x="32" xunits="pixels" y="64" yunits="insetPixels"/>
+      </IconStyle>
+      <LabelStyle>
+        <scale>1</scale>
+      </LabelStyle>
+    </Style>
+    <StyleMap id="icon-1899-DB4436">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#icon-1899-DB4436-normal</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#icon-1899-DB4436-highlight</styleUrl>
+      </Pair>
+    </StyleMap>
+    <Folder>
+      <name>お風呂</name>
+      <Placemark>
+        <name>風呂｜天然温泉 尾道みなと館（6:00-9:30、12:00-24:00）</name>
+        <description><![CDATA[日帰り温泉の営業<br>http://onomichi-minatokan.com/index.html<br>連絡先：0848-20-8222<br><br>営業時間：6:00~9:30、12:00~24:00 (受付は23:00まで)<br><br>タオルをお持ちください。 施設には駐車場はありません。 おむつの取れていない乳幼児のご利 用はお断りすることがあります。]]></description>
+        <styleUrl>#icon-1899-DB4436</styleUrl>
+        <Point>
+          <coordinates>
+            133.2038963,34.4109999,0
+          </coordinates>
+        </Point>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
+`
+      var data = new DOMParser().parseFromString(testdata, 'text/xml');
+      map = new PrintableMap("localhost:4567", "map");
+      let folders = data.getElementsByTagName('Folder');
+      let category:mapHelper.Category = {name:"お風呂", color:"ff3644db", iconUrl:"http://www.gstatic.com/mapspro/images/stock/503-wht-blank_maps.png" }
+      expect(map.readCategoryOfFolder(folders[0], data)).toBe(category);
     });
   });
   describe('to check event ', function() {
     let umapdata:string;
     let map:PrintableMap;
-    let mapSpy;
+    let mapSpy:jasmine.Spy;
     const testDate = new Date();
     beforeEach(function() {
       // read test data

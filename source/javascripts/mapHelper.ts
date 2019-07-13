@@ -148,11 +148,11 @@ export default class PrintableMap implements IPrintableMap{
     if (folders.length == 0) {
       folders = data.getElementsByTagName('Document');
     }
-    console.log(folders);
     Array.prototype.forEach.call(folders, (folder) => {
-        let category = folder.childNodes[1].firstChild;
-        let geojsondata = tj.kml(folder);
-        this.addMarker(geojsondata, category);
+      let category = folder.childNodes[1].firstChild;
+      console.log(category);
+      let geojsondata = tj.kml(folder);
+      this.addMarker(geojsondata, category);
     });
   }
 

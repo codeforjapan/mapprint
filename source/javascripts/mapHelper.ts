@@ -6,6 +6,7 @@ import * as L from 'leaflet';
 import * as $ from 'jquery';
 import * as geoJson from 'geojson';
 import * as leaflet_awesome_number_markers from './leaflet_awesome_number_markers';
+import * as tj from '@mapbox/togeojson';
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -142,6 +143,19 @@ export default class PrintableMap implements IPrintableMap{
       });
     });
   }
+  loadKMLData(data:Document){
+    let folders:HTMLCollectionOf<Element> = data.getElementsByTagName('Folder');
+    if (folders.length == 0) {
+      folders = data.getElementsByTagName('Document');
+    }
+    console.log(folders);
+    Array.prototype.forEach.call(folders, (folder) => {
+        let category = folder.childNodes[1].firstChild;
+        let geojsondata = tj.kml(folder);
+        this.addMarker(geojsondata, category);
+    });
+  }
+
   /**
    * Load file and add markers
    * @param url file path
@@ -153,7 +167,7 @@ export default class PrintableMap implements IPrintableMap{
       this.updated = new Date(jqXHR.getResponseHeader('date')!);
       if (jqXHR.responseXML){
         console.log("call XML data")
-        //loadKMLData(data, map);
+        this.loadKMLData(data);
       }else if(jqXHR.responseJSON){ // it must be json data
         console.log("call JSON data")
         this.loadUmapJsonData(data);

@@ -47,6 +47,7 @@ describe('Map contractor', () => {
 
 describe('Load map', () => {
   const dataUrl = "./data/data.umap";
+  const kmlUrl = "./data/data.kml";
   beforeEach(function() {
     document.body.innerHTML = '<div id="map"/>';
     // document.body.innerHTML = __html__["source/map.html.haml"] //@todo to be fixed. somehow this doesn’t work...
@@ -243,10 +244,10 @@ describe('Load map', () => {
     })
     it ("loads KML file", function(done){
       map = new PrintableMap("localhost:4567", "map");
-      jasmine.Ajax.stubRequest(dataUrl).andReturn({
+      jasmine.Ajax.stubRequest(kmlUrl).andReturn({
         status:200,
-        contentType:"text/xml",
-        responseHeaders: {"date":testDate.toString(), "content-type":"text/xml"},
+        contentType:'text/xml;charset=UTF-8',
+        responseHeaders: {"date":testDate.toString(), "content-type":'text/xml;charset=UTF-8'},
         responseText:kmldata
       })
       mapSpy = spyOn(map, "addMarker");
@@ -259,7 +260,7 @@ describe('Load map', () => {
         expect(fitBoundsFunc).toHaveBeenCalled();
         done();
       });
-      map.loadFile(dataUrl);
+      map.loadFile(kmlUrl);
       expect(showLegendSpy).toHaveBeenCalled();
     });
   });

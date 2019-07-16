@@ -115,6 +115,11 @@ export default class PrintableMap implements IPrintableMap{
    * @param category Category of the feacures
    */
   addMarker(feature:geoJson.Feature, category:Category): void{
+    if (!this.legends.some((legend) =>{
+      return legend.name == category.name;
+    })){
+      this.legends.push({name:category.name, color:category.color!});
+    }
     let geojson = L.geoJSON(feature, {
       onEachFeature: function (feature, layer:MyLayer) {
         var field = '名称: '+feature.properties.name+ '<br>'+
@@ -123,11 +128,6 @@ export default class PrintableMap implements IPrintableMap{
         layer.bindPopup(field);
       }
     }).addTo(this.map);
-    if (!this.legends.some((legend) =>{
-      return legend.name == category.name;
-    })){
-      this.legends.push({name:category.name, color:category.color!});
-    }
   }
   /**
    * load Json String based on umap file
@@ -144,15 +144,15 @@ export default class PrintableMap implements IPrintableMap{
     });
   }
   loadKMLData(data:Document){
+    let that = this;
     let folders:HTMLCollectionOf<Element> = data.getElementsByTagName('Folder');
     if (folders.length == 0) {
       folders = data.getElementsByTagName('Document');
     }
     Array.prototype.forEach.call(folders, (folder) => {
-      let category = folder.childNodes[1].firstChild;
-      console.log(category);
-      let geojsondata = tj.kml(folder);
-      this.addMarker(geojsondata, category);
+      let category:Category = readCategoryOfFolder(folder, data);
+      let geojsondata:geoJson.Feature = tj.kml(folder);
+      that.addMarker(geojsondata, category);
     });
   }
 
@@ -161,6 +161,7 @@ export default class PrintableMap implements IPrintableMap{
    * @param url file path
    */
   loadFile(url:string):void{
+    this.legends = [];
     $.ajax(url).then((data, textStatus, jqXHR)=> {
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
       //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
@@ -168,9 +169,11 @@ export default class PrintableMap implements IPrintableMap{
       if (jqXHR.responseXML){
         console.log("call XML data")
         this.loadKMLData(data);
+        console.log("legends length is " + this.legends.length);
       }else if(jqXHR.responseJSON){ // it must be json data
         console.log("call JSON data")
         this.loadUmapJsonData(data);
+        console.log("legends length is " + this.legends.length);
       }else{
         // it may be json
         this.loadUmapJsonData(JSON.parse(data));

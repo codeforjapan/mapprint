@@ -242,7 +242,7 @@ describe('Load map', () => {
     afterEach(function(){
       jasmine.Ajax.uninstall();
     })
-    xit ("loads KML file", function(done){
+    it ("loads KML file", function(done){
       jasmine.Ajax.stubRequest(kmlUrl).andReturn({
         status:200,
         contentType:'text/xml;charset=UTF-8',
@@ -251,10 +251,9 @@ describe('Load map', () => {
       })
       map = new PrintableMap("localhost:4567", "map");
       mapSpy = spyOn(map, "addMarker");
-      spyOn(map, "fitBounds").and.callThrough().and.callFake(() =>{
+      spyOn(map, "fitBounds").and.callFake(() =>{
         // it should have 8 folders (categories)
         expect(mapSpy.calls.count()).toBe(8);
-        expect($("#map .legend-type").length).toBe(8);
         done();
       });
       map.loadFile(kmlUrl);

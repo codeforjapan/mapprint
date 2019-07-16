@@ -27,6 +27,7 @@
     "@types/leaflet": "^1.4.4",
     "brfs": "^2.0.2",
     "browserify": "^16.2.3",
+    "dtsmake": "0.0.10",
     "eslint": "^5.16.0",
     "geojson": "^0.5.0",
     "gulp": "^4.0.2",

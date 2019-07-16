@@ -11,7 +11,10 @@
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     "strictNullChecks": true,              /* Enable strict null checks. */
     "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
-
+    "baseUrl": ".",
+    "paths": {
+      "*":["@types"]
+    },
     /* Additional Checks */
     "noUnusedLocals": false,                /* Report errors on unused locals. */
     "noUnusedParameters": false,            /* Report errors on unused parameters. */
@@ -20,7 +23,7 @@
   },
   "include": [
     "./source/javascripts/**/*.ts",
-    "./spec/**/*Spec.ts", "source/@types/leaflet_awesome_number_markers.d.ts"
+    "./spec/**/*Spec.ts", "build/images/@types/leaflet_awesome_number_markers.d.ts"
   ],
   "exclude": [
     "node_modules",

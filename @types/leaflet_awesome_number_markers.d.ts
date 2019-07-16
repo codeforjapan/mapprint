@@ -1,3 +1,3 @@
-declare namespace L{
+declare namespace L {
   var AwesomeNumberMarkers:any;
 }

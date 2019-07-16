@@ -1,6 +1,6 @@
 /// <reference path="../../node_modules/@types/leaflet/index.d.ts" />
 /// <reference path="../../node_modules/@types/geojson/index.d.ts" />
-/// <reference path="../@types/leaflet_awesome_number_markers.d.ts" />
+/// <reference path="../../@types/leaflet_awesome_number_markers.d.ts" />
 
 import * as L from 'leaflet';
 import * as $ from 'jquery';

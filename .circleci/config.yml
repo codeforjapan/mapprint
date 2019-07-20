@@ -19,6 +19,7 @@ jobs: # a collection of steps
       - run:
           name: Which bundler?
           command: bundle -v
+          command: which bundle
       # Which version of node?
       - run:
           name: Check current version of node

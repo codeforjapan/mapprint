@@ -6,7 +6,7 @@ jobs: # a collection of steps
         - gh-pages
     working_directory: ~/mapprint # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/ruby:2.4-node # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/ruby:2.4.2-node-browsers # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3

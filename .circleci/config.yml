@@ -55,7 +55,9 @@ jobs: # a collection of steps
 
       - run:
           name: npm Install
-          command: npm install
+          command: |
+            npm install
+            npm rebuild node-sass
 
       # Store npm cache
       - save_cache:

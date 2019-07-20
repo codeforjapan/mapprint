@@ -345,7 +345,7 @@ describe('Map controller ', () => {
     it ("get targets in specified bounds", function(done) {
       var listener:mapHelper.IPrintableMapListener = {
         POIFiltered(targets) {
-          expect(targets.length).toBe(8);
+          expect(targets.length).toBe(7);
           done();
         }
       }

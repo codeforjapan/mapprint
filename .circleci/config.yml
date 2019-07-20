@@ -16,6 +16,10 @@ jobs: # a collection of steps
 
       # Which version of bundler?
       - run:
+          name: update bundler
+          command: gem install bundler
+      # Which version of bundler?
+      - run:
           name: Which bundler?
           command: bundle -v
       # Which version of node?

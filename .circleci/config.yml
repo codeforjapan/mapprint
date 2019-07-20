@@ -10,6 +10,7 @@ jobs: # a collection of steps
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
+          BUNDLER_VERSION: 1.17.3
           BUNDLE_PATH: vendor/bundle
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory

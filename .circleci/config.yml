@@ -16,10 +16,6 @@ jobs: # a collection of steps
 
       # Which version of bundler?
       - run:
-          name: update bundler
-          command: gem install bundler
-      # Which version of bundler?
-      - run:
           name: Which bundler?
           command: bundle -v
       # Which version of node?
@@ -30,8 +26,8 @@ jobs: # a collection of steps
       # Restore bundle cache
       - restore_cache:
           keys:
-            - bundle-v2-{{ checksum "Gemfile.lock" }}
-            - bundle-v2-
+            - bundle-v2.2-{{ checksum "Gemfile.lock" }}
+            - bundle-v2.2-
 
       - run:
           name: Bundle Install
@@ -39,7 +35,7 @@ jobs: # a collection of steps
 
       # Store bundle cache
       - save_cache:
-          key: bundle-v2-{{ checksum "Gemfile.lock" }}
+          key: bundle-v2.2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 

@@ -58,9 +58,11 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@types/mapbox-gl": "^0.54.3",
     "jquery": "^3.4.1",
     "leaflet": "^1.5.1",
     "lodash": "^4.17.15",
+    "mapbox-gl": "^1.3.1",
     "natives": "latest",
     "qrcode": "^1.4.1",
     "xmldom": "^0.1.27"

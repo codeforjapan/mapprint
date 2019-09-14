@@ -204,22 +204,15 @@ export default class PrintableMap implements IPrintableMap{
    * show legends data
    */
   showLegend():void{
-    /* @todo fixme
-    var legend = new MapboxGL.Control({position: 'bottomright'});
-    legend.onAdd = () => {
-      var div = L.DomUtil.create('div', 'legend');
-
-      // loop through our density intervals and generate a label with a colored square for each interval
-      for (var i = 0; i < this.legends.length; i++) {
-        div.innerHTML +=
-        '<div class="legend-type">' +
-          '<i style="background:' + this.legends[i].color + '"></i><div class=poi-type> ' + this.legends[i].name + '</div></br>' +
-        '</div>';
-      }
-      return div;
-    };
-    this.map.addControl(legend);
-    */
+    var div = $("#legend");
+    div.html("");
+    // loop through our density intervals and generate a label with a colored square for each interval
+    for (var i = 0; i < this.legends.length; i++) {
+      div.append(
+      '<div class="legend-type">' +
+        '<i style="background:' + this.legends[i].color + '"></i><div class=poi-type> ' + this.legends[i].name + '</div></br>' +
+      '</div>');
+    }
   }
   /**
    * fit bounds to layers

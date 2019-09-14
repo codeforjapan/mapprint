@@ -83,7 +83,8 @@ export default class PrintableMap implements IPrintableMap{
       let s = serializeBounds(bounds);
       let path = location.pathname;
       window.history.pushState('', '', path + '#' + s);
-      //$('#list').html('<table>');
+      // @todo need to refactoring
+      $('#list').append(document.createElement('table'))
       that.layers.forEach((layer:any) => {
         if(that.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.getBounds())) {
           if (layer.properties === undefined) {
@@ -110,8 +111,23 @@ export default class PrintableMap implements IPrintableMap{
           }
           return 0;
       });
+      let lastCategory:string = "";
+      let categoryIndex:number = 0;
       res.forEach(function(layer,index){
+        var name = layer.properties.name;
         $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
+        if (layer.properties.category.name !== lastCategory){
+          // display categories
+          $('#list table').append('<tr><td colspan="4" class="category_separator">' + layer.properties.category.name + '</td></tr>');
+          lastCategory = layer.properties.category.name;
+          $('#list table').append('<tr>');
+          categoryIndex = index;
+      } else {
+          if ((index - categoryIndex) % 2 === 0){
+              $('#list table').append('<tr>');
+          }
+      }
+      $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
       });
       // call listener function if an instance is specified.
       if (that.listener !== undefined){
@@ -310,7 +326,7 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
           let styleUrl = elem.querySelector("styleUrl").textContent;
           let style = document.querySelector(styleUrl);
           try{
-            color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6);
+            color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6); // dirty fix
           }catch(e){
             color = DEFAULT_ICON_COLOR;
           }

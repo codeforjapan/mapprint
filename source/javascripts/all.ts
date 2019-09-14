@@ -9,9 +9,14 @@ var QRCode = require('qrcode')
 
 require('./leaflet_awesome_number_markers').default();
 import * as DisplayHelper from './displayHelper';
+import * as MapHelper from './mapHelper';
+interface Marker extends L.Marker{
+  category:{
+    name:string,
+    color:string
+  }
+}
 var _ = require('lodash');
-
-import Marker from 'leaflet';
 
 // アイコンの設定 https://codeforjapan.github.io/mapprint/stylesheets/leaflet_awesome_number_markers.css 内の色を使う。
 // 凡例はCSS3の色を指定しないと、色が出てこない https://www.w3.org/TR/2018/REC-css-color-3-20180619/#svg-color
@@ -46,30 +51,7 @@ function showLegend(map) {
     legend.addTo(map);
 }
 
-function tileServerUrl(mapStyle){
-  // 地図の色はnormal,grey, mono, bright, blueが選択できる。
-  // 印刷時の視認性の高さからカラーはbright、白黒にはgrayを使用する。
-  var styleCode;
-  if(mapStyle === 'color'){
-    styleCode = 'bright';
-  } else if(mapStyle === 'mono'){
-    styleCode = 'gray';
-  } else {
-    styleCode = 'normal';
-  }
-  // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/以下でのみ表示される）
-  // サーバ上の場合のみMIERUNE地図を使う
-  return ( location.host === 'codeforjapan.github.io' ) ?
-  'https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC' :
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-}
 
-function tileServerAttribution(){
-  return ( location.host === 'codeforjapan.github.io' ) ?
-  "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
-  'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
-
-}
 
 $(function(){
     function addMarker(feature, category, map){
@@ -141,8 +123,8 @@ $(function(){
     function initMap() {
       var map = L.map('map').setView([41.3921, 2.1705], 13);
       var tileLayer = L.tileLayer(
-          tileServerUrl($('input[name=mapStyle]:checked').val()), {
-            attribution: tileServerAttribution(),
+          MapHelper.tileServerUrl(location.host,$('input[name=mapStyle]:checked').val()), {
+            attribution: MapHelper.tileServerAttribution(location.host),
             maxZoom: 18
           }
       );
@@ -151,7 +133,7 @@ $(function(){
         addQRCodeLayer();
       }
       $('#date').text(() => {
-        const d = new Date();
+        let d = new Date();
         return DisplayHelper.getPrintDate(d);
       });
       $('#footer').append(
@@ -166,7 +148,7 @@ $(function(){
 
       // 背景地図の切り替え
       $('input[name="mapStyle"]:radio').change( function() {
-        tileLayer.setUrl(tileServerUrl($(this).val()));
+        tileLayer.setUrl(MapHelper.tileServerUrl(location.host,$(this).val()));
       })
 
       // 説明の表示/非表示
@@ -215,8 +197,8 @@ $(function(){
             //that._list.appendChild( that._createItem(layer) );
           });
           var res = targets.sort(function(a,b){
-              var _a = a.feature.properties.name;
-              var _b = b.feature.properties.name;
+              var _a = a.feature ? a.feature.properties.name : null;
+              var _b = b.feature ? b.feature.properties.name : null;
               var _a2 = a.category.name;
               var _b2 = b.category.name;
               if(_a2 > _b2){
@@ -231,7 +213,7 @@ $(function(){
           var categoryIndex = 0;
           res.forEach(function(layer,index){
               // get name
-              var name = layer.feature.properties.name;
+              var name = layer.feature ? layer.feature.properties.name : "";
               // get category and marker type
               var category = layer.category;
               var marker = category.color;

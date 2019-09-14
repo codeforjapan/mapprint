@@ -6,7 +6,7 @@ jobs: # a collection of steps
         - gh-pages
     working_directory: ~/mapprint # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/ruby:2.4-node # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/ruby:2.4.2-node-browsers # ...with this image as the primary container; this is where all `steps` will run
         environment: # environment variables for primary container
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -18,6 +18,7 @@ jobs: # a collection of steps
       - run:
           name: Which bundler?
           command: bundle -v
+
       # Which version of node?
       - run:
           name: Check current version of node
@@ -26,8 +27,15 @@ jobs: # a collection of steps
       # Restore bundle cache
       - restore_cache:
           keys:
-            - bundle-v2-{{ checksum "Gemfile.lock" }}
-            - bundle-v2-
+            - bundle-v2.2-{{ checksum "Gemfile.lock" }}
+            - bundle-v2.2-
+
+      - run:
+          name: bundler check
+          command: |
+            which bundler
+            bundle -v
+            gem install bundler -v 1.17.3
 
       - run:
           name: Bundle Install
@@ -35,7 +43,7 @@ jobs: # a collection of steps
 
       # Store bundle cache
       - save_cache:
-          key: bundle-v2-{{ checksum "Gemfile.lock" }}
+          key: bundle-v2.2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
@@ -47,7 +55,9 @@ jobs: # a collection of steps
 
       - run:
           name: npm Install
-          command: npm install
+          command: |
+            npm install
+            npm rebuild node-sass
 
       # Store npm cache
       - save_cache:

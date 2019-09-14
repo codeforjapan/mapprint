@@ -51,7 +51,7 @@ export default class PrintableMap implements IPrintableMap{
   constructor (public host:string, public divid :string, public listener?: IPrintableMapListener){
     this.map = new MapboxGL.Map({
       container: divid,
-      center: [141.3564, 43.0611],
+      center: [128.00890370574797,26.78826935024],
       zoom: 13,
       style: {
         "version": 8,
@@ -139,6 +139,10 @@ export default class PrintableMap implements IPrintableMap{
     var el:HTMLDivElement = document.createElement('div');
     el.innerHTML = '<span><b class="number">0</b></span>'
     el.className = 'marker ' + category.color!.toLowerCase();
+    new MapboxGL.Marker(el)
+    .setLngLat(feature.geometry.coordinates)
+    .addTo(this.map);
+    /*
     this.map.addLayer({
       id: "layer-" + this.layerid,
       type: "circle",
@@ -151,6 +155,7 @@ export default class PrintableMap implements IPrintableMap{
         'circle-color': category.color!.toLowerCase()
       }
     });
+    */
     this.layerid += 1;
     /*let geojson = MapboxGL.geoJSON(feature, {
       onEachFeature: function (feature, layer:MyLayer) {

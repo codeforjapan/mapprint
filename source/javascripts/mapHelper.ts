@@ -13,7 +13,7 @@ export interface Category {
   name: string,
   id?: number,
   color?: string,
-  iconUrl?: string
+  iconUrl?: string,
 }
 export interface IPrintableMap {
   map:MapboxGL.Map;
@@ -34,6 +34,7 @@ export interface Legend {
 export interface MyLayer extends L.Layer {
   category:Category;
 }
+export var DEFAULT_ICON_COLOR:string = "lightgreen";
 /**
  * main class of PrintableMap
  */
@@ -118,6 +119,13 @@ export default class PrintableMap implements IPrintableMap{
       }
     });
   }
+  addFeatureCollection(features:geoJson.FeatureCollection, category:Category): void{
+    features.features.forEach((feature:geoJson.Feature)=>{
+      if (feature.geometry.type == "Point"){
+        this.addMarker(feature, category);
+      }
+    });
+  }
   /**
    *
    * @param feature Feature object based on GeoJson
@@ -168,8 +176,13 @@ export default class PrintableMap implements IPrintableMap{
     }
     Array.prototype.forEach.call(folders, (folder) => {
       let category:Category = readCategoryOfFolder(folder, data);
-      let geojsondata:geoJson.Feature = tj.kml(folder);
-      that.addMarker(geojsondata, category);
+      if (tj.kml(folder).type == "FeatureCollection"){
+        let geojsondata:geoJson.FeatureCollection = tj.kml(folder);
+        that.addFeatureCollection(geojsondata, category);
+      }else{
+        let geojsondata:geoJson.Feature　= tj.kml(folder);
+        that.addMarker(geojsondata, category);
+      }
     });
   }
 
@@ -296,8 +309,12 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
         if (key && key.textContent == "normal"){
           let styleUrl = elem.querySelector("styleUrl").textContent;
           let style = document.querySelector(styleUrl);
-          color = style.querySelector("IconStyle color").textContent;
-          iconUrl = style.querySelector("IconStyle Icon href").textContent;
+          try{
+            color = style.querySelector("IconStyle color").textContent;
+          }catch(e){
+            color = DEFAULT_ICON_COLOR;
+          }
+          // iconUrl = style.querySelector("IconStyle Icon href").textContent;
         }
       });
     }

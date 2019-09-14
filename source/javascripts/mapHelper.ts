@@ -84,6 +84,7 @@ export default class PrintableMap implements IPrintableMap{
       let path = location.pathname;
       window.history.pushState('', '', path + '#' + s);
       // @todo need to refactoring
+      $('#list').html("");
       $('#list').append(document.createElement('table'))
       that.layers.forEach((layer:any) => {
         if(that.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.getBounds())) {

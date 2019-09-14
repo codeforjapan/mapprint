@@ -4,6 +4,7 @@ import * as MapboxGL from 'mapbox-gl';
 import * as $ from 'jquery';
 import * as geoJson from 'geojson';
 import * as tj from '@mapbox/togeojson';
+import { LatLng, LatLngBounds } from 'leaflet';
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -40,7 +41,7 @@ export default class PrintableMap implements IPrintableMap{
   map:MapboxGL.Map;   //map object
   updated:Date;  // last updated
   legends: Legend[] = [];  // legends data
-  layers: L.GeoJSON;   // layers of markers
+  layers: any[] = [];
   layerid: number = 0;
   /**
    * constructor
@@ -81,26 +82,25 @@ export default class PrintableMap implements IPrintableMap{
       let path = location.pathname;
       window.history.pushState('', '', path + '#' + s);
       //$('#list').html('<table>');
-      /*this.eachLayer((layer:any) => {
-        if(layer instanceof MapboxGL.Marker) {
-          if( this.getBounds().contains(layer.getLngLat()) ) {
-            if (layer.feature === undefined) {
-              return false;
-            } else {
-              var name = layer.feature.properties.name;
-              if (name !== undefined) {
-                this.targets.push(layer);
-              }
+      that.layers.forEach((layer:any) => {
+        if(that.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.getBounds())) {
+          if (layer.properties === undefined) {
+            return false;
+          } else {
+            var name = layer.properties.name;
+            if (name !== undefined) {
+              this.targets.push(layer);
             }
           }
         }
-      });*/
+      });
+      console.log(this.targets);
       //sort targets
       var res = this.targets.sort(function(a,b){
           var _a = a.feature ? a.feature.properties.name : null;
           var _b = b.feature ? b.feature.properties.name : null;
-          var _a2 = a.category.name;
-          var _b2 = b.category.name;
+          var _a2 = a.properties.category.name;
+          var _b2 = b.properties.category.name;
           if(_a2 > _b2){
               return -1;
           }else if(_a2 < _b2){
@@ -109,11 +109,7 @@ export default class PrintableMap implements IPrintableMap{
           return 0;
       });
       res.forEach(function(layer,index){
-        var category = layer.category;
-
-
-        // make a marker for each feature and add it to the map
-        //layer.setIcon()
+        $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
       });
       // call listener function if an instance is specified.
       if (that.listener !== undefined){
@@ -135,23 +131,13 @@ export default class PrintableMap implements IPrintableMap{
     var el:HTMLDivElement = document.createElement('div');
     el.innerHTML = '<span style="background:' + category.color!.toLowerCase() + '"><b class="number">0</b></span>'
     el.className = 'marker';
+    el.id = 'layer-' + this.layerid;
     new MapboxGL.Marker(el)
     .setLngLat(feature.geometry.coordinates)
     .addTo(this.map);
-    /*
-    this.map.addLayer({
-      id: "layer-" + this.layerid,
-      type: "circle",
-      source: {
-        type: "geojson",
-        data: feature,
-      },
-      paint: {
-        'circle-radius': 8,
-        'circle-color': category.color!.toLowerCase()
-      }
-    });
-    */
+    feature.properties.category = category;
+    feature.properties.layerid = this.layerid;
+    this.layers.push(feature);
     this.layerid += 1;
     /*let geojson = MapboxGL.geoJSON(feature, {
       onEachFeature: function (feature, layer:MyLayer) {
@@ -254,6 +240,11 @@ export default class PrintableMap implements IPrintableMap{
   }
   getLocationHash():string{
     return window.location.hash.substr(1);
+  }
+  inBounds(point:MapboxGL.LngLat, bounds:MapboxGL.LngLatBounds) {
+    var lng = (point.lng - bounds.getNorthEast().lng) * (point.lng - bounds.getSouthWest().lng) < 0;
+    var lat = (point.lat - bounds.getNorthEast().lat) * (point.lat - bounds.getSouthWest().lat) < 0;
+    return lng && lat;
   }
 }
 

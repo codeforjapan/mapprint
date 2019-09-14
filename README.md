@@ -1,13 +1,12 @@
 [![CircleCI](https://circleci.com/gh/codeforjapan/mapprint/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint/tree/master)
 
 
-給水所/お風呂/洗濯（ランドリー）マップ 印刷向け
+千葉県サポート情報マップ印刷用
 ===
 
-こちらの [給水所/お風呂/洗濯（ランドリー）マップ ](https://www.google.com/maps/d/u/0/viewer?mid=17BQwZDvJhDQ9OKZfakI-2PsyIaGdDtRx&ll=34.395888541511006%2C132.9701334&z=11
-) を、印刷向けに最適化したサイトのソースコードです。
+こちらの [千葉 ガソリン・給水・避難所・携帯充電・無料Wifiマップ ](https://www.google.com/maps/d/u/0/edit?mid=18v4csEC-qPW_aeXhEnuzgMfUAqWcbF5q&ll=35.67442129451118%2C140.02272653174055&z=10) を、印刷向けに最適化したサイトのソースコードです。
 
-https://codeforjapan.github.io/mapprint/
+https://codeforjapan.github.io/mapprint/map.html
 
 から実際のページを確認できます。
 
@@ -51,16 +50,6 @@ bundle exec middleman server
 ```
 
 http://localhost:4567 で見れるはず
-
-
-### deploy
-
-```
-bundle exec middleman deploy
-```
-
-`gh-pages` ブランチが自動的に更新されます。
-
 
 
 ### test

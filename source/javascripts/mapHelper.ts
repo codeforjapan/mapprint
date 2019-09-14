@@ -4,7 +4,7 @@ import * as MapboxGL from 'mapbox-gl';
 import * as $ from 'jquery';
 import * as geoJson from 'geojson';
 import * as tj from '@mapbox/togeojson';
-import { LatLng, LatLngBounds } from 'leaflet';
+import * as DisplayHelper from './displayHelper'
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -61,7 +61,7 @@ export default class PrintableMap implements IPrintableMap{
         "sources": {
           "OSM": {
             "type": "raster",
-            "tiles": [ tileServerUrl('mono', host )],
+            "tiles": [ tileServerUrl('moXno', host )],
             "tileSize": 256
           }
         },
@@ -136,6 +136,11 @@ export default class PrintableMap implements IPrintableMap{
       }
     });
   }
+  /**
+   * Insert Markers from FeatureCollections
+   * @param features FeatureCollection data
+   * @param category Category
+   */
   addFeatureCollection(features:geoJson.FeatureCollection, category:Category): void{
     features.features.forEach((feature:geoJson.Feature)=>{
       if (feature.geometry.type == "Point"){
@@ -194,10 +199,12 @@ export default class PrintableMap implements IPrintableMap{
     Array.prototype.forEach.call(folders, (folder) => {
       let category:Category = readCategoryOfFolder(folder, data);
       if (tj.kml(folder).type == "FeatureCollection"){
-        let geojsondata:geoJson.FeatureCollection = tj.kml(folder);
-        that.addFeatureCollection(geojsondata, category);
+        let geojsondata:geoJson.FeatureCollection = tj.kml(folder,{ styles: true });
+        if (geojsondata.features.length > 0){
+          that.addFeatureCollection(geojsondata, category);
+        }
       }else{
-        let geojsondata:geoJson.Feature　= tj.kml(folder);
+        let geojsondata:geoJson.Feature　= tj.kml(folder,{ styles: true });
         that.addMarker(geojsondata, category);
       }
     });
@@ -212,7 +219,8 @@ export default class PrintableMap implements IPrintableMap{
     this.bounds = new MapboxGL.LngLatBounds();
     $.ajax(url).then((data, textStatus, jqXHR)=> {
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
-      //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
+      var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')!));
+      $("#datetime").html(date);
       this.updated = new Date(jqXHR.getResponseHeader('date')!);
       if (jqXHR.responseXML){
         console.log("call XML data")

@@ -43,6 +43,7 @@ export default class PrintableMap implements IPrintableMap{
   legends: Legend[] = [];  // legends data
   layers: any[] = [];
   layerid: number = 0;
+  bounds: MapboxGL.LngLatBounds ;
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -123,6 +124,7 @@ export default class PrintableMap implements IPrintableMap{
    * @param category Category of the feacures
    */
   addMarker(feature:any, category:Category): void{
+    this.bounds.extend(feature.geometry.coordinates);
     if (!this.legends.some((legend) =>{
       return legend.name == category.name;
     })){
@@ -177,6 +179,7 @@ export default class PrintableMap implements IPrintableMap{
    */
   loadFile(url:string):void{
     this.legends = [];
+    this.bounds = new MapboxGL.LngLatBounds();
     $.ajax(url).then((data, textStatus, jqXHR)=> {
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
       //var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')));
@@ -218,14 +221,13 @@ export default class PrintableMap implements IPrintableMap{
    * fit bounds to layers
    */
   fitBounds():void {
-    /* @todo fixme
     try {
       const boundsstr = this.getLocationHash();
       var bounds = deserializeBounds(this.getLocationHash());
       this.map.fitBounds(bounds);
     } catch(e) {
-      this.map.fitBounds(this.layers.getBounds());
-    }*/
+      this.map.fitBounds(this.bounds);
+    }
   }
   getLocationHash():string{
     return window.location.hash.substr(1);

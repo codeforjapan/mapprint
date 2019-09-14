@@ -51,7 +51,7 @@ export default class PrintableMap implements IPrintableMap{
   constructor (public host:string, public divid :string, public listener?: IPrintableMapListener){
     this.map = new MapboxGL.Map({
       container: divid,
-      center: [128.00890370574797,26.78826935024],
+      center: [127.88768305343456,26.710444962177604],
       zoom: 13,
       style: {
         "version": 8,
@@ -110,11 +110,7 @@ export default class PrintableMap implements IPrintableMap{
       });
       res.forEach(function(layer,index){
         var category = layer.category;
-        // add markers to map
-        // create a HTML element for each feature
-        var el:HTMLDivElement = document.createElement('div');
-        el.innerHTML = '<span><b>' + (index + 1) + '</b></span>'
-        el.className = 'marker ' + category.color.toLowerCase();
+
 
         // make a marker for each feature and add it to the map
         //layer.setIcon()
@@ -137,8 +133,8 @@ export default class PrintableMap implements IPrintableMap{
       this.legends.push({name:category.name, color:category.color!});
     }
     var el:HTMLDivElement = document.createElement('div');
-    el.innerHTML = '<span><b class="number">0</b></span>'
-    el.className = 'marker ' + category.color!.toLowerCase();
+    el.innerHTML = '<span style="background:' + category.color!.toLowerCase() + '"><b class="number">0</b></span>'
+    el.className = 'marker';
     new MapboxGL.Marker(el)
     .setLngLat(feature.geometry.coordinates)
     .addTo(this.map);

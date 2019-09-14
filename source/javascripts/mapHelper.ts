@@ -132,22 +132,18 @@ export default class PrintableMap implements IPrintableMap{
     el.innerHTML = '<span style="background:' + category.color!.toLowerCase() + '"><b class="number">0</b></span>'
     el.className = 'marker';
     el.id = 'layer-' + this.layerid;
+    let desc = feature.properties.description ? feature.properties.description : "";
     new MapboxGL.Marker(el)
     .setLngLat(feature.geometry.coordinates)
+    .setPopup(new MapboxGL.Popup({
+      offset: 25
+    }) // add popups
+    .setHTML('<h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
     .addTo(this.map);
     feature.properties.category = category;
     feature.properties.layerid = this.layerid;
     this.layers.push(feature);
     this.layerid += 1;
-    /*let geojson = MapboxGL.geoJSON(feature, {
-      onEachFeature: function (feature, layer:MyLayer) {
-        var field = '名称: '+feature.properties.name+ '<br>'+
-        '詳細: '+feature.properties.description;
-        layer.category = category;
-        layer.bindPopup(field);
-      }
-    }).addTo(this.map);
-    */
   }
   /**
    * load Json String based on umap file

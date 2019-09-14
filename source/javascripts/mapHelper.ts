@@ -310,7 +310,7 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
           let styleUrl = elem.querySelector("styleUrl").textContent;
           let style = document.querySelector(styleUrl);
           try{
-            color = "#" + style.querySelector("IconStyle color").textContent;
+            color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6);
           }catch(e){
             color = DEFAULT_ICON_COLOR;
           }

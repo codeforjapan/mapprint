@@ -1,11 +1,8 @@
-/// <reference path="../../node_modules/@types/leaflet/index.d.ts" />
 /// <reference path="../../node_modules/@types/geojson/index.d.ts" />
-/// <reference path="../../@types/leaflet_awesome_number_markers.d.ts" />
 
-import * as L from 'leaflet';
+import * as MapboxGL from 'mapbox-gl';
 import * as $ from 'jquery';
 import * as geoJson from 'geojson';
-import * as leaflet_awesome_number_markers from './leaflet_awesome_number_markers';
 import * as tj from '@mapbox/togeojson';
 
 export interface Category {
@@ -18,12 +15,12 @@ export interface Category {
   iconUrl?: string
 }
 export interface IPrintableMap {
-  map:L.Map;
+  map:MapboxGL.Map;
   updated:Date;
   addMarker(feature:geoJson.Feature, category:Category): void;
 }
 export interface IPrintableMapListener {
-  POIFiltered(targets:L.Marker[]):void;
+  POIFiltered(targets:MapboxGL.Marker[]):void;
 }
 export interface Legend {
   color: string;
@@ -40,10 +37,11 @@ export interface MyLayer extends L.Layer {
  * main class of PrintableMap
  */
 export default class PrintableMap implements IPrintableMap{
-  map:L.Map;   //map object
+  map:MapboxGL.Map;   //map object
   updated:Date;  // last updated
   legends: Legend[] = [];  // legends data
   layers: L.GeoJSON;   // layers of markers
+  layerid: number = 0;
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -51,14 +49,30 @@ export default class PrintableMap implements IPrintableMap{
    * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
   constructor (public host:string, public divid :string, public listener?: IPrintableMapListener){
-    leaflet_awesome_number_markers.default();
-    this.map = L.map(divid).setView([41.3921, 2.1705], 13);
-    var tileLayer = L.tileLayer(
-      tileServerUrl('mono', host ), {
-        attribution: tileServerAttribution(host),
-        maxZoom: 18
+    this.map = new MapboxGL.Map({
+      container: divid,
+      center: [141.3564, 43.0611],
+      zoom: 13,
+      style: {
+        "version": 8,
+        "sources": {
+          "OSM": {
+            "type": "raster",
+            "tiles": [ tileServerUrl('mono', host )],
+            "tileSize": 256
+          }
+        },
+        "layers": [{
+          "id": "OSM",
+          "type": "raster",
+          "source": "OSM",
+          "minzoom": 0,
+          "maxzoom": 22
+        }]
       }
-    );
+    });
+    //attribution: tileServerAttribution(host),
+
     var that = this;
     this.map.on("moveend", function(){
       this.targets = [];
@@ -67,9 +81,9 @@ export default class PrintableMap implements IPrintableMap{
       let path = location.pathname;
       window.history.pushState('', '', path + '#' + s);
       //$('#list').html('<table>');
-      this.eachLayer((layer:any) => {
-        if(layer instanceof L.Marker) {
-          if( this.getBounds().contains(layer.getLatLng()) ) {
+      /*this.eachLayer((layer:any) => {
+        if(layer instanceof MapboxGL.Marker) {
+          if( this.getBounds().contains(layer.getLngLat()) ) {
             if (layer.feature === undefined) {
               return false;
             } else {
@@ -80,7 +94,7 @@ export default class PrintableMap implements IPrintableMap{
             }
           }
         }
-      });
+      });*/
       //sort targets
       var res = this.targets.sort(function(a,b){
           var _a = a.feature ? a.feature.properties.name : null;
@@ -97,30 +111,48 @@ export default class PrintableMap implements IPrintableMap{
       res.forEach(function(layer,index){
         var category = layer.category;
         // add markers to map
-        layer.setIcon(new L.AwesomeNumberMarkers({
-          number: index + 1,
-          markerColor: category.color.toLowerCase()
-        }));
+        // create a HTML element for each feature
+        var el:HTMLDivElement = document.createElement('div');
+        el.innerHTML = '<span><b>' + (index + 1) + '</b></span>'
+        el.className = 'marker ' + category.color.toLowerCase();
+
+        // make a marker for each feature and add it to the map
+        //layer.setIcon()
       });
       // call listener function if an instance is specified.
       if (that.listener !== undefined){
         that.listener.POIFiltered(res);
       }
     });
-    tileLayer.addTo( this.map );
   }
   /**
    *
    * @param feature Feature object based on GeoJson
    * @param category Category of the feacures
    */
-  addMarker(feature:geoJson.Feature, category:Category): void{
+  addMarker(feature:any, category:Category): void{
     if (!this.legends.some((legend) =>{
       return legend.name == category.name;
     })){
       this.legends.push({name:category.name, color:category.color!});
     }
-    let geojson = L.geoJSON(feature, {
+    var el:HTMLDivElement = document.createElement('div');
+    el.innerHTML = '<span><b class="number">0</b></span>'
+    el.className = 'marker ' + category.color!.toLowerCase();
+    this.map.addLayer({
+      id: "layer-" + this.layerid,
+      type: "circle",
+      source: {
+        type: "geojson",
+        data: feature,
+      },
+      paint: {
+        'circle-radius': 8,
+        'circle-color': category.color!.toLowerCase()
+      }
+    });
+    this.layerid += 1;
+    /*let geojson = MapboxGL.geoJSON(feature, {
       onEachFeature: function (feature, layer:MyLayer) {
         var field = '名称: '+feature.properties.name+ '<br>'+
         '詳細: '+feature.properties.description;
@@ -128,6 +160,7 @@ export default class PrintableMap implements IPrintableMap{
         layer.bindPopup(field);
       }
     }).addTo(this.map);
+    */
   }
   /**
    * load Json String based on umap file
@@ -135,10 +168,9 @@ export default class PrintableMap implements IPrintableMap{
    */
   loadUmapJsonData(data:any):void{
     //let data = JSON.parse(jsonstring)
-    this.layers = L.geoJSON(data.layers);
     data.layers.forEach( (layer) => {
       let category:Category = layer._umap_options
-      layer.features.forEach((feature:geoJson.Feature) => {
+      layer.features.forEach((feature) => {
         this.addMarker(feature, category);
       });
     });
@@ -181,7 +213,7 @@ export default class PrintableMap implements IPrintableMap{
       this.showLegend();
       this.fitBounds();
     }).catch((jqXHR, textStatus, errorThrown) => {
-      console.log('error:' + errorThrown);
+      console.log('error:' + jqXHR['message']);
       throw new Error(errorThrown);
     });
   }
@@ -189,7 +221,8 @@ export default class PrintableMap implements IPrintableMap{
    * show legends data
    */
   showLegend():void{
-    var legend = new L.Control({position: 'bottomright'});
+    /* @todo fixme
+    var legend = new MapboxGL.Control({position: 'bottomright'});
     legend.onAdd = () => {
       var div = L.DomUtil.create('div', 'legend');
 
@@ -203,18 +236,20 @@ export default class PrintableMap implements IPrintableMap{
       return div;
     };
     this.map.addControl(legend);
+    */
   }
   /**
    * fit bounds to layers
    */
   fitBounds():void {
+    /* @todo fixme
     try {
       const boundsstr = this.getLocationHash();
       var bounds = deserializeBounds(this.getLocationHash());
       this.map.fitBounds(bounds);
     } catch(e) {
       this.map.fitBounds(this.layers.getBounds());
-    }
+    }*/
   }
   getLocationHash():string{
     return window.location.hash.substr(1);
@@ -242,7 +277,7 @@ export function tileServerUrl(mapStyle:string, host:string):string{
   // サーバ上の場合のみMIERUNE地図を使う
   return ( host === 'codeforjapan.github.io' ) ?
   'https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC' :
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png';
 }
 function serializeLatLng(latLng) {
   return '' + latLng.lat + ',' + latLng.lng;
@@ -251,11 +286,14 @@ function serializeBounds(bounds) {
   return serializeLatLng(bounds.getNorthWest()) + '-' +
       serializeLatLng(bounds.getSouthEast());
 }
-export function deserializeLatLng(s) {
-  return L.latLng(s.split(',', 2).map(function(d) {return +d;}));
+export function deserializeLatLng(s:string) {
+  let [slng, slat] = s.split(',', 2);
+  let lng = parseFloat(slng);
+  let lat = parseFloat(slat);
+  return new MapboxGL.LngLat(lng,lat);
 }
 export function deserializeBounds(s) {
-  return L.latLngBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
+  return new MapboxGL.LngLatBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
 }
 /**
  * return Category object

@@ -45,6 +45,7 @@ export default class PrintableMap implements IPrintableMap{
   layers: any[] = [];
   layerid: number = 0;
   bounds: MapboxGL.LngLatBounds ;
+  defbounds: MapboxGL.LngLatBounds | undefined;
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -52,10 +53,13 @@ export default class PrintableMap implements IPrintableMap{
    * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
   constructor (public host:string, public divid :string, public listener?: IPrintableMapListener){
+    let locationhash = this.getLocationHash();
+    this.defbounds = deserializeBounds(locationhash);
     this.map = new MapboxGL.Map({
       container: divid,
       center: [127.88768305343456,26.710444962177604],
       zoom: 13,
+      bounds: this.defbounds,
       style: {
         "version": 8,
         "sources": {
@@ -235,7 +239,9 @@ export default class PrintableMap implements IPrintableMap{
         this.loadUmapJsonData(JSON.parse(data));
       }
       this.showLegend();
-      this.fitBounds();
+      if (this.defbounds == undefined){
+        this.map.fitBounds(this.bounds);
+      }
     }).catch((jqXHR, textStatus, errorThrown) => {
       console.log('error:' + jqXHR['message']);
       throw new Error(errorThrown);
@@ -253,18 +259,6 @@ export default class PrintableMap implements IPrintableMap{
       '<div class="legend-type">' +
         '<i style="background:' + this.legends[i].color + '"></i><div class=poi-type> ' + this.legends[i].name + '</div></br>' +
       '</div>');
-    }
-  }
-  /**
-   * fit bounds to layers
-   */
-  fitBounds():void {
-    try {
-      const boundsstr = this.getLocationHash();
-      var bounds = deserializeBounds(this.getLocationHash());
-      this.map.fitBounds(bounds);
-    } catch(e) {
-      this.map.fitBounds(this.bounds);
     }
   }
   getLocationHash():string{
@@ -308,13 +302,17 @@ function serializeBounds(bounds) {
       serializeLatLng(bounds.getSouthEast());
 }
 export function deserializeLatLng(s:string) {
-  let [slng, slat] = s.split(',', 2);
+  let [slat, slng] = s.split(',', 2);
   let lng = parseFloat(slng);
   let lat = parseFloat(slat);
   return new MapboxGL.LngLat(lng,lat);
 }
 export function deserializeBounds(s) {
-  return new MapboxGL.LngLatBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
+  try{
+    return new MapboxGL.LngLatBounds(s.split('-', 2).map(function(d) {return deserializeLatLng(d);}));
+  }catch(e){
+    return undefined;
+  }
 }
 /**
  * return Category object

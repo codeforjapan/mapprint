@@ -193,7 +193,7 @@ describe('Load map', () => {
         responseText:umapdata
       })
       let mapSpy = spyOn(map, "addMarker");
-      spyOn(map, 'fitBounds').and.callFake(()=>{
+      spyOn(map, 'showLegend').and.callFake(()=>{
         // it should add 33 markers. Needed to check after adding all markers.
         expect(mapSpy.calls.count()).toBe(33);
         done();
@@ -263,7 +263,7 @@ describe('Load map', () => {
       })
       map = new PrintableMap("localhost:4567", "map");
       mapSpy = spyOn(map, "addMarker");
-      spyOn(map, "fitBounds").and.callFake(() =>{
+      spyOn(map, "showLegend").and.callFake(() =>{
         // it should have 8 folders (categories)
         expect(mapSpy.calls.count()).toBe(8);
         done();
@@ -364,7 +364,7 @@ xdescribe('Map controller ', () => {
       map = new PrintableMap("localhost:4567", "map", listener);
       map.loadUmapJsonData(JSON.parse(umapdata));
       // This bounds contains 8 POIs.
-      map.map.fitBounds(mapHelper.deserializeBounds("26.67781931519818,127.9319886425601-26.515420330689124,128.20458690916166"));
+      //map.map.fitBounds(mapHelper.deserializeBounds("26.67781931519818,127.9319886425601-26.515420330689124,128.20458690916166"));
     });
   });
 })

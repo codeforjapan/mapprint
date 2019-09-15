@@ -46,6 +46,7 @@ export default class PrintableMap implements IPrintableMap{
   layerid: number = 0;
   bounds: MapboxGL.LngLatBounds ;
   defbounds: MapboxGL.LngLatBounds | undefined;
+  targets
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -82,63 +83,66 @@ export default class PrintableMap implements IPrintableMap{
 
     var that = this;
     this.map.on("moveend", function(){
-      this.targets = [];
+      that.filterPOIs();
       let bounds = this.getBounds();
       let s = serializeBounds(bounds);
       let path = location.pathname;
       window.history.pushState('', '', path + '#' + s);
-      // @todo need to refactoring
-      $('#list').html("");
-      $('#list').append(document.createElement('table'))
-      that.layers.forEach((layer:any) => {
-        if(that.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.getBounds())) {
-          if (layer.properties === undefined) {
-            return false;
-          } else {
-            var name = layer.properties.name;
-            if (name !== undefined) {
-              this.targets.push(layer);
-            }
+    });
+  }
+  filterPOIs(): void{
+    this.targets = [];
+    // @todo need to refactoring
+    $('#list').html("");
+    $('#list').append(document.createElement('table'))
+    this.layers.forEach((layer:any) => {
+      if(this.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.map.getBounds())) {
+        if (layer.properties === undefined) {
+          return false;
+        } else {
+          var name = layer.properties.name;
+          if (name !== undefined) {
+            this.targets.push(layer);
           }
         }
-      });
-      console.log(this.targets);
-      //sort targets
-      var res = this.targets.sort(function(a,b){
-          var _a = a.feature ? a.feature.properties.name : null;
-          var _b = b.feature ? b.feature.properties.name : null;
-          var _a2 = a.properties.category.name;
-          var _b2 = b.properties.category.name;
-          if(_a2 > _b2){
-              return -1;
-          }else if(_a2 < _b2){
-              return 1;
-          }
-          return 0;
-      });
-      let lastCategory:string = "";
-      let categoryIndex:number = 0;
-      res.forEach(function(layer,index){
-        var name = layer.properties.name;
-        $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
-        if (layer.properties.category.name !== lastCategory){
-          // display categories
-          $('#list table').append('<tr><td colspan="4" class="category_separator">' + layer.properties.category.name + '</td></tr>');
-          lastCategory = layer.properties.category.name;
-          $('#list table').append('<tr>');
-          categoryIndex = index;
-      } else {
-          if ((index - categoryIndex) % 2 === 0){
-              $('#list table').append('<tr>');
-          }
-      }
-      $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
-      });
-      // call listener function if an instance is specified.
-      if (that.listener !== undefined){
-        that.listener.POIFiltered(res);
       }
     });
+    console.log(this.targets);
+    //sort targets
+    var res = this.targets.sort(function(a,b){
+        var _a = a.feature ? a.feature.properties.name : null;
+        var _b = b.feature ? b.feature.properties.name : null;
+        var _a2 = a.properties.category.name;
+        var _b2 = b.properties.category.name;
+        if(_a2 > _b2){
+            return -1;
+        }else if(_a2 < _b2){
+            return 1;
+        }
+        return 0;
+    });
+    let lastCategory:string = "";
+    let categoryIndex:number = 0;
+    res.forEach(function(layer,index){
+      var name = layer.properties.name;
+      $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
+      if (layer.properties.category.name !== lastCategory){
+        // display categories
+        $('#list table').append('<tr><td colspan="4" class="category_separator">' + layer.properties.category.name + '</td></tr>');
+        lastCategory = layer.properties.category.name;
+        $('#list table').append('<tr>');
+        categoryIndex = index;
+    } else {
+        if ((index - categoryIndex) % 2 === 0){
+            $('#list table').append('<tr>');
+        }
+    }
+    $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
+    });
+    // call listener function if an instance is specified.
+    if (this.listener !== undefined){
+      this.listener.POIFiltered(res);
+    }
   }
   /**
    * Insert Markers from FeatureCollections
@@ -242,6 +246,7 @@ export default class PrintableMap implements IPrintableMap{
       if (this.defbounds == undefined){
         this.map.fitBounds(this.bounds);
       }
+      this.filterPOIs();
     }).catch((jqXHR, textStatus, errorThrown) => {
       console.log('error:' + jqXHR['message']);
       throw new Error(errorThrown);

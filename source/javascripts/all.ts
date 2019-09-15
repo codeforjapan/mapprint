@@ -219,7 +219,7 @@ $(function(){
               var marker = category.color;
               if (category.name !== lastCategory){
                   // display categories
-                  $('#list table').append('<tr><td colspan="4" class="category_separator">' + category.name + '</td></tr>');
+                  $('#list table').append('<tr><td colspan="4" class="category_separator" bgcolor="' + category.color + '">' + category.name + '</td></tr>');
                   lastCategory = category.name;
                   $('#list table').append('<tr>');
                   categoryIndex = index;

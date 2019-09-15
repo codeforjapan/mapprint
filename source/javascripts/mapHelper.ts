@@ -61,6 +61,7 @@ export default class PrintableMap implements IPrintableMap{
       center: [127.88768305343456,26.710444962177604],
       zoom: 13,
       bounds: this.defbounds,
+      preserveDrawingBuffer: true,
       style: {
         "version": 8,
         "sources": {

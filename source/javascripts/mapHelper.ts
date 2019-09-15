@@ -81,6 +81,7 @@ export default class PrintableMap implements IPrintableMap{
       }
     });
     //attribution: tileServerAttribution(host),
+    this.map.addControl(new MapboxGL.NavigationControl());
 
     var that = this;
     this.map.on("moveend", function(){

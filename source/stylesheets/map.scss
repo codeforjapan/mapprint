@@ -178,7 +178,7 @@ body {
   }
   // 印刷したくない領域
   .not_print_area {
-      display: none;
+      display: none !important;
   }
   // Firefoxだとiconが表示されない
   // .awesome-number-marker {
@@ -229,6 +229,7 @@ body {
     position: static;
   }
 }
+
 
 @page {
   size: A4;

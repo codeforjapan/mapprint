@@ -15,6 +15,9 @@ https://codeforjapan.github.io/mapprint/map.html
 
 ![kamimap_180713.png](source/images/kamimap_180713.png)
 
+## LICENSE
+
+This software is released under the MIT License, see LICENSE.txt.
 
 ## Help Wanted!!
 

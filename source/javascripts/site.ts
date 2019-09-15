@@ -4,9 +4,8 @@ import PrintableMap from './mapHelper';
 $(function(){
   if ($('#map')){
     let map = new PrintableMap("localhost:4567", "map");
-    //map.loadFile('./images/chiba.kml');
+    map.loadFile('./images/chiba.kml');
   }
-
   $('#print').on('click', () => {
     window.print();
   });

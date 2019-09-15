@@ -130,7 +130,7 @@ export default class PrintableMap implements IPrintableMap{
       $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
       if (layer.properties.category.name !== lastCategory){
         // display categories
-        $('#list table').append('<tr><td colspan="4" class="category_separator" bgcolor="' + layer.properties.category.color + '">' + layer.properties.category.name + '</td></tr>');
+        $('#list table').append('<tr><td colspan="4" class="category_separator">' + layer.properties.category.name + '</td></tr>');
         lastCategory = layer.properties.category.name;
         $('#list table').append('<tr>');
         categoryIndex = index;

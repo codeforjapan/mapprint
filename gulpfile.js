@@ -55,7 +55,7 @@ function jsBundle() {
 
 gulp.task('build', gulp.series('sass', 'bundle'));
 gulp.task('watch', function(){
-  gulp.watch([jsConf.srcPath, cssConf.srcPath], gulp.task('build'));
+  gulp.watch(['source/javascripts/*.ts', cssConf.srcPath], gulp.task('build'));
 });
 
 

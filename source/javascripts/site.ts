@@ -1,5 +1,6 @@
 /// <reference path="../../@types/config.d.ts" />
 import * as $ from 'jquery';
+<<<<<<< HEAD
 import PrintableMap from './mapHelper';
 import myconfig = require("./config.json")
 
@@ -40,6 +41,16 @@ $(function(){
         map.loadFile(map_setting.data_url);
       }
     }
+=======
+import PrintableMap, { IPrintableMap } from './mapHelper';
+
+
+$(function(){
+  let map: IPrintableMap;
+  if ($('#map')){
+    map = new PrintableMap(window.location.hostname, "map");
+    map.loadFile('./images/chiba.kml');
+>>>>>>> master
   }
   $('#print').on('click', () => {
     window.print();
@@ -52,5 +63,10 @@ $(function(){
     } else {
       $('#close').text('閉じる')
     }
+  });
+
+  $('input[name="mapStyle"]:radio').change( function() {
+    const mapStyle:string = <string> $(this).val();
+    map.changeStyle(mapStyle,window.location.hostname)
   });
 });

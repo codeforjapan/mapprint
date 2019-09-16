@@ -19,6 +19,8 @@ export interface IPrintableMap {
   map:MapboxGL.Map;
   updated:Date;
   addMarker(feature:geoJson.Feature, category:Category): void;
+  loadFile(url:string):void;
+  changeStyle(mapStyle:string, host:string): void;
 }
 export interface IPrintableMapListener {
   POIFiltered(targets:MapboxGL.Marker[]):void;
@@ -62,23 +64,7 @@ export default class PrintableMap implements IPrintableMap{
       zoom: 13,
       bounds: this.defbounds,
       preserveDrawingBuffer: true,
-      style: {
-        "version": 8,
-        "sources": {
-          "OSM": {
-            "type": "raster",
-            "tiles": [ tileServerUrl('moXno', host )],
-            "tileSize": 256
-          }
-        },
-        "layers": [{
-          "id": "OSM",
-          "type": "raster",
-          "source": "OSM",
-          "minzoom": 0,
-          "maxzoom": 22
-        }]
-      }
+      style: getStyle('color', host)
     });
     //attribution: tileServerAttribution(host),
     this.map.addControl(new MapboxGL.NavigationControl());
@@ -129,6 +115,8 @@ export default class PrintableMap implements IPrintableMap{
       var name = layer.properties.name;
       $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
       if (layer.properties.category.name !== lastCategory){
+        //adding spacing row
+        $('#list table').append('<tr><td colspan="4" class="category_spacer"></td></tr>');
         // display categories
         $('#list table').append('<tr><td colspan="4" class="category_separator" bgcolor="' + layer.properties.category.color + '">' + layer.properties.category.name + '</td></tr>');
         lastCategory = layer.properties.category.name;
@@ -180,7 +168,7 @@ export default class PrintableMap implements IPrintableMap{
     .setPopup(new MapboxGL.Popup({
       offset: 25
     }) // add popups
-    .setHTML('<h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
+    .setHTML('<div class="legend-type"><i style="background:' + category.color + '"></i><div class="poi-type">' + category.name + '</div></div><h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
     .addTo(this.map);
     feature.properties.category = category;
     feature.properties.layerid = this.layerid;
@@ -276,6 +264,9 @@ export default class PrintableMap implements IPrintableMap{
     var lat = (point.lat - bounds.getNorthEast().lat) * (point.lat - bounds.getSouthWest().lat) < 0;
     return lng && lat;
   }
+  changeStyle(mapStyle:string, host:string):void {
+    this.map.setStyle(getStyle(mapStyle, host))
+  }
 }
 
 export function tileServerAttribution(host:string):string{
@@ -284,7 +275,28 @@ export function tileServerAttribution(host:string):string{
   'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
 }
 
-export function tileServerUrl(mapStyle:string, host:string):string{
+export function getStyle(mapStyle:string, host:string): mapboxgl.Style {
+  return {
+    "version": 8,
+    "sources": {
+      "OSM": {
+        "type": "raster",
+        "tiles": tileServerUrl(mapStyle, host),
+        "tileSize": 256,
+        "attribution": tileServerAttribution(host)
+      }
+    },
+    "layers": [{
+      "id": "OSM",
+      "type": "raster",
+      "source": "OSM",
+      "minzoom": 0,
+      "maxzoom": 22
+    }]
+  }
+}
+
+export function tileServerUrl(mapStyle:string, host:string):Array<string>{
   // 地図の色はnormal,grey, mono, bright, blueが選択できる。
   // 印刷時の視認性の高さからカラーはbright、白黒にはgrayを使用する。
   var styleCode;
@@ -298,8 +310,8 @@ export function tileServerUrl(mapStyle:string, host:string):string{
   // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/以下でのみ表示される）
   // サーバ上の場合のみMIERUNE地図を使う
   return ( host === 'codeforjapan.github.io' ) ?
-  'https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC' :
-  'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  ['https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC'] :
+  ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
 }
 function serializeLatLng(latLng) {
   return '' + latLng.lat + ',' + latLng.lng;

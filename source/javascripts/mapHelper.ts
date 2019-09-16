@@ -282,7 +282,8 @@ export function getStyle(mapStyle:string, host:string): mapboxgl.Style {
       "OSM": {
         "type": "raster",
         "tiles": tileServerUrl(mapStyle, host),
-        "tileSize": 256
+        "tileSize": 256,
+        "attribution": tileServerAttribution(host)
       }
     },
     "layers": [{

@@ -9,8 +9,6 @@ declare namespace MapPrint {
    */
   export interface Config
   {
-    site_title:string,
-    site_description:string,
     map_settings:MapSetting[],
   }
   /**
@@ -28,6 +26,7 @@ declare namespace MapPrint {
     map_description:string,
     data_url:string,
     type:string,
+    default_hash?:string,
     layer_settings:LayerSetting[]|undefined|null
   }
   /**

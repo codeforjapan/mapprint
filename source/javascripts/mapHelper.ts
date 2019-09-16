@@ -182,7 +182,7 @@ export default class PrintableMap implements IPrintableMap{
     .setPopup(new MapboxGL.Popup({
       offset: 25
     }) // add popups
-    .setHTML('<h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
+    .setHTML('<div class="legend-type"><i style="background:' + category.color + '"></i><div class="poi-type">' + category.name + '</div></div><h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
     .addTo(this.map);
     feature.properties.category = category;
     feature.properties.layerid = this.layerid;

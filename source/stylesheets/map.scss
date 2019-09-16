@@ -143,6 +143,15 @@ body {
 
       .mapboxgl-popup {
         max-width: 200px;
+        .legend-type {
+          margin: 2px;
+          i {
+            width: 18px;
+            height: 18px;
+            float: left;
+            opacity: 0.7;
+          }
+        }
       }
     }
     #list {

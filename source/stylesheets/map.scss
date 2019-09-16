@@ -8,8 +8,16 @@ body {
 
 .sheet {
   float: left;
-  width:210mm !important;
-  min-height:297mm !important;
+  @media print {
+    width:210mm !important;
+    min-height:297mm !important;
+  }
+  @media screen and (min-width:0px) {
+  }
+  @media screen and (min-width:450px) {
+    width:210mm !important;
+    min-height:297mm !important;
+  } 
 }
 
 #explain {
@@ -34,10 +42,19 @@ body {
 #header {
   font-size: 3.5mm;
   text-align: right;
-  width: 210mm !important;
+  width: 100% !important;
+  height: 24px;
   #logo {
     float:left;
     width:200px;
+  }
+  #datetime_block {
+    @media screen and (min-width:0px) {
+      float:right;
+    }
+    @media screen and (min-width:450px) {
+      float:right;
+    }
   }
   #qrcodecontainer {
     float: left;
@@ -66,6 +83,7 @@ body {
     h1 {
       font-size: 7mm;
       margin: 0 auto 0.25em;
+      float: left;
     }
     #date {
       font-size: 4mm;

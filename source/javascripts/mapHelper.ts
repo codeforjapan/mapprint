@@ -217,9 +217,13 @@ export default class PrintableMap implements IPrintableMap{
     this.bounds = new MapboxGL.LngLatBounds();
     $.ajax(url).then((data, textStatus, jqXHR)=> {
       // データの最終更新日を表示（ローカルでは常に現在時刻となる）
-      var date = DisplayHelper.getNowYMD(new Date(jqXHR.getResponseHeader('date')!));
+      if (jqXHR.getResponseHeader('date')){
+        this.updated = new Date(jqXHR.getResponseHeader('date')!); // if update date is not provided, use current date
+      }else{
+        this.updated = new Date(); // if update date is not provided, use current date
+      }
+      var date = DisplayHelper.getNowYMD(this.updated);
       $("#datetime").html(date);
-      this.updated = new Date(jqXHR.getResponseHeader('date')!);
       if (jqXHR.responseXML){
         console.log("call XML data")
         this.loadKMLData(data);

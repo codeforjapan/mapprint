@@ -1,4 +1,5 @@
 /// <reference path="../../node_modules/@types/geojson/index.d.ts" />
+/// <reference path="../../@types/config.d.ts" />
 
 import * as MapboxGL from 'mapbox-gl';
 import * as $ from 'jquery';
@@ -14,6 +15,7 @@ export interface Category {
   id?: number,
   color?: string,
   iconUrl?: string,
+  class?: string
 }
 export interface IPrintableMap {
   map:MapboxGL.Map;
@@ -28,6 +30,7 @@ export interface IPrintableMapListener {
 export interface Legend {
   color: string;
   name: string;
+  class: string;
 }
 
 /**
@@ -48,6 +51,8 @@ export default class PrintableMap implements IPrintableMap{
   layerid: number = 0;
   bounds: MapboxGL.LngLatBounds ;
   defbounds: MapboxGL.LngLatBounds | undefined;
+  listener: IPrintableMapListener | undefined;
+  layer_settings: MapPrint.LayerSetting[] | null | undefined;
   targets
   /**
    * constructor
@@ -55,9 +60,13 @@ export default class PrintableMap implements IPrintableMap{
    * @param divid div id of a map container.
    * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
-  constructor (public host:string, public divid :string, public listener?: IPrintableMapListener){
+  constructor (public host:string, public divid :string, options?: {listener?: IPrintableMapListener, layer_settings?: MapPrint.LayerSetting[] | null}){
     let locationhash = this.getLocationHash();
     this.defbounds = deserializeBounds(locationhash);
+    if (options){
+      this.listener = options!.listener;
+      this.layer_settings = options!.layer_settings;
+    }
     this.map = new MapboxGL.Map({
       container: divid,
       center: [127.88768305343456,26.710444962177604],
@@ -156,7 +165,7 @@ export default class PrintableMap implements IPrintableMap{
     if (!this.legends.some((legend) =>{
       return legend.name == category.name;
     })){
-      this.legends.push({name:category.name, color:category.color!});
+      this.legends.push({name:category.name, color:category.color!, class: category.class!});
     }
     var el:HTMLDivElement = document.createElement('div');
     el.innerHTML = '<span style="background:' + category.color!.toLowerCase() + '"><b class="number">0</b></span>'
@@ -196,6 +205,10 @@ export default class PrintableMap implements IPrintableMap{
     }
     Array.prototype.forEach.call(folders, (folder) => {
       let category:Category = readCategoryOfFolder(folder, data);
+      // convret category style if layer_settings option is set
+      if (this.layer_settings){
+        category = this.convertCategoryStyle(category);
+      }
       if (tj.kml(folder).type == "FeatureCollection"){
         let geojsondata:geoJson.FeatureCollection = tj.kml(folder,{ styles: true });
         if (geojsondata.features.length > 0){
@@ -270,6 +283,20 @@ export default class PrintableMap implements IPrintableMap{
   }
   changeStyle(mapStyle:string, host:string):void {
     this.map.setStyle(getStyle(mapStyle, host))
+  }
+  convertCategoryStyle(category:Category):Category{
+    if (this.layer_settings == undefined){
+      return category;
+    }
+    this.layer_settings.forEach((setting:MapPrint.LayerSetting) => {
+      // if the category name is found, update with layer setting
+      if (setting.name == category.name){
+        category.color = setting.color;
+        category.class = setting.class;
+        return category;
+      }
+    });
+    return category;
   }
 }
 
@@ -367,3 +394,4 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
   }
   return {name:catname, color:color, iconUrl: iconUrl};
 }
+

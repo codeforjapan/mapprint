@@ -361,7 +361,7 @@ xdescribe('Map controller ', () => {
           done();
         }
       }
-      map = new PrintableMap("localhost:4567", "map", listener);
+      map = new PrintableMap("localhost:4567", "map", {listener: listener});
       map.loadUmapJsonData(JSON.parse(umapdata));
       // This bounds contains 8 POIs.
       //map.map.fitBounds(mapHelper.deserializeBounds("26.67781931519818,127.9319886425601-26.515420330689124,128.20458690916166"));

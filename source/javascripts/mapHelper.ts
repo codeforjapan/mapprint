@@ -19,6 +19,8 @@ export interface IPrintableMap {
   map:MapboxGL.Map;
   updated:Date;
   addMarker(feature:geoJson.Feature, category:Category): void;
+  loadFile(url:string):void;
+  changeStyle(mapStyle:string, host:string): void;
 }
 export interface IPrintableMapListener {
   POIFiltered(targets:MapboxGL.Marker[]):void;
@@ -62,23 +64,7 @@ export default class PrintableMap implements IPrintableMap{
       zoom: 13,
       bounds: this.defbounds,
       preserveDrawingBuffer: true,
-      style: {
-        "version": 8,
-        "sources": {
-          "OSM": {
-            "type": "raster",
-            "tiles": tileServerUrl('moXno', host ),
-            "tileSize": 256
-          }
-        },
-        "layers": [{
-          "id": "OSM",
-          "type": "raster",
-          "source": "OSM",
-          "minzoom": 0,
-          "maxzoom": 22
-        }]
-      }
+      style: getStyle('color', host)
     });
     //attribution: tileServerAttribution(host),
     this.map.addControl(new MapboxGL.NavigationControl());
@@ -278,12 +264,35 @@ export default class PrintableMap implements IPrintableMap{
     var lat = (point.lat - bounds.getNorthEast().lat) * (point.lat - bounds.getSouthWest().lat) < 0;
     return lng && lat;
   }
+  changeStyle(mapStyle:string, host:string):void {
+    this.map.setStyle(getStyle(mapStyle, host))
+  }
 }
 
 export function tileServerAttribution(host:string):string{
   return ( host === 'codeforjapan.github.io' ) ?
   "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
   'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
+}
+
+export function getStyle(mapStyle:string, host:string): any {
+  return {
+    "version": 8,
+    "sources": {
+      "OSM": {
+        "type": "raster",
+        "tiles": tileServerUrl(mapStyle, host),
+        "tileSize": 256
+      }
+    },
+    "layers": [{
+      "id": "OSM",
+      "type": "raster",
+      "source": "OSM",
+      "minzoom": 0,
+      "maxzoom": 22
+    }]
+  }
 }
 
 export function tileServerUrl(mapStyle:string, host:string):Array<string>{

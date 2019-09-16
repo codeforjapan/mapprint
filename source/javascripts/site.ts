@@ -1,10 +1,10 @@
 /// <reference path="../../@types/config.d.ts" />
 import * as $ from 'jquery';
-<<<<<<< HEAD
-import PrintableMap from './mapHelper';
+import PrintableMap, { IPrintableMap } from './mapHelper';
 import myconfig = require("./config.json")
 
 $(function(){
+  let map: IPrintableMap;
   const config:MapPrint.Config = myconfig;
   if ($('#maplist').length){
     // index page
@@ -37,20 +37,10 @@ $(function(){
       if ($('#map').length){
         $("#map_title").html(map_setting.map_title);
         $("#map_description").html(map_setting.map_description);
-        let map = new PrintableMap("localhost:4567", "map");
+        map = new PrintableMap(window.location.hostname, "map");
         map.loadFile(map_setting.data_url);
       }
     }
-=======
-import PrintableMap, { IPrintableMap } from './mapHelper';
-
-
-$(function(){
-  let map: IPrintableMap;
-  if ($('#map')){
-    map = new PrintableMap(window.location.hostname, "map");
-    map.loadFile('./images/chiba.kml');
->>>>>>> master
   }
   $('#print').on('click', () => {
     window.print();

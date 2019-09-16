@@ -43,18 +43,23 @@ body {
   font-size: 3.5mm;
   text-align: right;
   width: 100% !important;
-  height: 24px;
+  @media screen {
+    height: 24px;
+  }
+  @media print {
+    max-height: 24px;
+  }
   #logo {
-    float:left;
-    width:200px;
+    @media print {
+      display: none;
+    }
+    @media screen {
+      float:left;
+      width:200px;
+    }
   }
   #datetime_block {
-    @media screen and (min-width:0px) {
-      float:right;
-    }
-    @media screen and (min-width:450px) {
-      float:right;
-    }
+    float:right;
   }
   #qrcodecontainer {
     float: left;

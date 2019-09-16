@@ -3,7 +3,7 @@ import PrintableMap from './mapHelper';
 
 $(function(){
   if ($('#map')){
-    let map = new PrintableMap("localhost:4567", "map");
+    let map = new PrintableMap(window.location.hostname, "map");
     map.loadFile('./images/chiba.kml');
   }
   $('#print').on('click', () => {

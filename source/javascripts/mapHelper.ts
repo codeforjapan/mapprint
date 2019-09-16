@@ -63,8 +63,10 @@ export default class PrintableMap implements IPrintableMap{
   constructor (public host:string, public divid :string, options?: {listener?: IPrintableMapListener, layer_settings?: MapPrint.LayerSetting[] | null}){
     let locationhash = this.getLocationHash();
     this.defbounds = deserializeBounds(locationhash);
-    this.listener = options!.listener;
-    this.layer_settings = options!.layer_settings;
+    if (options){
+      this.listener = options!.listener;
+      this.layer_settings = options!.layer_settings;
+    }
     this.map = new MapboxGL.Map({
       container: divid,
       center: [127.88768305343456,26.710444962177604],

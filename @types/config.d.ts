@@ -16,7 +16,7 @@ declare namespace MapPrint {
    * map_title: 地図のタイトル
    * map_description: 地図の詳細
    * data_url: データのURL
-   * type: データの形式（Google マイマップはKML、umap は .umap 形式のデータであること）
+   * type: "KML" or "umap"。データの形式（Google マイマップはKML、umap は .umap 形式のデータであること）
    * layer_settings: レイヤー（カテゴリ）の設定情報
    */
   export interface MapSetting

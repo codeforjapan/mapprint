@@ -1,0 +1,14 @@
+{
+  "site_title": "印刷できる地図サイト",
+  "site_description": "A4で印刷できる地図サイトです",
+  "map_settings": [
+    {
+      "map_id":"chiba",
+      "map_title":"印刷できる台風災害支援情報マップ（千葉県）",
+      "map_description":"SNSで流れる給水所等の情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。（GS・給水・避難所・充電・無料Wifi）  ぜひ印刷して必要な人に届けてあげてください！",
+      "data_url":"./images/chiba.kml",
+      "type":"KML",
+      "layer_settings":null
+    }
+  ]
+}

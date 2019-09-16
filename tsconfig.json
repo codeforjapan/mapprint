@@ -19,11 +19,12 @@
     "noUnusedLocals": false,                /* Report errors on unused locals. */
     "noUnusedParameters": false,            /* Report errors on unused parameters. */
     "noImplicitReturns": false,             /* Report error when not all code paths in function return a value. */
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true
   },
   "include": [
     "./source/javascripts/**/*.ts",
-    "./spec/**/*Spec.ts", "build/images/@types/leaflet_awesome_number_markers.d.ts"
+    "./spec/**/*Spec.ts", "build/images/@types/leaflet_awesome_number_markers.d.ts", "@types/config.ts", "@types/site.ts"
   ],
   "exclude": [
     "node_modules",

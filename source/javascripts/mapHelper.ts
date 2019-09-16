@@ -275,7 +275,7 @@ export function tileServerAttribution(host:string):string{
   'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
 }
 
-export function getStyle(mapStyle:string, host:string): any {
+export function getStyle(mapStyle:string, host:string): mapboxgl.Style {
   return {
     "version": 8,
     "sources": {

@@ -2,6 +2,7 @@
 import * as $ from 'jquery';
 import PrintableMap from './mapHelper';
 import myconfig = require("./config.json")
+
 $(function(){
   const config:MapPrint.Config = myconfig;
   if ($('#maplist').length){
@@ -14,16 +15,30 @@ $(function(){
       if (map.default_hash){
         hash = map.default_hash;
       }
-      maplink.href = "map.html#" + hash;
+      maplink.href = "map.html?id=" + map.map_id + "#" + hash;
       maplink.innerText = map.map_title;
       div.appendChild(maplink)
       $("#maplist").append(div);
     });
   }else{
+    let mapid = new URLSearchParams(document.location.search).get("id")
+    if (mapid == null){
+      mapid = "chiba"
+    }
     // map page
-    if ($('#map').length){
-      let map = new PrintableMap("localhost:4567", "map");
-      map.loadFile('./images/chiba.kml');
+    let map_setting = config.map_settings.find((setting:MapPrint.MapSetting)=>{
+      return setting.map_id == mapid
+    })
+    if (map_setting == undefined){
+      $("#map_title").html("map IDが正しくありません。")
+    }else{
+      // map instance
+      if ($('#map').length){
+        $("#map_title").html(map_setting.map_title);
+        $("#map_description").html(map_setting.map_description);
+        let map = new PrintableMap("localhost:4567", "map");
+        map.loadFile(map_setting.data_url);
+      }
     }
   }
   $('#print').on('click', () => {

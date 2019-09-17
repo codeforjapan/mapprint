@@ -5,7 +5,8 @@ import * as MapboxGL from 'mapbox-gl';
 import * as $ from 'jquery';
 import * as geoJson from 'geojson';
 import * as tj from '@mapbox/togeojson';
-import * as DisplayHelper from './displayHelper'
+import * as DisplayHelper from './displayHelper';
+import myconfig = require("./config.json")
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -53,7 +54,8 @@ export default class PrintableMap implements IPrintableMap{
   defbounds: MapboxGL.LngLatBounds | undefined;
   listener: IPrintableMapListener | undefined;
   layer_settings: MapPrint.LayerSetting[] | null | undefined;
-  targets
+  targets;
+  myconfig: MapPrint.Config | undefined;
   /**
    * constructor
    * @param host host string of application, like codeforjapan.github.io
@@ -67,6 +69,9 @@ export default class PrintableMap implements IPrintableMap{
       this.listener = options!.listener;
       this.layer_settings = options!.layer_settings;
     }
+    if (!window.location.hash) {
+      window.location.hash = locationhash;
+    }
     this.map = new MapboxGL.Map({
       container: divid,
       center: [127.88768305343456,26.710444962177604],
@@ -79,6 +84,9 @@ export default class PrintableMap implements IPrintableMap{
     this.map.addControl(new MapboxGL.NavigationControl());
 
     var that = this;
+    this.map.on("render", function(){
+      that.filterPOIs();
+    });
     this.map.on("moveend", function(){
       that.filterPOIs();
       let bounds = this.getBounds();
@@ -274,7 +282,8 @@ export default class PrintableMap implements IPrintableMap{
     }
   }
   getLocationHash():string{
-    return window.location.hash.substr(1);
+    var hash = window.location.hash ? window.location.hash.substr(1) : myconfig.map_settings[0].default_hash;
+    return hash;
   }
   inBounds(point:MapboxGL.LngLat, bounds:MapboxGL.LngLatBounds) {
     var lng = (point.lng - bounds.getNorthEast().lng) * (point.lng - bounds.getSouthWest().lng) < 0;

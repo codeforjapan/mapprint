@@ -37,7 +37,7 @@ $(function(){
       if ($('#map').length){
         $("#map_title").html(map_setting.map_title);
         $("#map_description").html(map_setting.map_description);
-        map = new PrintableMap(window.location.hostname, "map", {layer_settings: map_setting.layer_settings})
+        map = new PrintableMap(window.location.hostname, "map", {layer_settings: map_setting.layer_settings, default_hash: map_setting.default_hash})
         map.loadFile(map_setting.data_url);
       }
     }

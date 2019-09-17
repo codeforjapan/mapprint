@@ -60,16 +60,22 @@ export default class PrintableMap implements IPrintableMap{
    * @param divid div id of a map container.
    * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
-  constructor (public host:string, public divid :string, options?: {listener?: IPrintableMapListener, layer_settings?: MapPrint.LayerSetting[] | null}){
+  constructor (public host:string, public divid :string, options?: {listener?: IPrintableMapListener, layer_settings?: MapPrint.LayerSetting[] | null, default_hash?:string}){
     let locationhash = this.getLocationHash();
+    if (!locationhash) {
+      if (options) {
+        locationhash = options.default_hash!;
+      }
+    }
     this.defbounds = deserializeBounds(locationhash);
     if (options){
       this.listener = options!.listener;
       this.layer_settings = options!.layer_settings;
     }
+
     this.map = new MapboxGL.Map({
       container: divid,
-      center: [127.88768305343456,26.710444962177604],
+      center: {lng:127.88768305343456,lat:26.710444962177604},
       zoom: 13,
       bounds: this.defbounds,
       preserveDrawingBuffer: true,
@@ -378,24 +384,31 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
   let catname:string = folder.getElementsByTagName("name")[0].textContent!;
   let color:string = "red";
   let iconUrl;
-  let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;
-  if (styleUrl){
-    let styles:NodeListOf<Element> = document.querySelectorAll(styleUrl + " Pair")!;
-    if (styles.length > 0) {
-      Array.prototype.forEach.call( styles, (elem) => {
-        let key = elem.querySelector("key");
-        if (key && key.textContent == "normal"){
-          let styleUrl = elem.querySelector("styleUrl").textContent;
-          let style = document.querySelector(styleUrl);
-          try{
-            color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6); // dirty fix
-          }catch(e){
-            color = DEFAULT_ICON_COLOR;
+  console.log(folder);
+  try {
+    let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;
+    if (styleUrl){
+      let styles:NodeListOf<Element> = document.querySelectorAll(styleUrl + " Pair")!;
+      if (styles.length > 0) {
+        Array.prototype.forEach.call( styles, (elem) => {
+          let key = elem.querySelector("key");
+          if (key && key.textContent == "normal"){
+            let styleUrl = elem.querySelector("styleUrl").textContent;
+            let style = document.querySelector(styleUrl);
+            try{
+              color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6); // dirty fix
+            }catch(e){
+              color = DEFAULT_ICON_COLOR;
+            }
+            // iconUrl = style.querySelector("IconStyle Icon href").textContent;
           }
-          // iconUrl = style.querySelector("IconStyle Icon href").textContent;
-        }
-      });
+        });
+      }
     }
+  }catch(e){
+    console.log("#category read error");
+    console.log(e);
+    console.log(folder);
   }
   return {name:catname, color:color, iconUrl: iconUrl};
 }

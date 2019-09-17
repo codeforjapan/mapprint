@@ -79,12 +79,17 @@ export default class PrintableMap implements IPrintableMap{
     this.map.addControl(new MapboxGL.NavigationControl());
 
     var that = this;
+    var prvious_hash = '';
     this.map.on("moveend", function(){
       that.filterPOIs();
       let bounds = this.getBounds();
       let s = serializeBounds(bounds);
       let path = location.pathname;
-      window.history.pushState('', '', path + '#' + s);
+      if (s != prvious_hash) {
+        window.history.pushState('', '', path + '#' + s);
+      }
+      prvious_hash = s;
+
     });
   }
   filterPOIs(): void{

@@ -60,16 +60,22 @@ export default class PrintableMap implements IPrintableMap{
    * @param divid div id of a map container.
    * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
-  constructor (public host:string, public divid :string, options?: {listener?: IPrintableMapListener, layer_settings?: MapPrint.LayerSetting[] | null}){
+  constructor (public host:string, public divid :string, options?: {listener?: IPrintableMapListener, layer_settings?: MapPrint.LayerSetting[] | null, default_hash?:string}){
     let locationhash = this.getLocationHash();
+    if (!locationhash) {
+      if (options) {
+        locationhash = options.default_hash!;
+      }
+    }
     this.defbounds = deserializeBounds(locationhash);
     if (options){
       this.listener = options!.listener;
       this.layer_settings = options!.layer_settings;
     }
+
     this.map = new MapboxGL.Map({
       container: divid,
-      center: [127.88768305343456,26.710444962177604],
+      center: {lng:127.88768305343456,lat:26.710444962177604},
       zoom: 13,
       bounds: this.defbounds,
       preserveDrawingBuffer: true,

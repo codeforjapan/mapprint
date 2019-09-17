@@ -6,7 +6,7 @@ import * as $ from 'jquery';
 import * as geoJson from 'geojson';
 import * as tj from '@mapbox/togeojson';
 import * as DisplayHelper from './displayHelper';
-import myconfig = require("./config.json")
+import myconfig = require("./config.json");
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -84,15 +84,22 @@ export default class PrintableMap implements IPrintableMap{
     this.map.addControl(new MapboxGL.NavigationControl());
 
     var that = this;
+
     this.map.on("render", function(){
       that.filterPOIs();
     });
+
+    var prvious_hash = '';
     this.map.on("moveend", function(){
       that.filterPOIs();
       let bounds = this.getBounds();
       let s = serializeBounds(bounds);
       let path = location.pathname;
-      window.history.pushState('', '', path + '#' + s);
+      if (s != prvious_hash) {
+        window.history.pushState('', '', path + '#' + s);
+      }
+      prvious_hash = s;
+
     });
   }
   filterPOIs(): void{

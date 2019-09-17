@@ -373,24 +373,31 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
   let catname:string = folder.getElementsByTagName("name")[0].textContent!;
   let color:string = "red";
   let iconUrl;
-  let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;
-  if (styleUrl){
-    let styles:NodeListOf<Element> = document.querySelectorAll(styleUrl + " Pair")!;
-    if (styles.length > 0) {
-      Array.prototype.forEach.call( styles, (elem) => {
-        let key = elem.querySelector("key");
-        if (key && key.textContent == "normal"){
-          let styleUrl = elem.querySelector("styleUrl").textContent;
-          let style = document.querySelector(styleUrl);
-          try{
-            color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6); // dirty fix
-          }catch(e){
-            color = DEFAULT_ICON_COLOR;
+  console.log(folder);
+  try {
+    let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;
+    if (styleUrl){
+      let styles:NodeListOf<Element> = document.querySelectorAll(styleUrl + " Pair")!;
+      if (styles.length > 0) {
+        Array.prototype.forEach.call( styles, (elem) => {
+          let key = elem.querySelector("key");
+          if (key && key.textContent == "normal"){
+            let styleUrl = elem.querySelector("styleUrl").textContent;
+            let style = document.querySelector(styleUrl);
+            try{
+              color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6); // dirty fix
+            }catch(e){
+              color = DEFAULT_ICON_COLOR;
+            }
+            // iconUrl = style.querySelector("IconStyle Icon href").textContent;
           }
-          // iconUrl = style.querySelector("IconStyle Icon href").textContent;
-        }
-      });
+        });
+      }
     }
+  }catch(e){
+    console.log("#category read error");
+    console.log(e);
+    console.log(folder);
   }
   return {name:catname, color:color, iconUrl: iconUrl};
 }

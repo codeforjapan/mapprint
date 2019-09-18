@@ -37,3 +37,10 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
     = yield
+    // Global site tag (gtag.js) - Google Analytics
+    = javascript_include_tag "https://www.googletagmanager.com/gtag/js?id=UA-45275834-9", async: "async"
+    :javascript
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45275834-9');

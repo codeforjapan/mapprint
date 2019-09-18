@@ -102,7 +102,6 @@ export default class PrintableMap implements IPrintableMap{
     this.targets = [];
     // @todo need to refactoring
     $('#list').html("");
-    $('#list').append(document.createElement('table'))
     this.layers.forEach((layer:any) => {
       if(this.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.map.getBounds())) {
         if (layer.properties === undefined) {
@@ -130,24 +129,19 @@ export default class PrintableMap implements IPrintableMap{
         return 0;
     });
     let lastCategory:string = "";
-    let categoryIndex:number = 0;
     res.forEach(function(layer,index){
       var name = layer.properties.name;
       $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
       if (layer.properties.category.name !== lastCategory){
-        //adding spacing row
-        $('#list table').append('<tr><td colspan="4" class="category_spacer"></td></tr>');
         // display categories
-        $('#list table').append('<tr><td colspan="4" class="category_separator" bgcolor="' + layer.properties.category.color + '">' + layer.properties.category.name + '</td></tr>');
+        $('#list').append('<section id="section-' + layer.properties.category.class + '" class="list-section">' +
+          '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span>' + layer.properties.category.name + '</h2>' +
+          '<ul class="list-items"></ul>' +
+          '</section>');
+
         lastCategory = layer.properties.category.name;
-        $('#list table').append('<tr>');
-        categoryIndex = index;
-    } else {
-        if ((index - categoryIndex) % 2 === 0){
-            $('#list table').append('<tr>');
-        }
-    }
-    $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
+      }
+      $('#section-' + layer.properties.category.class + ' ul').append('<li><span>' + (index + 1) + '</span><span>' + name + '</span></li>');
     });
     // call listener function if an instance is specified.
     if (this.listener !== undefined){

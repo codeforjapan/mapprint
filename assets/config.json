@@ -1,0 +1,43 @@
+{
+  "map_settings": [
+    {
+      "map_id":"chiba",
+      "map_title":"印刷できる台風災害支援情報マップ（千葉県）",
+      "map_description":"SNSで流れる給水所等の情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。（GS・給水・避難所・充電・無料Wifi）  ぜひ印刷して必要な人に届けてあげてください！",
+      "data_url":"https://www.google.com/maps/d/kml?mid=18v4csEC-qPW_aeXhEnuzgMfUAqWcbF5q&forcekml=1",
+      "default_hash": "35.034970230243786,139.83536606997205-34.998870264553034,139.90144296563784",
+      "type":"KML",
+      "layer_settings":[
+        {
+          "name": "GS(赤：無事)",
+          "color": "#cc2a36",
+          "class": "layer_gs_ok"
+        },{
+          "name": "GS (黒点：未確認)",
+          "color": "#65737e",
+          "class": "layer_gs_undefined"
+        },{
+          "name": "給水所_千葉市",
+          "color": "#0392cf",
+          "class": "layer_water_chibacity"
+        },{
+          "name": "給水所_ほか",
+          "color": "#adcbe3",
+          "class": "layer_water_others"
+        },{
+          "name": "避難所",
+          "color": "#54b2a9",
+          "class": "layer_temporary_houses"
+        },{
+          "name": "携帯充電",
+          "color": "#ffcc5c",
+          "class": "layer_charger"
+        },{
+          "name": "無料Wifi",
+          "color": "#8874a3",
+          "class": "layer_wifi"
+        }
+      ]
+    }
+  ]
+}

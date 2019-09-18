@@ -1,0 +1,28 @@
+#header {
+  .banner {
+    display: flex;
+    flex-direction: column;
+    @include bp(sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+  .logo {
+    width: 13em;
+    @include bp(sm) {
+      flex: 0 0 25%;
+    }
+  }
+  .datetime {
+    text-align: right;
+    @include bp(sm) {
+      order: -1;
+      flex: 1 0 100%;
+    }
+  }
+  .title {
+    @include bp(sm) {
+      flex: 0 0 75%;
+    }
+  }
+}

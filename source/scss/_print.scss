@@ -1,0 +1,15 @@
+@page {
+  size: A4;
+  margin: 10mm;
+}
+
+@media print {
+  body {
+    width: 190mm;
+    color: #000;
+  }
+  // 印刷したくない領域
+  .not_print_area {
+    display: none;
+  }
+}

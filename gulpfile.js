@@ -13,7 +13,7 @@ var jsConf = {
 };
 
 var cssConf = {
-  srcPath: 'source/stylesheets/**/*.scss',
+  srcPath: 'source/scss/**/*.scss',
   destFileName: 'site',
   destPath: '.tmp/dist/stylesheets'
 };

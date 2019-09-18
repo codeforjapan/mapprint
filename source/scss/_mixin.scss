@@ -1,0 +1,66 @@
+// -----------------------------------------------------------------
+// Media Queries (Variables for gridlex is required)
+// -----------------------------------------------------------------
+@mixin bp($breakpoint) {
+  $query: map-get($gl-mq-list, $breakpoint);
+  @if $query != null {
+    @media ($gl-mq-width: #{nth($query, 1)}) {
+      @content;
+    }
+  }
+}
+
+// -----------------------------------------------------------------
+// icon font
+// -----------------------------------------------------------------
+@mixin icon-font($font-name) {
+  content: attr(data-icon);
+  font-family: quote($font-name);
+  font-weight: bold;
+  font-style: normal;
+  font-size: 1em;
+  color: currentColor;
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+  vertical-align: middle;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+// -----------------------------------------------------------------
+// aspect ratio box
+// -----------------------------------------------------------------
+@mixin aspect-ratio($width, $height-percentage) {
+  position: relative;
+  width: $width;
+  &::before {
+    content: '';
+    display: block;
+    padding-top: $height-percentage;
+  }
+  > * {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// -----------------------------------------------------------------
+// z-index
+// -----------------------------------------------------------------
+$z-map: (
+  slider,
+  scroll-to-top,
+  sidebar
+);
+
+@function z($name) {
+  @return index($z-map, $name);
+}

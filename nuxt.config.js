@@ -23,19 +23,22 @@ export default {
   ** Global CSS
   */
   css: [
+    { src: '~/assets/sass/site.scss', lang: 'scss' },
+    { src: '~/assets/sass/index.scss', lang: 'scss' },
+    '~/assets/sass/leaflet_awesome_number_markers.css'
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/mapbox', mode: 'client' },{ src: '~/plugins/mapbox', mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
-    '@nuxt/typescript-build'
+    //'@nuxtjs/eslint-module'
   ],
   /*
   ** Nuxt.js modules

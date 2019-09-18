@@ -40,4 +40,5 @@ declare namespace MapPrint {
     color:string|undefined,
     class:string|undefined
   }
+
 }

@@ -39,6 +39,15 @@ body {
   margin: 3mm;
 }
 
+#qrcodecontainer {
+  position: absolute;
+  display: inline-block;
+  transform-origin: 0 0;
+  transform: scale(0.35);
+  top: 20px;
+  left: 50px;
+}
+
 #header {
   font-size: 3.5mm;
   text-align: right;
@@ -60,15 +69,6 @@ body {
   }
   #datetime_block {
     float:right;
-  }
-  #qrcodecontainer {
-    float: left;
-    margin-left: 200px;
-    display: inline-block;
-    transform-origin: 0 0;
-    transform: scale(0.35);
-    position: absolute;
-    left: 1rem;
   }
 }
 
@@ -236,6 +236,9 @@ body {
   body {
     width: 190mm;
     color: #000;
+    h1 {
+      margin-left: 50px !important;
+    }
   }
   // 印刷時のみ表示
   .print_area {
@@ -275,10 +278,9 @@ body {
     h1 {
       line-height: 40px;
     }
-    #header {
-      #qrcodecontainer {
-        left: 4rem;
-      }
+    #qrcodecontainer {
+      top: 20px;
+      left: 50px;
     }
   }
   .sheet {

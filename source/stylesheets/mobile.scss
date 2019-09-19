@@ -38,16 +38,16 @@
     }
   }
 
+  #qrcodecontainer {
+    display: none !important;
+  }
+
   #header {
     position: relative;
     width: auto !important;
     height: 4rem;
     #logo {
       width: 150px;
-    }
-    #qrcodecontainer {
-      left: 0 !important;
-      display: none;
     }
   }
 

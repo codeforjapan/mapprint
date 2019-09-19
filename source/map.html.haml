@@ -3,8 +3,8 @@ title: 印刷できる台風災害支援情報マップ（千葉県）
 ---
 - content_for(:header) do
   = stylesheet_link_tag "styles"
-%div.grid
-  %aside#explain.not_print_area.col-12_sm-3
+%div.inner-layout-container.grid
+  %aside#explain.not_print_area.col-12_md-3
     %button#print 印刷する（A4タテ）
     %p Google Chromeブラウザをお使いの方は上記(　印刷する（A4タテ）)のボタンから印刷してください。
     %br
@@ -24,7 +24,7 @@ title: 印刷できる台風災害支援情報マップ（千葉県）
         このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
         %a{:href=>"https://github.com/codeforjapan/mapprint"} Code for Japan の Github リポジトリ
         から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
-  %main.sheet.col-12_sm-9
+  %main.sheet.col-12_md-9
     #header
       %div.banner
         %div.logo

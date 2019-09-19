@@ -15,6 +15,7 @@ export interface Category {
   id?: number,
   color?: string,
   iconUrl?: string,
+  iconClass?: string,
   class?: string
 }
 export interface IPrintableMap {
@@ -31,6 +32,7 @@ export interface Legend {
   color: string;
   name: string;
   class: string;
+  iconClass: string;
 }
 
 /**
@@ -170,10 +172,10 @@ export default class PrintableMap implements IPrintableMap{
     if (!this.legends.some((legend) =>{
       return legend.name == category.name;
     })){
-      this.legends.push({name:category.name, color:category.color!, class: category.class!});
+      this.legends.push({name:category.name, color:category.color!, class: category.class!, iconClass: category.iconClass!});
     }
     var el:HTMLDivElement = document.createElement('div');
-    el.innerHTML = '<span><i class="fas ' + category.class + '" style="background:' + category.color + '"></i><b class="number" style="background:' + category.color + '">0</b></span>';
+    el.innerHTML = '<span><i class="' + category.iconClass + '" style="background:' + category.color!.toLowerCase() + '"></i><b class="number" style="background:' + category.color + '">0</b></span>'
     el.className = 'marker';
     el.id = 'layer-' + this.layerid;
     let desc = feature.properties.description ? feature.properties.description : "";
@@ -182,7 +184,7 @@ export default class PrintableMap implements IPrintableMap{
     .setPopup(new MapboxGL.Popup({
       offset: 25
     }) // add popups
-    .setHTML('<div class="legend-type"><i style="background:' + category.color + '"></i><div class="poi-type">' + category.name + '</div></div><h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
+    .setHTML('<div class="legend-type"><i style="background:' + category.color + ' class="' + category.iconClass + '"></i><div class="poi-type">' + category.name + '</div></div><h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
     .addTo(this.map);
     feature.properties.category = category;
     feature.properties.layerid = this.layerid;
@@ -274,7 +276,7 @@ export default class PrintableMap implements IPrintableMap{
     for (var i = 0; i < this.legends.length; i++) {
       div.append(
       '<div class="legend-type">' +
-        '<i style="background:' + this.legends[i].color + '"></i><div class=poi-type> ' + this.legends[i].name + '</div></br>' +
+        '<i style="background:' + this.legends[i].color + '" class="' + this.legends[i].iconClass + '"></i><div class=poi-type> ' + this.legends[i].name + '</div></br>' +
       '</div>');
     }
   }
@@ -298,6 +300,7 @@ export default class PrintableMap implements IPrintableMap{
       if (setting.name == category.name){
         category.color = setting.color;
         category.class = setting.class;
+        category.iconClass = setting.icon_class;
         return category;
       }
     });

@@ -10,39 +10,39 @@
       "layer_settings":[
         {
           "name": "GS(赤：無事)",
-          "color": "#992222",
-          "class": "fa-heart",
-          "id": "gs_ok"
+          "color": "#cc2a36",
+          "icon_class": "fas fa-heart",
+          "class": "layer_gs_ok",
         },{
           "name": "GS (黒点：未確認)",
           "color": "#4F4F5A",
-          "class": "fa-eye-slash",
-          "id": "gs_undefined"
+          "icon_class": "fas fa-eye-slash",
+          "class": "layer_gs_undefined"
         },{
-          "name": "給水所_千葉市",
+          "name": "給水所_(千葉市・県指定除く）",
           "color": "#285797",
-          "class": "fa-tint",
-          "id": "water_chibacity"
+          "icon_class": "fas fa-tint",
+          "class": "layer_water_chibacity"
         },{
           "name": "給水所_ほか",
-          "color": "#adcbe3",
-          "class": "fa-tint",
-          "id": "water_others"
+          "color": "#285797",
+          "icon_class": "fas fa-tint",
+          "class": "layer_water_others"
         },{
           "name": "避難所",
           "color": "#276445",
-          "class": "fa-street-view",
-          "id": "temporary_houses"
+          "icon_class": "fas fa-street-view",
+          "class": "layer_temporary_houses"
         },{
-          "name": "携帯充電",
+          "name": "携帯充電_ほか",
           "color": "#9F2951",
-          "class": "fa-plug",
-          "id": "charger"
+          "icon_class": "fas fa-plug",
+          "class": "layer_charger"
         },{
           "name": "無料Wifi",
           "color": "#604490",
-          "class": "fa-wifi",
-          "id": "wifi"
+          "icon_class": "fas fa-wifi",
+          "class": "layer_wifi"
         }
       ]
     }

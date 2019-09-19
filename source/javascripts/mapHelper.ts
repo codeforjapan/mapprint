@@ -136,14 +136,14 @@ export default class PrintableMap implements IPrintableMap{
       $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
       if (layer.properties.category.name !== lastCategory){
         // display categories
-        $('#list').append('<section id="section-' + layer.properties.category.id + '" class="list-section">' +
+        $('#list').append('<section id="section-' + layer.properties.category.class + '" class="list-section">' +
           '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span><span>' + layer.properties.category.name + '</span></h2>' +
           '<ul class="list-items grid-noBottom"></ul>' +
           '</section>');
 
         lastCategory = layer.properties.category.name;
       }
-      $('#section-' + layer.properties.category.id + ' ul').append('<li class="col-12_xs-6"><span class="item-number">' + (index + 1) + '</span><span class="item-name">' + name + '</span></li>');
+      $('#section-' + layer.properties.category.class + ' ul').append('<li class="col-12_xs-6"><span class="item-number">' + (index + 1) + '</span><span class="item-name">' + name + '</span></li>');
     });
     // call listener function if an instance is specified.
     if (this.listener !== undefined){

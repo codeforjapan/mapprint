@@ -32,6 +32,7 @@ function sassCompile(){
     style : 'expanded',
     includePaths: cssConf.destFileName
   }))
+  .pipe(postcss())
   .pipe(gulp.dest(cssConf.destPath));
 }
 

@@ -5,6 +5,7 @@ var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
 var neat = require('node-neat');
 var notify  = require('gulp-notify');
+var postcss = require('gulp-postcss');
 
 var jsConf = {
   srcPath: 'source/javascripts/site.ts',

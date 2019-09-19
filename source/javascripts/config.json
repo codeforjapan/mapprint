@@ -10,38 +10,38 @@
       "layer_settings":[
         {
           "name": "GS(赤：無事)",
-          "color": "#cc2a36",
-          "class": "layer_gs_ok",
+          "color": "#992222",
+          "class": "fa-heart",
           "id": "gs_ok"
         },{
           "name": "GS (黒点：未確認)",
-          "color": "#65737e",
-          "class": "layer_gs_undefined",
+          "color": "#4F4F5A",
+          "class": "fa-eye-slash",
           "id": "gs_undefined"
         },{
           "name": "給水所_千葉市",
-          "color": "#0392cf",
-          "class": "layer_water_chibacity",
+          "color": "#285797",
+          "class": "fa-tint",
           "id": "water_chibacity"
         },{
           "name": "給水所_ほか",
           "color": "#adcbe3",
-          "class": "layer_water_others",
+          "class": "fa-tint",
           "id": "water_others"
         },{
           "name": "避難所",
-          "color": "#54b2a9",
-          "class": "layer_temporary_houses",
+          "color": "#276445",
+          "class": "fa-street-view",
           "id": "temporary_houses"
         },{
           "name": "携帯充電",
-          "color": "#ffcc5c",
-          "class": "layer_charger",
+          "color": "#9F2951",
+          "class": "fa-plug",
           "id": "charger"
         },{
           "name": "無料Wifi",
-          "color": "#8874a3",
-          "class": "layer_wifi",
+          "color": "#604490",
+          "class": "fa-wifi",
           "id": "wifi"
         }
       ]

@@ -135,13 +135,13 @@ export default class PrintableMap implements IPrintableMap{
       if (layer.properties.category.name !== lastCategory){
         // display categories
         $('#list').append('<section id="section-' + layer.properties.category.id + '" class="list-section">' +
-          '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span>' + layer.properties.category.name + '</h2>' +
-          '<ul class="list-items"></ul>' +
+          '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span><span>' + layer.properties.category.name + '</span></h2>' +
+          '<ul class="list-items grid-noBottom"></ul>' +
           '</section>');
 
         lastCategory = layer.properties.category.name;
       }
-      $('#section-' + layer.properties.category.id + ' ul').append('<li><span>' + (index + 1) + '</span><span>' + name + '</span></li>');
+      $('#section-' + layer.properties.category.id + ' ul').append('<li class="col-12_xs-6"><span class="item-number">' + (index + 1) + '</span><span class="item-name">' + name + '</span></li>');
     });
     // call listener function if an instance is specified.
     if (this.listener !== undefined){
@@ -173,7 +173,7 @@ export default class PrintableMap implements IPrintableMap{
       this.legends.push({name:category.name, color:category.color!, class: category.class!});
     }
     var el:HTMLDivElement = document.createElement('div');
-    el.innerHTML = '<span style="background:' + category.color!.toLowerCase() + '"><b class="number">0</b></span>'
+    el.innerHTML = '<span><i class="fas ' + category.class + '" style="background:' + category.color + '"></i><b class="number" style="background:' + category.color + '">0</b></span>';
     el.className = 'marker';
     el.id = 'layer-' + this.layerid;
     let desc = feature.properties.description ? feature.properties.description : "";

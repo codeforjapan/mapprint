@@ -116,6 +116,10 @@ body {
             height: 18px;
             float: left;
             opacity: 0.7;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 18px;
           }
         }
       }
@@ -123,7 +127,7 @@ body {
         width:0;
         height:0;
       }
-      .marker span {
+      .marker span.mark {
         display:flex;
         justify-content:center;
         align-items:center;
@@ -138,8 +142,26 @@ body {
         cursor: pointer;
         transform-origin:0 0;
         transform: rotateZ(-135deg);
+        span.icon {
+          width:22px;
+          height: 22px;
+          border-radius: 50%;
+          position: absolute;
+          transform: rotateZ(135deg);
+          right: 3px;
+          top: 21px;
+          background-color: #777;
+          text-align: center;
+          border: 2px solid #fff;
+          i {
+            color:#fff;
+            font-size: 15px;  // font-awesom用
+            line-height: 22px;   // font-awesom用
+            vertical-align: middle; // font-awesom用
+          }
+        }
+        b {transform: rotateZ(135deg)}
       }
-      .marker b {transform: rotateZ(135deg)}
 
       .mapboxgl-popup {
         max-width: 200px;
@@ -150,6 +172,10 @@ body {
             height: 18px;
             float: left;
             opacity: 0.7;
+            color: #fff;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 18px;
           }
         }
       }
@@ -174,6 +200,8 @@ body {
         }
         .category_separator {
           border: 1px solid #000000;
+          color: white;
+          font-weight: bolder;
         }
         td {
           border-collapse: collapse;

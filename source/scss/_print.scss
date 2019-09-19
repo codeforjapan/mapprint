@@ -1,14 +1,21 @@
+//@page {
+//  size: A4;
+//  margin: 10mm;
+//}
+
 @page {
   size: A4;
-  margin: 10mm;
+  margin: 15mm 0;
 }
 
 @media print {
-  body {
-    width: 190mm;
-    color: #000;
+  .inner-layout-container {
+    display: block;
   }
-  // 印刷したくない領域
+  .sheet {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+  }
   .not_print_area {
     display: none;
   }

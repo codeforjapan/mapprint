@@ -7,6 +7,7 @@ $color-accent: #f2caff;
 $color-logo-mark: #ebbc0e;
 $color-site-title: #ff0;
 $color-highlight: #fafafa;
+$color-gray: #f2f2f2;
 
 // -----------------------------------------------------------------
 // Font
@@ -42,20 +43,19 @@ $font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Avenir Next", "Aven
 $root-background-color: #eee;
 $root-color: $color-base;
 $root-font-family: $font-family-sans-serif;
-$root-font-size: 87.5%;
+$root-font-size: 125%;
 $root-line-height: 1.75;
 $root-box-sizing: border-box;
 
 // -----------------------------------------------------------------
 // Variables for gridlex
 // -----------------------------------------------------------------
-$gl-gutter: 2rem;
-$gl-gutter-vertical: 2rem;
+$gl-gutter: 1.5rem;
+$gl-gutter-vertical: 1.5rem;
 $gl-mq-width: 'min-width';
 $gl-mq-list: (
-  xl: 95em,
   lg: 75em,
-  md: 64em,
+  md: 52.625em,
   sm: 48em,
   xs: 35.5em
 );

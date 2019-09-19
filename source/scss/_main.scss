@@ -1,9 +1,9 @@
 .sheet {
   background-color: #fff;
   box-shadow: 0 0.5mm 2mm rgba(0, 0, 0, 0.3);
-  padding: 2em;
   order: 1;
   @include bp(sm) {
     order: -1;
+    padding: 2em;
   }
 }

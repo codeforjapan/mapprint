@@ -6,6 +6,7 @@ import * as $ from 'jquery';
 import * as geoJson from 'geojson';
 import * as tj from '@mapbox/togeojson';
 import * as DisplayHelper from './displayHelper'
+import * as QRCode from 'qrcode';
 
 export interface Category {
   displayOnLoad?: boolean,
@@ -33,6 +34,15 @@ export interface Legend {
   name: string;
   class: string;
   iconClass: string;
+}
+
+function renewQRCode() {
+  if($('#qrcode')[0] == undefined) return;
+  var canvas = document.getElementById('qrcode');
+
+  QRCode.toCanvas(canvas, window.location.href, function (error) {
+  if (error) console.error(error);
+  })
 }
 
 /**
@@ -96,8 +106,8 @@ export default class PrintableMap implements IPrintableMap{
       if (s != prvious_hash) {
         window.history.pushState('', '', path + '#' + s);
       }
-      prvious_hash = s;
-
+      prvious_hash = s;2
+      renewQRCode();
     });
   }
   filterPOIs(): void{
@@ -266,6 +276,7 @@ export default class PrintableMap implements IPrintableMap{
       if (this.defbounds == undefined){
         this.map.fitBounds(this.bounds);
       }
+      renewQRCode();
       this.filterPOIs();
     }).catch((jqXHR, textStatus, errorThrown) => {
       console.log('error:' + jqXHR['message']);

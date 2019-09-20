@@ -18,4 +18,23 @@
   .not_print_area {
     display: none;
   }
+  #header {
+    display: flex;
+    align-items: center;
+    .qrcode {
+      display: block;
+      flex: 0 0 20mm;
+      height: 20mm;
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    }
+    .banner {
+      flex: 1 1 auto;
+    }
+    .logo {
+      display: none;
+    }
+  }
 }

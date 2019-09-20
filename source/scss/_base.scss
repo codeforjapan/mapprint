@@ -5,10 +5,10 @@
   color: $root-color;
   font: #{$root-font-size}/#{$root-line-height} $root-font-family;
   @include bp(xs) {
-    font-size: calc(.875rem + ((1vw - 0.355rem) * 0.3165));
+    font-size: calc(1rem + ((1vw - 0.355rem) * 0.5063));
   }
   @include bp(lg) {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
 }
 

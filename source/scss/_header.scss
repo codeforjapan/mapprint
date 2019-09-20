@@ -1,10 +1,14 @@
 #header {
+  .qrcode {
+    display: none;
+  }
   .banner {
     display: flex;
     flex-direction: column;
     @include bp(sm) {
       flex-direction: row;
       flex-wrap: wrap;
+      align-items: end;
     }
   }
   .logo {
@@ -21,6 +25,7 @@
     }
   }
   .title {
+    font-size: $font-size-lg;
     @include bp(sm) {
       flex: 0 0 75%;
     }

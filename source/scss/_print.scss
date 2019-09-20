@@ -1,20 +1,16 @@
-//@page {
-//  size: A4;
-//  margin: 10mm;
-//}
-
 @page {
   size: A4;
   margin: 15mm 0;
 }
 
 @media print {
-  .inner-layout-container {
+  .layout-container-inner {
     display: block;
   }
   .sheet {
     flex-basis: 100% !important;
     max-width: 100% !important;
+    box-shadow: none;
   }
   .not_print_area {
     display: none;

@@ -1,105 +1,99 @@
 #map {
   width: 100%;
   height: 140mm;
-  border: 1px solid #000000;
+  border: 1px solid #000;
   .legend {
     position: absolute;
     right: 0;
     bottom: 20px;
-    z-index: 999;
+    z-index: z(legend);
     line-height: 18px;
-    color: #555;
-    background-color: #fff;
+    background-color: rgba(255,255,255,.7);
     width: 100px;
-    //opacity: 0.7;
-    .legend-type {
-      margin: 2px;
-      i {
-        width: 18px;
-        height: 18px;
-        float: left;
-        //opacity: 0.7;
-        &::before {
-          color: #fff;
-        }
-      }
-    }
   }
   .mapboxgl-popup {
     max-width: 200px;
-    .legend-type {
-      margin: 2px;
-      i {
-        width: 18px;
-        height: 18px;
-        float: left;
-        opacity: 0.7;
-      }
+    z-index: z(mapboxgl-popup);
+  }
+}
+
+.legend-type {
+  margin: 2px;
+  i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 18px;
+  }
+}
+
+.marker {
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    color: #fff;
+    background: #555;
+    //border:solid 2px;
+    border-radius: 0 70% 70%;
+    box-shadow: 0 0 2px #000;
+    cursor: pointer;
+    transform-origin: 0 0;
+    transform: rotateZ(-135deg);
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      background: #FFF;
+      top: 50%;
+      bottom: 0;
+      right: 0;
+      left: 50%;
+      width: 29px;
+      height: 29px;
+      border-radius: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      z-index: z(marker);
     }
   }
-}
-
-.marker span {
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  box-sizing:border-box;
-  width: 30px;
-  height: 30px;
-  color:#fff;
-  background: #555 !important;// 追記
-  //border:solid 2px;
-  border-radius: 0 70% 70%;
-  box-shadow:0 0 2px #000;
-  cursor: pointer;
-  transform-origin:0 0;
-  transform: rotateZ(-135deg);
-  &::after {
-    display:block;
-    content:'';
-    position: absolute;
-    background: #FFF;
-    top: 50%;
-    bottom: 0;
-    right: 0;
-    left: 50%;
-    width: 29px;
-    height: 29px;
+  .number {
+    transform: rotateZ(135deg);
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
     border-radius: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    z-index: -1;
+    background: rgba(96, 68, 144, .2);//変化する値
+    z-index: z(marker-number);
   }
-}
-
-.marker b {
-  transform: rotateZ(135deg);
-  width: 26px;
-  height: 26px;
-  line-height: 26px;
-  text-align: center;
-  border-radius: 50%;
-  background: rgba(96, 68, 144, .2);//変化する値
-  z-index: 0;
-}
-// 以降、htmlの要素追加（ span > i > svg ）
-.marker i {
-  position: absolute;
-  left: 3px;
-  bottom: -10px;
-  width: 22px;
-  height: 22px;
-  //background: #604490;//変化する値
-  border-radius: 50%;
-  transform: rotateZ(-180deg);
-  vertical-align: middle;
-  color: #FFF;
-  border: 1px solid #FFF;
-  &::before {
+  i {
     position: absolute;
-    width: 80%;
-    height: 80%;
-    top: 50%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
+    right: 6px;
+    bottom: -15px;
+    z-index: z(marker-icon);
+    width: 22px;
+    height: 22px;
+    //background: #604490;//変化する値
+    border-radius: 50%;
+    transform: rotateZ(-180deg);
+    color: #FFF;
+    border: 1px solid #FFF;
+    &::before {
+      position: absolute;
+      display: block;
+      width: 80%;
+      height: 80%;
+      top: 50%;
+      left: 50%;
+      text-align: center;
+      line-height: 1.25;
+      transform: translateY(-50%) translateX(-50%);
+    }
   }
 }

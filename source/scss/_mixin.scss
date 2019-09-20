@@ -56,9 +56,11 @@
 // z-index
 // -----------------------------------------------------------------
 $z-map: (
-  slider,
-  scroll-to-top,
-  sidebar
+  marker,
+  marker-number,
+  marker-icon,
+  legend,
+  mapboxgl-popup
 );
 
 @function z($name) {

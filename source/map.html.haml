@@ -5,9 +5,9 @@ title: 印刷できる台風災害支援情報マップ（千葉県）
   = stylesheet_link_tag "styles"
 %div.layout-container-inner.grid
   %aside#explain.not_print_area.col-12_md-3
-    %button#print 印刷する（A4タテ）
-    %p Google Chromeブラウザをお使いの方は上記(　印刷する（A4タテ）)のボタンから印刷してください。
-    %br
+    %div.print-button-outer
+      %button#print 印刷する（A4タテ）
+      %p Google Chromeブラウザをお使いの方は上記( 印刷する（A4タテ）)のボタンから印刷してください。
     %div.map_controls
       %b 地図選択
       %br
@@ -15,10 +15,9 @@ title: 印刷できる台風災害支援情報マップ（千葉県）
       %label{:for => "color"} カラー
       %input{:type => "radio", :name => "mapStyle", :id => "mono", :value => "mono"}
       %label{:for => "mono"} 白黒
-    %br
-    %button#close 閉じる
-    .explain-container
-      %h2 このサイトについて
+    %h2.explain-title-pc このサイトについて
+    %div#explain-title.explain-title-sp このサイトについて
+    %div#explain-container.explain
       %p#map_description
       %p
         このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、

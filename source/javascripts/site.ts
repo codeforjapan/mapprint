@@ -55,7 +55,16 @@ $(function(){
     }
   });
 
-  $('input[name="mapStyle"]:radio').change( function() {
+  $('#explain-title').on('click', function(){
+    const $this = $('#explain-container');
+    if ($this.css('display') === 'none') {
+      $this.addClass('display-block').removeClass('display-none');
+    } else {
+      $this.addClass('display-none').removeClass('display-block');
+    }
+  });
+
+  $('input[name="mapStyle"]:radio').on('change', function() {
     const mapStyle:string = <string> $(this).val();
     map.changeStyle(mapStyle,window.location.hostname)
   });

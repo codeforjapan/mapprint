@@ -38,6 +38,8 @@ declare namespace MapPrint {
   {
     name:string,
     color:string|undefined,
+    bg_color:string|undefined,
+    icon_class:string|undefined,
     class:string|undefined
   }
 }

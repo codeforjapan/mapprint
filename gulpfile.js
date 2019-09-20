@@ -5,6 +5,7 @@ var sass = require('gulp-sass');
 var plumber = require('gulp-plumber');
 var neat = require('node-neat');
 var notify  = require('gulp-notify');
+var postcss = require('gulp-postcss');
 
 var jsConf = {
   srcPath: 'source/javascripts/site.ts',
@@ -13,7 +14,7 @@ var jsConf = {
 };
 
 var cssConf = {
-  srcPath: 'source/stylesheets/**/*.scss',
+  srcPath: 'source/scss/**/*.scss',
   destFileName: 'site',
   destPath: '.tmp/dist/stylesheets'
 };
@@ -32,6 +33,7 @@ function sassCompile(){
     style : 'expanded',
     includePaths: cssConf.destFileName
   }))
+  .pipe(postcss())
   .pipe(gulp.dest(cssConf.destPath));
 }
 

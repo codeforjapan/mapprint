@@ -1,0 +1,40 @@
+@page {
+  size: A4;
+  margin: 15mm 0;
+}
+
+@media print {
+  :root {
+    background-color: #fff;
+  }
+  .layout-container-inner {
+    display: block;
+  }
+  .sheet {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none;
+  }
+  .not_print_area {
+    display: none;
+  }
+  #header {
+    display: flex;
+    align-items: center;
+    .qrcode {
+      display: block;
+      flex: 0 0 20mm;
+      height: 20mm;
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+    }
+    .banner {
+      flex: 1 1 auto;
+    }
+    .logo {
+      display: none;
+    }
+  }
+}

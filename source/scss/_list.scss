@@ -1,0 +1,32 @@
+.list-title {
+  display: flex;
+  align-items: center;
+  padding: .5em;
+  background-color: $color-light-gray;
+}
+
+.list-title-mark {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  margin-right: .5em;
+}
+
+.list-items {
+  padding: 0;
+  li {
+    display: flex;
+    margin: .5em 0;
+  }
+}
+
+.item-number {
+  flex: 0 0 3em;
+  padding: .5em 0;
+  text-align: center;
+  border-right: 1px solid $color-gray;
+}
+.item-name {
+  padding: .5em;
+}

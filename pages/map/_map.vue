@@ -38,7 +38,7 @@
         #footer.print_area
 </template>
 
-<script lang="ts">
+<script>
 import PrintableMap from '~/components/PrintableMap'
 import '@/assets/sass/map.scss'
 export default {

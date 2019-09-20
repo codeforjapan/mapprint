@@ -1,39 +1,22 @@
-<template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        mapprint-nuxt
-      </h1>
-      <h2 class="subtitle">
-        migrate to nuxt
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+<template lang="pug">
+  .container
+    nuxt-link(:to='"map/"+map.map_id', v-for='map in maps') {{map.map_title}}
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import mapList from '~/assets/config/list.json'
+console.log(mapList)
+const maps = []
+
+mapList.forEach((name) => {
+  maps.push(require('~/assets/config/' + name))
+})
 
 export default {
-  components: {
-    Logo
+  data () {
+    return {
+      maps
+    }
   }
 }
 </script>

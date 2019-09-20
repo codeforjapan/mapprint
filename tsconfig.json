@@ -1,37 +1,33 @@
 {
   "compilerOptions": {
-    /* Basic Options */
-    "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
-    "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-    "lib": ["es6", "dom"],                             /* Specify library files to be included in the compilation. */
-    "allowJs": true,                       /* Allow javascript files to be compiled. */
-    "checkJs": true,                       /* Report errors in .js files. */
-    "removeComments": true,                /* Do not emit comments to output. */
-    /* Strict Type-Checking Options */
-    // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
-    "strictNullChecks": true,              /* Enable strict null checks. */
-    "alwaysStrict": true,                  /* Parse in strict mode and emit "use strict" for each source file. */
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": [
+      "esnext",
+      "esnext.asynciterable",
+      "dom"
+    ],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": false,
+    "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "*":["@types"]
+      "~/*": [
+        "./*"
+      ],
+      "@/*": [
+        "./*"
+      ]
     },
-    /* Additional Checks */
-    "noUnusedLocals": false,                /* Report errors on unused locals. */
-    "noUnusedParameters": false,            /* Report errors on unused parameters. */
-    "noImplicitReturns": false,             /* Report error when not all code paths in function return a value. */
-    "sourceMap": true,
-    "resolveJsonModule": true,
     "types": [
       "@types/node",
-      "@nuxt/vue-app"
+      "@nuxt/types"
     ]
   },
-  "include": [
-    "./source/javascripts/**/*.ts",
-    "./spec/**/*Spec.ts", "build/images/@types/leaflet_awesome_number_markers.d.ts", "@types/config.ts", "@types/site.ts"
-  ],
   "exclude": [
-    "node_modules",
-    "vendor"
+    "node_modules"
   ]
 }

@@ -150,7 +150,7 @@ export default class PrintableMap implements IPrintableMap{
         // display categories
         $('#list').append('<section id="section-' + layer.properties.category.class + '" class="list-section">' +
           '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span><span>' + layer.properties.category.name + '</span></h2>' +
-          '<ul class="list-items grid-noBottom"></ul>' +
+          '<ul class="list-items grid-noGutter"></ul>' +
           '</section>');
 
         lastCategory = layer.properties.category.name;

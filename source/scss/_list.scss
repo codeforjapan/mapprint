@@ -1,14 +1,16 @@
 .list-title {
   display: flex;
   align-items: center;
-  padding: .5em;
+  font-size: $font-size-base;
+  padding: .3em .5em;
+  margin-bottom: 0;
   background-color: $color-light-gray;
 }
 
 .list-title-mark {
   display: inline-block;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: $font-size-base;
+  height: $font-size-base;
   border-radius: 50%;
   margin-right: .5em;
 }
@@ -17,16 +19,24 @@
   padding: 0;
   li {
     display: flex;
-    margin: .5em 0;
+    font-size: $font-size-sm;
+    margin: .3em 0;
   }
 }
 
 .item-number {
   flex: 0 0 3em;
-  padding: .5em 0;
+  padding: .3em 0;
   text-align: center;
   border-right: 1px solid $color-gray;
+  @include bp(xs) {
+    padding: 0;
+  }
 }
+
 .item-name {
-  padding: .5em;
+  padding: .3em .5em;
+  @include bp(xs) {
+    padding: 0 .5em;
+  }
 }

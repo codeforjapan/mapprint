@@ -6,6 +6,10 @@
 @media print {
   :root {
     background-color: #fff;
+    font-size: $font-size-sm;
+  }
+  .layout-container {
+    margin: 0 auto;
   }
   .layout-container-inner {
     display: block;
@@ -14,6 +18,7 @@
     flex-basis: 100% !important;
     max-width: 100% !important;
     box-shadow: none;
+    padding: 0;
   }
   .not_print_area {
     display: none;
@@ -35,6 +40,9 @@
     }
     .logo {
       display: none;
+    }
+    .title {
+      font-size: $font-size-h2;
     }
   }
 }

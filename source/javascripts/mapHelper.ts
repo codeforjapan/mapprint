@@ -175,7 +175,7 @@ export default class PrintableMap implements IPrintableMap{
       this.legends.push({name:category.name, color:category.color!, class: category.class!, iconClass: category.iconClass!});
     }
     var el:HTMLDivElement = document.createElement('div');
-    el.innerHTML = '<span><i class="' + category.iconClass + '" style="background:' + category.color!.toLowerCase() + '"></i><b class="number" style="background:' + category.color + '">0</b></span>'
+    el.innerHTML = '<span><i class="' + category.iconClass + '" style="background:' + category.color!.toLowerCase() + '"></i><b class="number" style="background:' + category.color + '">0</b></span>';
     el.className = 'marker';
     el.id = 'layer-' + this.layerid;
     let desc = feature.properties.description ? feature.properties.description : "";
@@ -184,7 +184,7 @@ export default class PrintableMap implements IPrintableMap{
     .setPopup(new MapboxGL.Popup({
       offset: 25
     }) // add popups
-    .setHTML('<div class="legend-type"><i style="background:' + category.color + ' class="' + category.iconClass + '"></i><div class="poi-type">' + category.name + '</div></div><h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
+    .setHTML('<div class="legend-type"><i style="background:' + category.color + '" class="' + category.iconClass + '"></i><div class="poi-type">' + category.name + '</div></div><p>名称:' + feature.properties.name + '</p><p>' + desc + '</p>'))
     .addTo(this.map);
     feature.properties.category = category;
     feature.properties.layerid = this.layerid;

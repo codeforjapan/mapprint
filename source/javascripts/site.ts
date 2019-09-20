@@ -68,4 +68,7 @@ $(function(){
     const mapStyle:string = <string> $(this).val();
     map.changeStyle(mapStyle,window.location.hostname)
   });
+  
+  $('#qrcodecontainer')
+      .append('<canvas id="qrcode"></canvas>');
 });

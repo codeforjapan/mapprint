@@ -36,11 +36,9 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    width: 30px;
-    height: 30px;
-    color: #fff;
+    width: 40px;
+    height: 40px;
     background: #555;
-    //border:solid 2px;
     border-radius: 0 70% 70%;
     box-shadow: 0 0 2px #000;
     cursor: pointer;
@@ -55,8 +53,8 @@
       bottom: 0;
       right: 0;
       left: 50%;
-      width: 29px;
-      height: 29px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       transform: translateY(-50%) translateX(-50%);
       z-index: z(marker);
@@ -64,24 +62,23 @@
   }
   .number {
     transform: rotateZ(135deg);
-    width: 26px;
-    height: 26px;
-    line-height: 26px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
     text-align: center;
     border-radius: 50%;
-    background: rgba(96, 68, 144, .2);//変化する値
     z-index: z(marker-number);
   }
   i {
     position: absolute;
-    right: 6px;
-    bottom: -15px;
+    right: 10px;
+    bottom: -12px;
     z-index: z(marker-icon);
     width: 22px;
     height: 22px;
-    //background: #604490;//変化する値
     border-radius: 50%;
-    transform: rotateZ(-180deg);
+    transform: rotateZ(135deg);
     color: #FFF;
     border: 1px solid #FFF;
     &::before {
@@ -91,9 +88,14 @@
       height: 80%;
       top: 50%;
       left: 50%;
+      color: #fff;
       text-align: center;
       line-height: 1.25;
       transform: translateY(-50%) translateX(-50%);
+    }
+    &.layer_charger,
+    &.layer_wifi {
+      transform: rotateZ(-180deg);
     }
   }
 }

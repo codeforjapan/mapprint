@@ -2,7 +2,8 @@
 // Color
 // -----------------------------------------------------------------
 $color-base: #000;
-$color-gray: #f2f2f2;
+$color-light-gray: #f2f2f2;
+$color-gray: #b5b5b5;
 
 // -----------------------------------------------------------------
 // Font
@@ -45,8 +46,8 @@ $root-box-sizing: border-box;
 // -----------------------------------------------------------------
 // Variables for gridlex
 // -----------------------------------------------------------------
-$gl-gutter: 1.5rem;
-$gl-gutter-vertical: 1.5rem;
+$gl-gutter: 1.5em;
+$gl-gutter-vertical: 1.5em;
 $gl-mq-width: 'min-width';
 $gl-mq-list: (
   lg: 75em,

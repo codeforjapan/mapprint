@@ -4,6 +4,9 @@
 }
 
 @media print {
+  :root {
+    background-color: #fff;
+  }
   .layout-container-inner {
     display: block;
   }

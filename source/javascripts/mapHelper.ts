@@ -15,6 +15,7 @@ export interface Category {
   name: string,
   id?: number,
   color?: string,
+  bgColor?: string,
   iconUrl?: string,
   iconClass?: string,
   class?: string
@@ -31,6 +32,7 @@ export interface IPrintableMapListener {
 }
 export interface Legend {
   color: string;
+  bgColor: string;
   name: string;
   class: string;
   iconClass: string;
@@ -114,7 +116,6 @@ export default class PrintableMap implements IPrintableMap{
     this.targets = [];
     // @todo need to refactoring
     $('#list').html("");
-    $('#list').append(document.createElement('table'))
     this.layers.forEach((layer:any) => {
       if(this.inBounds(new MapboxGL.LngLat(layer.geometry.coordinates[0],layer.geometry.coordinates[1]), this.map.getBounds())) {
         if (layer.properties === undefined) {
@@ -142,24 +143,19 @@ export default class PrintableMap implements IPrintableMap{
         return 0;
     });
     let lastCategory:string = "";
-    let categoryIndex:number = 0;
     res.forEach(function(layer,index){
       var name = layer.properties.name;
       $("#layer-" + layer.properties.layerid + " b.number").html(index + 1);
       if (layer.properties.category.name !== lastCategory){
-        //adding spacing row
-        $('#list table').append('<tr><td colspan="4" class="category_spacer"></td></tr>');
         // display categories
-        $('#list table').append('<tr><td colspan="4" class="category_separator" bgcolor="' + layer.properties.category.color + '">' + layer.properties.category.name + '</td></tr>');
+        $('#list').append('<section id="section-' + layer.properties.category.class + '" class="list-section">' +
+          '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span><span>' + layer.properties.category.name + '</span></h2>' +
+          '<ul class="list-items grid-noGutter"></ul>' +
+          '</section>');
+
         lastCategory = layer.properties.category.name;
-        $('#list table').append('<tr>');
-        categoryIndex = index;
-    } else {
-        if ((index - categoryIndex) % 2 === 0){
-            $('#list table').append('<tr>');
-        }
-    }
-    $('#list table tr:last').append('<td class="id">' + (index + 1) + '</td><td class="value">'  + name + '</td>');
+      }
+      $('#section-' + layer.properties.category.class + ' ul').append('<li class="col-12_xs-6"><span class="item-number">' + (index + 1) + '</span><span class="item-name">' + name + '</span></li>');
     });
     // call listener function if an instance is specified.
     if (this.listener !== undefined){
@@ -188,10 +184,10 @@ export default class PrintableMap implements IPrintableMap{
     if (!this.legends.some((legend) =>{
       return legend.name == category.name;
     })){
-      this.legends.push({name:category.name, color:category.color!, class: category.class!, iconClass: category.iconClass!});
+      this.legends.push({name:category.name, color:category.color!, bgColor:category.bgColor!, class: category.class!, iconClass: category.iconClass!});
     }
     var el:HTMLDivElement = document.createElement('div');
-    el.innerHTML = '<span class="mark" style="background:' + category.color!.toLowerCase() + '"><span class="icon"><i class="' + category.iconClass + '"></i></span><b class="number">0</b></span>'
+    el.innerHTML = '<span><i class="' + category.iconClass + ' ' + category.class + '" style="background:' + category.color! + '"></i><b class="number" style="background:' + category.bgColor + '">0</b></span>';
     el.className = 'marker';
     el.id = 'layer-' + this.layerid;
     let desc = feature.properties.description ? feature.properties.description : "";
@@ -200,7 +196,7 @@ export default class PrintableMap implements IPrintableMap{
     .setPopup(new MapboxGL.Popup({
       offset: 25
     }) // add popups
-    .setHTML('<div class="legend-type"><i style="background:' + category.color + ' class="' + category.iconClass + '"></i><div class="poi-type">' + category.name + '</div></div><h3>名称:' + feature.properties.name + '</h3><p>' + desc + '</p>'))
+    .setHTML('<div class="legend-type"><i style="background:' + category.color + '" class="' + category.iconClass + '"></i><div class="poi-type">' + category.name + '</div></div><p>名称:' + feature.properties.name + '</p><p>' + desc + '</p>'))
     .addTo(this.map);
     feature.properties.category = category;
     feature.properties.layerid = this.layerid;
@@ -316,6 +312,7 @@ export default class PrintableMap implements IPrintableMap{
       // if the category name is found, update with layer setting
       if (setting.name == category.name){
         category.color = setting.color;
+        category.bgColor = setting.bg_color;
         category.class = setting.class;
         category.iconClass = setting.icon_class;
         return category;

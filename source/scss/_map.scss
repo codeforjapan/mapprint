@@ -1,0 +1,101 @@
+#map {
+  width: 100%;
+  height: 140mm;
+  border: 1px solid #000;
+  .legend {
+    position: absolute;
+    right: 0;
+    bottom: 20px;
+    z-index: z(legend);
+    line-height: 18px;
+    background-color: rgba(255,255,255,.7);
+    width: 100px;
+  }
+  .mapboxgl-popup {
+    max-width: 200px;
+    z-index: z(mapboxgl-popup);
+  }
+}
+
+.legend-type {
+  margin: 2px;
+  i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 18px;
+  }
+}
+
+.marker {
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    background: #555;
+    border-radius: 0 70% 70%;
+    box-shadow: 0 0 2px #000;
+    cursor: pointer;
+    transform-origin: 0 0;
+    transform: rotateZ(-135deg);
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      background: #FFF;
+      top: 50%;
+      bottom: 0;
+      right: 0;
+      left: 50%;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      z-index: z(marker);
+    }
+  }
+  .number {
+    transform: rotateZ(135deg);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 50%;
+    z-index: z(marker-number);
+  }
+  i {
+    position: absolute;
+    right: 10px;
+    bottom: -12px;
+    z-index: z(marker-icon);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    transform: rotateZ(135deg);
+    color: #FFF;
+    border: 1px solid #FFF;
+    &::before {
+      position: absolute;
+      display: block;
+      width: 80%;
+      height: 80%;
+      top: 50%;
+      left: 50%;
+      color: #fff;
+      text-align: center;
+      line-height: 1.25;
+      transform: translateY(-50%) translateX(-50%);
+    }
+    &.layer_charger,
+    &.layer_wifi {
+      transform: rotateZ(-180deg);
+    }
+  }
+}

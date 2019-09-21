@@ -2,40 +2,41 @@
 title: 印刷できる台風災害支援情報マップ（千葉県）
 ---
 - content_for(:header) do
-  = stylesheet_link_tag "map"
-#explain.not_print_area
-  %button#print 印刷する（A4タテ）
-  %p Google Chromeブラウザをお使いの方は上記(　印刷する（A4タテ）)のボタンから印刷してください。
-  %br
-  %div.map_controls
-    %b 地図選択
-    %br
-    %input{:type => "radio", :name => "mapStyle", :id => "color", :value => "color", :checked => true}
-    %label{:for => "color"} カラー
-    %input{:type => "radio", :name => "mapStyle", :id => "mono", :value => "mono"}
-    %label{:for => "mono"} 白黒
-  %br
-  %button#close 閉じる
-  .explain-container
-    %h2 このサイトについて
-    %p#map_description
-    %p
-      このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
-      %a{:href=>"https://github.com/codeforjapan/mapprint"} Code for Japan の Github リポジトリ
-      から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
-%section.sheet
-  / #qrcodecontainer
-  #header
-    %img{:src=>"images/logo.jpg", :id=>"logo"}
-    %span#datetime_block
-      データ最終更新日：
-      %span#datetime
-
-  #content
-    #page
-      %h1#map_title
-      #date.print_area
-      #map
-        #legend.legend
-      #list
-    #footer.print_area
+  = stylesheet_link_tag "styles"
+%div.layout-container-inner.grid
+  %aside#explain.not_print_area.col-12_md-3
+    %div.print-button-outer
+      %button#print 印刷する（A4タテ）
+      %p Google Chromeブラウザをお使いの方は上記( 印刷する（A4タテ）)のボタンから印刷してください。
+    %div.map_controls
+      %b 地図選択
+      %br
+      %input{:type => "radio", :name => "mapStyle", :id => "color", :value => "color", :checked => true}
+      %label{:for => "color"} カラー
+      %input{:type => "radio", :name => "mapStyle", :id => "mono", :value => "mono"}
+      %label{:for => "mono"} 白黒
+    %h2.explain-title-pc このサイトについて
+    %div#explain-title.explain-title-sp このサイトについて
+    %div#explain-container.explain
+      %p#map_description
+      %p
+        このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
+        %a{:href=>"https://github.com/codeforjapan/mapprint"} Code for Japan の Github リポジトリ
+        から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
+  %main.sheet.col-12_md-9
+    #header
+      #qrcodecontainer.qrcode
+      %div.banner
+        %div.logo
+          %img{:src=>"images/logo.jpg"}
+        %div#datetime_block.datetime
+          データ最終更新日：
+          %span#datetime
+        %h1#map_title.title
+    #content
+      #page
+        #date.print_area
+        #map
+          #legend.legend
+        #list
+      #footer.print_area

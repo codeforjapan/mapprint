@@ -18,6 +18,7 @@
     }
   }
   .datetime {
+    font-size: $font-size-sm;
     text-align: right;
     @include bp(sm) {
       order: -1;

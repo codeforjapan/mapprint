@@ -20,6 +20,7 @@
   display: none;
   @include bp(xs) {
     display: block;
+    font-size: $font-size-lg;
   }
 }
 

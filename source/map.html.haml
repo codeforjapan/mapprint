@@ -7,14 +7,15 @@ title: 印刷できる台風災害支援情報マップ（千葉県）
   %aside#explain.not_print_area.col-12_md-3
     %div.print-button-outer
       %button#print 印刷する（A4タテ）
-      %p Google Chromeブラウザをお使いの方は上記( 印刷する（A4タテ）)のボタンから印刷してください。
-    %div.map_controls
-      %b 地図選択
-      %br
-      %input{:type => "radio", :name => "mapStyle", :id => "color", :value => "color", :checked => true}
-      %label{:for => "color"} カラー
-      %input{:type => "radio", :name => "mapStyle", :id => "mono", :value => "mono"}
-      %label{:for => "mono"} 白黒
+      -#
+        / MIERUNE地図は建物が表示されるズームレベルが高すぎるので、利用しないことになった。以下はコメントアウトしている（参照：https://github.com/codeforjapan/mapprint/issues/200）
+        %div.map_controls 
+        %b 地図選択
+        %br
+        %input{:type => "radio", :name => "mapStyle", :id => "color", :value => "color", :checked => true}
+        %label{:for => "color"} カラー
+        %input{:type => "radio", :name => "mapStyle", :id => "mono", :value => "mono"}
+        %label{:for => "mono"} 白黒
     %h2.explain-title-pc このサイトについて
     %div#explain-title.explain-title-sp このサイトについて
     %div#explain-container.explain

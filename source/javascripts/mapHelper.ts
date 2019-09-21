@@ -149,7 +149,7 @@ export default class PrintableMap implements IPrintableMap{
       if (layer.properties.category.name !== lastCategory){
         // display categories
         $('#list').append('<section id="section-' + layer.properties.category.class + '" class="list-section">' +
-          '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"></span><span>' + layer.properties.category.name + '</span></h2>' +
+          '<h2 class="list-title"><span class="list-title-mark" style="background-color:' + layer.properties.category.color + '"><i class="' + layer.properties.category.iconClass + '"></i></span><span>' + layer.properties.category.name + '</span></h2>' +
           '<ul class="list-items grid-noGutter"></ul>' +
           '</section>');
 

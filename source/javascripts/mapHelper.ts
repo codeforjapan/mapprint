@@ -360,11 +360,15 @@ export function tileServerUrl(mapStyle:string, host:string):Array<string>{
   } else {
     styleCode = 'normal';
   }
+  return ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
+  /*
+  // 以下の処理は使わない。MIERUNE地図はズームレベルが高すぎるため。（参照：https://github.com/codeforjapan/mapprint/issues/200）
   // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/以下でのみ表示される）
   // サーバ上の場合のみMIERUNE地図を使う
   return ( host === 'codeforjapan.github.io' ) ?
-  ['https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC'] :
+   ['https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC'] :
   ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
+  */
 }
 function serializeLatLng(latLng) {
   return '' + latLng.lat + ',' + latLng.lng;

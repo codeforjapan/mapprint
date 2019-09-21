@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<meta content='ie=edge' http-equiv='x-ua-compatible'>
+<meta content='width=device-width, initial-scale=1, shrink-to-fit=no' name='viewport'>
+<title>印刷できる台風災害支援情報マップ</title>
+<meta content='印刷できる台風災害支援情報マップ' property='og:title'>
+<meta content='website' property='og:type'>
+<meta content='https://codeforjapan.github.io/mapprint/' property='og:url'>
+<meta content='https://codeforjapan.github.io/mapprint/images/thumbnail.png' property='og:image'>
+<meta content='印刷できる台風災害支援情報マップ' property='og:site_name'>
+<meta content='災害に対して、SNSで流れる給水所などの情報や、行政発信の情報を見れていない地域の人たちにも伝えるために、情報をA4にまとめて印刷してくばれるように情報を最適化しています。' property='og:description'>
+<meta content='192795788056486' property='fb:app_id'>
+<meta content='summary' name='twitter:card'>
+<link href='/mapprint/apple-touch-icon-180x180.png' rel='apple-touch-icon' type='image/png'>
+<link href='/mapprint/icon-192x192.png' rel='icon' type='image/png'>
+<link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/9b0eb4b9b8.js"></script>
+<script src="/mapprint/javascripts/bundle.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+<link href="/stylesheets/index.css" rel="stylesheet" />
+
+</head>
+<body>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAeHWBQHYtnqnKqvYMVG80yTNDOL9U5ly8",
+    authDomain: "knowwhere-7b502.firebaseapp.com",
+    databaseURL: "https://knowwhere-7b502.firebaseio.com",
+    projectId: "knowwhere-7b502",
+    storageBucket: "knowwhere-7b502.appspot.com",
+    messagingSenderId: "553967041157",
+    appId: "1:553967041157:web:eec1d011046e013b"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+<div class='layout-container'>
+<section class='sheet'>
+<div id='header'>
+<img id='logo' src='/mapprint/images/logo.jpg'>
+</div>
+<div id='content'>
+<p>印刷マップ：必要な情報を１ページにまとめて表示できます。</p>
+<div id='page'>
+<div id='maplist'></div>
+</div>
+</div>
+</section>
+
+<!-- / Global site tag (gtag.js) - Google Analytics -->
+<script src="https://www.googletagmanager.com/gtag/js?id=UA-45275834-9" async="async"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-45275834-9');
+  window.addEventListener( "afterprint", function () {
+    gtag('event', 'print');
+  });
+</script>
+</div>
+</body>
+</html>

@@ -34,8 +34,8 @@
           "class": "layer_temporary_houses"
         },{
           "name": "携帯充電_ほか",
-          "color": "#9F2951",
-          "bg_color": "#CE9DB9",
+          "color": "#6D4615",
+          "bg_color": "#C1B17E",
           "icon_class": "fas fa-plug",
           "class": "layer_charger"
         },{

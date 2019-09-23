@@ -1,0 +1,32 @@
+.print-button-outer {
+  display: none;
+  @include bp(xs) {
+    display: block;
+  }
+}
+
+.explain-title-sp {
+  background-color: $color-gray;
+  border-radius: 3em;
+  text-align: center;
+  padding: .5em;
+  margin: 1em 0;
+  @include bp(xs) {
+    display: none;
+  }
+}
+
+.explain-title-pc {
+  display: none;
+  @include bp(xs) {
+    display: block;
+    font-size: $font-size-lg;
+  }
+}
+
+.explain {
+  display: none;
+  @include bp(xs) {
+    display: block;
+  }
+}

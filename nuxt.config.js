@@ -1,3 +1,4 @@
+import sortCSSmq from 'sort-css-media-queries';
 
 export default {
   mode: 'universal',
@@ -12,7 +13,12 @@ export default {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'apple-touch-icon', type: 'image/png', href: '/apple-touch-icon-180x180.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' }
+    ],
+    script: [
+      { src: 'https://kit.fontawesome.com/9b0eb4b9b8.js' }
     ]
   },
   /*
@@ -23,9 +29,7 @@ export default {
   ** Global CSS
   */
   css: [
-    { src: '~/assets/sass/site.scss', lang: 'scss' },
-    { src: '~/assets/sass/index.scss', lang: 'scss' },
-    '~/assets/sass/leaflet_awesome_number_markers.css'
+    { src: '~/assets/sass/styles.scss', lang: 'scss' }
   ],
   /*
   ** Plugins to load before mounting the App
@@ -63,6 +67,17 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    },
+    postcss: {
+      plugins: {
+        'css-mqpacker': {
+          sort: sortCSSmq
+        },
+        'cssnano': {
+          reduceIdents: false,
+          zindex: false
+        }
+      }
     }
   }
 }

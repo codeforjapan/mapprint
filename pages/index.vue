@@ -1,6 +1,6 @@
 <template lang="pug">
   .container
-    nuxt-link(:to='"map/"+map.map_id', v-for='map in maps') {{map.map_title}}
+    nuxt-link(:to='"map/"+map.map_id', v-for='(map, index) in maps', v-bind:key='index') {{map.map_title}}
 </template>
 
 <script>

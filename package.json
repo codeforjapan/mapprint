@@ -11,6 +11,11 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
+  "browserslist": [
+    "last 2 version",
+    "android >= 4.4",
+    "IE 11"
+  ],
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.1.6",
     "@nuxtjs/axios": "^5.3.6",
@@ -28,6 +33,7 @@
     "@types/geojson": "^7946.0.7",
     "@types/leaflet": "^1.5.1",
     "babel-eslint": "^10.0.1",
+    "css-mqpacker": "^7.0.0",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
     "node-sass": "^4.12.0",
@@ -35,6 +41,7 @@
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^8.0.0",
+    "sort-css-media-queries": "^1.4.3",
     "ts-loader": "^6.1.1"
   }
 }

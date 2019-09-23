@@ -14,6 +14,7 @@ export interface Category {
   name: string,
   id?: number,
   color?: string,
+  bgColor?: string,
   iconUrl?: string,
   iconClass?: string,
   class?: string
@@ -146,6 +147,8 @@ export default class MapHelper implements IPrintableMap {
       // if the category name is found, update with layer setting
       if (setting.name == category.name) {
         category.color = setting.color;
+        category.bgColor = setting.bg_color;
+        category.iconClass = setting.icon_class;
         category.class = setting.class;
         // category.iconClass = setting.icon_class;
         return category;

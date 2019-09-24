@@ -6,7 +6,8 @@
     {
       "url" : "https://www.google.com/maps/d/kml?mid=18v4csEC-qPW_aeXhEnuzgMfUAqWcbF5q&forcekml=1",
       "type" : "kml",
-      "title" : "2019千葉台風15号"
+      "title" : "2019千葉台風15号",
+      "show" : true
     }
   ],
   "default_hash": "35.034970230243786,139.83536606997205-34.998870264553034,139.90144296563784",

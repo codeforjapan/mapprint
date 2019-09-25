@@ -1,9 +1,15 @@
 <template lang="pug">
   client-only
     div
+      div
+        label(v-for='source in map_config.sources')
+          input(type='checkbox', v-model='source.show')
+          | {{source.title}}
+      div#datetime_block.datetime
+        | データ最終更新日： {{updated_at}}
       MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center="center", zoom="15", @load="load")#map
         MglGeolocateControl
-        template(v-for='layer in layers')
+        template(v-for='layer in layers', v-if="layer.source.show")
           MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
             template(slot="marker")
               div.marker
@@ -32,12 +38,31 @@
 <script>
 import 'mapbox-gl/dist/mapbox-gl.css'
 import MapHelper from '~/lib/MapHelper.ts'
+import { getNowYMD } from '~/lib/displayHelper.ts'
+
 const helper = new MapHelper
 export default {
   props: ['map_config'],
   computed: {
     center () {
       return this.map_config.center
+    },
+    inBoundsMarkers () {
+      const inBoundsMarkers = []
+      this.layers.map((layer) => {
+        if (!layer.source.show) {
+          return
+        }
+        layer.markers.map((marker) => {
+          if (!this.bounds) {
+            return
+          }
+          if (helper.inBounds(marker.feature.geometry.coordinates, this.bounds)) {
+            inBoundsMarkers.push(marker)
+          }
+        })
+      })
+      return inBoundsMarkers
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
@@ -64,7 +89,7 @@ export default {
       layers: [],
       map: null,
       bounds: null,
-      inBoundsMarkers:[]
+      updated_at: null
     }
   },
   methods: {
@@ -77,24 +102,13 @@ export default {
       this.bounds = this.map.getBounds()
     }
   },
-  watch: {
-    bounds () {
-      this.inBoundsMarkers.splice(0, this.inBoundsMarkers.length)
-      this.layers.map((layer) => {
-        layer.markers.map((marker) => {
-          if (helper.inBounds(marker.feature.geometry.coordinates, this.bounds)) {
-            this.inBoundsMarkers.push(marker)
-          }
-        })
-      })
-    }
-  },
   mounted () {
     this.map_config.sources.forEach((source) => {
-      $nuxt.$axios.$get(source.url).then((data) => {
+      this.updated_at = getNowYMD(new Date())
+      $nuxt.$axios.get(source.url).then((response) => {
         this.layers.push({
           source,
-          markers: helper.parse(source.type, data, this.map_config.layer_settings)
+          markers: helper.parse(source.type, response.data, this.map_config.layer_settings)
         })
       })
     })

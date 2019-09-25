@@ -185,21 +185,8 @@ export default class MapHelper implements IPrintableMap {
   }
 
   tileServerUrl(mapStyle: string, host: string): Array<string> {
-    // 地図の色はnormal,grey, mono, bright, blueが選択できる。
-    // 印刷時の視認性の高さからカラーはbright、白黒にはgrayを使用する。
-    var styleCode;
-    if (mapStyle === 'color') {
-      styleCode = 'bright';
-    } else if (mapStyle === 'mono') {
-      styleCode = 'gray';
-    } else {
-      styleCode = 'normal';
-    }
-    // MIERUNEMAPのAPIキーはローカル環境では表示されないのでご注意(https://codeforjapan.github.io/以下でのみ表示される）
-    // サーバ上の場合のみMIERUNE地図を使う
-    return (host === 'codeforjapan.github.io') ?
-      ['https://tile.cdn.mierune.co.jp/styles/' + styleCode + '/{z}/{x}/{y}.png?key=KNmswjVYR187ACBqbsZc5fEIBM_DC2TXwMST0tVMe4AiYCt274X0VqAy5pf-ebvl8CtjAtBx15r1YyAiXURC'] :
-      ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
+
+    return ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
   }
 
 }

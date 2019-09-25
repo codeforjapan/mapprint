@@ -17,10 +17,7 @@ div.layout-container-inner.grid
       div.banner
         div.logo
           img(src="images/logo.jpg")
-        div#datetime_block.datetime
-          | データ最終更新日：
-          span#datetime
-        h1#map_title.title
+        h1#map_title.title(v-if="map_config") {{map_config.map_title}}
     #content
       #page
         #date.print_area

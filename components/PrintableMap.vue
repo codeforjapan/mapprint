@@ -7,7 +7,7 @@
           | {{source.title}}
       div.header-datetime
         | データ最終更新日： {{updated_at}}
-      MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center="center", zoom="15", @load="load", preserveDrawingBuffer='true')#map
+      MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true)#map
         MglGeolocateControl
         template(v-for='layer in layers', v-if="layer.source.show")
           MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
@@ -24,7 +24,7 @@
                   | 名称: {{marker.feature.properties.name}}
                   | {{marker.feature.properties.description ? marker.feature.properties.description : ""}}
       div
-        section(v-for='group in displayMarkersGroupByCategory', :id="'section-'+group.prop.class")
+        section(v-for='group in displayMarkersGroupByCategory')
           h2.list-title
             span.list-title-mark(:style="{backgroundColor:group.prop.color}")
               i(:class="[group.prop.iconClass]")

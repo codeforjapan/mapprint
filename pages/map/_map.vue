@@ -12,12 +12,12 @@ div.layout-container-inner.grid
         a(href="https://github.com/codeforjapan/mapprint") Code for Japan の Github リポジトリ
         | から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
   main.sheet.col-12_md-9
-    header#header
+    header.header
       #qrcodecontainer.qrcode
       div.banner
         div.logo
           img(src="~/assets/images/logo.jpg")
-        h1#map_title.title(v-if="map_config") {{map_config.map_title}}
+        h1.title(v-if="map_config") {{map_config.map_title}}
     #content
       #page
         #date.print_area

@@ -32,6 +32,8 @@ declare namespace MapPrint {
   /**
    * name: レイヤー名。この名前でマッチングを行う
    * color: 色文字列（css の形式）。デフォルトカラーを上書きする場合
+   * bg_color: マーカーの数字の背景色
+   * icon_class: Fontawesomeのアイコンclass
    * class: 追加するクラス名
    */
   export interface LayerSetting

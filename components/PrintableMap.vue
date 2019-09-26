@@ -7,28 +7,39 @@
           | {{source.title}}
       .header-datetime
         | データ最終更新日： {{updated_at}}
-      MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true)#map
-        MglGeolocateControl
-        .legend
-          .legend-type(v-for='setting in map_config.layer_settings')
-            i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
-            span.poi-type
-            | {{setting.name}}
-        template(v-for='layer in layers', v-if="layer.source.show")
-          MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
-            template(slot="marker")
-              div.marker
-                span(:style="{background:marker.category.color}")
-                  i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
-                  b.number(:style="{background:marker.category.bgColor}") {{inBoundsMarkers.indexOf(marker) +1}}
-            MglPopup
-              div.legend-type
-                i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
+      .map-outer
+        MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true)#map
+          MglGeolocateControl
+          .legend(v-bind:class='{open: isOpen}')
+            .legend-inner
+              .legend-type(v-for='setting in map_config.layer_settings')
+                i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
                 span.poi-type
-                | {{marker.category.name}}
-                p
-                  | 名称: {{marker.feature.properties.name}}
-                  | {{marker.feature.properties.description ? marker.feature.properties.description : ""}}
+                  | {{setting.name}}
+              .legend-trigger(v-on:click='isOpen=!isOpen' v-bind:class='{close: !isOpen}')
+                .legend-trigger-icon(v-if='!isOpen')
+                  i.fas.fa-caret-left
+                  span
+                    | 凡例
+                .legend-trigger-icon(v-else)
+                  i.fas.fa-caret-right
+                  span
+                    | とじる
+          template(v-for='layer in layers', v-if="layer.source.show")
+            MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
+              template(slot="marker")
+                div.marker
+                  span(:style="{background:marker.category.color}")
+                    i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
+                    b.number(:style="{background:marker.category.bgColor}") {{inBoundsMarkers.indexOf(marker) +1}}
+              MglPopup
+                div.legend-type
+                  i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
+                  span.poi-type
+                    | {{marker.category.name}}
+                  p
+                    | 名称: {{marker.feature.properties.name}}
+                    | {{marker.feature.properties.description ? marker.feature.properties.description : ""}}
       div
         section(v-for='group in displayMarkersGroupByCategory')
           h2.list-title
@@ -95,7 +106,8 @@ export default {
       layers: [],
       map: null,
       bounds: null,
-      updated_at: null
+      updated_at: null,
+      isOpen: false
     }
   },
   methods: {

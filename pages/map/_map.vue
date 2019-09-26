@@ -16,7 +16,7 @@ div.layout-container-inner.grid
       #qrcodecontainer.qrcode
       div.banner
         div.logo
-          img(src="images/logo.jpg")
+          img(src="~/assets/images/logo.jpg")
         h1#map_title.title(v-if="map_config") {{map_config.map_title}}
     #content
       #page

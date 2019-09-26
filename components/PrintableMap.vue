@@ -5,10 +5,15 @@
         label.header-label(v-for='source in map_config.sources')
           input.header-input(type='checkbox', v-model='source.show')
           | {{source.title}}
-      div.header-datetime
+      .header-datetime
         | データ最終更新日： {{updated_at}}
       MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true)#map
         MglGeolocateControl
+        .legend
+          .legend-type(v-for='setting in map_config.layer_settings')
+            i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
+            span.poi-type
+            | {{setting.name}}
         template(v-for='layer in layers', v-if="layer.source.show")
           MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
             template(slot="marker")
@@ -19,7 +24,8 @@
             MglPopup
               div.legend-type
                 i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
-                .poi-type {{marker.category.name}}
+                span.poi-type
+                | {{marker.category.name}}
                 p
                   | 名称: {{marker.feature.properties.name}}
                   | {{marker.feature.properties.description ? marker.feature.properties.description : ""}}

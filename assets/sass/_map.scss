@@ -7,9 +7,8 @@
     right: 0;
     bottom: 20px;
     z-index: z(legend);
-    line-height: 18px;
     background-color: rgba(255,255,255,.7);
-    width: 100px;
+    width: 200px;
   }
   .mapboxgl-popup {
     max-width: 200px;
@@ -18,15 +17,23 @@
 }
 
 .legend-type {
-  margin: 2px;
+  display: flex;
+  align-items: center;
+  margin: .5em;
   i {
-    width: 18px;
+    position: relative;
+    flex: 0 0 18px;
     height: 18px;
-    float: left;
     color: #fff;
     text-align: center;
-    vertical-align: middle;
-    line-height: 18px;
+    margin-right: .3em;
+    &::before {
+      position: absolute;
+      font-size: 80%;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
   }
 }
 
@@ -83,9 +90,6 @@
     border: 1px solid #FFF;
     &::before {
       position: absolute;
-      display: block;
-      width: 80%;
-      height: 80%;
       top: 50%;
       left: 50%;
       color: #fff;

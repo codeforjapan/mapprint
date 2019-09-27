@@ -1,4 +1,4 @@
-#header {
+.header {
   .qrcode {
     display: none;
   }
@@ -8,7 +8,7 @@
     @include bp(sm) {
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: end;
+      align-items: center;
     }
   }
   .logo {
@@ -17,18 +17,23 @@
       flex: 0 0 25%;
     }
   }
-  .datetime {
-    font-size: $font-size-sm;
-    text-align: right;
-    @include bp(sm) {
-      order: -1;
-      flex: 1 0 100%;
-    }
-  }
   .title {
     font-size: $font-size-lg;
     @include bp(sm) {
       flex: 0 0 75%;
     }
   }
+}
+
+.header-label {
+  margin: .5em 0;
+}
+
+.header-input {
+  margin-right: .5em;
+}
+
+.header-datetime {
+  font-size: $font-size-sm;
+  text-align: right;
 }

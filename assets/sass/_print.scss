@@ -23,7 +23,7 @@
   .not_print_area {
     display: none;
   }
-  #header {
+  .header {
     display: flex;
     align-items: center;
     .qrcode {
@@ -44,5 +44,16 @@
     .title {
       font-size: $font-size-h2;
     }
+  }
+  .legend {
+    position: absolute;
+    right: 0 !important;
+    bottom: 20px;
+    z-index: z(legend);
+    width: 150px !important;
+  }
+  .legend-inner {
+    background-color: rgba(255,255,255,.7);
+    padding: 0;
   }
 }

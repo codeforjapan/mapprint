@@ -1,32 +1,16 @@
+.map-outer {
+  position: relative;
+  overflow: hidden;
+}
+
 #map {
   width: 100%;
   height: 140mm;
   border: 1px solid #000;
-  .legend {
-    position: absolute;
-    right: 0;
-    bottom: 20px;
-    z-index: z(legend);
-    line-height: 18px;
-    background-color: rgba(255,255,255,.7);
-    width: 100px;
-  }
+  overflow: hidden;
   .mapboxgl-popup {
     max-width: 200px;
     z-index: z(mapboxgl-popup);
-  }
-}
-
-.legend-type {
-  margin: 2px;
-  i {
-    width: 18px;
-    height: 18px;
-    float: left;
-    color: #fff;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 18px;
   }
 }
 
@@ -83,9 +67,6 @@
     border: 1px solid #FFF;
     &::before {
       position: absolute;
-      display: block;
-      width: 80%;
-      height: 80%;
       top: 50%;
       left: 50%;
       color: #fff;

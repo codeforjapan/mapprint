@@ -52,6 +52,8 @@ export var DEFAULT_ICON_COLOR: string = "lightgreen";
  * main class of PrintableMap
  */
 export default class MapHelper implements IPrintableMap {
+  updated: Date;
+  markers: Marker[];
 
   /**
    * constructor
@@ -133,7 +135,7 @@ export default class MapHelper implements IPrintableMap {
     return markers;
   }
 
-  inBounds(point: bounds.getNorthEast, bounds: MapboxGL.LngLatBounds) {
+  inBounds(point: MapboxGL.LngLatBounds.getNorthEast, bounds: MapboxGL.LngLatBounds) {
     var lng = (point[0] - bounds.getNorthEast().lng) * (point[0] - bounds.getSouthWest().lng) < 0;
     var lat = (point[1] - bounds.getNorthEast().lat) * (point[1] - bounds.getSouthWest().lat) < 0;
     return lng && lat;

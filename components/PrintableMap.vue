@@ -10,14 +10,14 @@
       .map-outer
         MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true)#map
           MglGeolocateControl
-          .legend(v-bind:class='{open: isOpen}')
+          .legend(v-bind:class='{open: isOpenLegend}')
             .legend-inner
               .legend-type(v-for='setting in map_config.layer_settings')
                 i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
                 span.poi-type
                   | {{setting.name}}
-              .legend-trigger(v-on:click='isOpen=!isOpen' v-bind:class='{close: !isOpen}')
-                .legend-trigger-icon(v-if='!isOpen')
+              .legend-trigger(v-on:click='isOpenLegend=!isOpenLegend' v-bind:class='{close: !isOpenLegend}')
+                .legend-trigger-icon(v-if='!isOpenLegend')
                   i.fas.fa-caret-left
                   span
                     | 凡例
@@ -107,7 +107,7 @@ export default {
       map: null,
       bounds: null,
       updated_at: null,
-      isOpen: false
+      isOpenLegend: false
     }
   },
   methods: {

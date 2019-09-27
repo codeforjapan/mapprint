@@ -69,6 +69,9 @@ export default {
       })
     }
   },
+  router: {
+    base: '/mapprint-nuxt/'
+  },
   build: {
     /*
     ** You can extend webpack config here

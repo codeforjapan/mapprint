@@ -39,7 +39,7 @@ jobs:
                 git config --global user.email info@code4japan.org
                 git config --global user.name circleci
                 git clone -b gh-pages git@github.com:codeforjapan/mapprint-nuxt.git
-                cp -rf mapprint-nuxt/*
-                mv -rf dist/* mapprint-nuxt
-                cd gh-pages git commit ./; git commit -m "From `git log --oneline origin/master -n 1`"; git push
+                rm -rf mapprint-nuxt/*
+                cp -rf dist/* mapprint-nuxt
+                cd mapprint-nuxt git commit ./; git commit -m "From `git log --oneline origin/master -n 1`"; git push
             fi

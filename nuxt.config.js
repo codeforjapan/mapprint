@@ -1,4 +1,4 @@
-import sortCSSmq from 'sort-css-media-queries';
+import sortCSSmq from 'sort-css-media-queries'
 
 export default {
   mode: 'universal',
@@ -35,14 +35,14 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/mapbox', mode: 'client' },{ src: '~/plugins/mapbox', mode: 'client' },
+    { src: '~/plugins/mapbox', mode: 'client' }, { src: '~/plugins/mapbox', mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
-    //'@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
     '@nuxt/typescript-build'
 
   ],
@@ -57,11 +57,18 @@ export default {
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
-  axios: {
-  },
+  axios: {},
   /*
   ** Build configuration
   */
+  generate: {
+    routes () {
+      const list = require('./assets/config/list.json')
+      return list.map((name) => {
+        return '/map/' + name.replace('.json', '')
+      })
+    }
+  },
   build: {
     /*
     ** You can extend webpack config here

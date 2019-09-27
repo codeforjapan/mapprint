@@ -1,0 +1,43 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: npm run generate
+      - add_ssh_keys
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                git config --global user.email info@code4japan.org
+                git config --global user.name circleci
+                git clone -b gh-pages git@github.com:codeforjapan/mapprint-nuxt.git
+                cp -rf mapprint-nuxt/*
+                mv -rf dist/* mapprint-nuxt
+                cd gh-pages git commit ./; git commit -m "From `git log --oneline origin/master -n 1`"; git push
+            fi

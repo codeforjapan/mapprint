@@ -30,7 +30,7 @@ jobs:
           key: v2-dependencies-{{ checksum "package.json" }}
 
       - run: npm run generate
-      - add_ssh_keys
+      - add_ssh_keys:
           fingerprints:
             - "be:39:d2:f2:39:f1:22:5d:0e:3e:1e:17:2c:e5:d6:67"
       - deploy:

@@ -3,9 +3,11 @@ div.layout-container-inner.grid
   aside#explain.not_print_area.col-12_md-3
     div.print-button-outer
       button#print 印刷する（A4タテ）
-    h2.explain-title-pc このサイトについて
-    div#explain-title.explain-title-sp このサイトについて
-    div#explain-container.explain
+    h2.explain-title-pc
+     | このサイトについて
+    div.explain-title-sp(v-on:click='isOpenExplain=!isOpenExplain')
+     | このサイトについて
+    div.explain(v-bind:class='{open: isOpenExplain}')
       p(v-if="map_config") {{map_config.map_description}}
       p
         | このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
@@ -22,7 +24,6 @@ div.layout-container-inner.grid
       #page
         #date.print_area
         printable-map(:map_config='map_config', v-if="map_config")
-          #legend.legend
       #footer.print_area
 </template>
 
@@ -34,7 +35,8 @@ export default {
   },
   data () {
     return {
-      map_config: null
+      map_config: null,
+      isOpenExplain: false
     }
   },
   mounted () {

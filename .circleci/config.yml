@@ -41,5 +41,5 @@ jobs:
                 git clone -b gh-pages git@github.com:codeforjapan/mapprint-nuxt.git
                 rm -rf mapprint-nuxt/*
                 cp -rf dist/* mapprint-nuxt
-                cd mapprint-nuxt; git commit .; git commit -m "From `git log --oneline origin/master -n 1`"; git push
+                cd mapprint-nuxt; git add .; git commit -m "From `git log --oneline origin/master -n 1`"; git push
             fi

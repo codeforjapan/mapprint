@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/codeforjapan/mapprint-nuxt/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint-nuxt/tree/master)
+
 # mapprint-nuxt
 
 > migrate to nuxt

@@ -190,7 +190,26 @@ export default class MapHelper implements IPrintableMap {
 
     return ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
   }
-
+  serializeLatLng(latLng) {
+    return '' + latLng.lat + ',' + latLng.lng;
+  }
+  serializeBounds(bounds) {
+    return this.serializeLatLng(bounds.getNorthWest()) + '-' +
+        this.serializeLatLng(bounds.getSouthEast());
+  }
+  public deserializeLatLng(s:string) {
+    let [slat, slng] = s.split(',', 2);
+    let lng = parseFloat(slng);
+    let lat = parseFloat(slat);
+    return new MapboxGL.LngLat(lng,lat);
+  }
+  public deserializeBounds(s) {
+    try{
+      return new MapboxGL.LngLatBounds(s.split('-', 2).map(function(d) {return this.deserializeLatLng(d);}));
+    }catch(e){
+      return undefined;
+    }
+  }
 }
 
 
@@ -233,3 +252,4 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
   return {name:catname, color:color, iconUrl: iconUrl};
 
 }
+

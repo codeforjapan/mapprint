@@ -60,6 +60,7 @@ import { getNowYMD } from '~/lib/displayHelper.ts'
 const helper = new MapHelper
 export default {
   props: ['map_config'],
+  previous_hash: "",
   computed: {
     center () {
       return this.map_config.center
@@ -118,6 +119,15 @@ export default {
     },
     etmitBounds () {
       this.bounds = this.map.getBounds()
+      this.setHash(this.bounds)
+    },
+    setHash(bounds){
+      var s = helper.serializeBounds(bounds);
+      let path = location.pathname;
+      if (s != this.prvious_hash) {
+        window.history.pushState('', '', path + '#' + s);
+      }
+      this.previous_hash = s;
     }
   },
   mounted () {

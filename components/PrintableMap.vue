@@ -54,10 +54,10 @@
 
 <script>
 import 'mapbox-gl/dist/mapbox-gl.css'
-import MapHelper from '~/lib/MapHelper.ts'
+
 import { getNowYMD } from '~/lib/displayHelper.ts'
 
-const helper = new MapHelper
+let helper;
 export default {
   props: ['map_config'],
   previous_hash: "",
@@ -137,6 +137,9 @@ export default {
     }
   },
   mounted () {
+    const MapHelper = require('~/lib/MapHelper.ts').default
+
+    helper = new MapHelper()
     this.map_config.sources.forEach((source) => {
       this.updated_at = getNowYMD(new Date())
       $nuxt.$axios.get(source.url).then((response) => {

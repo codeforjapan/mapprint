@@ -201,13 +201,7 @@ export default class MapHelper implements IPrintableMap {
     let [slat, slng] = s.split(',', 2);
     let lng = parseFloat(slng);
     let lat = parseFloat(slat);
-    if (process.client) {
-      // この行が入るとエラーになり、直接 /map/{ID} のURLを呼び出すと self is not defined エラーになる。if 分で分岐してみたが変わらず。この行を消して undefined を返す場合エラーが消える
-      return new MapboxGL.LngLat(lng,lat);
-      //return undefined;
-    }else{
-      return undefined;
-    }
+    return new MapboxGL.LngLat(lng,lat);
   }
   public deserializeBounds(s) {
     try{

@@ -135,7 +135,7 @@ export default class MapHelper implements IPrintableMap {
     return markers;
   }
 
-  inBounds(point: MapboxGL.LngLatBounds.getNorthEast, bounds: MapboxGL.LngLatBounds) {
+  inBounds(point: any, bounds: MapboxGL.LngLatBounds) {
     var lng = (point[0] - bounds.getNorthEast().lng) * (point[0] - bounds.getSouthWest().lng) < 0;
     var lat = (point[1] - bounds.getNorthEast().lat) * (point[1] - bounds.getSouthWest().lat) < 0;
     return lng && lat;
@@ -190,7 +190,32 @@ export default class MapHelper implements IPrintableMap {
 
     return ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
   }
-
+  serializeLatLng(latLng) {
+    return '' + latLng.lat + ',' + latLng.lng;
+  }
+  serializeBounds(bounds) {
+    return this.serializeLatLng(bounds.getNorthWest()) + '-' +
+        this.serializeLatLng(bounds.getSouthEast());
+  }
+  public deserializeLatLng(s:string) {
+    let [slat, slng] = s.split(',', 2);
+    let lng = parseFloat(slng);
+    let lat = parseFloat(slat);
+    return new MapboxGL.LngLat(lng,lat);
+  }
+  public deserializeBounds(s) {
+    try{
+      let _this = this;
+      if (process.client) {
+        return new MapboxGL.LngLatBounds(s.split('-', 2).map(function(d) {return _this.deserializeLatLng(d);}));
+        //return undefined;
+      }else{
+        return undefined;
+      }
+    }catch(e){
+      return undefined;
+    }
+  }
 }
 
 
@@ -233,3 +258,4 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
   return {name:catname, color:color, iconUrl: iconUrl};
 
 }
+

@@ -54,12 +54,13 @@
 
 <script>
 import 'mapbox-gl/dist/mapbox-gl.css'
-import MapHelper from '~/lib/MapHelper.ts'
+
 import { getNowYMD } from '~/lib/displayHelper.ts'
 
-const helper = new MapHelper
+let helper;
 export default {
   props: ['map_config'],
+  previous_hash: "",
   computed: {
     center () {
       return this.map_config.center
@@ -112,15 +113,33 @@ export default {
   },
   methods: {
     load (e) {
+      // deserialie bounds from url
+      var locationhash = window.location.hash.substr(1);
+      var initbounds = helper.deserializeBounds(locationhash);
       this.map = e.map
+      if (initbounds != undefined){
+        this.map.fitBounds(initbounds, {linear:false});
+      }
       this.map.on('moveend', this.etmitBounds)
       this.etmitBounds()
     },
     etmitBounds () {
       this.bounds = this.map.getBounds()
+      this.setHash(this.bounds)
+    },
+    setHash(bounds){
+      var s = helper.serializeBounds(bounds);
+      let path = location.pathname;
+      if (s != this.prvious_hash) {
+        window.history.pushState('', '', path + '#' + s);
+      }
+      this.previous_hash = s;
     }
   },
   mounted () {
+    const MapHelper = require('~/lib/MapHelper.ts').default
+
+    helper = new MapHelper()
     this.map_config.sources.forEach((source) => {
       this.updated_at = getNowYMD(new Date())
       $nuxt.$axios.get(source.url).then((response) => {

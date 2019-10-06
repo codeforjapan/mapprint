@@ -113,7 +113,13 @@ export default {
   },
   methods: {
     load (e) {
+      // deserialie bounds from url
+      var locationhash = window.location.hash.substr(1);
+      var initbounds = helper.deserializeBounds(locationhash);
       this.map = e.map
+      if (initbounds != undefined){
+        this.map.fitBounds(initbounds, {linear:false});
+      }
       this.map.on('moveend', this.etmitBounds)
       this.etmitBounds()
     },

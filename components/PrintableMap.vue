@@ -60,7 +60,7 @@ import { getNowYMD } from '~/lib/displayHelper.ts'
 let helper;
 export default {
   props: ['map_config'],
-  previous_hash: "",
+
   computed: {
     center () {
       return this.map_config.center
@@ -108,7 +108,8 @@ export default {
       map: null,
       bounds: null,
       updated_at: null,
-      isOpenLegend: false
+      isOpenLegend: false,
+      previous_hash: "",
     }
   },
   methods: {
@@ -130,7 +131,7 @@ export default {
     setHash(bounds){
       var s = helper.serializeBounds(bounds);
       let path = location.pathname;
-      if (s != this.prvious_hash) {
+      if (s != this.previous_hash) {
         window.history.pushState('', '', path + '#' + s);
       }
       this.previous_hash = s;

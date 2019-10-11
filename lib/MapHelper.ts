@@ -158,38 +158,6 @@ export default class MapHelper implements IPrintableMap {
     });
     return category;
   }
-
-  tileServerAttribution(host: string): string {
-    return (host === 'codeforjapan.github.io') ?
-      "Maptiles by <a href='http://mierune.co.jp/' target='_blank'>MIERUNE</a>, under CC BY. Data by <a href='http://osm.org/copyright' target='_blank'>OpenStreetMap</a> contributors, under ODbL." :
-      'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>';
-  }
-
-  getStyle(mapStyle: string, host: string): MapboxGL.Style {
-    return {
-      "version": 8,
-      "sources": {
-        "OSM": {
-          "type": "raster",
-          "tiles": this.tileServerUrl(mapStyle, host),
-          "tileSize": 256,
-          "attribution": this.tileServerAttribution(host)
-        }
-      },
-      "layers": [{
-        "id": "OSM",
-        "type": "raster",
-        "source": "OSM",
-        "minzoom": 0,
-        "maxzoom": 22
-      }]
-    }
-  }
-
-  tileServerUrl(mapStyle: string, host: string): Array<string> {
-
-    return ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'];
-  }
   serializeLatLng(latLng) {
     return '' + latLng.lat + ',' + latLng.lng;
   }

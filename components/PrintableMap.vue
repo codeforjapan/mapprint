@@ -8,7 +8,8 @@
       .header-datetime
         | データ最終更新日： {{updated_at}}
       .map-outer
-        MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', map-style='mapbox://styles/mapbox/streets-v11', :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true)#map
+        MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', :mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
+        )#map
           MglGeolocateControl
           .legend(v-bind:class='{open: isOpenLegend}')
             .legend-inner
@@ -108,7 +109,25 @@ export default {
       map: null,
       bounds: null,
       updated_at: null,
-      isOpenLegend: false
+      isOpenLegend: false,
+      mapStyle: {
+        "version": 8,
+        "sources": {
+          "OSM": {
+            "type": "raster",
+            "tiles": ['http://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            "tileSize": 256,
+            "attribution": 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
+          }
+        },
+        "layers": [{
+          "id": "OSM",
+          "type": "raster",
+          "source": "OSM",
+          "minzoom": 0,
+          "maxzoom": 22
+        }]
+      }
     }
   },
   methods: {

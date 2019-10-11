@@ -115,7 +115,7 @@ export default {
         "sources": {
           "OSM": {
             "type": "raster",
-            "tiles": ['http://a.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            "tiles": ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'],
             "tileSize": 256,
             "attribution": 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
           }

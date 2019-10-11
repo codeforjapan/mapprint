@@ -8,7 +8,7 @@
       .header-datetime
         | データ最終更新日： {{updated_at}}
       .map-outer
-        MglMap(access-token='pk.eyJ1IjoibWlra2FtZSIsImEiOiJjamtpNnczNTQxMXJuM3FtbHl1a3dyMmgxIn0.d4Xr7p5rC24rYg4pFVWwqg', :mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
+        MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
         )#map
           MglGeolocateControl
           .legend(v-bind:class='{open: isOpenLegend}')

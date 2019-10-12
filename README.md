@@ -1,10 +1,31 @@
 [![CircleCI](https://circleci.com/gh/codeforjapan/mapprint/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint/tree/master)
 
-# mapprint-nuxt
+紙マップ
+===
 
-> migrate to nuxt
+Google マイマップ や、umap の情報を取り込んで、印刷向けに最適化しで表示できるサイトのソースコードです。
 
-## Build Setup
+https://codeforjapan.github.io/mapprint/
+
+から実際のページを確認できます。
+災害時に、近くのサポート情報を印刷した地図を避難所や市役所で配布するような用途で使われています。
+
+## おばあちゃんの手に届くまで
+このサイトの特徴は、紙でマップが配布できることです。
+このプロジェクトで作られたデータは、さまざまな人々の手を経て、困っているおばあちゃんのところにまで届きます。
+
+![kamimap_180713.png](source/images/kamimap_180713.png)
+
+## LICENSE
+
+This software is released under the MIT License, see LICENSE.txt.
+
+## Help Wanted!!
+
+Issues にあるいろいろな修正にご協力いただけると嬉しいです。
+詳しくは[こちら](./CONTRIBUTE.md)
+
+## 開発環境の構築方法
 
 ``` bash
 # install dependencies
@@ -20,5 +41,3 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

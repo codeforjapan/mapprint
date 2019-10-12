@@ -111,15 +111,12 @@ export default class MapHelper implements IPrintableMap {
     }
     let markers = [];
     Array.prototype.forEach.call(folders, (folder) => {
-      let category: Category = readCategoryOfFolder(folder, data);
-      // convret category style if layer_settings option is set
-      if (layer_setting) {
-        category = this.convertCategoryStyle(category, layer_setting);
-      }
+      let category = readCategoryOfFolder(folder, data).name;
+
       if (tj.kml(folder).type == "FeatureCollection") {
         let geojsondata: geoJson.FeatureCollection = tj.kml(folder, {styles: true});
         if (geojsondata.features.length > 0) {
-          that.addFeatureCollection(geojsondata, category);
+          //that.addFeatureCollection(geojsondata, category);
           const result =  geojsondata.features.map((feature: geoJson.Feature) => {
             if (feature.geometry.type == "Point") {
               markers.push({feature, category});

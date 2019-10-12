@@ -1,6 +1,6 @@
 <template lang="pug">
   client-only
-    div
+    div(v-if='layers.length')
       div
         label.header-label(v-for='source in map_config.sources')
           input.header-input(type='checkbox', v-model='source.show')
@@ -13,10 +13,10 @@
           MglGeolocateControl
           .legend(v-bind:class='{open: isOpenLegend}')
             .legend-inner
-              .legend-type(v-for='setting in map_config.layer_settings')
+              .legend-type(v-for='(setting, name) in map_config.layer_settings')
                 i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
                 span.poi-type
-                  | {{setting.name}}
+                  | {{name}}
               .legend-trigger(v-on:click='isOpenLegend=!isOpenLegend' v-bind:class='{close: !isOpenLegend}')
                 .legend-trigger-icon(v-if='!isOpenLegend')
                   i.fas.fa-caret-left
@@ -30,15 +30,14 @@
             MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
               template(slot="marker")
                 div.marker
-                  span(:style="{background:marker.category.color}")
-                    i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
-                    b.number(:style="{background:marker.category.bgColor}") {{inBoundsMarkers.indexOf(marker) +1}}
+                  span(:style="{background:map_config.layer_settings[marker.category].color}")
+                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                    b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
-                div
-                  div.legend-type
-                    i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
-                    span.poi-type
-                      | {{marker.category.name}}
+                div.legend-type
+                  i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                  span.poi-type
+                    | {{marker.category}}
                   p
                     | 名称: {{marker.feature.properties.name}}
                   div.legend-detail-content
@@ -46,9 +45,9 @@
       div
         section(v-for='group in displayMarkersGroupByCategory')
           h2.list-title
-            span.list-title-mark(:style="{backgroundColor:group.prop.color}")
-              i(:class="[group.prop.iconClass]")
-            span {{group.prop.name}}
+            span.list-title-mark(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
+              i(:class="map_config.layer_settings[group.name].icon_class")
+            span {{group.name}}
           ul.list-items.grid-noGutter
             li.col-12_xs-6(v-for="marker in group.markers")
               span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
@@ -59,7 +58,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import { getNowYMD } from '~/lib/displayHelper.ts'
-
+const crc16 = require('js-crc').crc16;
 let helper;
 export default {
   props: ['map_config'],
@@ -87,10 +86,11 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
-        let group = groups.find((g) => g.name === current.category.name)
+
+        let group = groups.find((g) => g.name === current.category)
         if (!group) {
           group = {
-            name: current.category.name,
+            name: current.category,
             prop: current.category,
             markers: []
           }
@@ -163,13 +163,43 @@ export default {
     const MapHelper = require('~/lib/MapHelper.ts').default
 
     helper = new MapHelper()
+    const categories = {};
     this.map_config.sources.forEach((source) => {
       this.updated_at = getNowYMD(new Date())
       $nuxt.$axios.get(source.url).then((response) => {
+        const markers = helper.parse(source.type, response.data, this.map_config.layer_settings)
+        markers.map((marker) => {
+          categories[marker.category] = true;
+        })
+        Object.keys(categories).map((category) => {
+          const categoryExists = this.map_config.layer_settings[category]
+
+          if (!categoryExists) {
+            let color = '#'
+            color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 64).toString(16)
+            color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 64).toString(16)
+            color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 64).toString(16)
+
+            let bg_color = '#'
+            bg_color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16)
+            bg_color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16)
+            bg_color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16)
+            this.map_config.layer_settings[category] = {
+              name: category,
+              color,
+              bg_color
+
+            }
+          }
+          console.log(this.map_config.layer_settings);
+        })
         this.layers.push({
           source,
-          markers: helper.parse(source.type, response.data, this.map_config.layer_settings)
+          markers
         })
+
+
+
       })
     })
   }

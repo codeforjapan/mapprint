@@ -143,6 +143,11 @@ export default {
       this.map = e.map
       if (initbounds != undefined){
         this.map.fitBounds(initbounds, {linear:false});
+      }else{
+        initbounds = helper.deserializeBounds(this.map_config.default_hash);
+        if (initbounds != undefined){
+          this.map.fitBounds(initbounds, {linear:false});
+        }
       }
       this.map.on('moveend', this.etmitBounds)
       this.etmitBounds()

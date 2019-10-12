@@ -70,7 +70,7 @@ export default {
     }
   },
   router: {
-    base: '/mapprint-nuxt/'
+    base: '/mapprint/'
   },
   build: {
     /*

@@ -1,6 +1,11 @@
 <template lang="pug">
-  .container
-    nuxt-link(:to='"map/"+map.map_id', v-for='(map, index) in maps', v-bind:key='index') {{map.map_title}}
+  .page
+    h1
+      | 紙マップ
+    .container
+      ul
+        li(v-for='(map, index) in maps')
+          nuxt-link(:to='"map/"+map.map_id', v-bind:key='index') {{map.map_title}}
 </template>
 
 <script>

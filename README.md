@@ -14,7 +14,7 @@ https://codeforjapan.github.io/mapprint/
 このサイトの特徴は、紙でマップが配布できることです。
 このプロジェクトで作られたデータは、さまざまな人々の手を経て、困っているおばあちゃんのところにまで届きます。
 
-![kamimap_180713.png](source/images/kamimap_180713.png)
+![kamimap_180713.png](static/kamimap_180713.png)
 
 ## LICENSE
 

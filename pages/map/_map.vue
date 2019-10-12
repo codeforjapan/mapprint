@@ -15,8 +15,8 @@ div.layout-container-inner.grid
         | から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
   main.sheet.col-12_md-9
     header.header
-      #qrcodecontainer.qrcode
-        vue-qrcode(v-bind:value='fullURL' tag="img" class='qrcode')
+      div.qrcode
+        vue-qrcode(v-bind:value='fullURL' tag="img")
       div.banner
         div.logo
           img(src="~/assets/images/logo.jpg")

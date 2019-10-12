@@ -146,6 +146,7 @@ export default {
     etmitBounds () {
       this.bounds = this.map.getBounds()
       this.setHash(this.bounds)
+      this.$emit('bounds-changed')
     },
     setHash(bounds){
       var s = helper.serializeBounds(bounds);

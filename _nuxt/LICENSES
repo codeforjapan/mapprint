@@ -29,6 +29,16 @@
  * Released under the MIT License.
  */
 
+/**
+ * [js-crc]{@link https://github.com/emn178/js-crc}
+ *
+ * @namespace crc
+ * @version 0.2.0
+ * @author Chen, Yi-Cyuan [emn178@gmail.com]
+ * @copyright Chen, Yi-Cyuan 2015-2017
+ * @license MIT
+ */
+
 /*!
  * vue-qrcode v1.0.1
  * https://fengyuanchen.github.io/vue-qrcode

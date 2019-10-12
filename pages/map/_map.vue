@@ -1,8 +1,6 @@
 <template lang="pug">
 div.layout-container-inner.grid
   aside#explain.not_print_area.col-12_md-3
-    div.print-button-outer
-      button#print 印刷する（A4タテ）
     h2.explain-title-pc
      | このサイトについて
     div.explain-title-sp(v-on:click='isOpenExplain=!isOpenExplain')

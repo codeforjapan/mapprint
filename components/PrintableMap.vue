@@ -34,10 +34,11 @@
                     i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                     b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
-                div.legend-type
-                  i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                  span.poi-type
-                    | {{marker.category}}
+                div
+                  div.legend-type
+                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                    span.poi-type
+                      | {{marker.category}}
                   p
                     | 名称: {{marker.feature.properties.name}}
                   div.legend-detail-content

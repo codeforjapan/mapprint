@@ -49,13 +49,13 @@
     "docomo 無料WIFI": {
       "color": "#992222",
       "bg_color": "#CA9491",
-      "icon_class": "fas fa-plug",
+      "icon_class": "fas fa-wifi",
       "class": "layer_wifi-docomo"
     },
     "Softbank 無料WIFI": {
       "color": "#666666",
       "bg_color": "#B1B6B9",
-      "icon_class": "fas fa-plug",
+      "icon_class": "fas fa-wifi",
       "class": "layer_wifi-sb"
     }
 }

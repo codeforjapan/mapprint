@@ -3,7 +3,7 @@
 紙マップ
 ===
 
-Google マイマップ や、umap の情報を取り込んで、印刷向けに最適化しで表示できるサイトのソースコードです。
+Google マイマップ や、umap の情報を取り込んで、印刷向けに最適化して表示できるサイトのソースコードです。
 
 https://codeforjapan.github.io/mapprint/
 

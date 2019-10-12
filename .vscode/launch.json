@@ -20,7 +20,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:3000/mapprint-nuxt",
+            "url": "http://localhost:3000/mapprint",
             "webRoot": "${workspaceFolder}"
         }
     ],

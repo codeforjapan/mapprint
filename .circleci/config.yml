@@ -32,14 +32,14 @@ jobs:
       - run: npm run generate
       - add_ssh_keys:
           fingerprints:
-            - "be:39:d2:f2:39:f1:22:5d:0e:3e:1e:17:2c:e5:d6:67"
+            - "c7:f9:19:fc:bc:1f:a2:43:9d:15:2b:3b:3d:ff:41:f2"
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
                 git config --global user.email info@code4japan.org
                 git config --global user.name circleci
-                git clone -b gh-pages git@github.com:codeforjapan/mapprint-nuxt.git
-                rm -rf mapprint-nuxt/*
-                cp -rf dist/* mapprint-nuxt
-                cd mapprint-nuxt; git add .; git commit -m "From `git log --oneline origin/master -n 1`"; git push
+                git clone -b gh-pages git@github.com:codeforjapan/mapprint.git
+                rm -rf mapprint/*
+                cp -rf dist/* mapprint
+                cd mapprint; git add .; git commit -m "From `git log --oneline origin/master -n 1`"; git push
             fi

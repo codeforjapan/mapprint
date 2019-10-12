@@ -38,7 +38,7 @@ export default {
   },
   data () {
     return {
-      map_config: null,
+      map_config: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
       isOpenExplain: false,
       fullURL: null
     }
@@ -49,8 +49,17 @@ export default {
     }
   },
   mounted () {
-    this.map_config = require('~/assets/config/' + ($nuxt.$route.params.map));
+
     this.fullURL = location.href;
+  },
+  head () {
+    return {
+      title: this.map_config.map_title,
+      meta: [
+        { hid: 'description', name: 'description', content: this.map_config.map_title },
+        { hid: 'og:image', property: 'og:image', content: '/mapprint/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}
+      ]
+    }
   }
 }
 </script>

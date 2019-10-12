@@ -44,6 +44,12 @@
   font-size: $font-size-sm;
 }
 
+.legend-detail-content {
+  max-height: 10em;
+  word-break: break-all;
+  overflow-y: auto;
+}
+
 .legend-trigger {
   position: absolute;
   right: 2px;

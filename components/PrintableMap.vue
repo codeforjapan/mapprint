@@ -6,7 +6,7 @@
           input.header-input(type='checkbox', v-model='source.show')
           | {{source.title}}
       .header-datetime
-        | データ最終更新日： {{updated_at}}
+        | 印刷日： {{updated_at}}
       .map-outer
         MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
         )#map
@@ -34,13 +34,15 @@
                     i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
                     b.number(:style="{background:marker.category.bgColor}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
-                div.legend-type
-                  i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
-                  span.poi-type
-                    | {{marker.category.name}}
+                div
+                  div.legend-type
+                    i(:class="[marker.category.iconClass, marker.category.class]", :style="{backgroundColor:marker.category.color}")
+                    span.poi-type
+                      | {{marker.category.name}}
                   p
                     | 名称: {{marker.feature.properties.name}}
-                    | {{marker.feature.properties.description ? marker.feature.properties.description : ""}}
+                  div.legend-detail-content
+                    p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       div
         section(v-for='group in displayMarkersGroupByCategory')
           h2.list-title

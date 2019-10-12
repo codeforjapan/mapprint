@@ -58,6 +58,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css'
 
 import { getNowYMD } from '~/lib/displayHelper.ts'
+
 const crc16 = require('js-crc').crc16;
 let helper;
 export default {
@@ -161,18 +162,20 @@ export default {
   },
   mounted () {
     const MapHelper = require('~/lib/MapHelper.ts').default
-
+    const ky = require('ky').default
     helper = new MapHelper()
     const categories = {};
+    const self = this
     this.map_config.sources.forEach((source) => {
-      this.updated_at = getNowYMD(new Date())
-      $nuxt.$axios.get(source.url).then((response) => {
-        const markers = helper.parse(source.type, response.data, this.map_config.layer_settings)
+      (async () => {
+        self.updated_at = getNowYMD(new Date())
+        const data = await ky.get(source.url).text()
+        const markers = helper.parse(source.type, data, self.map_config.layer_settings)
         markers.map((marker) => {
           categories[marker.category] = true;
         })
         Object.keys(categories).map((category) => {
-          const categoryExists = this.map_config.layer_settings[category]
+          const categoryExists = self.map_config.layer_settings[category]
 
           if (!categoryExists) {
             let color = '#'
@@ -184,23 +187,19 @@ export default {
             bg_color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16)
             bg_color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16)
             bg_color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16)
-            this.map_config.layer_settings[category] = {
+            self.map_config.layer_settings[category] = {
               name: category,
               color,
               bg_color
 
             }
           }
-          console.log(this.map_config.layer_settings);
         })
-        this.layers.push({
+        self.layers.push({
           source,
           markers
         })
-
-
-
-      })
+      })()
     })
   }
 }

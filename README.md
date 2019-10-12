@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/codeforjapan/mapprint-nuxt/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint-nuxt/tree/master)
+[![CircleCI](https://circleci.com/gh/codeforjapan/mapprint/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint/tree/master)
 
 # mapprint-nuxt
 

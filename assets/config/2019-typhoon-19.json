@@ -13,26 +13,26 @@
   "default_hash": "35.034970230243786,139.83536606997205-34.998870264553034,139.90144296563784",
   "center" : [139.83536606997205, 35.034970230243786],
   "type":"KML",
-  "layer_settings":[
-    {
-      "name": "GS (黒点：未確認)",
+  "layer_settings":{
+    "GS (黒点：未確認)": {
       "color": "#4F4F5A",
       "bg_color": "#B7B7BE",
       "icon_class": "fas fa-eye-slash",
       "class": "layer_gs_undefined"
-    },{
+    },
+    "避難所_台風19号_19年10月": {
       "name": "避難所_台風19号_19年10月",
       "color": "#276445",
       "bg_color": "#A4C1B0",
       "icon_class": "fas fa-street-view",
       "class": "layer_temporary_houses"
-    },{
-      "name": "携帯充電_ショップ(緑点；未確認)",
+    },
+    "携帯充電_ショップ(緑点；未確認)": {
       "color": "#6D4615",
       "bg_color": "#C1B17E",
       "icon_class": "fas fa-plug",
       "class": "layer_charger"
     }
-  ]
+}
 }
 

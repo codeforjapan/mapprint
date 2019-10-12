@@ -67,7 +67,8 @@ export default {
       return list.map((name) => {
         return '/map/' + name.replace('.json', '')
       })
-    }
+    },
+    fallback: true,
   },
   router: {
     base: '/mapprint/'

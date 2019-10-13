@@ -33,10 +33,12 @@
       margin-right: 5mm;
     }
     .banner {
+      flex-direction: row;
+      align-items: center;
       flex: 1 1 auto;
     }
     .logo {
-      display: none;
+      width: 30mm;
     }
     .title {
       font-size: $font-size-h2;

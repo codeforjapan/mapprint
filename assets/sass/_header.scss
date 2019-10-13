@@ -13,6 +13,7 @@
   }
   .logo {
     width: 13em;
+    padding: 0 1em 1em 0;
     @include bp(sm) {
       flex: 0 0 25%;
     }
@@ -26,11 +27,11 @@
 }
 
 .header-label {
-  margin: .5em 0;
+  margin: .5em 1em .5em 0;
 }
 
 .header-input {
-  margin-right: .5em;
+  margin-right: .3em;
 }
 
 .header-datetime {

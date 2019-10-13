@@ -26,6 +26,7 @@ export interface Marker {
 export interface UpdatedSearchKey {
   type:string,
   pattern:string,
+  index:number,
   field:string
 }
 
@@ -123,7 +124,7 @@ export default class MapHelper implements IPrintableMap {
           const regExp = new RegExp(updated_search_key.pattern, "iu");
           const result = regExp.exec(text);
           if (result != null && result.length > 1){
-            updated_at = "(" + result[1] + ")";
+            updated_at = "(" + result[updated_search_key.index] + ")";
           }
         }
       }

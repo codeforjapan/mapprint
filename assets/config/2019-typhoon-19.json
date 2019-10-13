@@ -9,7 +9,8 @@
       "link": "https://www.google.com/maps/d/u/0/viewer?mid=1pl0sY4TmNur6xB4bKvxxvi5rsizCY1bu",
       "updated_search_key": {
         "type":"regexp",
-        "pattern":"<!\\[CDATA\\[<br>(.*?)<br>",
+        "pattern":"<!\\[CDATA\\[(<br>)*(.+?)<br>",
+        "index":2,
         "field":"description"
       },
       "type" : "kml",

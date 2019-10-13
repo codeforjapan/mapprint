@@ -18,7 +18,7 @@ export default {
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:title', property: 'og:title', content: '紙マップ' },
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
-      { hid: 'og:image', property: 'og:image', content: '/mapprint/images/ogp_main.png' },
+      { hid: 'og:image', property: 'og:image', content: 'https://codeforjapan.github.io/mapprint/images/ogp_main.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
 
     ],

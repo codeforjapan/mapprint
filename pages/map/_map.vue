@@ -58,7 +58,7 @@ export default {
       ],
       meta: [
         { hid: 'description', name: 'description', content: this.map_config.map_title },
-        { hid: 'og:image', property: 'og:image', content: '/mapprint/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}
+        { hid: 'og:image', property: 'og:image', content: 'https://codeforjapan.github.io/mapprint/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}
       ]
     }
   }

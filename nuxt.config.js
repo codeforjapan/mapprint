@@ -28,8 +28,8 @@ export default {
     ],
     script: [
       { src: 'https://kit.fontawesome.com/9b0eb4b9b8.js', crossorigin:"anonymous"  },
-      { src: 'https://www.googletagmanager.com/gtag/js?id=UA-45275834-9', crossorigin:"anonymous"  },
-      { src: '/mapprint/ga.js', crossorigin:"anonymous"  }
+      { src: 'https://www.googletagmanager.com/gtag/js?id=UA-45275834-9' },
+      { src: '/mapprint/ga.js'  }
     ]
   },
   /*

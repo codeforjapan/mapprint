@@ -13,6 +13,7 @@
   }
   .logo {
     width: 13em;
+    padding: 0 1em 1em 0;
     @include bp(sm) {
       flex: 0 0 25%;
     }

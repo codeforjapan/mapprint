@@ -1,7 +1,8 @@
 <template lang="pug">
   .page
-    h1
-      | 紙マップ
+    header.header
+      h1.logo
+        img(src="~/assets/images/logo.png" alt="紙マップ")
     .container
       ul
         li(v-for='(map, index) in maps')

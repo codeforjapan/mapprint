@@ -17,7 +17,7 @@ div.layout-container-inner.grid
         vue-qrcode(v-bind:value='fullURL' tag="img")
       div.banner
         div.logo
-          img(src="~/assets/images/logo.jpg")
+          img(src="~/assets/images/logo_l.png")
         h1.title(v-if="map_config") {{map_config.map_title}}
     #content
       #page

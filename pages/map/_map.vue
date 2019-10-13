@@ -57,8 +57,8 @@ export default {
         { src: 'https://kit.fontawesome.com/9b0eb4b9b8.js', crossorigin:"anonymous", "data-n-head":false }
       ],
       meta: [
-        { hid: 'description', name: 'description', content: this.map_config.map_title },
-        { hid: 'og:image', property: 'og:image', content: '/mapprint/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}
+        { hid: 'description', name: 'description', content: this.map_config.map_description },
+        { hid: 'og:image', property: 'og:image', content: 'https://codeforjapan.github.io/mapprint/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}
       ]
     }
   }

@@ -23,6 +23,11 @@ export interface Category {
 export interface Marker {
 
 }
+export interface UpdatedSearchKey {
+  type:string,
+  pattern:string,
+  field:string
+}
 
 export interface IPrintableMap {
   updated: Date;
@@ -62,12 +67,12 @@ export default class MapHelper implements IPrintableMap {
    * @param listener listener class which receives an event after POI is filtered by moving a map.
    */
 
-  public parse (type: string, data: any, layer_setting: any): Array<any> {
+  public parse (type: string, data: any, layer_setting: any, updated_search_key?:UpdatedSearchKey): [Array<any>, string] {
     switch (type) {
       case "kml":
         var parser = new DOMParser();
         var dom = parser.parseFromString(data, 'text/xml');
-        return this.loadKMLData(dom, layer_setting);
+        return this.loadKMLData(dom, layer_setting, updated_search_key);
         break;
       case "umal":
         this.loadUmapJsonData(data);
@@ -103,11 +108,25 @@ export default class MapHelper implements IPrintableMap {
     });
   }
 
-  loadKMLData(data: Document, layer_setting:any): any {
+  loadKMLData(data: Document, layer_setting:any, updated_search_key?:UpdatedSearchKey): [any, string] {
     let that = this;
     let folders: HTMLCollectionOf<Element> = data.getElementsByTagName('Folder');
     if (folders.length == 0) {
       folders = data.getElementsByTagName('Document');
+    }
+    let updated_at = "";
+    if (updated_search_key != undefined){
+      if (updated_search_key.type == "regexp"){
+        const targetElm = data.getElementsByTagName(updated_search_key.field);
+        if (targetElm.length > 0){
+          const text = targetElm[0].innerHTML;
+          const regExp = new RegExp(updated_search_key.pattern, "iu");
+          const result = regExp.exec(text);
+          if (result.length > 1){
+            updated_at = "(" + result[1] + ")";
+          }
+        }
+      }
     }
     let markers = [];
     Array.prototype.forEach.call(folders, (folder) => {
@@ -129,7 +148,7 @@ export default class MapHelper implements IPrintableMap {
         markers.push({geojsondata, category});
       }
     });
-    return markers;
+    return [markers, updated_at];
   }
 
   inBounds(point: any, bounds: MapboxGL.LngLatBounds) {

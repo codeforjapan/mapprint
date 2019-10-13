@@ -5,6 +5,8 @@
         label.header-label(v-for='source in map_config.sources')
           input.header-input(type='checkbox', v-model='source.show')
           | {{source.title}}
+          span.source_updated
+          | {{source.updated_at}}
       .header-datetime
         | 印刷日： {{updated_at}}
       .map-outer
@@ -164,7 +166,7 @@ export default {
         window.history.pushState('', '', path + '#' + s);
       }
       this.previous_hash = s;
-    }
+    },
   },
   mounted () {
     const MapHelper = require('~/lib/MapHelper.ts').default
@@ -176,10 +178,11 @@ export default {
       (async () => {
         self.updated_at = getNowYMD(new Date())
         const data = await ky.get(source.url).text()
-        const markers = helper.parse(source.type, data, self.map_config.layer_settings)
+        const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings,source.updated_search_key)
         markers.map((marker) => {
           categories[marker.category] = true;
         })
+        source.updated_at = updated_at;
         Object.keys(categories).map((category) => {
           const categoryExists = self.map_config.layer_settings[category]
 

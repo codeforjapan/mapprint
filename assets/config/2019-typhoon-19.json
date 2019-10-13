@@ -6,12 +6,19 @@
   "sources": [
     {
       "url" : "https://www.google.com/maps/d/kml?mid=1pl0sY4TmNur6xB4bKvxxvi5rsizCY1bu&forcekml=1",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1pl0sY4TmNur6xB4bKvxxvi5rsizCY1bu",
+      "updated_search_key": {
+        "type":"regexp",
+        "pattern":"<!\\[CDATA\\[<br>(.*?)<br>",
+        "field":"description"
+      },
       "type" : "kml",
       "title" : "全国",
       "show" : true
     },
     {
       "url" : "https://www.google.com/maps/d/kml?mid=1rAKfJOHRj7K8KkaAGEAwN4RGTABs9zIt&forcekml=1",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1rAKfJOHRj7K8KkaAGEAwN4RGTABs9zIt",
       "type" : "kml",
       "title" : "千葉県流山市のみ",
       "show" : true

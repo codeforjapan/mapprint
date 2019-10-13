@@ -16,10 +16,9 @@ export default {
       { hid: 'description', name: 'description', content: '印刷できる災害情報サイト' },
       { hid: 'og:site_name', property: 'og:site_name', content: '紙マップ' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'https://codeforjapan.github.io/mapprint/' },
       { hid: 'og:title', property: 'og:title', content: '紙マップ' },
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
-      { hid: 'og:image', property: 'og:image', content: '/mapprint/images/logo.png' },
+      { hid: 'og:image', property: 'og:image', content: '/mapprint/images/ogp_main.png' },
       { name: 'twitter:card', content: 'summary' },
     ],
     link: [

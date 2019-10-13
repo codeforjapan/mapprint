@@ -122,7 +122,7 @@ export default class MapHelper implements IPrintableMap {
           const text = targetElm[0].innerHTML;
           const regExp = new RegExp(updated_search_key.pattern, "iu");
           const result = regExp.exec(text);
-          if (result.length > 1){
+          if (result != null && result.length > 1){
             updated_at = "(" + result[1] + ")";
           }
         }

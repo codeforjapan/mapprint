@@ -19,7 +19,8 @@ export default {
       { hid: 'og:title', property: 'og:title', content: '紙マップ' },
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
       { hid: 'og:image', property: 'og:image', content: '/mapprint/images/ogp_main.png' },
-      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+
     ],
     link: [
       { rel: 'apple-touch-icon', type: 'image/png', href: '/apple-touch-icon-180x180.png' },

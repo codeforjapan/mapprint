@@ -7,6 +7,7 @@
           | {{source.title}}
           span.source_updated
           | {{source.updated_at}}
+          a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
       .header-datetime
         | 印刷日： {{updated_at}}
       .map-outer

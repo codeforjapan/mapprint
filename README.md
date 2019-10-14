@@ -2,6 +2,7 @@
 
 紙マップ
 ===
+![kamimap](static/images/logo.png)
 
 Google マイマップ や、umap の情報を取り込んで、印刷向けに最適化して表示できるサイトのソースコードです。
 
@@ -14,16 +15,17 @@ https://codeforjapan.github.io/mapprint/
 このサイトの特徴は、紙でマップが配布できることです。
 このプロジェクトで作られたデータは、さまざまな人々の手を経て、困っているおばあちゃんのところにまで届きます。
 
-![kamimap_180713.png](static/kamimap_180713.png)
+![kamimap_180713.png](docs/kamimap_180713.png)
 
-## LICENSE
+## LICENSE/ライセンス
 
-This software is released under the MIT License, see LICENSE.txt.
+本ソフトウェアは、MITライセンスの元提供されています。詳しくは docs/LICENSE.txt を確認してください。  
+This software is released under the MIT License, see docs/LICENSE.txt.
 
 ## Help Wanted!!
 
 Issues にあるいろいろな修正にご協力いただけると嬉しいです。
-詳しくは[こちら](./CONTRIBUTE.md)
+詳しくは[こちら](./docs/CONTRIBUTING.md)を御覧ください。
 
 ## 開発環境の構築方法
 

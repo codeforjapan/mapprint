@@ -14,21 +14,6 @@
         MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
         )#map
           MglGeolocateControl
-          .legend(v-bind:class='{open: isOpenLegend}')
-            .legend-inner
-              .legend-type(v-for='(setting, name) in map_config.layer_settings')
-                i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
-                span.poi-type
-                  | {{name}}
-              .legend-trigger(v-on:click='isOpenLegend=!isOpenLegend' v-bind:class='{close: !isOpenLegend}')
-                .legend-trigger-icon(v-if='!isOpenLegend')
-                  i.fas.fa-caret-left
-                  span
-                    | 凡例
-                .legend-trigger-icon(v-else)
-                  i.fas.fa-caret-right
-                  span
-                    | とじる
           template(v-for='layer in layers', v-if="layer.source.show")
             MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
               template(slot="marker")
@@ -38,14 +23,19 @@
                     b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
                 div
-                  div.legend-type
+                  div.popup-type
                     i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                    span.poi-type
+                    span.popup-poi-type
                       | {{marker.category}}
                   p
                     | 名称: {{marker.feature.properties.name}}
-                  div.legend-detail-content
+                  div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
+      div
+        ul.legend-list
+          li.legend-item(v-for='setting in map_config.layer_settings')
+            span.legend-mark(:style="{backgroundColor:setting.color}")
+              i(:class="[setting.icon_class]")
       div
         section(v-for='group in displayMarkersGroupByCategory')
           h2.list-title
@@ -116,7 +106,6 @@ export default {
       map: null,
       bounds: null,
       updated_at: null,
-      isOpenLegend: false,
       previous_hash: "",
       mapStyle: {
         "version": 8,
@@ -167,7 +156,7 @@ export default {
         window.history.pushState('', '', path + '#' + s);
       }
       this.previous_hash = s;
-    },
+    }
   },
   mounted () {
     const MapHelper = require('~/lib/MapHelper.ts').default

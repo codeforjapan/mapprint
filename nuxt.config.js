@@ -100,6 +100,11 @@ export default {
           reduceIdents: false,
           zindex: false
         }
+      },
+      preset: {
+        autoprefixer: {
+          grid: true
+        }
       }
     }
   },

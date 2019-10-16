@@ -14,13 +14,13 @@
   .layout-container-inner {
     display: block;
   }
-  .sheet {
+  .main-sheet {
     flex-basis: 100% !important;
     max-width: 100% !important;
     box-shadow: none;
     padding: 0;
   }
-  .not_print_area {
+  .print-exclude {
     display: none;
   }
   .header {

@@ -66,7 +66,19 @@
       "bg_color": "#B1B6B9",
       "icon_class": "fas fa-wifi",
       "class": "layer_wifi-sb"
+    },
+    "携帯充電(緑マーク：確認済)_台風19号_19年10月" : {
+      "color": "#456658",
+      "bg_color": "#8ED4B8",
+      "icon_class": "fas fa-plug",
+      "class": "layer_charger_19"
+    },
+    "給水(青：確認済)_台風19号_19年10月" : {
+      "color": "#001D96",
+      "bg_color": "#1CA3EA",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
     }
-}
+  }
 }
 

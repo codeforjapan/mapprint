@@ -1,62 +1,67 @@
 <template lang="pug">
-div.layout-container-inner.grid-noGutter
-  aside.print-exclude.col-12_md-3_xl-6
-    .aside-inner
-      .aside-grid
-        .aside-item1
-          h2.aside-title-sp
-            img(src="~/assets/images/sp_logo.png" width="607" height="452" alt="地図情報を印刷できる「紙マップ」")
-          h2.aside-title-pc
-            img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
-        .aside-item2
-          p
-            | さまざまな人の手によって収集された地図情報
-        .aside-item3
-          div.aside-item-illust1
-            img(src="~/assets/images/illust_1.png" width="360" height="450" alt="")
-        .aside-item4
-          p
-            | 必要な地域に調整すると
-            br
-            | 印刷に最適化されたマップ情報が表示されます
-        .aside-item5
-          p
-            | その時々に応じた情報を選択してください
-            br
-            | 印刷用紙にちょうどよくおさまります
-        .aside-item6
-          div.aside-item-illust2
-            img(src="~/assets/images/illust_2.png" width="640" height="435" alt="")
-        .aside-item7
-          p
-            | 印刷して情報を必要としているひとに
-            br
-            | ぜひ届けてあげてください！
-  main.main.col-12_md-9_xl-6
-    .main-sheet
-      header.header
-        .qrcode
-          vue-qrcode(v-bind:value='fullURL' tag="img")
-        .banner
-          .logo
-            img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
-          .sub-outer
-            .sub-button(@click='isOpenExplain=!isOpenExplain')
-              | このサイトについて
-            .sub-button.github-link
-              a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
-          .title-outer
-            h1.title(v-if="map_config") {{map_config.map_title}}
-            .datetime
-              | 印刷日： {{updated_at}}
-      .explain(v-bind:class='{open: isOpenExplain}')
-        p(v-if="map_config") {{map_config.map_description}}
-        p
-          | このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
-          a(href="https://github.com/codeforjapan/mapprint") Code for Japan の Github リポジトリ
-          | から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
-      div
-        printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+div
+  div.layout-container-inner.grid-noGutter
+    aside.print-exclude.col-12_md-3_xl-6
+      .aside-inner
+        .aside-grid
+          .aside-item1
+            h2.aside-title-sp
+              img(src="~/assets/images/sp_logo.png" width="607" height="452" alt="地図情報を印刷できる「紙マップ」")
+            h2.aside-title-pc
+              img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
+          .aside-item2
+            p
+              | さまざまな人の手によって収集された地図情報
+          .aside-item3
+            div.aside-item-illust1
+              img(src="~/assets/images/illust_1.png" width="360" height="450" alt="")
+          .aside-item4
+            p
+              | 必要な地域に調整すると
+              br
+              | 印刷に最適化されたマップ情報が表示されます
+          .aside-item5
+            p
+              | その時々に応じた情報を選択してください
+              br
+              | 印刷用紙にちょうどよくおさまります
+          .aside-item6
+            div.aside-item-illust2
+              img(src="~/assets/images/illust_2.png" width="640" height="435" alt="")
+          .aside-item7
+            p
+              | 印刷して情報を必要としているひとに
+              br
+              | ぜひ届けてあげてください！
+    main.main.col-12_md-9_xl-6
+      .main-sheet
+        header.header
+          .qrcode
+            vue-qrcode(v-bind:value='fullURL' tag="img")
+          .banner
+            .logo
+              img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
+            .sub-outer
+              .sub-button(@click='isOpenExplain=!isOpenExplain')
+                | このサイトについて
+              .sub-button.github-link
+                a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
+            .title-outer
+              h1.title(v-if="map_config") {{map_config.map_title}}
+              .datetime
+                | 印刷日： {{updated_at}}
+        div
+          printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+  .modal(v-bind:class='{open: isOpenExplain}')
+    p(v-if="map_config") {{map_config.map_description}}
+    p
+      | このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
+      a(href="https://github.com/codeforjapan/mapprint") Code for Japan の Github リポジトリ
+      | から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
+    div
+      span.modal-close(@click='isOpenExplain=false')
+        | × close
+  .modal-background(v-bind:class='{open: isOpenExplain}')
 </template>
 
 <script>

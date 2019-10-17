@@ -62,7 +62,9 @@ $z-map: (
   mapboxgl-popup,
   legend-navi,
   legend-close,
-  header
+  header,
+  modal-background,
+  modal
 );
 
 @function z($name) {

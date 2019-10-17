@@ -37,13 +37,11 @@
       position: absolute;
       background: #FFF;
       top: 50%;
-      bottom: 0;
-      right: 0;
       left: 50%;
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      transform: translateY(-50%) translateX(-50%);
+      transform: translate(-50%, -50%);
       z-index: z(marker);
     }
   }

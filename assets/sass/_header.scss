@@ -54,13 +54,13 @@
   }
   .sub-button {
     font-size: $font-size-sm;
+    cursor: pointer;
     @include bp(md) {
       background-color: #fff;
       color: $color-base;
       border-radius: 3em;
       text-align: center;
       padding: .3em 1em;
-      cursor: pointer;
       a {
         color: inherit;
         text-decoration: none;

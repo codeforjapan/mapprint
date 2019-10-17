@@ -1,8 +1,0 @@
-.explain {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .5s;
-  &.open {
-    max-height: 100vh;
-  }
-}

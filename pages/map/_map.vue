@@ -39,16 +39,17 @@ div.layout-container-inner.grid
         | このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
         a(href="https://github.com/codeforjapan/mapprint") Code for Japan の Github リポジトリ
         | から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
-  main.main-sheet.col-12_md-9_xl-6
-    header.header
-      .qrcode
-        vue-qrcode(v-bind:value='fullURL' tag="img")
-      .banner
-        div.logo
-          img(src="~/assets/images/logo_l.png" alt="")
-        h1.title(v-if="map_config") {{map_config.map_title}}
-    div
-      printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+  main.main.col-12_md-9_xl-6
+    .main-sheet
+      header.header
+        .qrcode
+          vue-qrcode(v-bind:value='fullURL' tag="img")
+        .banner
+          div.logo
+            img(src="~/assets/images/logo_l.png" alt="")
+          h1.title(v-if="map_config") {{map_config.map_title}}
+      div
+        printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
 </template>
 
 <script>

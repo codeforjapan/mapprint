@@ -14,9 +14,11 @@
   .layout-container-inner {
     display: block;
   }
-  .main-sheet {
+  .main {
     flex-basis: 100% !important;
     max-width: 100% !important;
+  }
+  .main-sheet {
     box-shadow: none;
     padding: 0;
   }

@@ -33,11 +33,11 @@
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       div
         ul.legend-list
-          li.legend-item(v-for='setting in map_config.layer_settings')
-            span.legend-mark(:style="{backgroundColor:setting.color}")
+          li.legend-item(v-for='(setting, name) in map_config.layer_settings')
+            span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name)")
               i(:class="[setting.icon_class]")
       div
-        section(v-for='group in displayMarkersGroupByCategory')
+        section(v-for='group in displayMarkersGroupByCategory' v-show="isActiveCategory === group.name")
           h2.list-title
             span.list-title-mark(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
               i(:class="map_config.layer_settings[group.name].icon_class")
@@ -46,6 +46,13 @@
             li.col-12_xs-6(v-for="marker in group.markers")
               span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
               span.item-name {{marker.feature.properties.name}}
+        section(v-if="!displayMarkersGroupByCategory.some((elm) => elm.name === isActiveCategory)")
+          h2.list-title
+            span.list-title-mark(:style="{backgroundColor:map_config.layer_settings[isActiveCategory].color}")
+              i(:class="map_config.layer_settings[isActiveCategory].icon_class")
+            span {{isActiveCategory}}
+          p
+            | 表示中のマップには存在しません
 </template>
 
 <script>
@@ -107,6 +114,7 @@ export default {
       bounds: null,
       updated_at: null,
       previous_hash: "",
+      isActiveCategory: "",
       mapStyle: {
         "version": 8,
         "sources": {
@@ -156,6 +164,9 @@ export default {
         window.history.pushState('', '', path + '#' + s);
       }
       this.previous_hash = s;
+    },
+    isSelectCategory(category) {
+      this.isActiveCategory = category;
     }
   },
   mounted () {
@@ -172,6 +183,7 @@ export default {
         markers.map((marker) => {
           categories[marker.category] = true;
         })
+        self.isActiveCategory = Object.keys(categories)[0];
         source.updated_at = updated_at;
         Object.keys(categories).map((category) => {
           const categoryExists = self.map_config.layer_settings[category]

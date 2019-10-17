@@ -5,9 +5,12 @@
 
 #map {
   width: 100%;
-  height: 140mm;
+  height: 100vh;
   border: 1px solid #000;
   overflow: hidden;
+  @include bp(md) {
+    height: 140mm;
+  }
   .mapboxgl-popup {
     max-width: 200px;
     z-index: z(mapboxgl-popup);

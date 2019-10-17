@@ -8,7 +8,6 @@
 .main-sheet {
   background-color: #fff;
   box-shadow: 0 2px 6px rgba(0,0,0,.3);
-  padding: 1.5em;
   @include bp(md) {
     padding: 2em;
   }

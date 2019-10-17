@@ -1,3 +1,21 @@
+.list-outer {
+  padding: 0 1em;
+  overflow: auto;
+  max-height: 0;
+  transition: max-height .5s;
+  &.open {
+    max-height: 40vh;
+  }
+  @include bp(md) {
+    padding: 0;
+    overflow: visible;
+    max-height: none;
+    &.open {
+      max-height: none;
+    }
+  }
+}
+
 .list-title {
   display: flex;
   align-items: center;

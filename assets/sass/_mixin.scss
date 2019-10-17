@@ -59,8 +59,10 @@ $z-map: (
   marker,
   marker-number,
   marker-icon,
-  legend,
-  mapboxgl-popup
+  mapboxgl-popup,
+  legend-navi,
+  legend-close,
+  header
 );
 
 @function z($name) {

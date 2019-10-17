@@ -1,29 +1,83 @@
 .header {
+  position: absolute;
+  z-index: z(header);
+  background-color: #fff;
+  padding: .5em 1em;
+  @include bp(md) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $color-alpha-black;
+    color: #fff;
+  }
   .qrcode {
     display: none;
   }
   .banner {
     display: flex;
-    flex-direction: column;
-    @include bp(sm) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    @include bp(md) {
+      flex-wrap: nowrap;
+      justify-content: space-between;
     }
   }
   .logo {
-    width: 13em;
-    padding: 0 1em 1em 0;
-    @include bp(sm) {
-      flex: 0 0 25%;
+    width: 60%;
+    @include bp(md) {
+      display: none;
+    }
+  }
+  .title-outer {
+    order: 1;
+    @include bp(md) {
+      order: -1;
     }
   }
   .title {
     font-size: $font-size-lg;
-    @include bp(sm) {
-      flex: 0 0 75%;
+    margin: 0;
+  }
+  .datetime {
+    font-size: $font-size-sm;
+    display: none;
+    @include bp(md) {
+      display: block;
     }
   }
+  .sub-outer {
+    display: flex;
+    justify-content: flex-end;
+    width: 40%;
+  }
+  .sub-button {
+    font-size: $font-size-sm;
+    @include bp(md) {
+      background-color: #fff;
+      color: $color-base;
+      border-radius: 3em;
+      text-align: center;
+      padding: .3em 1em;
+      cursor: pointer;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+  }
+  .github-link {
+    display: none;
+    @include bp(md) {
+      display: block;
+      margin-left: 1em;
+    }
+  }
+}
+
+.header-input-outer {
+  padding: 0 1em;
 }
 
 .header-label {
@@ -32,9 +86,4 @@
 
 .header-input {
   margin-right: .3em;
-}
-
-.header-datetime {
-  font-size: $font-size-sm;
-  text-align: right;
 }

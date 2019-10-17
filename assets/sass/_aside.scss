@@ -1,4 +1,12 @@
+.aside-inner {
+  padding: 0 1.5em;
+}
+
 .aside-grid {
+  display: none;
+  @include bp(md) {
+    display: block;
+  }
   @include bp(xl) {
     display: grid;
     grid-template-columns: 50% auto;
@@ -66,28 +74,4 @@
 .aside-item-illust2 {
   max-width: 450px;
   margin: 2em auto;
-}
-
-.explain-title-sp {
-  background-color: $color-gray;
-  border-radius: 3em;
-  text-align: center;
-  padding: .5em;
-  margin: 1em 0;
-  @include bp(xs) {
-    display: none;
-  }
-}
-
-.explain {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .5s;
-  &.open {
-    max-height: 100vh;
-  }
-  @include bp(xs) {
-    height: auto;
-    max-height: 100%;
-  }
 }

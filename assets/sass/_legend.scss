@@ -1,12 +1,33 @@
-.legend {
+.legend-navi {
   position: absolute;
-  right: -215px;
+  z-index: z(legend-navi);
   bottom: 0;
-  z-index: z(legend);
-  width: 250px;
-  transition: right .5s;
+  width: 100vw;
+  background-color: #fff;
+  @include bp(md) {
+    position: relative;
+    width: auto;
+  }
+}
+
+.legend-close {
+  display: none;
+  position: absolute;
+  z-index: z(legend-close);
+  bottom: 0;
+  width: 100vw;
+  background-color: $color-alpha-black;
+  color: #fff;
+  text-align: right;
+  padding: .5em;
   &.open {
-    right: 0;
+    display: block;
+  }
+  @include bp(md) {
+    display: none;
+    &.open {
+      display: none;
+    }
   }
 }
 

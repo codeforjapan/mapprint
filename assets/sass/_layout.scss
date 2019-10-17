@@ -1,7 +1,10 @@
 .layout-container {
   position: relative;
   max-width: 100vw;
-  margin: 2em auto;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+  padding: 2em auto;
+  @include bp(md) {
+    margin: 2em auto 5em;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
 }

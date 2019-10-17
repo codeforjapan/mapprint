@@ -38,8 +38,8 @@
               i(:class="[setting.icon_class]")
       div
         section(v-for='group in displayMarkersGroupByCategory' v-show="isActiveCategory === group.name")
-          h2.list-title
-            span.list-title-mark(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
+          h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
+            span.list-title-mark
               i(:class="map_config.layer_settings[group.name].icon_class")
             span {{group.name}}
           ul.list-items.grid-noGutter
@@ -47,8 +47,8 @@
               span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
               span.item-name {{marker.feature.properties.name}}
         section(v-if="!displayMarkersGroupByCategory.some((elm) => elm.name === isActiveCategory)")
-          h2.list-title
-            span.list-title-mark(:style="{backgroundColor:map_config.layer_settings[isActiveCategory].color}")
+          h2.list-title(:style="{backgroundColor:map_config.layer_settings[isActiveCategory].color}")
+            span.list-title-mark
               i(:class="map_config.layer_settings[isActiveCategory].icon_class")
             span {{isActiveCategory}}
           p

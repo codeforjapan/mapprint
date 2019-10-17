@@ -36,12 +36,10 @@ div
     main.main.col-12_md-9_xl-6
       .main-sheet
         header.header
-          .qrcode
-            vue-qrcode(v-bind:value='fullURL' tag="img")
           .banner
-            .logo
+            .logo.print-exclude
               img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
-            .sub-outer
+            .sub-outer.print-exclude
               .sub-button(@click='isOpenExplain=!isOpenExplain')
                 | このサイトについて
               .sub-button.github-link
@@ -50,8 +48,13 @@ div
               h1.title(v-if="map_config") {{map_config.map_title}}
               .datetime
                 | 印刷日： {{updated_at}}
-        div
+          .qrcode
+            vue-qrcode(v-bind:value='fullURL' tag="img")
+        .map-contents
           printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+        footer.footer
+          .footer-logo
+            img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
   .modal(v-bind:class='{open: isOpenExplain}')
     p(v-if="map_config") {{map_config.map_description}}
     p
@@ -77,7 +80,8 @@ export default {
     return {
       map_config: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
       isOpenExplain: false,
-      fullURL: null
+      fullURL: null,
+      updated_at: null
     }
   },
   methods: {

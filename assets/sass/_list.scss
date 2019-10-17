@@ -16,6 +16,13 @@
   }
 }
 
+.list-section {
+  display: none;
+  &.show {
+    display: block;
+  }
+}
+
 .list-title {
   display: flex;
   align-items: center;

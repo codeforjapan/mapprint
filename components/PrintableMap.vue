@@ -30,12 +30,12 @@
             span.source_updated
               | {{source.updated_at}}
             a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
-        ul.legend-list
+        ul.legend-list.print-exclude
           li.legend-item(v-for='(setting, name) in map_config.layer_settings')
             span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")
               i(:class="[setting.icon_class]")
         .list-outer(v-bind:class='{open: isOpenList}')
-          section(v-for='group in displayMarkersGroupByCategory' v-show="isActiveCategory === group.name")
+          section.list-section(v-for='group in displayMarkersGroupByCategory' v-bind:class='{show: isActiveCategory === group.name}')
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
               span.list-title-mark
                 i(:class="map_config.layer_settings[group.name].icon_class")
@@ -51,7 +51,7 @@
               span {{isActiveCategory}}
             p
               | 表示中のマップには存在しません
-      .legend-close(v-bind:class='{open: isOpenList}' @click="isOpenList=false")
+      .legend-close.print-exclude(v-bind:class='{open: isOpenList}' @click="isOpenList=false")
         | リストをとじる
 </template>
 

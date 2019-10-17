@@ -11,9 +11,6 @@
     background-color: $color-alpha-black;
     color: #fff;
   }
-  .qrcode {
-    display: none;
-  }
   .banner {
     display: flex;
     flex-direction: row;
@@ -73,6 +70,9 @@
       display: block;
       margin-left: 1em;
     }
+  }
+  .qrcode {
+    display: none;
   }
 }
 

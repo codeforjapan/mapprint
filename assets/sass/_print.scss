@@ -1,9 +1,12 @@
 @page {
   size: A4;
-  margin: 10mm 5mm;
+  margin: 15mm 5mm 15mm;
 }
 
 @media print {
+  .print-exclude {
+    display: none !important;
+  }
   :root {
     background-color: #fff;
     font-size: $font-size-sm;
@@ -22,39 +25,49 @@
     box-shadow: none;
     padding: 0;
   }
-  .print-exclude {
-    display: none;
-  }
   .header {
+    position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    color: $color-base;
+    .title {
+      font-size: $font-size-h2;
+    }
+    .datetime {
+      display: block;
+    }
     .qrcode {
       display: block;
       flex: 0 0 20mm;
       height: 20mm;
-      margin-right: 5mm;
-    }
-    .banner {
-      flex-direction: row;
-      align-items: center;
-      flex: 1 1 auto;
-    }
-    .logo {
-      width: 30mm;
-    }
-    .title {
-      font-size: $font-size-h2;
     }
   }
-  .legend {
-    position: absolute;
-    right: 0 !important;
-    bottom: 20px;
-    z-index: z(legend);
-    width: 150px !important;
+  .map-contents {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
   }
-  .legend-inner {
-    background-color: rgba(255,255,255,.7);
-    padding: 0;
+  #map {
+    height: 140mm;
+  }
+  .legend-navi {
+    position: relative;
+  }
+  .list-outer {
+    max-height: none;
+  }
+  .list-section {
+    display: block !important;
+  }
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid $color-base;
+    padding-top: 5mm;
+    margin-top: 10mm;
+  }
+  .footer-logo {
+    flex: 0 0 50mm;
   }
 }

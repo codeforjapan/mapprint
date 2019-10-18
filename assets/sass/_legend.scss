@@ -2,11 +2,10 @@
   position: absolute;
   z-index: z(legend-navi);
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   background-color: #fff;
   @include bp(md) {
     position: relative;
-    width: auto;
   }
 }
 
@@ -15,7 +14,7 @@
   position: absolute;
   z-index: z(legend-close);
   bottom: 0;
-  width: 100vw;
+  width: 100%;
   background-color: $color-alpha-black;
   color: #fff;
   font-size: $font-size-xs;
@@ -27,6 +26,7 @@
   }
   @include bp(md) {
     display: none;
+    position: relative;
     &.open {
       display: none;
     }

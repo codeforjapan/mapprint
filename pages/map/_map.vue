@@ -1,6 +1,6 @@
 <template lang="pug">
-div
-  div.layout-container-inner.grid-noGutter
+div.layout-map
+  div.layout-map-inner.grid-noGutter
     aside.print-exclude.col-12_md-3_xl-6
       .aside-inner
         .aside-grid
@@ -36,13 +36,19 @@ div
     main.main.col-12_md-9_xl-6
       .main-sheet
         header.header
+          .to-top
+            nuxt-link(to='/')
+              i.far.fa-arrow-alt-circle-left
           .banner
             .logo.print-exclude
               img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
             .sub-outer.print-exclude
               .sub-button(@click='isOpenExplain=!isOpenExplain')
-                | このサイトについて
+                i.fas.fa-info-circle
+                span
+                  | このサイトについて
               .sub-button.github-link
+                i.fab.fa-github
                 a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
             .title-outer
               h1.title(v-if="map_config") {{map_config.map_title}}
@@ -50,31 +56,23 @@ div
                 | 印刷日： {{updated_at}}
           .qrcode
             vue-qrcode(v-bind:value='fullURL' tag="img")
-        .map-contents
+        div
           printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
         footer.footer
           .footer-logo
             img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
-  .modal(v-bind:class='{open: isOpenExplain}')
-    p(v-if="map_config") {{map_config.map_description}}
-    p
-      | このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
-      a(href="https://github.com/codeforjapan/mapprint") Code for Japan の Github リポジトリ
-      | から、開発にご参加ください。JavaScript や Leaflet などの経験がある方、大歓迎です。
-    div
-      span.modal-close(@click='isOpenExplain=false')
-        | × close
-  .modal-background(v-bind:class='{open: isOpenExplain}')
+  modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>
 
 <script>
 import PrintableMap from '~/components/PrintableMap'
-import VueQrcode from "@chenfengyuan/vue-qrcode";
+import VueQrcode from "@chenfengyuan/vue-qrcode"
 import { getNowYMD } from '~/lib/displayHelper.ts'
+import Modal from '~/components/Modal'
 
 export default {
   components: {
-    PrintableMap, VueQrcode
+    PrintableMap, VueQrcode, Modal
   },
   data () {
     return {
@@ -87,6 +85,9 @@ export default {
   methods: {
     updateQRCode() {
       this.fullURL = location.href;
+    },
+    closeModalMethod () {
+      this.isOpenExplain = false;
     }
   },
   mounted () {

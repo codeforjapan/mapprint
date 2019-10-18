@@ -14,7 +14,7 @@
   .layout-container {
     margin: 0 auto;
   }
-  .layout-container-inner {
+  .layout-map-inner {
     display: block;
   }
   .main {
@@ -43,10 +43,6 @@
       flex: 0 0 20mm;
       height: 20mm;
     }
-  }
-  .map-contents {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
   }
   #map {
     height: 140mm;

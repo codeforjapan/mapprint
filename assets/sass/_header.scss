@@ -2,8 +2,10 @@
   position: absolute;
   z-index: z(header);
   background-color: #fff;
-  padding: .5em 1em;
+  padding: 0 1em;
   @include bp(md) {
+    display: flex;
+    align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
@@ -11,11 +13,29 @@
     background-color: $color-alpha-black;
     color: #fff;
   }
+  .to-top {
+    display: none;
+    @include bp(md) {
+      display: block;
+      flex: 0 0 3.5em;
+      margin-right: 1em;
+      padding: .5em 0;
+      border-right: 1px solid $color-light-gray;
+      i {
+        font-size: 2.5em;
+      }
+      a {
+        color: #fff;
+      }
+    }
+  }
   .banner {
+    flex: 1 1 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    padding: .5em 0;
     @include bp(md) {
       flex-wrap: nowrap;
       justify-content: space-between;
@@ -42,26 +62,6 @@
     display: none;
     @include bp(md) {
       display: block;
-    }
-  }
-  .sub-outer {
-    display: flex;
-    justify-content: flex-end;
-    width: 40%;
-  }
-  .sub-button {
-    font-size: $font-size-sm;
-    cursor: pointer;
-    @include bp(md) {
-      background-color: #fff;
-      color: $color-base;
-      border-radius: 3em;
-      text-align: center;
-      padding: .3em 1em;
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
     }
   }
   .github-link {

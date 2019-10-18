@@ -14,7 +14,7 @@
     overflow: auto;
     @include bp(md) {
       width: 50%;
-      height: 80%;
+      height: auto;
     }
   }
 }

@@ -1,0 +1,24 @@
+.sub-outer {
+  display: flex;
+  justify-content: flex-end;
+  width: 40%;
+}
+
+.sub-button {
+  font-size: $font-size-sm;
+  cursor: pointer;
+  i {
+    padding-right: .5em;
+  }
+  @include bp(md) {
+    background-color: #fff;
+    color: $color-base;
+    border-radius: 3em;
+    text-align: center;
+    padding: .3em 1em;
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

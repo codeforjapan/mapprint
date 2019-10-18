@@ -23,13 +23,14 @@
                   div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       .legend-navi
-        .header-input-outer
-          label.header-label(v-for='source in map_config.sources')
-            input.header-input(type='checkbox', v-model='source.show')
-            | {{source.title}}
-            span.source_updated
-              | {{source.updated_at}}
-            a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
+        ul.header-input-list
+          li(v-for='source in map_config.sources')
+            label.header-label
+              input.header-input(type='checkbox', v-model='source.show')
+              | {{source.title}}
+              span.source_updated
+                | {{source.updated_at}}
+              a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
         ul.legend-list.print-exclude
           li.legend-item(v-for='(setting, name) in map_config.layer_settings')
             span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")

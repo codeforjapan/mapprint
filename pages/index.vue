@@ -1,5 +1,6 @@
 <template lang="pug">
   .layout-index
+    #fb-root
     header
       h1.index-title
         img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
@@ -16,6 +17,8 @@
                       | {{map.map_title}}
                     i.index-arrow-icon.fas.fa-long-arrow-alt-right
             .index-item-sns
+              div(class="fb-share-button" :data-href='"https://codeforjapan.github.io/mapprint/map/" + map.map_id' data-layout="button" data-size="small")
+                a(target="_blank" :href='"https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fcodeforjapan.github.io%2Fmapprint%2Fmap%2F" + map.map_id + "%2F&amp;src=sdkpreparse"' class="fb-xfbml-parse-ignore") シェア
               div
                 a(href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" :data-text='map.map_title + " - 地図情報を印刷できる「紙マップ」"' :data-url='"https://codeforjapan.github.io/mapprint/map/" + map.map_id' data-show-count="false") Tweet
               div(class="line-it-button" data-lang="ja" data-type="share-a" data-ver="3" :data-url='"https://codeforjapan.github.io/mapprint/map/" + map.map_id' data-color="default" data-size="small" data-count="false" style="display: none;")
@@ -58,6 +61,7 @@ export default {
   head () {
     return {
       script: [
+        { src: 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v4.0', async: true, defer: true, crossorigin: 'anonymous' },
         { src: 'https://platform.twitter.com/widgets.js', async: true },
         { src: 'https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js', async: true, defer: true }
       ]

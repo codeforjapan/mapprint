@@ -58,6 +58,10 @@
   }
 }
 
+.fb_iframe_widget > span {
+  vertical-align: baseline !important;
+}
+
 .index-footer {
   display: flex;
   justify-content: center;

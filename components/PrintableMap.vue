@@ -44,7 +44,7 @@
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
                 span.item-name {{marker.feature.properties.name}}
-          section(v-if="!displayMarkersGroupByCategory.some((elm) => elm.name === isActiveCategory)")
+          section.list-section-none(v-if="!displayMarkersGroupByCategory.some((elm) => elm.name === isActiveCategory)")
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[isActiveCategory].color}")
               span.list-title-mark
                 i(:class="map_config.layer_settings[isActiveCategory].icon_class")

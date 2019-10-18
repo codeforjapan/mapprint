@@ -56,8 +56,7 @@ div.layout-map
                 | 印刷日： {{updated_at}}
           .qrcode
             vue-qrcode(v-bind:value='fullURL' tag="img")
-        div
-          printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+        printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
         footer.footer
           .footer-logo
             img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")

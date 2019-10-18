@@ -17,11 +17,16 @@
   background-color: rgba(0,0,0,.2);
   border-radius: 15px;
   a {
+    color: $color-base;
     text-decoration: none;
   }
 }
 
 .index-item-inner {
+  height: 90%;
+}
+
+.index-link-inner {
   display: grid;
   grid-template-rows: max-content;
   height: 100%;
@@ -43,6 +48,14 @@
 .index-arrow-icon {
   font-size: 2em;
   padding-left: .5em;
+}
+
+.index-item-sns {
+  display: flex;
+  padding: .5em 0;
+  > div {
+    margin-right: .5em;
+  }
 }
 
 .index-footer {

@@ -21,6 +21,7 @@
   font-size: $font-size-xs;
   text-align: right;
   padding: .5em;
+  cursor: pointer;
   &.open {
     display: block;
   }

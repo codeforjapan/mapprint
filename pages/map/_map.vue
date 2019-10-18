@@ -68,7 +68,9 @@ import VueQrcode from '@chenfengyuan/vue-qrcode'
 import PrintableMap from '~/components/PrintableMap'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
-
+if (process.client) {
+  require('viewport-units-buggyfill').init();
+}
 export default {
   components: {
     PrintableMap, VueQrcode, Modal
@@ -92,9 +94,6 @@ export default {
   mounted () {
     this.fullURL = location.href;
     this.updated_at = getNowYMD(new Date());
-    if (process.client) {
-      require('viewport-units-buggyfill').init();
-    }
   },
   head () {
     return {

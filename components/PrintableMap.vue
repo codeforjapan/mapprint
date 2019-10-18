@@ -31,10 +31,11 @@
               span.source_updated
                 | {{source.updated_at}}
               a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
-        ul.legend-list.print-exclude
-          li.legend-item(v-for='(setting, name) in map_config.layer_settings')
-            span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")
-              i(:class="[setting.icon_class]")
+        simplebar(data-simplebar-auto-hide="false")
+          ul.legend-list.print-exclude
+            li.legend-item(v-for='(setting, name) in map_config.layer_settings')
+              span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")
+                i(:class="[setting.icon_class]")
         .list-outer(v-bind:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' v-bind:class='{show: isActiveCategory === group.name}')
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
@@ -59,14 +60,13 @@
 
 <script>
 import 'mapbox-gl/dist/mapbox-gl.css'
-
+import 'simplebar/dist/simplebar.min.css'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 
 const crc16 = require('js-crc').crc16;
 let helper;
 export default {
   props: ['map_config'],
-
   computed: {
     center () {
       return this.map_config.center

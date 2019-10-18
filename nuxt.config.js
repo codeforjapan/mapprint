@@ -46,7 +46,8 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/mapbox', mode: 'client' }, { src: '~/plugins/mapbox', mode: 'client' },
+    { src: '~/plugins/mapbox', mode: 'client' },
+    { src: '~/plugins/simplebar', mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules

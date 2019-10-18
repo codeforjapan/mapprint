@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "dev-cross-env": "cross-env NUXT_HOST=0.0.0.0 NUXT_PORT=3333 nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -39,6 +40,7 @@
     "@types/geojson": "^7946.0.7",
     "@types/leaflet": "^1.5.1",
     "babel-eslint": "^10.0.1",
+    "cross-env": "^6.0.3",
     "css-mqpacker": "^7.0.0",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",

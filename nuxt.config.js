@@ -39,8 +39,8 @@ export default {
   ** Global CSS
   */
   css: [
-    '@/assets/fonts/fontawesome/css/all.css',
-    '@/assets/sass/styles.scss'
+    { src: '~/assets/fonts/fontawesome/css/all.css', 'data-viewport-units-buggyfill': 'ignore' },
+    { src: '~/assets/sass/styles.scss', lang: 'scss' }
   ],
   /*
   ** Plugins to load before mounting the App

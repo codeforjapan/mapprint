@@ -64,8 +64,8 @@ div.layout-map
 </template>
 
 <script>
+import VueQrcode from '@chenfengyuan/vue-qrcode'
 import PrintableMap from '~/components/PrintableMap'
-import VueQrcode from "@chenfengyuan/vue-qrcode"
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
 
@@ -92,6 +92,9 @@ export default {
   mounted () {
     this.fullURL = location.href;
     this.updated_at = getNowYMD(new Date());
+    if (process.client) {
+      require('viewport-units-buggyfill').init();
+    }
   },
   head () {
     return {

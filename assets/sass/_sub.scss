@@ -11,12 +11,13 @@
   color: $color-base;
   border-radius: 3em;
   text-align: center;
-  padding: .3em 1em;
+  line-height: 1.1;
+  padding: .5em 1em;
   @include bp(md) {
     box-shadow: 2px 2px 5px $color-alpha-black;
   }
   i {
-    padding-right: .5em;
+    padding-right: .2em;
   }
   a {
     color: inherit;

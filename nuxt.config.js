@@ -20,7 +20,6 @@ export default {
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
       { hid: 'og:image', property: 'og:image', content: 'https://codeforjapan.github.io/mapprint/images/ogp_main.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
-
     ],
     link: [
       { rel: 'apple-touch-icon', type: 'image/png', href: '/apple-touch-icon-180x180.png' },
@@ -28,9 +27,8 @@ export default {
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' }
     ],
     script: [
-      { src: 'https://kit.fontawesome.com/9b0eb4b9b8.js', crossorigin:"anonymous"  },
       { src: 'https://www.googletagmanager.com/gtag/js?id=UA-45275834-9' },
-      { src: '/mapprint/ga.js'  }
+      { src: '/mapprint/ga.js' }
     ]
   },
   /*
@@ -41,7 +39,8 @@ export default {
   ** Global CSS
   */
   css: [
-    { src: '~/assets/sass/styles.scss', lang: 'scss' }
+    '@/assets/fonts/fontawesome/css/all.css',
+    '@/assets/sass/styles.scss'
   ],
   /*
   ** Plugins to load before mounting the App

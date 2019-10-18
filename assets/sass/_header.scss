@@ -17,13 +17,10 @@
     display: none;
     @include bp(md) {
       display: block;
-      flex: 0 0 3.5em;
+      flex: 0 0 3em;
       margin-right: 1em;
       padding: .5em 0;
       border-right: 1px solid $color-light-gray;
-      i {
-        font-size: 2.5em;
-      }
       a {
         color: #fff;
       }
@@ -54,8 +51,11 @@
     }
   }
   .title {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
     margin: 0;
+    @include bp(md) {
+      font-size: $font-size-lg;
+    }
   }
   .datetime {
     font-size: $font-size-sm;

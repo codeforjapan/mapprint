@@ -53,6 +53,7 @@
               | 表示中のマップには存在しません
       .legend-close.print-exclude(v-bind:class='{open: isOpenList}' @click="isOpenList=false")
         | リストをとじる
+        i.fas.fa-arrow-down
 </template>
 
 <script>

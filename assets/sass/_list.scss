@@ -5,6 +5,7 @@
   transition: max-height .5s;
   &.open {
     max-height: 40vh;
+    padding-bottom: 2em;
   }
   @include bp(md) {
     padding: 0;
@@ -12,6 +13,7 @@
     max-height: none;
     &.open {
       max-height: none;
+      padding-bottom: 0;
     }
   }
 }

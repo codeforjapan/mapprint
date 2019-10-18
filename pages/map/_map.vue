@@ -38,17 +38,17 @@ div.layout-map
         header.header
           .to-top
             nuxt-link(to='/')
-              i.far.fa-arrow-alt-circle-left
+              i.far.fa-arrow-alt-circle-left.fa-2x
           .banner
             .logo.print-exclude
               img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
             .sub-outer.print-exclude
               .sub-button(@click='isOpenExplain=!isOpenExplain')
-                i.fas.fa-info-circle
+                i.fas.fa-info-circle.fa-lg
                 span
                   | このサイトについて
               .sub-button.github-link
-                i.fab.fa-github
+                i.fab.fa-github.fa-lg
                 a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
             .title-outer
               h1.title(v-if="map_config") {{map_config.map_title}}
@@ -97,9 +97,6 @@ export default {
   head () {
     return {
       title: this.map_config.map_title,
-      script: [
-        { src: 'https://kit.fontawesome.com/9b0eb4b9b8.js', crossorigin:"anonymous", "data-n-head":false }
-      ],
       meta: [
         { hid: 'description', name: 'description', content: this.map_config.map_description },
         { hid: 'og:image', property: 'og:image', content: 'https://codeforjapan.github.io/mapprint/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}

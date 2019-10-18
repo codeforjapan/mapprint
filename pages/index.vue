@@ -16,11 +16,11 @@
                   i.index-arrow-icon.fas.fa-long-arrow-alt-right
     footer.index-footer
       .sub-button(@click='isOpenExplain=!isOpenExplain')
-        i.sub-icon.fas.fa-info-circle
+        i.fas.fa-info-circle.fa-lg
         span
           | このサイトについて
       .sub-button
-        i.sub-icon.fab.fa-github
+        i.fab.fa-github.fa-lg
         a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
     modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>

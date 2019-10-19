@@ -18,7 +18,7 @@ export default {
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:title', property: 'og:title', content: '紙マップ' },
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
-      { hid: 'og:image', property: 'og:image', content: 'https://codeforjapan.github.io/mapprint/images/ogp_main.png' },
+      { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/ogp_main.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
     ],
     link: [
@@ -28,7 +28,7 @@ export default {
     ],
     script: [
       { src: 'https://www.googletagmanager.com/gtag/js?id=UA-45275834-9' },
-      { src: '/mapprint/ga.js' }
+      { src: '/ga.js'  }
     ]
   },
   /*
@@ -83,7 +83,7 @@ export default {
     fallback: true,
   },
   router: {
-    base: '/mapprint/'
+    base: '/'
   },
   build: {
     /*

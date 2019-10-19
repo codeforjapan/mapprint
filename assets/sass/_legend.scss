@@ -33,11 +33,25 @@
   }
 }
 
+.legend-navi-inner {
+  display: flex;
+  align-items: center;
+}
+
+.legend-navi-title {
+  flex: 0 0 3.5em;
+  padding: .3em;
+}
+
+.legend-list-outer {
+  flex: 1 1 auto;
+}
+
 .legend-list {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  padding: .3em 1em;
+  padding: .3em;
   margin: .5em 0;
 }
 

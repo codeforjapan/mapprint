@@ -31,11 +31,15 @@
               span.source_updated
                 | {{source.updated_at}}
               a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
-        simplebar(data-simplebar-auto-hide="false")
-          ul.legend-list.print-exclude
-            li.legend-item(v-for='(setting, name) in map_config.layer_settings')
-              span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")
-                i(:class="[setting.icon_class]")
+        .legend-navi-inner
+          .legend-navi-title
+            img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" alt="凡例ナビ")
+          .legend-list-outer
+            simplebar(data-simplebar-auto-hide="false")
+              ul.legend-list.print-exclude
+                li.legend-item(v-for='(setting, name) in map_config.layer_settings')
+                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")
+                    i(:class="[setting.icon_class]")
         .list-outer(v-bind:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' v-bind:class='{show: isActiveCategory === group.name}')
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")

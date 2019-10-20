@@ -1,7 +1,7 @@
 .aside-inner {
   padding: 0 1.5em;
   @include bp(md) {
-    padding: 2.5em 1.5em;
+    padding: 2.5em 1.5em 5em;
   }
   @include bp(lg) {
     padding: 2.5em 5em 5em;

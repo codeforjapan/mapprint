@@ -9,22 +9,22 @@
       div
         span.modal-close(@click='handleClick')
           | × close
-    .modal-background(v-bind:class='{open: isOpen}')
+    .modal-background(@click='handleClick' :class='{open: isOpen}')
 </template>
 
 <script>
-  export default {
-    props: ['isOpen'],
-    data () {
-      return {
-        map_config: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ""
-      }
-    },
-    methods: {
-      handleClick: function () {
-        this.isOpen = false;
-        this.$emit('closeModal');
-      }
+export default {
+  props: ['isOpen'],
+  data () {
+    return {
+      map_config: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ""
+    }
+  },
+  methods: {
+    handleClick: function () {
+      this.isOpen = false;
+      this.$emit('closeModal');
     }
   }
+}
 </script>

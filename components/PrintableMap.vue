@@ -61,7 +61,7 @@
               span {{activeCategory}}
             p
               | 表示中のマップには存在しません
-          .list-section-none(v-if="isDisplayAllCategory && !displayMarkersGroupByCategory.some((elm) => elm.name === activeCategory)")
+          .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
             p
               | 表示中のマップにはどのポイントも存在しません
       .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")

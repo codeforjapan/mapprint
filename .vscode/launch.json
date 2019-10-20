@@ -20,7 +20,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:3000/mapprint",
+            "url": "http://localhost:3000/",
             "webRoot": "${workspaceFolder}"
         }
     ],

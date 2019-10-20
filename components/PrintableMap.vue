@@ -39,7 +39,7 @@
             simplebar(data-simplebar-auto-hide="false")
               ul.legend-list
                 li.legend-item(v-for='(setting, name) in map_config.layer_settings')
-                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: !isDisplayAllCategory && activeCategory === name}')
+                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
                     i(:class="[setting.icon_class]")
           .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
             .legend-navi-button

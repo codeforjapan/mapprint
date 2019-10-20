@@ -42,6 +42,7 @@
   }
   .logo {
     width: 60%;
+    margin-bottom: .5em;
     @include bp(md) {
       display: none;
     }

@@ -47,6 +47,11 @@
   #map {
     height: 140mm;
   }
+  .marker {
+    span {
+      display: flex !important;
+    }
+  }
   .legend-navi {
     position: relative;
   }

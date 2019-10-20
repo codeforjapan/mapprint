@@ -78,6 +78,30 @@
       "bg_color": "#1CA3EA",
       "icon_class": "fas fa-tint",
       "class": "layer_water"
+    },
+    "Wifi(薄茶；確認済)_台風19号_19年10月" : {
+      "color": "#6D4615",
+      "bg_color": "#C1B17E",
+      "icon_class": "fas fa-wifi",
+      "class": "layer_wifi"
+    },
+    "トイレ(紫：確認済)_台風19号_19年10月 のコピー" : {
+      "color": "#BE4BDB",
+      "bg_color": "#d6b1e0",
+      "icon_class": "fas fa-toilet",
+      "class": "layer_toilet"
+    },
+    "入浴(桃：確認済)_台風19号_19年10月" : {
+      "color": "#c43895",
+      "bg_color": "#f9b3e2",
+      "icon_class": "fas fa-shower",
+      "class": "layer_shower"
+    },
+    "給水(青)_台風19号_19年10月" : {
+      "color": "#001D96",
+      "bg_color": "#1CA3EA",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
     }
   }
 }

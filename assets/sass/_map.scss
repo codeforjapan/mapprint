@@ -44,6 +44,9 @@
       transform: translate(-50%, -50%);
       z-index: z(marker);
     }
+    &:not(.show) {
+      display: none;
+    }
   }
   .number {
     transform: rotateZ(135deg);
@@ -75,8 +78,8 @@
       line-height: 1.25;
       transform: translateY(-50%) translateX(-50%);
     }
-    &.layer_charger,
-    &.layer_wifi {
+    &.fa-plug,
+    &.fa-wifi {
       transform: rotateZ(-180deg);
     }
   }

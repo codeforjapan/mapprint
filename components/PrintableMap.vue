@@ -6,16 +6,17 @@
         )#map
           MglGeolocateControl
           template(v-for='layer in layers', v-if="layer.source.show")
-            MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
+            MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
               template(slot="marker")
                 div.marker
-                  span(:style="{background:map_config.layer_settings[marker.category].color}")
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                  span(:style="{background:map_config.layer_settings[marker.category].color}"
+                       :class="{show: isDisplayAllCategory || activeCategory === marker.category}")
+                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                     b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
                 div
                   div.popup-type
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                     span.popup-poi-type
                       | {{marker.category}}
                   p
@@ -32,16 +33,19 @@
                 | {{source.updated_at}}
               a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
         .legend-navi-inner.print-exclude
-          .legend-navi-title
+          .legend-navi-icon
             img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" alt="凡例ナビ")
           .legend-list-outer
             simplebar(data-simplebar-auto-hide="false")
               ul.legend-list
                 li.legend-item(v-for='(setting, name) in map_config.layer_settings')
-                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="isSelectCategory(name), isOpenList=name")
+                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: !isDisplayAllCategory && activeCategory === name}')
                     i(:class="[setting.icon_class]")
-        .list-outer(v-bind:class='{open: isOpenList}')
-          section.list-section(v-for='group in displayMarkersGroupByCategory' v-bind:class='{show: isActiveCategory === group.name}')
+          .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
+            .legend-navi-button
+              img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
+        .list-outer(:class='{open: isOpenList}')
+          section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
               span.list-title-mark
                 i(:class="map_config.layer_settings[group.name].icon_class")
@@ -50,14 +54,17 @@
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
                 span.item-name {{marker.feature.properties.name}}
-          section.list-section-none(v-if="!displayMarkersGroupByCategory.some((elm) => elm.name === isActiveCategory)")
-            h2.list-title(:style="{backgroundColor:map_config.layer_settings[isActiveCategory].color}")
+          section.list-section-none(v-if="!isDisplayAllCategory && !displayMarkersGroupByCategory.some((elm) => elm.name === activeCategory)")
+            h2.list-title(:style="{backgroundColor: activeCategory ? map_config.layer_settings[activeCategory].color : '#fff'}")
               span.list-title-mark
-                i(:class="map_config.layer_settings[isActiveCategory].icon_class")
-              span {{isActiveCategory}}
+                i(:class="activeCategory ? map_config.layer_settings[activeCategory].icon_class : ''")
+              span {{activeCategory}}
             p
               | 表示中のマップには存在しません
-      .legend-close.print-exclude(v-bind:class='{open: isOpenList}' @click="isOpenList=false")
+          .list-section-none(v-if="isDisplayAllCategory && !displayMarkersGroupByCategory.some((elm) => elm.name === activeCategory)")
+            p
+              | 表示中のマップにはどのポイントも存在しません
+      .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")
         | リストをとじる
         i.fas.fa-arrow-down
 </template>
@@ -120,8 +127,9 @@ export default {
       bounds: null,
       updated_at: null,
       previous_hash: "",
-      isActiveCategory: "",
+      activeCategory: "",
       isOpenList: false,
+      isDisplayAllCategory: true,
       mapStyle: {
         "version": 8,
         "sources": {
@@ -172,8 +180,8 @@ export default {
       }
       this.previous_hash = s;
     },
-    isSelectCategory(category) {
-      this.isActiveCategory = category;
+    selectCategory(category) {
+      this.activeCategory = category;
     }
   },
   mounted () {
@@ -190,7 +198,6 @@ export default {
         markers.map((marker) => {
           categories[marker.category] = true;
         })
-        self.isActiveCategory = Object.keys(categories)[0];
         source.updated_at = updated_at;
         Object.keys(categories).map((category) => {
           const categoryExists = self.map_config.layer_settings[category]

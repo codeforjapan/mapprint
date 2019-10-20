@@ -38,9 +38,26 @@
   align-items: center;
 }
 
-.legend-navi-title {
+.legend-navi-icon {
   flex: 0 0 3.5em;
   padding: .3em;
+  &.inactive {
+    opacity: .5;
+  }
+}
+
+.legend-navi-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px $color-gray;
+}
+
+.legend-navi-img {
+  padding: 3px;
+  vertical-align: middle;
 }
 
 .legend-list-outer {
@@ -71,5 +88,8 @@
   i {
     font-size: 1.25em;
     color: #fff;
+  }
+  &:not(.open) {
+    opacity: .5;
   }
 }

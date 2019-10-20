@@ -17,6 +17,22 @@
 
 .layout-map {
   @include bp(md) {
-    padding: 2em 1.5em 5em;
+    position: relative;
+    // padding: 2em 1.5em 5em;
+    padding: 0;
+
+    //&::before {
+    //  display: block;
+    //  content: '';
+    //  position: absolute;
+    //  left: 50%;
+    //  bottom: 0;
+    //  top: 0;
+    //  width: 7.5%;
+    //  background: -moz-linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+    //  background: -webkit-linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+    //  background: linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+    //  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#555555",endColorstr="#555555",GradientType=1);
+    //}
   }
 }

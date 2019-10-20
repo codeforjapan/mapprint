@@ -1,4 +1,5 @@
 .main {
+  background: #FFF;
   order: 1;
   @include bp(md) {
     order: -1;
@@ -6,9 +7,20 @@
 }
 
 .main-sheet {
-  background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.3);
   @include bp(md) {
-    padding: 2em;
+    position: relative;
+    padding: 1.5em 1.5em 6em;
+    &::before {
+      display: block;
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background: -moz-linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+      background: -webkit-linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+      background: linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+    }
   }
 }

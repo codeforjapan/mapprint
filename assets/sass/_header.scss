@@ -18,11 +18,11 @@
     @include bp(md) {
       display: block;
       flex: 0 0 3em;
-      margin-right: 1em;
-      padding: .5em 0;
-      border-right: 1px solid $color-light-gray;
+      padding: 0;
       a {
         color: #fff;
+        display: block;
+        line-height: 1.1;
       }
     }
   }
@@ -32,10 +32,12 @@
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    padding: .5em 0;
+    padding: 1em 0;
     @include bp(md) {
+      padding: 1em 0 1em 1em;
       flex-wrap: nowrap;
       justify-content: space-between;
+      border-left: 1px solid $color-light-gray;
     }
   }
   .logo {
@@ -52,16 +54,20 @@
   }
   .title {
     font-size: $font-size-base;
+    line-height: 1.1;
+    font-weight: normal;
     margin: 0;
     @include bp(md) {
-      font-size: $font-size-lg;
+      font-size: $font-size-xl;
     }
   }
   .datetime {
     font-size: $font-size-sm;
+    line-height: 1.1;
     display: none;
     @include bp(md) {
       display: block;
+      padding-top: .5em;
     }
   }
   .github-link {

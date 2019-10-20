@@ -1,0 +1,30 @@
+.popup-type {
+  display: flex;
+  align-items: center;
+  margin: 7px;
+  i {
+    position: relative;
+    flex: 0 0 18px;
+    height: 18px;
+    color: #fff;
+    text-align: center;
+    margin-right: 10px;
+    &::before {
+      position: absolute;
+      font-size: 80%;
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+}
+
+.popup-poi-type {
+  font-size: $font-size-sm;
+}
+
+.popup-detail-content {
+  max-height: 10em;
+  word-break: break-all;
+  overflow-y: auto;
+}

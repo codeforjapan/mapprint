@@ -2,9 +2,10 @@
 // Color
 // -----------------------------------------------------------------
 $color-base: #000;
-$color-light-gray: #f2f2f2;
+$color-light-gray: #626262;
 $color-gray: #b5b5b5;
 $color-accent: #263694;
+$color-alpha-black: rgba(0,0,0,.9);
 
 // -----------------------------------------------------------------
 // Font
@@ -51,6 +52,7 @@ $gl-gutter: 1.5em;
 $gl-gutter-vertical: 1.5em;
 $gl-mq-width: 'min-width';
 $gl-mq-list: (
+  xl: 93em,
   lg: 75em,
   md: 52.625em,
   sm: 48em,

@@ -20,15 +20,13 @@ export default {
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
       { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/ogp_main.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
-
     ],
     link: [
-      { rel: 'apple-touch-icon', type: 'image/png', href: '/apple-touch-icon-180x180.png' },
+      { rel: 'apple-touch-icon', type: 'image/png', href: '/apple-touch-icon.png' },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' }
     ],
     script: [
-      { src: 'https://kit.fontawesome.com/9b0eb4b9b8.js', crossorigin:"anonymous"  },
       { src: 'https://www.googletagmanager.com/gtag/js?id=UA-45275834-9' },
       { src: '/ga.js'  }
     ]
@@ -41,13 +39,15 @@ export default {
   ** Global CSS
   */
   css: [
+    { src: '~/assets/fonts/fontawesome/css/all.css', 'data-viewport-units-buggyfill': 'ignore' },
     { src: '~/assets/sass/styles.scss', lang: 'scss' }
   ],
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~/plugins/mapbox', mode: 'client' }, { src: '~/plugins/mapbox', mode: 'client' },
+    { src: '~/plugins/mapbox', mode: 'client' },
+    { src: '~/plugins/simplebar', mode: 'client' },
   ],
   /*
   ** Nuxt.js dev-modules
@@ -99,6 +99,11 @@ export default {
         'cssnano': {
           reduceIdents: false,
           zindex: false
+        }
+      },
+      preset: {
+        autoprefixer: {
+          grid: true
         }
       }
     }

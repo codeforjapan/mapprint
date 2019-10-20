@@ -1,8 +1,16 @@
 .layout-container {
   position: relative;
-  max-width: 1200px;
-  box-sizing: content-box;
-  margin: 2em auto;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+.layout-index {
+  background-image: url("~assets/images/index_body_bg.png");
+  background-size: 500px 500px;
+  min-height: 100vh;
+  padding: 2em;
+  @include bp(md) {
+    padding-left: 5em;
+    padding-right: 5em;
+  }
 }

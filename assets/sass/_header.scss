@@ -1,29 +1,91 @@
 .header {
-  .qrcode {
+  position: absolute;
+  z-index: z(header);
+  background-color: #fff;
+  padding: 0 1em;
+  @include bp(md) {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: $color-alpha-black;
+    color: #fff;
+  }
+  .to-top {
     display: none;
+    @include bp(md) {
+      display: block;
+      flex: 0 0 3em;
+      padding: 0;
+      a {
+        color: #fff;
+        display: block;
+        line-height: 1.1;
+      }
+    }
   }
   .banner {
+    flex: 1 1 auto;
     display: flex;
-    flex-direction: column;
-    @include bp(sm) {
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 1em 0;
+    @include bp(md) {
+      padding: 1em 0 1em 1em;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      border-left: 1px solid $color-light-gray;
     }
   }
   .logo {
-    width: 13em;
-    padding: 0 1em 1em 0;
-    @include bp(sm) {
-      flex: 0 0 25%;
+    width: 60%;
+    margin-bottom: .5em;
+    @include bp(md) {
+      display: none;
+    }
+  }
+  .title-outer {
+    order: 1;
+    @include bp(md) {
+      order: -1;
     }
   }
   .title {
-    font-size: $font-size-lg;
-    @include bp(sm) {
-      flex: 0 0 75%;
+    font-size: $font-size-base;
+    line-height: 1.1;
+    font-weight: normal;
+    margin: 0;
+    @include bp(md) {
+      font-size: $font-size-xl;
     }
   }
+  .datetime {
+    font-size: $font-size-sm;
+    line-height: 1.1;
+    display: none;
+    @include bp(md) {
+      display: block;
+      padding-top: .5em;
+    }
+  }
+  .github-link {
+    display: none;
+    @include bp(md) {
+      display: block;
+      margin-left: 1em;
+    }
+  }
+  .qrcode {
+    display: none;
+  }
+}
+
+.header-input-list {
+  padding: .5em 1em;
+  margin: 0;
 }
 
 .header-label {
@@ -32,9 +94,4 @@
 
 .header-input {
   margin-right: .3em;
-}
-
-.header-datetime {
-  font-size: $font-size-sm;
-  text-align: right;
 }

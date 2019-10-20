@@ -1,73 +1,83 @@
 <template lang="pug">
   client-only
     div(v-if='layers.length')
-      div
-        label.header-label(v-for='source in map_config.sources')
-          input.header-input(type='checkbox', v-model='source.show')
-          | {{source.title}}
-          span.source_updated
-          | {{source.updated_at}}
-          a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
-      .header-datetime
-        | 印刷日： {{updated_at}}
       .map-outer
         MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
         )#map
           MglGeolocateControl
-          .legend(v-bind:class='{open: isOpenLegend}')
-            .legend-inner
-              .legend-type(v-for='(setting, name) in map_config.layer_settings')
-                i(:class="[setting.icon_class]", :style="{backgroundColor:setting.color}")
-                span.poi-type
-                  | {{name}}
-              .legend-trigger(v-on:click='isOpenLegend=!isOpenLegend' v-bind:class='{close: !isOpenLegend}')
-                .legend-trigger-icon(v-if='!isOpenLegend')
-                  i.fas.fa-caret-left
-                  span
-                    | 凡例
-                .legend-trigger-icon(v-else)
-                  i.fas.fa-caret-right
-                  span
-                    | とじる
           template(v-for='layer in layers', v-if="layer.source.show")
-            MglMarker(v-for="(marker, index) in layer.markers", v-bind:key="index", :coordinates="marker.feature.geometry.coordinates")
+            MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
               template(slot="marker")
                 div.marker
-                  span(:style="{background:map_config.layer_settings[marker.category].color}")
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                  span(:style="{background:map_config.layer_settings[marker.category].color}"
+                       :class="{show: isDisplayAllCategory || activeCategory === marker.category}")
+                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                     b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
                 div
-                  div.legend-type
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]", :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                    span.poi-type
+                  div.popup-type
+                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                    span.popup-poi-type
                       | {{marker.category}}
                   p
                     | 名称: {{marker.feature.properties.name}}
-                  div.legend-detail-content
+                  div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
-      div
-        section(v-for='group in displayMarkersGroupByCategory')
-          h2.list-title
-            span.list-title-mark(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
-              i(:class="map_config.layer_settings[group.name].icon_class")
-            span {{group.name}}
-          ul.list-items.grid-noGutter
-            li.col-12_xs-6(v-for="marker in group.markers")
-              span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
-              span.item-name {{marker.feature.properties.name}}
+      .legend-navi
+        ul.header-input-list
+          li(v-for='source in map_config.sources')
+            label.header-label
+              input.header-input(type='checkbox', v-model='source.show')
+              | {{source.title}}
+              span.source_updated
+                | {{source.updated_at}}
+              a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
+        .legend-navi-inner.print-exclude
+          .legend-navi-icon
+            img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" alt="凡例ナビ")
+          .legend-list-outer
+            simplebar(data-simplebar-auto-hide="false")
+              ul.legend-list
+                li.legend-item(v-for='(setting, name) in map_config.layer_settings')
+                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: !isDisplayAllCategory && activeCategory === name}')
+                    i(:class="[setting.icon_class]")
+          .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
+            .legend-navi-button
+              img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
+        .list-outer(:class='{open: isOpenList}')
+          section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
+            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
+              span.list-title-mark
+                i(:class="map_config.layer_settings[group.name].icon_class")
+              span {{group.name}}
+            ul.list-items.grid-noGutter
+              li.col-12_xs-6(v-for="marker in group.markers")
+                span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
+                span.item-name {{marker.feature.properties.name}}
+          section.list-section-none(v-if="!isDisplayAllCategory && !displayMarkersGroupByCategory.some((elm) => elm.name === activeCategory)")
+            h2.list-title(:style="{backgroundColor: activeCategory ? map_config.layer_settings[activeCategory].color : '#fff'}")
+              span.list-title-mark
+                i(:class="activeCategory ? map_config.layer_settings[activeCategory].icon_class : ''")
+              span {{activeCategory}}
+            p
+              | 表示中のマップには存在しません
+          .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
+            p
+              | 表示中のマップにはどのポイントも存在しません
+      .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")
+        | リストをとじる
+        i.fas.fa-arrow-down
 </template>
 
 <script>
 import 'mapbox-gl/dist/mapbox-gl.css'
-
+import 'simplebar/dist/simplebar.min.css'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 
 const crc16 = require('js-crc').crc16;
 let helper;
 export default {
   props: ['map_config'],
-
   computed: {
     center () {
       return this.map_config.center
@@ -116,8 +126,10 @@ export default {
       map: null,
       bounds: null,
       updated_at: null,
-      isOpenLegend: false,
       previous_hash: "",
+      activeCategory: "",
+      isOpenList: false,
+      isDisplayAllCategory: true,
       mapStyle: {
         "version": 8,
         "sources": {
@@ -168,6 +180,9 @@ export default {
       }
       this.previous_hash = s;
     },
+    selectCategory(category) {
+      this.activeCategory = category;
+    }
   },
   mounted () {
     const MapHelper = require('~/lib/MapHelper.ts').default

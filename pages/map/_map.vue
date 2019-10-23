@@ -100,7 +100,9 @@ export default {
       title: this.map_config.map_title,
       meta: [
         { hid: 'description', name: 'description', content: this.map_config.map_description },
-        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')}
+        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')},
+        { hid: 'og:description', name: 'og:description', content: this.map_config.map_description },
+        { hid: 'og:title', name: 'og:title', content: this.map_config.map_title +  ' - 紙マップ'}
       ]
     }
   }

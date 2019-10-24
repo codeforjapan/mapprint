@@ -38,7 +38,7 @@
           .legend-list-outer
             simplebar(data-simplebar-auto-hide="false")
               ul.legend-list
-                li.legend-item(v-for='(setting, name) in map_config.layer_settings')
+                li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
                   span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
                     i(:class="[setting.icon_class]")
           .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
@@ -54,13 +54,6 @@
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
                 span.item-name {{marker.feature.properties.name}}
-          section.list-section-none(v-if="!isDisplayAllCategory && !displayMarkersGroupByCategory.some((elm) => elm.name === activeCategory)")
-            h2.list-title(:style="{backgroundColor: activeCategory ? map_config.layer_settings[activeCategory].color : '#fff'}")
-              span.list-title-mark
-                i(:class="activeCategory ? map_config.layer_settings[activeCategory].icon_class : ''")
-              span {{activeCategory}}
-            p
-              | 表示中のマップには存在しません
           .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
             p
               | 表示中のマップにはどのポイントも存在しません

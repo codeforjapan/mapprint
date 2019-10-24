@@ -2,14 +2,8 @@
   background: #FFF;
   order: 1;
   @include bp(md) {
-    order: -1;
-  }
-}
-
-.main-sheet {
-  @include bp(md) {
     position: relative;
-    padding: 1.5em 1.5em 6em;
+    order: -1;
     &::before {
       display: block;
       content: '';
@@ -20,5 +14,11 @@
       height: 100%;
       background: linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
     }
+  }
+}
+
+.main-sheet {
+  @include bp(md) {
+    padding: 1.5em 1.5em 6em;
   }
 }

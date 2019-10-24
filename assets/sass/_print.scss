@@ -47,11 +47,16 @@
   #map {
     height: 140mm;
   }
+  .marker {
+    span {
+      display: flex !important;
+    }
+  }
   .legend-navi {
     position: relative;
   }
   .list-outer {
-    max-height: none;
+    max-height: none !important;
   }
   .list-section {
     display: block !important;

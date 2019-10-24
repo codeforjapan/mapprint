@@ -5,7 +5,7 @@
         MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
         )#map
           MglGeolocateControl
-          template(v-for='layer in layers', v-if="layer.source.show")
+          template(v-for='layer in layers', v-if="checkedArea.includes(layer.source.title)")
             MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
               template(slot="marker")
                 div.marker
@@ -24,26 +24,40 @@
                   div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       .legend-navi
-        ul.header-input-list
-          li(v-for='source in map_config.sources')
-            label.header-label
-              input.header-input(type='checkbox', v-model='source.show')
-              | {{source.title}}
-              span.source_updated
-                | {{source.updated_at}}
-              a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
-        .legend-navi-inner.print-exclude
-          .legend-navi-icon
-            img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" alt="凡例ナビ")
-          .legend-list-outer
-            simplebar(data-simplebar-auto-hide="false")
-              ul.legend-list
-                li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
-                  span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
-                    i(:class="[setting.icon_class]")
-          .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
-            .legend-navi-button
-              img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
+        .area-select(:class='{open: isOpenAreaSelect}')
+          .area-close(@click="isOpenAreaSelect=false")
+            | 地域選択をとじる
+            i.fas.fa-arrow-down
+          .area-list-outer(:class='{open: isOpenAreaSelect}')
+            ul.area-list.grid-noGutter
+              li.col-12_xs-6(v-for='source in map_config.sources')
+                label.area-label
+                  input.area-input(type='checkbox', :value='source.title', v-model='selectArea')
+                  | {{source.title}}
+                  span
+                    | {{source.updated_at}}
+                  a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
+        .navigation
+          .navigation-area
+            .area-select-button(@click="isOpenAreaSelect=true")
+              .area-array-outer
+                i.fas.fa-check-square
+                .area-array
+                  | {{checkedArea.join(',')}}
+              .area-select-button-icon
+                i.fas.fa-arrow-up
+          .navigation-legend.legend-navi-inner.print-exclude
+            .legend-navi-icon
+              img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" alt="凡例ナビ")
+            .legend-list-outer
+              simplebar(data-simplebar-auto-hide="false")
+                ul.legend-list
+                  li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
+                    span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
+                      i(:class="[setting.icon_class]")
+            .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
+              .legend-navi-button
+                img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
         .list-outer(:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
@@ -109,8 +123,15 @@ export default {
       },
       []
       )
-
       return resultGroupBy
+    },
+    selectArea: {
+      get () {
+        return this.checkedArea
+      },
+      set (value) {
+        this.checkedArea = value
+      }
     }
   },
   data () {
@@ -121,6 +142,8 @@ export default {
       updated_at: null,
       previous_hash: "",
       activeCategory: "",
+      checkedArea: [],
+      isOpenAreaSelect: false,
       isOpenList: false,
       isDisplayAllCategory: true,
       mapStyle: {
@@ -181,10 +204,13 @@ export default {
     const MapHelper = require('~/lib/MapHelper.ts').default
     const ky = require('ky').default
     helper = new MapHelper()
+    let area = [];
     const categories = {};
     const self = this
     this.map_config.sources.forEach((source) => {
       (async () => {
+        if (source.show) area.push(source.title)
+        self.checkedArea = area
         self.updated_at = getNowYMD(new Date())
         const data = await ky.get(source.url).text()
         const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings,source.updated_search_key)

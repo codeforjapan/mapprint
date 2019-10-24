@@ -115,6 +115,18 @@
       "bg_color": "#1CA3EA",
       "icon_class": "fas fa-tint",
       "class": "layer_water"
+    },
+    "（南相馬市）給水所" : {
+      "color": "#001D96",
+      "bg_color": "#1CA3EA",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
+    },
+    "（無料）入浴施設" : {
+      "color": "#c43895",
+      "bg_color": "#f9b3e2",
+      "icon_class": "fas fa-shower",
+      "class": "layer_shower"
     }
   }
 }

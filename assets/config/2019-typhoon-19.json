@@ -23,6 +23,19 @@
       "type" : "kml",
       "title" : "千葉県流山市のみ",
       "show" : true
+    },
+    {
+      "url" : "https://www.google.com/maps/d/kml?mid=1IKlMaWlNDYmfEtgWsL9ZirnmLnirffhl&forcekml=1",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1IKlMaWlNDYmfEtgWsL9ZirnmLnirffhl",
+      "type" : "kml",
+      "title" : "福島県相双地区",
+      "updated_search_key": {
+        "type":"regexp",
+        "pattern":"(2019.+?更新)",
+        "index":1,
+        "field":"description"
+      },
+      "show" : true
     }
   ],
   "default_hash": "35.89575594927511,139.65994077606268-35.62491040699955,140.1995505107742",
@@ -102,6 +115,18 @@
       "bg_color": "#1CA3EA",
       "icon_class": "fas fa-tint",
       "class": "layer_water"
+    },
+    "（南相馬市）給水所" : {
+      "color": "#001D96",
+      "bg_color": "#1CA3EA",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
+    },
+    "（無料）入浴施設" : {
+      "color": "#c43895",
+      "bg_color": "#f9b3e2",
+      "icon_class": "fas fa-shower",
+      "class": "layer_shower"
     }
   }
 }

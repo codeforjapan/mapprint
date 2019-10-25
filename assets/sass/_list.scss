@@ -1,6 +1,6 @@
 .list-outer {
   padding: 0 1em;
-  overflow: auto;
+  overflow-y: auto;
   max-height: 0;
   transition: max-height .5s;
   &.open {

@@ -43,7 +43,7 @@
               .area-array-outer
                 i.fas.fa-check-square
                 .area-array
-                  | {{checkedArea.join(',')}}
+                  | {{checkedArea.join(', ')}}
               .area-select-button-icon.print-exclude
                 i.fas.fa-arrow-up
           .navigation-legend.legend-navi-inner.print-exclude

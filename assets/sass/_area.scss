@@ -69,7 +69,8 @@
 
 .area-array {
   font-size: $font-size-sm;
-  max-width: calc(100% - 1em);
+  width: calc(100% - 1em);
+  max-width: 300px;
   padding: 0 .3em;
   white-space: nowrap;
   overflow: hidden;

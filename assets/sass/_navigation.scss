@@ -10,7 +10,7 @@
 .navigation-area {
   padding: .5em;
   @include bp(md) {
-    flex: 1 1 auto;
+    min-width: 0;
   }
 }
 

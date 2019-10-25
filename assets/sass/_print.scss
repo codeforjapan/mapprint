@@ -52,6 +52,14 @@
       display: flex !important;
     }
   }
+  .area-select-button {
+    box-shadow: none;
+  }
+  .area-array {
+    white-space: normal;
+    overflow: auto;
+    max-width: 100%;
+  }
   .legend-navi {
     position: relative;
   }

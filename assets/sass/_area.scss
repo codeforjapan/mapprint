@@ -1,5 +1,6 @@
 .area-select {
   position: absolute;
+  z-index: z(area-select);
   bottom: 100%;
   left: 50%;
   transform: translate(-50%, -3px);
@@ -34,8 +35,12 @@
 }
 
 .area-list {
-  padding: .5em 1em;
+  padding: .5em;
   margin: 0;
+}
+
+.area-item {
+  padding: .3em .5em;
 }
 
 .area-label {
@@ -59,9 +64,11 @@
 .area-array-outer {
   display: flex;
   align-items: center;
+  min-width: 0;
 }
 
 .area-array {
+  max-width: calc(100% - 1em);
   padding: 0 .3em;
   white-space: nowrap;
   overflow: hidden;

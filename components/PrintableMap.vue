@@ -29,8 +29,8 @@
             | 地域選択をとじる
             i.fas.fa-arrow-down
           .area-list-outer(:class='{open: isOpenAreaSelect}')
-            ul.area-list.grid-noGutter
-              li.col-12_xs-6(v-for='source in map_config.sources')
+            ul.area-list.grid
+              li.area-item.col-12_xs-6(v-for='source in map_config.sources')
                 label.area-label
                   input.area-input(type='checkbox', :value='source.title', v-model='selectArea')
                   | {{source.title}}
@@ -39,12 +39,12 @@
                   a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
         .navigation
           .navigation-area
-            .area-select-button(@click="isOpenAreaSelect=true")
+            .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
               .area-array-outer
                 i.fas.fa-check-square
                 .area-array
                   | {{checkedArea.join(',')}}
-              .area-select-button-icon
+              .area-select-button-icon.print-exclude
                 i.fas.fa-arrow-up
           .navigation-legend.legend-navi-inner.print-exclude
             .legend-navi-icon

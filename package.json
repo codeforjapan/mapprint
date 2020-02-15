@@ -32,7 +32,7 @@
     "togeojson": "^0.16.0",
     "ts-node": "^8.4.1",
     "viewport-units-buggyfill": "^0.6.2",
-    "vue": "^2.6.10",
+    "vue": "^2.6.11",
     "vue-mapbox": "^0.4.1"
   },
   "devDependencies": {

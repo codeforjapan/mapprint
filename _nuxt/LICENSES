@@ -1,12 +1,6 @@
 /*!
- * Vue.js v2.6.10
- * (c) 2014-2019 Evan You
- * Released under the MIT License.
- */
-
-/*!
-  * vue-router v3.0.7
-  * (c) 2019 Evan You
+  * vue-router v3.1.5
+  * (c) 2020 Evan You
   * @license MIT
   */
 
@@ -15,6 +9,18 @@
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
+ */
+
+/*!
+ * Vue.js v2.6.11
+ * (c) 2014-2019 Evan You
+ * Released under the MIT License.
+ */
+
+/*!
+ * viewport-units-buggyfill v0.6.2
+ * @web: https://github.com/rodneyrehm/viewport-units-buggyfill/
+ * @author: Rodney Rehm - http://rodneyrehm.de/en/
  */
 
 /*!
@@ -39,6 +45,8 @@
  * Date: 2019-06-29T08:20:19.827Z
  */
 
+/*! MIT License © Sindre Sorhus */
+
 /**
  * [js-crc]{@link https://github.com/emn178/js-crc}
  *
@@ -47,12 +55,4 @@
  * @author Chen, Yi-Cyuan [emn178@gmail.com]
  * @copyright Chen, Yi-Cyuan 2015-2017
  * @license MIT
- */
-
-/*! MIT License © Sindre Sorhus */
-
-/*!
- * viewport-units-buggyfill v0.6.2
- * @web: https://github.com/rodneyrehm/viewport-units-buggyfill/
- * @author: Rodney Rehm - http://rodneyrehm.de/en/
  */

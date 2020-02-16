@@ -10,6 +10,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "createtiles": "node createtiles.ts",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "dev-debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt"
   },
@@ -47,6 +48,7 @@
     "css-mqpacker": "^7.0.0",
     "eslint": "^6.1.0",
     "eslint-plugin-nuxt": ">=0.4.2",
+    "fs": "0.0.1-security",
     "node-sass": "^4.13.1",
     "pug": "^2.0.4",
     "pug-loader": "^2.4.0",

@@ -1,0 +1,50 @@
+{
+    "tilejson": "2.0.0",
+    "id": "2019-typhoon-19",
+    "name": "印刷できる台風災害支援情報マップ（千葉県）",
+    "format": "pbf",
+    "maxzoom": 14,
+    "minzoom": 0,
+    "attribution": "mapprint",
+    "description": "SNSで流れる給水所等の情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。（GS・給水・避難所・充電・無料Wifi）  ぜひ印刷して必要な人に届けてあげてください！",
+    "vector_layers": [
+        {
+            "id": "japan",
+            "description": "",
+            "minzoom": 0,
+            "maxzoom": 14,
+            "fields": {
+                "description": "String",
+                "https://tree-maps-2019-dot-tree-maps-152415.appspot.com/geocoding/google": "String",
+                "name": "String",
+                "styleHash": "String",
+                "styleMapHash": "String",
+                "styleUrl": "String",
+                "unnamed (1)": "String",
+                "unnamed (2)": "String",
+                "ふりがな": "String",
+                "やってる？": "String",
+                "マイマップ更新日時 *********": "String",
+                "マイマップ更新日時 10/13 21:20": "String",
+                "マイマップ更新日時 10/18 8:20": "String",
+                "住所": "String",
+                "備考": "String",
+                "市町村名": "String",
+                "情報更新日": "String",
+                "情報源": "String",
+                "番号": "String",
+                "経度": "String",
+                "緯度": "String",
+                "自治体コード": "String",
+                "都道府県名": "String",
+                "電話": "String"
+            }
+        }
+    ],
+    "crs": "EPSG:3857",
+    "crs_wkt": "PROJCS[\"WGS 84 / Pseudo-Mercator\",GEOGCS[\"WGS 84\",DATUM[\"WGS_1984\",SPHEROID[\"WGS 84\",6378137,298.257223563,AUTHORITY[\"EPSG\",\"7030\"]],AUTHORITY[\"EPSG\",\"6326\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4326\"]],PROJECTION[\"Mercator_1SP\"],PARAMETER[\"central_meridian\",0],PARAMETER[\"scale_factor\",1],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],EXTENSION[\"PROJ4\",\"+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +nadgrids=@null +wktext +no_defs\"],AUTHORITY[\"EPSG\",\"3857\"]]",
+    "tile_grid": "mercator",
+    "tiles": [
+        "./japan/zxy/{z}/{x}/{y}.pbf"
+    ]
+}

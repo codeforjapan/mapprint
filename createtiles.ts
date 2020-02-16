@@ -1,5 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
+const shell = require('shelljs')
 
 const TARGET_DIR = './dist/data/';
 const CONFIG_DIR = './assets/config/'
@@ -17,7 +18,8 @@ list.map((name) => {
     }
     console.log(`downloading ${source.url}...`)
     axios.get(source.url).then((response) => {
-      fs.writeFile(`${TARGET_DIR}${config.map_id}/${source.id}.${source.type}`, response.data, (err) => {
+      const file_path = `${TARGET_DIR}${config.map_id}/${source.id}.${source.type}`
+      fs.writeFile(file_path, response.data, (err) => {
         // 書き出しに失敗した場合
         if(err){
           console.log("Downloading kml file failed" + err)
@@ -26,6 +28,9 @@ list.map((name) => {
         // 書き出しに成功した場合
         else{
           console.log(`Downloaded ${source.id}.${source.type}`)
+          console.log(`./create_tiles.sh ${file_path}`)
+          shell.exec(`./create_tiles.sh ${file_path}`)
+          // shell.exec(`./convert_to_tiles.sh ${file_path}`)
         }
       })
     })

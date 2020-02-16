@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "----------------------"
 echo "convert $1 into tiles"
 path=$1
 dir=${path%/*}

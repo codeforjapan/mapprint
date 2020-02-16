@@ -5,6 +5,7 @@
   "map_image":  "ogp_2019-typhoon-19.png",
   "sources": [
     {
+      "id" : "japan",
       "url" : "https://www.google.com/maps/d/kml?mid=1pl0sY4TmNur6xB4bKvxxvi5rsizCY1bu&forcekml=1",
       "link": "https://www.google.com/maps/d/u/0/viewer?mid=1pl0sY4TmNur6xB4bKvxxvi5rsizCY1bu",
       "updated_search_key": {
@@ -18,6 +19,7 @@
       "show" : true
     },
     {
+      "id" : "nagareyama",
       "url" : "https://www.google.com/maps/d/kml?mid=1rAKfJOHRj7K8KkaAGEAwN4RGTABs9zIt&forcekml=1",
       "link": "https://www.google.com/maps/d/u/0/viewer?mid=1rAKfJOHRj7K8KkaAGEAwN4RGTABs9zIt",
       "type" : "kml",
@@ -25,6 +27,7 @@
       "show" : true
     },
     {
+      "id" : "sousou",
       "url" : "https://www.google.com/maps/d/kml?mid=1IKlMaWlNDYmfEtgWsL9ZirnmLnirffhl&forcekml=1",
       "link": "https://www.google.com/maps/d/u/0/viewer?mid=1IKlMaWlNDYmfEtgWsL9ZirnmLnirffhl",
       "type" : "kml",

@@ -5,6 +5,7 @@
   "map_image":  "ogp_2019-chiba-typhoon-15.png",
   "sources": [
     {
+      "id" : "chiba",
       "url" : "https://www.google.com/maps/d/kml?mid=18v4csEC-qPW_aeXhEnuzgMfUAqWcbF5q&forcekml=1",
       "type" : "kml",
       "title" : "2019千葉台風15号",

@@ -10,7 +10,7 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "createtiles": "node createtiles.ts",
+    "createtiles": "node createtiles.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "dev-debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt"
   },

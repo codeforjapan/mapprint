@@ -11,7 +11,7 @@ if (!fs.existsSync(TARGET_DIR)) {
     fs.mkdirSync(TARGET_DIR, {recursive: true});
 }
 
-const _make_tilejson = (dir: string, base_name: string) => {
+const _make_tilejson = (dir, base_name) => {
   let metadata = require(`${dir}${base_name}/metadata.json`)
   //console.log(metadata)
   let vector_layers = JSON.parse(metadata.json)

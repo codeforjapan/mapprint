@@ -154,6 +154,10 @@ export default {
             "tiles": ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'],
             "tileSize": 256,
             "attribution": 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
+          },
+          "mapprint": {
+            "type": "vector",
+            "url": `https://kamimap.com/data/${this.map_config.map_id}/tilejson.json`
           }
         },
         "layers": [{

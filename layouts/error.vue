@@ -6,7 +6,7 @@
 export default {
   mounted () {
     setTimeout(() => {
-      location.href = '/mapprint/'
+      location.href = '/'
     }, 5000)
 
   }

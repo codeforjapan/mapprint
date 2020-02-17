@@ -1,6 +1,7 @@
 const axios = require('axios');
 const fs = require('fs');
 const shell = require('shelljs')
+const path = require('path')
 
 const TARGET_DIR = './dist/data/';
 const CONFIG_DIR = './assets/config/'
@@ -8,6 +9,26 @@ const CONFIG_DIR = './assets/config/'
 // create target directory
 if (!fs.existsSync(TARGET_DIR)) {
     fs.mkdirSync(TARGET_DIR, {recursive: true});
+}
+
+const _make_tilejson = (dir: string, base_name: string) => {
+  let metadata = require(`${dir}${base_name}/metadata.json`)
+  //console.log(metadata)
+  let vector_layers = JSON.parse(metadata.json)
+  delete metadata.json
+  metadata.vector_layers = vector_layers.vector_layers
+  metadata.center = metadata.center.split(',').map((v) => parseFloat(v))
+  metadata.bounds = metadata.bounds.split(',').map((v) => parseFloat(v))
+  metadata.pixel_scale = 256
+  metadata.tilejson = "2.0.0"
+  metadata.tile = [
+    `https://kamimap.com/data/${base_name}/zxy/{z}/{x}/{y}.pbf`
+  ]
+  fs.writeFile(`${dir}${base_name}/tilejson.json`, JSON.stringify(metadata), (err) => {
+    if (err) {
+      console.log("Wrighting tilejson.json failed: " + err)
+    }
+  })
 }
 
 // load config
@@ -44,7 +65,8 @@ list.map((name) => {
     })
   })
   Promise.all(funcs).then(() => {
-    console.log(`${name} is finished!!!!!!!!`)
     shell.exec(`./merge_tiles.sh ${name} ${TARGET_DIR}`)
+    const base_name = path.basename(name, '.json')
+    _make_tilejson(TARGET_DIR, base_name)
   })
 })

@@ -8,4 +8,4 @@ id=${file%".kml"}
 target="${id}.mbtiles"
 zxy="${id}/zxy"
 mkdir -p "${dir}/$zxy"
-npx togeojson "${dir}/$file" | tippecanoe  -f -o "${dir}/$target" --base-zoom=2 
+npx togeojson "${dir}/$file" | tippecanoe  -f -o "${dir}/$target" --base-zoom=2 -l mapprint

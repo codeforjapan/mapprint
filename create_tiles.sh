@@ -9,4 +9,3 @@ target="${id}.mbtiles"
 zxy="${id}/zxy"
 mkdir -p "${dir}/$zxy"
 npx togeojson "${dir}/$file" | tippecanoe  -f -o "${dir}/$target" --base-zoom=2 
-tile-join --output-to-directory="${dir}/$zxy" --force --no-tile-compression --no-tile-size-limit "${dir}/$target"

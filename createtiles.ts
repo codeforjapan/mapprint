@@ -16,28 +16,35 @@ list.map((name) => {
   // load map config
   console.log(`loading ${CONFIG_DIR}${name}`)
   const config = require(`${CONFIG_DIR}${name}`)
-  config.sources.forEach((source) => {
-    // download source file
-    if (!fs.existsSync(`${TARGET_DIR}${config.map_id}`)) {
-      fs.mkdirSync(`${TARGET_DIR}${config.map_id}`, {recursive: true});
-    }
-    console.log(`downloading ${source.url}...`)
-    axios.get(source.url).then((response) => {
-      // currently, this is supporting only kml
-      const file_path = `${TARGET_DIR}${config.map_id}/${source.id}.${source.type}`
-      fs.writeFile(file_path, response.data, (err) => {
-        // failed
-        if(err){
-          console.log("Downloading kml file failed" + err)
-          throw err
-        }
-        // success
-        else{
-          console.log(`Downloaded ${source.id}.${source.type}`)
-          // convert kml files to xyz tile
-          shell.exec(`./create_tiles.sh ${file_path}`)
-        }
+  const funcs = config.sources.map(source => {
+    return new Promise((resolve, reject) => {
+      // download source file
+      if (!fs.existsSync(`${TARGET_DIR}${config.map_id}`)) {
+        fs.mkdirSync(`${TARGET_DIR}${config.map_id}`, {recursive: true});
+      }
+      console.log(`downloading ${source.url}...`)
+      axios.get(source.url).then((response) => {
+        // currently, this is supporting only kml
+        const file_path = `${TARGET_DIR}${config.map_id}/${source.id}.${source.type}`
+        fs.writeFile(file_path, response.data, (err) => {
+          // failed
+          if(err){
+            console.log("Downloading kml file failed" + err)
+            reject(err)
+          }
+          // success
+          else{
+            console.log(`Downloaded ${source.id}.${source.type}`)
+            // convert kml files to xyz tile
+            shell.exec(`./create_tiles.sh ${file_path}`)
+            resolve()
+          }
+        })
       })
     })
+  })
+  Promise.all(funcs).then(() => {
+    console.log(`${name} is finished!!!!!!!!`)
+    shell.exec(`./merge_tiles.sh ${name} ${TARGET_DIR}`)
   })
 })

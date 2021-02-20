@@ -1,6 +1,7 @@
 {
   "map_id":"2019-typhoon-19",
   "map_title":"2019年台風19号災害支援情報マップ",
+  "map_title_en":"2019 Typhoon-19 Disaster relief information map",
   "map_description":"SNSで流れる給水所等の情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。随時情報更新していきます。ぜひ印刷して必要な人に届けてあげてください！",
   "map_image":  "ogp_2019-typhoon-19.png",
   "sources": [

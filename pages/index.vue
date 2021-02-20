@@ -9,12 +9,14 @@
         li.col-12_xs-6_lg-4(v-for='(map, index) in maps')
           .index-item
             .index-item-inner
-              nuxt-link(:to='"map/" + map.map_id', v-bind:key='index')
+              nuxt-link(:to="localePath('/map/' + map.map_id)", v-bind:key='index')
                 .index-link-inner
                   img(:src='"https://kamimap.com/images/" + (map.map_image ? map.map_image : "logo.png")' alt='')
-                  .index-item-title
-                    span
+                  .index-item-title(:class='$i18n.locale')
+                    span(class='ja')
                       | {{map.map_title}}
+                    span(class='en')
+                      | {{map.map_title_en}}
                     i.index-arrow-icon.fas.fa-long-arrow-alt-right
             .index-item-sns
               div
@@ -28,10 +30,17 @@
       .sub-button(@click='isOpenExplain=!isOpenExplain')
         i.fas.fa-info-circle.fa-lg
         span
-          | このサイトについて
+          | {{ $t('root.about') }}
       .sub-button
         i.fab.fa-github.fa-lg
-        a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
+        a(href="https://github.com/codeforjapan/mapprint") {{ $t('root.contribute') }}
+    footer.index-footer
+      .sub-button(v-for="locale in $i18n.locales")
+        nuxt-link(
+          :key="locale.code"
+          :to="switchLocalePath(locale.code)"
+        )
+          span {{ locale.name }}
     modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>
 

@@ -69,7 +69,7 @@ import PrintableMap from '~/components/PrintableMap'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
 if (process.client) {
-  require('viewport-units-buggyfill').init();
+  require('viewport-units-buggyfill').init()
 }
 export default {
   components: {
@@ -83,27 +83,27 @@ export default {
       updated_at: null
     }
   },
-  methods: {
-    updateQRCode() {
-      this.fullURL = location.href;
-    },
-    closeModalMethod () {
-      this.isOpenExplain = false;
-    }
-  },
-  mounted () {
-    this.fullURL = location.href;
-    this.updated_at = getNowYMD(new Date());
-  },
   head () {
     return {
       title: this.map_config.map_title,
       meta: [
         { hid: 'description', name: 'description', content: this.map_config.map_description },
-        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png')},
+        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png') },
         { hid: 'og:description', name: 'og:description', content: this.map_config.map_description },
-        { hid: 'og:title', name: 'og:title', content: this.map_config.map_title +  ' - 紙マップ'}
+        { hid: 'og:title', name: 'og:title', content: this.map_config.map_title + ' - 紙マップ' }
       ]
+    }
+  },
+  mounted () {
+    this.fullURL = location.href
+    this.updated_at = getNowYMD(new Date())
+  },
+  methods: {
+    updateQRCode () {
+      this.fullURL = location.href
+    },
+    closeModalMethod () {
+      this.isOpenExplain = false
     }
   }
 }

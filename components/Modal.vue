@@ -17,13 +17,13 @@ export default {
   props: ['isOpen'],
   data () {
     return {
-      map_config: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ""
+      map_config: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ''
     }
   },
   methods: {
-    handleClick: function () {
-      this.isOpen = false;
-      this.$emit('closeModal');
+    handleClick () {
+      this.isOpen = false
+      this.$emit('closeModal')
     }
   }
 }

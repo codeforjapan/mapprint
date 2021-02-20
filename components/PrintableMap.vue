@@ -81,10 +81,46 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 
-const crc16 = require('js-crc').crc16;
-let helper;
+const crc16 = require('js-crc').crc16
+let helper
 export default {
   props: ['map_config'],
+  data () {
+    return {
+      layers: [],
+      map: null,
+      bounds: null,
+      updated_at: null,
+      previous_hash: '',
+      activeCategory: '',
+      checkedArea: [],
+      isOpenAreaSelect: false,
+      isOpenList: false,
+      isDisplayAllCategory: true,
+      mapStyle: {
+        'version': 8,
+        'sources': {
+          'OSM': {
+            'type': 'raster',
+            'tiles': ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            'tileSize': 256,
+            'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
+          },
+          'mapprint': {
+            'type': 'vector',
+            'url': `https://kamimap.com/data/${this.map_config.map_id}/tilejson.json`
+          }
+        },
+        'layers': [{
+          'id': 'OSM',
+          'type': 'raster',
+          'source': 'OSM',
+          'minzoom': 0,
+          'maxzoom': 22
+        }]
+      }
+    }
+  },
   computed: {
     center () {
       return this.map_config.center
@@ -108,8 +144,7 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
-
-        let group = groups.find((g) => g.name === current.category)
+        let group = groups.find(g => g.name === current.category)
         if (!group) {
           group = {
             name: current.category,
@@ -134,94 +169,24 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      layers: [],
-      map: null,
-      bounds: null,
-      updated_at: null,
-      previous_hash: "",
-      activeCategory: "",
-      checkedArea: [],
-      isOpenAreaSelect: false,
-      isOpenList: false,
-      isDisplayAllCategory: true,
-      mapStyle: {
-        "version": 8,
-        "sources": {
-          "OSM": {
-            "type": "raster",
-            "tiles": ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'],
-            "tileSize": 256,
-            "attribution": 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
-          },
-          "mapprint": {
-            "type": "vector",
-            "url": `https://kamimap.com/data/${this.map_config.map_id}/tilejson.json`
-          }
-        },
-        "layers": [{
-          "id": "OSM",
-          "type": "raster",
-          "source": "OSM",
-          "minzoom": 0,
-          "maxzoom": 22
-        }]
-      }
-    }
-  },
-  methods: {
-    load (e) {
-      // deserialie bounds from url
-      var locationhash = window.location.hash.substr(1);
-      var initbounds = helper.deserializeBounds(locationhash);
-      this.map = e.map
-      if (initbounds != undefined){
-        this.map.fitBounds(initbounds, {linear:false});
-      }else{
-        initbounds = helper.deserializeBounds(this.map_config.default_hash);
-        if (initbounds != undefined){
-          this.map.fitBounds(initbounds, {linear:false});
-        }
-      }
-      this.map.on('moveend', this.etmitBounds)
-      this.etmitBounds()
-    },
-    etmitBounds () {
-      this.bounds = this.map.getBounds()
-      this.setHash(this.bounds)
-      this.$emit('bounds-changed')
-    },
-    setHash(bounds){
-      var s = helper.serializeBounds(bounds);
-      let path = location.pathname;
-      if (s != this.previous_hash) {
-        window.history.pushState('', '', path + '#' + s);
-      }
-      this.previous_hash = s;
-    },
-    selectCategory(category) {
-      this.activeCategory = category;
-    }
-  },
   mounted () {
     const MapHelper = require('~/lib/MapHelper.ts').default
     const ky = require('ky').default
     helper = new MapHelper()
-    let area = [];
-    const categories = {};
+    const area = []
+    const categories = {}
     const self = this
     this.map_config.sources.forEach((source) => {
       (async () => {
-        if (source.show) area.push(source.title)
+        if (source.show) { area.push(source.title) }
         self.checkedArea = area
         self.updated_at = getNowYMD(new Date())
         const data = await ky.get(source.url).text()
-        const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings,source.updated_search_key)
+        const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings, source.updated_search_key)
         markers.map((marker) => {
-          categories[marker.category] = true;
+          categories[marker.category] = true
         })
-        source.updated_at = updated_at;
+        source.updated_at = updated_at
         Object.keys(categories).map((category) => {
           const categoryExists = self.map_config.layer_settings[category]
 
@@ -249,6 +214,40 @@ export default {
         })
       })()
     })
+  },
+  methods: {
+    load (e) {
+      // deserialie bounds from url
+      const locationhash = window.location.hash.substr(1)
+      let initbounds = helper.deserializeBounds(locationhash)
+      this.map = e.map
+      if (initbounds != undefined) {
+        this.map.fitBounds(initbounds, { linear: false })
+      } else {
+        initbounds = helper.deserializeBounds(this.map_config.default_hash)
+        if (initbounds != undefined) {
+          this.map.fitBounds(initbounds, { linear: false })
+        }
+      }
+      this.map.on('moveend', this.etmitBounds)
+      this.etmitBounds()
+    },
+    etmitBounds () {
+      this.bounds = this.map.getBounds()
+      this.setHash(this.bounds)
+      this.$emit('bounds-changed')
+    },
+    setHash (bounds) {
+      const s = helper.serializeBounds(bounds)
+      const path = location.pathname
+      if (s != this.previous_hash) {
+        window.history.pushState('', '', path + '#' + s)
+      }
+      this.previous_hash = s
+    },
+    selectCategory (category) {
+      this.activeCategory = category
+    }
   }
 }
 </script>

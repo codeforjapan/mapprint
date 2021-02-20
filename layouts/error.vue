@@ -8,7 +8,6 @@ export default {
     setTimeout(() => {
       location.href = '/'
     }, 5000)
-
   }
 }
 </script>

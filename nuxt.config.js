@@ -19,7 +19,7 @@ export default {
       { hid: 'og:title', property: 'og:title', content: '紙マップ' },
       { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
       { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/ogp_main.png' },
-      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:card', content: 'summary_large_image' }
     ],
     link: [
       { rel: 'apple-touch-icon', type: 'image/png', href: '/apple-touch-icon.png' },
@@ -28,7 +28,7 @@ export default {
     ],
     script: [
       { src: 'https://www.googletagmanager.com/gtag/js?id=UA-45275834-9' },
-      { src: '/ga.js'  }
+      { src: '/ga.js' }
     ]
   },
   /*
@@ -47,7 +47,7 @@ export default {
   */
   plugins: [
     { src: '~/plugins/mapbox', mode: 'client' },
-    { src: '~/plugins/simplebar', mode: 'client' },
+    { src: '~/plugins/simplebar', mode: 'client' }
   ],
   /*
   ** Nuxt.js dev-modules
@@ -80,7 +80,7 @@ export default {
         return '/map/' + name.replace('.json', '')
       })
     },
-    fallback: true,
+    fallback: true
   },
   router: {
     base: '/'
@@ -107,5 +107,5 @@ export default {
         }
       }
     }
-  },
+  }
 }

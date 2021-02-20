@@ -52,12 +52,7 @@ export default {
   data () {
     return {
       maps,
-      isOpenExplain: false,
-    }
-  },
-  methods: {
-    closeModalMethod () {
-      this.isOpenExplain = false;
+      isOpenExplain: false
     }
   },
   head () {
@@ -67,6 +62,11 @@ export default {
         { src: 'https://platform.twitter.com/widgets.js', async: true },
         { src: 'https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js', async: true, defer: true }
       ]
+    }
+  },
+  methods: {
+    closeModalMethod () {
+      this.isOpenExplain = false
     }
   }
 }

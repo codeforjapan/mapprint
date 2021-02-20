@@ -43,3 +43,12 @@ $ npm run start
 # generate static project
 $ npm run generate
 ```
+
+## Forkして独自のプロジェクトをリリースする方法
+- GitHub上で自分あるいは任意のorganizationへForkする
+- Forkしたリポジトリを `git clone` する
+- `git checkout -b forked-release` で `forked-release` というブランチを作る
+- `forked-release` に対して、独自に行いたい変更を行う
+- `npm run generate` で `dist` を生成する
+- `git subtree push --prefix dist/ origin forked-pages` で `forked-pages` というブランチを作る
+- GithubのリポジトリのページのSettingsタブから、GitHub Pagesとして公開するページとして `forked-pages` ブランチを選択する

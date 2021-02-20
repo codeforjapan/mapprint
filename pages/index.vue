@@ -38,7 +38,7 @@
       .sub-button(v-for="locale in $i18n.locales")
         nuxt-link(
           :key="locale.code"
-          :to="'./'+switchLocalePath(locale.code)+'/index.html'"
+          :to="switchLocalePath(locale.code)"
         )
           span {{ locale.name }}
     modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")

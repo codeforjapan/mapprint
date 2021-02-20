@@ -1,4 +1,5 @@
 import sortCSSmq from 'sort-css-media-queries'
+import i18n from './nuxt-i18n.config'
 
 export default {
   mode: 'universal',
@@ -63,7 +64,8 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['nuxt-i18n', i18n]
   ],
   /*
   ** Axios module configuration

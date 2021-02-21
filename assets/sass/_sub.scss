@@ -1,6 +1,7 @@
 .sub-outer {
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  justify-content: center;
   width: 40%;
 }
 
@@ -13,6 +14,8 @@
   text-align: center;
   line-height: 1.1;
   padding: .5em 1em;
+  margin-left: 1em;
+  margin-bottom: 0.5em;
   @include bp(md) {
     box-shadow: 2px 2px 5px $color-alpha-black;
   }

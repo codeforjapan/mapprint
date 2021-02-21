@@ -50,6 +50,12 @@ div.layout-map
               .sub-button.github-link
                 i.fab.fa-github.fa-lg
                 a(href="https://github.com/codeforjapan/mapprint") {{ $t('common.contribute') }}
+              .sub-button(v-for="locale in $i18n.locales")
+                nuxt-link(
+                  :key="locale.code"
+                  :to="switchLocalePath(locale.code)"
+                )
+                  span {{ locale.name }}
             .title-outer
               h1.title(v-if="map_config && $i18n.locale === 'ja'")
                 | {{map_config.map_title}}

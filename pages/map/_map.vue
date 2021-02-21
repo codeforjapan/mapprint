@@ -85,6 +85,10 @@ export default {
   components: {
     PrintableMap, VueQrcode, Modal
   },
+  asyncData ({ app }) {
+    const updated_at = getNowYMD(new Date(), app.i18n.locale)
+    return { updated_at }
+  },
   data () {
     return {
       map_config: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
@@ -103,10 +107,6 @@ export default {
         { hid: 'og:title', name: 'og:title', content: this.map_config.map_title + ' - 紙マップ' }
       ]
     }
-  },
-  asyncData ({ app }) {
-    const updated_at = getNowYMD(new Date(), app.i18n.locale)
-    return { updated_at }
   },
   mounted () {
     this.fullURL = location.href

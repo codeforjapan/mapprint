@@ -20,13 +20,13 @@
                     span.popup-poi-type
                       | {{marker.category}}
                   p
-                    | 名称: {{marker.feature.properties.name}}
+                    | {{$t("PrinitableMap.name")}} {{marker.feature.properties.name}}
                   div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       .legend-navi
         .area-select(:class='{open: isOpenAreaSelect}')
           .area-close(@click="isOpenAreaSelect=false")
-            | 地域選択をとじる
+            | {{$t("PrintableMap.close_area_select")}}
             i.fas.fa-arrow-down
           .area-list-outer(:class='{open: isOpenAreaSelect}')
             ul.area-list.grid
@@ -36,7 +36,7 @@
                   | {{source.title}}
                   span
                     | {{source.updated_at}}
-                  a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
+                  a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
           .navigation-area
             .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
@@ -70,9 +70,9 @@
                 span.item-name {{marker.feature.properties.name}}
           .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
             p
-              | 表示中のマップにはどのポイントも存在しません
+              | {{$t("PrintableMap.no_point_in_map")}}
       .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")
-        | リストをとじる
+        | {{$t("PrintableMap.close_list")}}
         i.fas.fa-arrow-down
 </template>
 

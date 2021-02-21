@@ -11,28 +11,28 @@ div.layout-map
               img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
           .aside-item2
             p
-              | {{$t(map.desc_1)}}
+              | {{$t('map.desc_1')}}
           .aside-item3
             div.aside-item-illust1
               img(src="~/assets/images/illust_1.png" width="360" height="450" alt="")
           .aside-item4
             p
-              | {{$t(map.desc_2)}}
+              | {{$t('map.desc_2')}}
               br
-              | {{$t(map.desc_3)}}
+              | {{$t('map.desc_3')}}
           .aside-item5
             p
-              | {{$t(map.desc_4)}}
+              | {{$t('map.desc_4')}}
               br
-              | {{$t(map.desc_5)}}
+              | {{$t('map.desc_5')}}
           .aside-item6
             div.aside-item-illust2
               img(src="~/assets/images/illust_2.png" width="640" height="435" alt="")
           .aside-item7
             p
-              | {{$t(map.desc_6)}}
+              | {{$t('map.desc_6')}}
               br
-              | {{$t(map.desc_7)}}
+              | {{$t('map.desc_7')}}
     main.main.col-12_md-9_xl-6
       .main-sheet
         header.header
@@ -71,6 +71,7 @@ import Modal from '~/components/Modal'
 if (process.client) {
   require('viewport-units-buggyfill').init()
 }
+
 export default {
   components: {
     PrintableMap, VueQrcode, Modal
@@ -94,9 +95,12 @@ export default {
       ]
     }
   },
+  asyncData ({ app }) {
+    const updated_at = getNowYMD(new Date(), app.i18n.locale)
+    return { updated_at }
+  },
   mounted () {
     this.fullURL = location.href
-    this.updated_at = getNowYMD(new Date())
   },
   methods: {
     updateQRCode () {

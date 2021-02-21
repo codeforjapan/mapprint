@@ -118,7 +118,7 @@ export default class MapHelper implements IPrintableMap {
     let markers = [];
     console.log(data)
     data["features"].forEach((feature) => {
-      const category = feature["category"];
+      const category = feature.properties["category"];
       markers.push({feature, category});
     });
     return [markers, updated_at];

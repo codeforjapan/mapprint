@@ -79,7 +79,10 @@ export default {
     routes () {
       const list = require('./assets/config/list.json')
       return list.map((name) => {
-        return '/map/' + name.replace('.json', '')
+        return [
+          '/map/' + name.replace('.json', ''),
+          '/en/map/' + name.replace('.json', '')
+        ]
       })
     },
     fallback: true

@@ -51,7 +51,10 @@ div.layout-map
                 i.fab.fa-github.fa-lg
                 a(href="https://github.com/codeforjapan/mapprint") {{ $t('common.contribute') }}
             .title-outer
-              h1.title(v-if="map_config") {{map_config.map_title}}
+              h1.title(v-if="map_config && $i18n.locale === 'ja'")
+                | {{map_config.map_title}}
+              h1.title(v-else)
+                | {{map_config.map_title_en}}
               .datetime
                 | {{$t('map.printed_at')}} {{updated_at}}
           .qrcode

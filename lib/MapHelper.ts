@@ -78,6 +78,10 @@ export default class MapHelper implements IPrintableMap {
       case "umal":
         this.loadUmapJsonData(data);
         break;
+      case "geojson":
+        const json = JSON.parse(data);
+        return this.loadGeoJSONData(json);
+        break;
     }
   }
 
@@ -107,6 +111,17 @@ export default class MapHelper implements IPrintableMap {
         // this.addMarker(feature, category);
       });
     });
+  }
+
+  loadGeoJSONData(data: any): [any, string] {
+    let updated_at = Date.now().toLocaleString();
+    let markers = [];
+    console.log(data)
+    data["features"].forEach((feature) => {
+      const category = feature["category"];
+      markers.push({feature, category});
+    });
+    return [markers, updated_at];
   }
 
   loadKMLData(data: Document, layer_setting:any, updated_search_key?:UpdatedSearchKey): [any, string] {

@@ -60,10 +60,11 @@
                 img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
         .list-outer(:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
-            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
+            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
               span.list-title-mark
-                i(:class="map_config.layer_settings[group.name].icon_class")
-              span {{group.name}}
+                i(:class="map_config.layer_settings[group.category].icon_class")
+              span(v-if="$i18n.locale === 'ja'") {{group.name}}
+              span(v-else) {{group.name_en}}
             ul.list-items.grid-noGutter
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
@@ -144,10 +145,13 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
+        const config = this.map_config.layer_settings[current.category]
         let group = groups.find(g => g.name === current.category)
         if (!group) {
           group = {
-            name: current.category,
+            category: current.category,
+            name: config.name,
+            name_en: config.name_en,
             prop: current.category,
             markers: []
           }

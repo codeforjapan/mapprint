@@ -12,10 +12,11 @@
               nuxt-link(:to="localePath('/map/' + map.map_id)", v-bind:key='index')
                 .index-link-inner
                   img(:src='"https://kamimap.com/images/" + (map.map_image ? map.map_image : "logo.png")' alt='')
-                  .index-item-title(:class='$i18n.locale')
-                    span(class='ja')
+                  .index-item-title(v-if="$i18n.locale === 'ja'")
+                    span
                       | {{map.map_title}}
-                    span(class='en')
+                  .index-item-title(v-else)
+                    span
                       | {{map.map_title_en}}
                     i.index-arrow-icon.fas.fa-long-arrow-alt-right
             .index-item-sns
@@ -30,10 +31,10 @@
       .sub-button(@click='isOpenExplain=!isOpenExplain')
         i.fas.fa-info-circle.fa-lg
         span
-          | {{ $t('root.about') }}
+          | {{$t('common.about')}}
       .sub-button
         i.fab.fa-github.fa-lg
-        a(href="https://github.com/codeforjapan/mapprint") {{ $t('root.contribute') }}
+        a(href="https://github.com/codeforjapan/mapprint") {{$t('common.contribute')}}
     footer.index-footer
       .sub-button(v-for="locale in $i18n.locales")
         nuxt-link(

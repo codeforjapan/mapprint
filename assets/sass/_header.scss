@@ -34,7 +34,7 @@
     align-items: center;
     padding: 1em 0;
     @include bp(md) {
-      padding: 1em 0 1em 1em;
+      padding: 0.5em 0 0.5em 0.5em;
       flex-wrap: nowrap;
       justify-content: space-between;
       border-left: 1px solid $color-light-gray;
@@ -75,7 +75,6 @@
     display: none;
     @include bp(md) {
       display: block;
-      margin-left: 1em;
     }
   }
   .qrcode {

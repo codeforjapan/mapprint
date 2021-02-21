@@ -43,18 +43,6 @@
   align-items: center;
   justify-content: space-between;
   padding: .5em;
-
-  span {
-    display: none;
-  }
-
-  &.ja span.ja {
-    display: flex;
-  }
-
-  &.en span.en {
-    display: flex;
-  }
 }
 
 .index-arrow-icon {

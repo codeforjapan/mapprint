@@ -211,11 +211,12 @@ export default class MapHelper implements IPrintableMap {
  */
 
 export function readCategoryOfFolder(folder:Element, document:Document):Category{
-  let catname:string = folder.getElementsByTagName("name")[0].textContent!;
+  let name;
   let color:string = "red";
   let iconUrl;
   console.log(folder);
   try {
+    name = folder.getElementsByTagName("name")[0].textContent!;
     let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;
     if (styleUrl){
       let styles:NodeListOf<Element> = document.querySelectorAll(styleUrl + " Pair")!;
@@ -240,7 +241,7 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
     console.log(e);
     console.log(folder);
   }
-  return {name:catname, color:color, iconUrl: iconUrl};
+  return {name:name, color:color, iconUrl: iconUrl};
 
 }
 

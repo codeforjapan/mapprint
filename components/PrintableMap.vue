@@ -20,13 +20,13 @@
                     span.popup-poi-type
                       | {{marker.category}}
                   p
-                    | 名称: {{marker.feature.properties.name}}
+                    | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties.name}}
                   div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       .legend-navi
         .area-select(:class='{open: isOpenAreaSelect}')
           .area-close(@click="isOpenAreaSelect=false")
-            | 地域選択をとじる
+            | {{$t("PrintableMap.close_area_select")}}
             i.fas.fa-arrow-down
           .area-list-outer(:class='{open: isOpenAreaSelect}')
             ul.area-list.grid
@@ -36,7 +36,7 @@
                   | {{source.title}}
                   span
                     | {{source.updated_at}}
-                  a(v-if='source.link', :href='source.link', target='blank') [元の地図へ]
+                  a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
           .navigation-area
             .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
@@ -60,19 +60,20 @@
                 img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
         .list-outer(:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
-            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.name].color}")
+            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
               span.list-title-mark
-                i(:class="map_config.layer_settings[group.name].icon_class")
-              span {{group.name}}
+                i(:class="map_config.layer_settings[group.category].icon_class")
+              span(v-if="$i18n.locale === 'ja'") {{group.name}}
+              span(v-else) {{group.name_en}}
             ul.list-items.grid-noGutter
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
                 span.item-name {{marker.feature.properties.name}}
           .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
             p
-              | 表示中のマップにはどのポイントも存在しません
+              | {{$t("PrintableMap.no_point_in_map")}}
       .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")
-        | リストをとじる
+        | {{$t("PrintableMap.close_list")}}
         i.fas.fa-arrow-down
 </template>
 
@@ -144,10 +145,13 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
+        const config = this.map_config.layer_settings[current.category]
         let group = groups.find(g => g.name === current.category)
         if (!group) {
           group = {
-            name: current.category,
+            category: current.category,
+            name: config.name,
+            name_en: config.name_en,
             prop: current.category,
             markers: []
           }

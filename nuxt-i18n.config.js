@@ -16,5 +16,6 @@ export default {
   strategy: 'prefix_except_default',
   defaultLocale: 'ja',
   lazy: true,
+  loadLanguagesAsync: true,
   langDir: 'locales/'
 }

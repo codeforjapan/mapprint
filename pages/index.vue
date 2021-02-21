@@ -30,10 +30,10 @@
       .sub-button(@click='isOpenExplain=!isOpenExplain')
         i.fas.fa-info-circle.fa-lg
         span
-          | {{ $t('root.about') }}
+          | {{$t('common.about')}}
       .sub-button
         i.fab.fa-github.fa-lg
-        a(href="https://github.com/codeforjapan/mapprint") {{ $t('root.contribute') }}
+        a(href="https://github.com/codeforjapan/mapprint") {{$t('common.contribute')}}
     footer.index-footer
       .sub-button(v-for="locale in $i18n.locales")
         nuxt-link(

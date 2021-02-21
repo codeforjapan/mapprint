@@ -1,6 +1,12 @@
 {
-  "root": {
+  "common": {
     "about": "About this site",
     "contribute": "Welcome to contribute"
+  },
+  "root": {
+  },
+  "map": {
+    "desc_1": "",
+    "printed_at": "Printed at: "
   }
 }

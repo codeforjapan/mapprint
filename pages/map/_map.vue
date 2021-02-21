@@ -11,28 +11,28 @@ div.layout-map
               img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
           .aside-item2
             p
-              | さまざまな人の手によって収集された地図情報
+              | {{$t(map.desc_1)}}
           .aside-item3
             div.aside-item-illust1
               img(src="~/assets/images/illust_1.png" width="360" height="450" alt="")
           .aside-item4
             p
-              | 必要な地域に調整すると
+              | {{$t(map.desc_2)}}
               br
-              | 印刷に最適化されたマップ情報が表示されます
+              | {{$t(map.desc_3)}}
           .aside-item5
             p
-              | その時々に応じた情報を選択してください
+              | {{$t(map.desc_4)}}
               br
-              | 印刷用紙にちょうどよくおさまります
+              | {{$t(map.desc_5)}}
           .aside-item6
             div.aside-item-illust2
               img(src="~/assets/images/illust_2.png" width="640" height="435" alt="")
           .aside-item7
             p
-              | 印刷して情報を必要としているひとに
+              | {{$t(map.desc_6)}}
               br
-              | ぜひ届けてあげてください！
+              | {{$t(map.desc_7)}}
     main.main.col-12_md-9_xl-6
       .main-sheet
         header.header
@@ -46,14 +46,14 @@ div.layout-map
               .sub-button(@click='isOpenExplain=!isOpenExplain')
                 i.fas.fa-info-circle.fa-lg
                 span
-                  | このサイトについて
+                  | {{$t('common.about')}}
               .sub-button.github-link
                 i.fab.fa-github.fa-lg
-                a(href="https://github.com/codeforjapan/mapprint") 開発参加者募集中
+                a(href="https://github.com/codeforjapan/mapprint") {{ $t('common.contribute') }}
             .title-outer
               h1.title(v-if="map_config") {{map_config.map_title}}
               .datetime
-                | 印刷日： {{updated_at}}
+                | {{$t('map.printed_at')}} {{updated_at}}
           .qrcode
             vue-qrcode(v-bind:value='fullURL' tag="img")
         printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")

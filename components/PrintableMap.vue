@@ -20,7 +20,7 @@
                     span.popup-poi-type
                       | {{marker.category}}
                   p
-                    | {{$t("PrinitableMap.name")}} {{marker.feature.properties.name}}
+                    | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties.name}}
                   div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       .legend-navi

@@ -53,3 +53,11 @@ jobs:
                 cp -rf dist/* mapprint
                 cd mapprint; git add .; git commit -m "From `git log --oneline origin/master -n 1`"; git push
             fi
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
+         filters:
+           branches:
+             only: master

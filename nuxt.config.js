@@ -84,7 +84,7 @@ export default {
           '/en/map/' + name.replace('.json', '')
         ]
       })
-      return routes.flat()
+      return [].concat(...routes)
     },
     fallback: true
   },

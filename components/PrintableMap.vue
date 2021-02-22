@@ -106,7 +106,7 @@ export default {
         'sources': {
           'OSM': {
             'type': 'raster',
-            'tiles': ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            'tiles': [this.$i18n.t("PrintableMap.map_url")],
             'tileSize': 256,
             'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
           },

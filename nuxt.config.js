@@ -84,6 +84,7 @@ export default {
           '/en/map/' + name.replace('.json', '')
         ]
       });
+      console.log(mapped)
       return mapped.flat();
     },
     fallback: true

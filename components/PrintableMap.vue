@@ -71,7 +71,7 @@
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
                 span.item-name(v-if="$i18n.locale === 'ja'") {{marker.feature.properties.name}}
-                span.item-name(v-else) {{marker.feature.properties["name:en"]}}}
+                span.item-name(v-else) {{marker.feature.properties["name:en"]}}
           .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
             p
               | {{$t("PrintableMap.no_point_in_map")}}
@@ -261,6 +261,7 @@ export default {
       } else {
         return this.map_config.layer_settings[category].name_en
       }
+    }
   }
 }
 </script>

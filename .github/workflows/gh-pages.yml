@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - forked-release
       - test-github-action
 
 jobs:

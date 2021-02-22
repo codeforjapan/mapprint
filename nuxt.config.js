@@ -89,8 +89,7 @@ export default {
     fallback: true
   },
   router: {
-    base: '/mapprint',
-    base_en: '/mapprint/en'
+    base: '/mapprint'
   },
   build: {
     /*

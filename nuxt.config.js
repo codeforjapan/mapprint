@@ -77,13 +77,14 @@ export default {
   */
   generate: {
     routes () {
-      const list = require('./assets/config/list.json');
-      return list.map((name) => {
+      const list = require('./assets/config/list.json')
+      const routes = list.map((name) => {
         return [
           '/map/' + name.replace('.json', ''),
           '/en/map/' + name.replace('.json', '')
-        ];
-      });
+        ]
+      })
+      return routes.flat()
     },
     fallback: true
   },

@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - test-github-action
 
 jobs:
   build-deploy:

@@ -261,6 +261,7 @@ export default {
       } else {
         return this.map_config.layer_settings[category].name_en
       }
+    }
   }
 }
 </script>

@@ -18,9 +18,11 @@
                   div.popup-type
                     i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                     span.popup-poi-type
-                      | {{marker.category}}
-                  p
+                      | {{getCategoryText(marker.category, $i18n.locale)}}
+                  p(v-if="$i18n.locale === 'ja'")
                     | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties.name}}
+                  p(v-else)
+                    | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties["name:en"]}}
                   div.popup-detail-content
                     p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
       .legend-navi
@@ -68,7 +70,8 @@
             ul.list-items.grid-noGutter
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
-                span.item-name {{marker.feature.properties.name}}
+                span.item-name(v-if="$i18n.locale === 'ja'") {{marker.feature.properties.name}}
+                span.item-name(v-else) {{marker.feature.properties["name:en"]}}
           .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
             p
               | {{$t("PrintableMap.no_point_in_map")}}
@@ -103,7 +106,7 @@ export default {
         'sources': {
           'OSM': {
             'type': 'raster',
-            'tiles': ['https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://b.tile.openstreetmap.org/{z}/{x}/{y}.png', 'https://c.tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            'tiles': [this.$i18n.t("PrintableMap.map_url")],
             'tileSize': 256,
             'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
           },
@@ -251,6 +254,13 @@ export default {
     },
     selectCategory (category) {
       this.activeCategory = category
+    },
+    getCategoryText (category, locale) {
+      if (locale === 'ja') {
+        return this.map_config.layer_settings[category].name
+      } else {
+        return this.map_config.layer_settings[category].name_en
+      }
     }
   }
 }

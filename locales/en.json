@@ -20,6 +20,7 @@
     "close_area_select": "Close area select",
     "back_to_map": "Back to prevues map",
     "no_point_in_map": "None of the points are present on the map being displayed",
-    "close_list": "Close list"
+    "close_list": "Close list",
+    "map_url": "https://tile.openstreetmap.jp/styles/maptiler-basic-en/{z}/{x}/{y}.png"
   }
 }

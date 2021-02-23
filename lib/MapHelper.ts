@@ -116,9 +116,11 @@ export default class MapHelper implements IPrintableMap {
   loadGeoJSONData(data: any): [any, string] {
     let updated_at = Date.now().toLocaleString();
     let markers = [];
-    console.log(data)
     data["features"].forEach((feature) => {
-      const category = feature["category"];
+      let category = "未分類"
+      if (feature.property["category"]) {
+        category = feature.properties["category"];
+      }
       markers.push({feature, category});
     });
     return [markers, updated_at];

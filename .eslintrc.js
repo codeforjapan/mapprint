@@ -21,6 +21,11 @@ module.exports = {
   // add your custom rules here
   rules: {
     quotes: ['error', 'single'],
+    camelcase: 'warn',
+    'vue/no-mutating-props': 'warn',
+    'brace-style': 'warn',
+    'eqeqeq': 'warn',
+    'quotes': 'warn',
     semi: 'error'
   }
 }

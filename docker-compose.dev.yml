@@ -1,0 +1,13 @@
+version: '3'
+services:
+  dev: 
+    build: 
+      context: ./
+      dockerfile: Dockerfile.dev
+    ports:
+      - ${PORT:-5000}:${PORT:-5000}
+    environment:
+      - NUXT_HOST=0.0.0.0
+      - PORT=${PORT:-5000}
+    volumes:
+      - ./:/app

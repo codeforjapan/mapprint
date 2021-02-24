@@ -1,0 +1,6 @@
+FROM node:14
+RUN mkdir /app
+WORKDIR /app
+ENV PORT=5000
+EXPOSE 5000
+CMD npm ci && npm run dev

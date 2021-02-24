@@ -86,9 +86,6 @@ export default {
       })
       return [].concat(...routes)
     },
-    fallback: true
-  },
-  router: {
     base: '/mapprint'
   },
   build: {

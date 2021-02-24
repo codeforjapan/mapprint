@@ -9,14 +9,14 @@
             MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
               template(slot="marker")
                 div.marker
-                  span(:style="{background:map_config.layer_settings[marker.category].color}"
+                  span(:style="{background:mapConfig.layer_settings[marker.category].color}"
                        :class="{show: isDisplayAllCategory || activeCategory === marker.category}")
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                    b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
+                    i(:class="[mapConfig.layer_settings[marker.category].icon_class, mapConfig.layer_settings[marker.category].class]" :style="{backgroundColor:mapConfig.layer_settings[marker.category].color}")
+                    b.number(:style="{background:mapConfig.layer_settings[marker.category].bgColor}") {{inBoundsMarkers.indexOf(marker) +1}}
               MglPopup
                 div
                   div.popup-type
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                    i(:class="[mapConfig.layer_settings[marker.category].icon_class, mapConfig.layer_settings[marker.category].class]" :style="{backgroundColor:mapConfig.layer_settings[marker.category].color}")
                     span.popup-poi-type
                       | {{getCategoryText(marker.category, $i18n.locale)}}
                   p(v-if="$i18n.locale === 'ja'")
@@ -32,12 +32,12 @@
             i.fas.fa-arrow-down
           .area-list-outer(:class='{open: isOpenAreaSelect}')
             ul.area-list.grid
-              li.area-item.col-12_xs-6(v-for='source in map_config.sources')
+              li.area-item.col-12_xs-6(v-for='source in mapConfig.sources')
                 label.area-label
                   input.area-input(type='checkbox', :value='source.title', v-model='selectArea')
                   | {{source.title}}
                   span
-                    | {{source.updated_at}}
+                    | {{source.updatedAt}}
                   a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
           .navigation-area
@@ -54,7 +54,7 @@
             .legend-list-outer
               simplebar(data-simplebar-auto-hide="false")
                 ul.legend-list
-                  li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
+                  li.legend-item(v-for='(setting, name) in mapConfig.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
                     span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
                       i(:class="[setting.icon_class]")
             .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
@@ -62,9 +62,9 @@
                 img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
         .list-outer(:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
-            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
+            h2.list-title(:style="{backgroundColor:mapConfig.layer_settings[group.category].color}")
               span.list-title-mark
-                i(:class="map_config.layer_settings[group.category].icon_class")
+                i(:class="mapConfig.layer_settings[group.category].icon_class")
               span(v-if="$i18n.locale === 'ja'") {{group.name}}
               span(v-else) {{group.name_en}}
             ul.list-items.grid-noGutter
@@ -88,13 +88,13 @@ import { getNowYMD } from '~/lib/displayHelper.ts'
 const crc16 = require('js-crc').crc16
 let helper
 export default {
-  props: ['map_config'],
+  props: ['mapConfig'],
   data () {
     return {
       layers: [],
       map: null,
       bounds: null,
-      updated_at: null,
+      updatedAt: null,
       previous_hash: '',
       activeCategory: '',
       checkedArea: [],
@@ -106,13 +106,13 @@ export default {
         'sources': {
           'OSM': {
             'type': 'raster',
-            'tiles': [this.$i18n.t("PrintableMap.map_url")],
+            'tiles': [this.$i18n.t('PrintableMap.map_url')],
             'tileSize': 256,
             'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
           },
           'mapprint': {
             'type': 'vector',
-            'url': `https://kamimap.com/data/${this.map_config.map_id}/tilejson.json`
+            'url': `https://kamimap.com/data/${this.mapConfig.map_id}/tilejson.json`
           }
         },
         'layers': [{
@@ -127,7 +127,7 @@ export default {
   },
   computed: {
     center () {
-      return this.map_config.center
+      return this.mapConfig.center
     },
     inBoundsMarkers () {
       const inBoundsMarkers = []
@@ -148,7 +148,7 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
-        const config = this.map_config.layer_settings[current.category]
+        const config = this.mapConfig.layer_settings[current.category]
         let group = groups.find(g => g.name === current.category)
         if (!group) {
           group = {
@@ -183,19 +183,19 @@ export default {
     const area = []
     const categories = {}
     const self = this
-    this.map_config.sources.forEach((source) => {
+    this.mapConfig.sources.forEach((source) => {
       (async () => {
         if (source.show) { area.push(source.title) }
         self.checkedArea = area
-        self.updated_at = getNowYMD(new Date())
+        self.updatedAt = getNowYMD(new Date())
         const data = await ky.get(source.url).text()
-        const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings, source.updated_search_key)
+        const [markers, updatedAt] = helper.parse(source.type, data, self.mapConfig.layer_settings, source.updated_search_key)
         markers.map((marker) => {
           categories[marker.category] = true
         })
-        source.updated_at = updated_at
+        source.updatedAt = updatedAt
         Object.keys(categories).map((category) => {
-          const categoryExists = self.map_config.layer_settings[category]
+          const categoryExists = self.mapConfig.layer_settings[category]
 
           if (!categoryExists) {
             let color = '#'
@@ -203,14 +203,15 @@ export default {
             color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 64).toString(16)
             color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 64).toString(16)
 
-            let bg_color = '#'
-            bg_color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16)
-            bg_color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16)
-            bg_color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16)
-            self.map_config.layer_settings[category] = {
+            let bgColor = '#'
+            bgColor += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16)
+            bgColor += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16)
+            bgColor += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16)
+            // eslint-disable-next-line vue/no-mutating-props
+            self.mapConfig.layer_settings[category] = {
               name: category,
               color,
-              bg_color
+              bgColor
 
             }
           }
@@ -228,11 +229,11 @@ export default {
       const locationhash = window.location.hash.substr(1)
       let initbounds = helper.deserializeBounds(locationhash)
       this.map = e.map
-      if (initbounds != undefined) {
+      if (initbounds !== undefined) {
         this.map.fitBounds(initbounds, { linear: false })
       } else {
-        initbounds = helper.deserializeBounds(this.map_config.default_hash)
-        if (initbounds != undefined) {
+        initbounds = helper.deserializeBounds(this.mapConfig.default_hash)
+        if (initbounds !== undefined) {
           this.map.fitBounds(initbounds, { linear: false })
         }
       }
@@ -247,7 +248,7 @@ export default {
     setHash (bounds) {
       const s = helper.serializeBounds(bounds)
       const path = location.pathname
-      if (s != this.previous_hash) {
+      if (s !== this.previous_hash) {
         window.history.pushState('', '', path + '#' + s)
       }
       this.previous_hash = s
@@ -257,9 +258,9 @@ export default {
     },
     getCategoryText (category, locale) {
       if (locale === 'ja') {
-        return this.map_config.layer_settings[category].name
+        return this.mapConfig.layer_settings[category].name
       } else {
-        return this.map_config.layer_settings[category].name_en
+        return this.mapConfig.layer_settings[category].name_en
       }
     }
   }

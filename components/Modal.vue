@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     .modal(v-bind:class='{open: isOpen}')
-      p(v-if="map_config") {{map_config.map_description}}
+      p(v-if="mapConfig") {{mapConfig.map_description}}
       p
         | このサイトのソースコードはオープンに公開しております。開発にご協力いただける方は、
         a(href="https://github.com/codeforjapan/mapprint") Code for Japan の Github リポジトリ
@@ -17,11 +17,12 @@ export default {
   props: ['isOpen'],
   data () {
     return {
-      map_config: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ''
+      mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ''
     }
   },
   methods: {
     handleClick () {
+      // eslint-disable-next-line vue/no-mutating-props
       this.isOpen = false
       this.$emit('closeModal')
     }

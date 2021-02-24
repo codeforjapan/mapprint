@@ -57,15 +57,15 @@ div.layout-map
                 )
                   span {{ locale.name }}
             .title-outer
-              h1.title(v-if="map_config && $i18n.locale === 'ja'")
-                | {{map_config.map_title}}
+              h1.title(v-if="mapConfig && $i18n.locale === 'ja'")
+                | {{mapConfig.map_title}}
               h1.title(v-else)
-                | {{map_config.map_title_en}}
+                | {{mapConfig.map_title_en}}
               .datetime
-                | {{$t('map.printed_at')}} {{updated_at}}
+                | {{$t('map.printed_at')}} {{updatedAt}}
           .qrcode
             vue-qrcode(v-bind:value='fullURL' tag="img")
-        printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+        printable-map(:mapConfig='mapConfig', v-if="mapConfig", @bounds-changed="updateQRCode")
         footer.footer
           .footer-logo
             img(src="~/assets/images/logo.png" width="895" height="160" alt="地図情報を印刷できる「紙マップ」")
@@ -86,25 +86,25 @@ export default {
     PrintableMap, VueQrcode, Modal
   },
   asyncData ({ app }) {
-    const updated_at = getNowYMD(new Date(), app.i18n.locale)
-    return { updated_at }
+    const updatedAt = getNowYMD(new Date(), app.i18n.locale)
+    return { updatedAt }
   },
   data () {
     return {
-      map_config: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
+      mapConfig: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
       isOpenExplain: false,
       fullURL: null,
-      updated_at: null
+      updatedAt: null
     }
   },
   head () {
     return {
-      title: this.map_config.map_title,
+      title: this.mapConfig.map_title,
       meta: [
-        { hid: 'description', name: 'description', content: this.map_config.map_description },
-        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png') },
-        { hid: 'og:description', name: 'og:description', content: this.map_config.map_description },
-        { hid: 'og:title', name: 'og:title', content: this.map_config.map_title + ' - 紙マップ' }
+        { hid: 'description', name: 'description', content: this.mapConfig.map_description },
+        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.mapConfig.map_image ? this.mapConfig.map_image : 'logo.png') },
+        { hid: 'og:description', name: 'og:description', content: this.mapConfig.map_description },
+        { hid: 'og:title', name: 'og:title', content: this.mapConfig.map_title + ' - 紙マップ' }
       ]
     }
   },

@@ -114,7 +114,7 @@ export default class MapHelper implements IPrintableMap {
   }
 
   loadGeoJSONData(data: any): [any, string] {
-    let updated_at = Date.now().toLocaleString();
+    let updatedAt = Date.now().toLocaleString();
     let markers = [];
     data["features"].forEach((feature) => {
       let category = "未分類"
@@ -123,7 +123,7 @@ export default class MapHelper implements IPrintableMap {
       }
       markers.push({feature, category});
     });
-    return [markers, updated_at];
+    return [markers, updatedAt];
   }
 
   loadKMLData(data: Document, layer_setting:any, updated_search_key?:UpdatedSearchKey): [any, string] {
@@ -132,16 +132,16 @@ export default class MapHelper implements IPrintableMap {
     if (folders.length == 0) {
       folders = data.getElementsByTagName('Document');
     }
-    let updated_at = "";
-    if (updated_search_key != undefined){
+    let updatedAt = "";
+    if (updated_search_key !== undefined){
       if (updated_search_key.type == "regexp"){
         const targetElm = data.getElementsByTagName(updated_search_key.field);
         if (targetElm.length > 0){
           const text = targetElm[0].innerHTML;
           const regExp = new RegExp(updated_search_key.pattern, "iu");
           const result = regExp.exec(text);
-          if (result != null && result.length > 1){
-            updated_at = "(" + result[updated_search_key.index] + ")";
+          if (result !== null && result.length > 1){
+            updatedAt = "(" + result[updated_search_key.index] + ")";
           }
         }
       }
@@ -166,7 +166,7 @@ export default class MapHelper implements IPrintableMap {
         markers.push({geojsondata, category});
       }
     });
-    return [markers, updated_at];
+    return [markers, updatedAt];
   }
 
   inBounds(point: any, bounds: MapboxGL.LngLatBounds) {
@@ -183,7 +183,7 @@ export default class MapHelper implements IPrintableMap {
       // if the category name is found, update with layer setting
       if (setting.name == category.name) {
         category.color = setting.color;
-        category.bgColor = setting.bg_color;
+        category.bgColor = setting.bgColor;
         category.iconClass = setting.icon_class;
         category.class = setting.class;
         // category.iconClass = setting.icon_class;

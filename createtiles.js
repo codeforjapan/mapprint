@@ -11,20 +11,20 @@ if (!fs.existsSync(TARGET_DIR)) {
   fs.mkdirSync(TARGET_DIR, { recursive: true })
 }
 
-const _make_tilejson = (dir, base_name) => {
-  const metadata = require(`${dir}${base_name}/metadata.json`)
+const _makeTileJSON = (dir, baseName) => {
+  const metadata = require(`${dir}${baseName}/metadata.json`)
   // console.log(metadata)
-  const vector_layers = JSON.parse(metadata.json)
+  const vectorLayers = JSON.parse(metadata.json)
   delete metadata.json
-  metadata.vector_layers = vector_layers.vector_layers
+  metadata.vectorLayers = vectorLayers.vectorLayers
   metadata.center = metadata.center.split(',').map(v => parseFloat(v))
   metadata.bounds = metadata.bounds.split(',').map(v => parseFloat(v))
   metadata.pixel_scale = 256
   metadata.tilejson = '2.0.0'
   metadata.tile = [
-    `https://kamimap.com/data/${base_name}/zxy/{z}/{x}/{y}.pbf`
+    `https://kamimap.com/data/${baseName}/zxy/{z}/{x}/{y}.pbf`
   ]
-  fs.writeFile(`${dir}${base_name}/tilejson.json`, JSON.stringify(metadata), (err) => {
+  fs.writeFile(`${dir}${baseName}/tilejson.json`, JSON.stringify(metadata), (err) => {
     if (err) {
       console.log('Wrighting tilejson.json failed: ' + err)
     }
@@ -46,18 +46,17 @@ list.map((name) => {
       console.log(`downloading ${source.url}...`)
       axios.get(source.url).then((response) => {
         // currently, this is supporting only kml
-        const file_path = `${TARGET_DIR}${config.map_id}/${source.id}.${source.type}`
-        fs.writeFile(file_path, response.data, (err) => {
-          // failed
+        const filePath = `${TARGET_DIR}${config.map_id}/${source.id}.${source.type}`
+        fs.writeFile(filePath, response.data, (err) => {
           if (err) {
+            // failed
             console.log('Downloading kml file failed' + err)
             reject(err)
-          }
-          // success
-          else {
+          } else {
+            // success
             console.log(`Downloaded ${source.id}.${source.type}`)
             // convert kml files to xyz tile
-            shell.exec(`./create_tiles.sh ${file_path}`)
+            shell.exec(`./create_tiles.sh ${filePath}`)
             resolve()
           }
         })
@@ -66,7 +65,7 @@ list.map((name) => {
   })
   Promise.all(funcs).then(() => {
     shell.exec(`./merge_tiles.sh ${name} ${TARGET_DIR}`)
-    const base_name = path.basename(name, '.json')
-    _make_tilejson(TARGET_DIR, base_name)
+    const baseName = path.basename(name, '.json')
+    _makeTileJSON(TARGET_DIR, baseName)
   })
 })

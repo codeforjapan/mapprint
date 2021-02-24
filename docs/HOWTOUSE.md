@@ -65,7 +65,7 @@
       # そのカテゴリの表示に使われる色です
       "color": "#276445",
       # そのカテゴリのマーカーで使われる色です
-      "bg_color": "#A4C1B0",
+      "bgColor": "#A4C1B0",
       # そのカテゴリアイコンです
       # fontawesomeのアイコンが指定できます
       "icon_class": "fas fa-street-view",
@@ -77,7 +77,7 @@
       "name": "給水所",
       "name_en": "Water Supply Office",
       "color": "#285797",
-      "bg_color": "#A3BBDA",
+      "bgColor": "#A3BBDA",
       "icon_class": "fas fa-tint",
       "class": "layer_water"
     },

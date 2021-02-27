@@ -130,11 +130,11 @@ export default {
       },
       imageLegendMark: {
         ja: imageLegendMarkJa,
-        en: imageLegendMarkEn,
+        en: imageLegendMarkEn
       },
       imageActiveText: {
         ja: imageActiveTextJa,
-        en: imageActiveTextEn,
+        en: imageActiveTextEn
       }
     }
   },
@@ -224,7 +224,6 @@ export default {
               name: category,
               color,
               bg_color
-
             }
           }
         })

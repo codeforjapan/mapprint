@@ -275,9 +275,9 @@ export default {
       }
     },
     getMarkerNameText (markerProperties, locale) {
-      let name = markerProperties.name;
-      if (markerProperties.hasOwnProperty("name:"+locale)) {
-        name = markerProperties["name:"+locale]
+      let name = markerProperties.name
+      if (markerProperties.hasOwnProperty("name:" + locale)) {
+        name = markerProperties["name:" + locale]
       }
       return name
     }

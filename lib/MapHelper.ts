@@ -208,12 +208,7 @@ export default class MapHelper implements IPrintableMap {
   public deserializeBounds(s) {
     try{
       let _this = this;
-      if (process.client) {
-        return new MapLibre.LngLatBounds(s.split('-', 2).map(function(d) {return _this.deserializeLatLng(d);}));
-        //return undefined;
-      }else{
-        return undefined;
-      }
+      return new MapLibre.LngLatBounds(s.split('-', 2).map(function(d) {return _this.deserializeLatLng(d);}));
     }catch(e){
       return undefined;
     }

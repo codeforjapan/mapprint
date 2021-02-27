@@ -42,7 +42,7 @@
         .navigation
           .navigation-area.print-exclude
             .legend-navi-icon
-              .legend-navi-button.print-button
+              .legend-navi-button.print-button(@click="clickPrintButton()")
                 span.fa.fa-print(alt="印刷")
           .navigation-area
             .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
@@ -258,6 +258,9 @@ export default {
     },
     selectCategory (category) {
       this.activeCategory = category
+    },
+    clickPrintButton () {
+      window.print()
     },
     getCategoryText (category, locale) {
       if (locale === 'ja') {

@@ -1,7 +1,8 @@
 {
   "common": {
     "about": "About this site",
-    "contribute": "Welcome to contribute"
+    "contribute": "Welcome to contribute",
+    "title": "Paper Map for printable map information"
   },
   "root": {
   },
@@ -17,6 +18,8 @@
   },
   "PrintableMap": {
     "name": "Name: ",
+    "legend": "Legend",
+    "show_all": "Show all",
     "close_area_select": "Close area select",
     "back_to_map": "Back to prevues map",
     "no_point_in_map": "None of the points are present on the map being displayed",

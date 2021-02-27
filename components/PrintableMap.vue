@@ -40,6 +40,10 @@
                     | {{source.updated_at}}
                   a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
+          .navigation-area.print-exclude
+            .legend-navi-icon.active
+              .legend-navi-button.print-button(@click="clickPrintButton()")
+                span.fa.fa-print(alt="印刷")
           .navigation-area
             .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
               .area-array-outer
@@ -50,7 +54,7 @@
                 i.fas.fa-arrow-up
           .navigation-legend.legend-navi-inner.print-exclude
             .legend-navi-icon
-              img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" alt="凡例ナビ")
+              img(src="~/assets/images/fukidashi_obj.svg" width="60" height="60" :alt='$t("PrintableMap.legend")')
             .legend-list-outer
               simplebar(data-simplebar-auto-hide="false")
                 ul.legend-list
@@ -59,7 +63,7 @@
                       i(:class="[setting.icon_class]")
             .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{active: activeCategory}')
               .legend-navi-button
-                img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
+                img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" :alt='$t("PrintableMap.show_all")')
         .list-outer(:class='{open: isOpenList}')
           section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
             h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
@@ -254,6 +258,9 @@ export default {
     },
     selectCategory (category) {
       this.activeCategory = category
+    },
+    clickPrintButton () {
+      window.print()
     },
     getCategoryText (category, locale) {
       if (locale === 'ja') {

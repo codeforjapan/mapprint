@@ -1,7 +1,8 @@
 {
   "common": {
     "about": "このサイトについて",
-    "contribute": "開発参加者募集中"
+    "contribute": "開発参加者募集中",
+    "title": "地図情報を印刷できる「紙マップ」"
   },
   "root": {
   },
@@ -17,6 +18,8 @@
   },
   "PrintableMap": {
     "name": "名称：",
+    "legend": "凡例",
+    "show_all": "すべて表示",
     "close_area_select": "地域選択を閉じる",
     "back_to_map": "元の地図へ",
     "no_point_in_map": "表示中のマップにはどのポイントも存在しません",

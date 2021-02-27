@@ -57,7 +57,7 @@
                   li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
                     span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
                       i(:class="[setting.icon_class]")
-            .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: activeCategory}')
+            .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{inactive: !activeCategory}')
               .legend-navi-button
                 img.legend-navi-img(src="~/assets/images/active_txt.svg" width="40" height="40" alt="すべて表示")
         .list-outer(:class='{open: isOpenList}')

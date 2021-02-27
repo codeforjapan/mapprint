@@ -100,8 +100,8 @@ export default {
     }
   },
   head () {
-    let title, description, image
-    image = this.map_config.map_image ? this.map_config.map_image : 'logo.png'
+    let title, description
+    const image = this.map_config.map_image ? this.map_config.map_image : 'logo.png'
     switch (this.$i18n.locale) {
       case 'ja':
         title = this.map_config.map_title
@@ -112,9 +112,8 @@ export default {
         description = this.map_config.map_description_en
         break
     }
-    
     return {
-      title: title + ' - ' + this.$i18n.t('common.site_name'),
+      title: title+ ' - ' + this.$i18n.t('common.site_name'),
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + image },

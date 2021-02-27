@@ -86,25 +86,41 @@ export default {
     PrintableMap, VueQrcode, Modal
   },
   asyncData ({ app }) {
-    const updated_at = getNowYMD(new Date(), app.i18n.locale)
-    return { updated_at }
+    const locale = app.i18n.locale;
+    const updated_at = getNowYMD(new Date(), locale)
+    return { updated_at, locale }
   },
   data () {
     return {
       map_config: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
+      locale: null,
       isOpenExplain: false,
       fullURL: null,
       updated_at: null
     }
   },
   head () {
+    let title, description, image;
+    image = this.map_config.map_image ? this.map_config.map_image : 'logo.png';
+    switch (this.locale) {
+      case 'ja':
+        title = this.map_config.map_title;
+        description = this.map_config.map_description;
+        break;
+      case 'en':
+        title = this.map_config.map_title_en;
+        description = this.map_config.map_description_en;
+        break;
+        
+    }
+    
     return {
-      title: this.map_config.map_title,
+      title: title,
       meta: [
-        { hid: 'description', name: 'description', content: this.map_config.map_description },
-        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + (this.map_config.map_image ? this.map_config.map_image : 'logo.png') },
-        { hid: 'og:description', name: 'og:description', content: this.map_config.map_description },
-        { hid: 'og:title', name: 'og:title', content: this.map_config.map_title + ' - 紙マップ' }
+        { hid: 'description', name: 'description', content: description },
+        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + image },
+        { hid: 'og:description', name: 'og:description', content: description },
+        { hid: 'og:title', name: 'og:title', content: title + ' - 紙マップ' }
       ]
     }
   },

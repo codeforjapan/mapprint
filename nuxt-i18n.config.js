@@ -7,6 +7,12 @@ export default {
       file: 'en.json'
     },
     {
+      code: 'tw',
+      iso: 'tw',
+      name: '中国語（繁体字）',
+      file: 'tw.json'
+    },
+    {
       code: 'ja',
       iso: 'ja',
       name: '日本語',

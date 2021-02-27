@@ -3,7 +3,7 @@
     client-only
       div(v-if='layers.length')
         .map-outer
-          MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
+          MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap", ref="map_obj"
           )#map
             MglGeolocateControl
             template(v-for='(layer, indexOfLayer) in layers', v-if="checkedArea.includes(layer.source.title)")
@@ -85,6 +85,7 @@
 <script>
 import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
+import MapLibre from 'maplibre-gl'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import imageLegendMarkJa from '@/assets/images/fukidashi_obj_ja.svg'
 import imageLegendMarkEn from '@/assets/images/fukidashi_obj_en.svg'
@@ -107,24 +108,7 @@ export default {
       isOpenAreaSelect: false,
       isOpenList: false,
       isDisplayAllCategory: true,
-      mapStyle: {
-        'version': 8,
-        'sources': {
-          'OSM': {
-            'type': 'raster',
-            'tiles': [this.$i18n.t("PrintableMap.map_url")],
-            'tileSize': 256,
-            'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
-          }
-        },
-        'layers': [{
-          'id': 'OSM',
-          'type': 'raster',
-          'source': 'OSM',
-          'minzoom': 0,
-          'maxzoom': 22
-        }]
-      },
+      mapStyle: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
       imageLegendMark: {
         ja: imageLegendMarkJa,
         en: imageLegendMarkEn
@@ -232,24 +216,25 @@ export default {
     })
   },
   methods: {
-    load (e) {
+    load () {
       // deserialie bounds from url
       const locationhash = window.location.hash.substr(1)
       let initbounds = helper.deserializeBounds(locationhash)
-      this.map = e.map
+      this.map = this.$refs.map_obj
       if (initbounds != undefined) {
-        this.map.fitBounds(initbounds, { linear: false })
+        this.map.map.fitBounds(initbounds, { linear: false })
       } else {
         initbounds = helper.deserializeBounds(this.map_config.default_hash)
         if (initbounds != undefined) {
-          this.map.fitBounds(initbounds, { linear: false })
+          this.map.map.fitBounds(initbounds, { linear: false })
         }
       }
-      this.map.on('moveend', this.etmitBounds)
+      this.map.map.on('moveend', this.etmitBounds)
       this.etmitBounds()
+      this.map.map.addControl(new MapLibre.NavigationControl())
     },
     etmitBounds () {
-      this.bounds = this.map.getBounds()
+      this.bounds = this.map.map.getBounds()
       this.setHash(this.bounds)
       this.$emit('bounds-changed')
     },

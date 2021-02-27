@@ -41,9 +41,9 @@
                   a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
           .navigation-area.print-exclude
-            .legend-navi-icon.active
+            .legend-navi-icon
               .legend-navi-button.print-button(@click="clickPrintButton()")
-                span.fa.fa-print(alt="印刷")
+                span.fa.fa-print(:alt='$t("PrintableMap.print")')
           .navigation-area
             .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
               .area-array-outer

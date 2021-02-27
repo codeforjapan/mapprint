@@ -1,5 +1,7 @@
 {
   "common": {
+    "site_name": "KamiMap",
+    "site_desc": "Paper Map for printable map information",
     "about": "About this site",
     "contribute": "Welcome to contribute",
     "title": "Paper Map for printable map information"

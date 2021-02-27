@@ -10,15 +10,10 @@ export default {
     htmlAttrs: {
       prefix: 'og: http://ogp.me/ns#'
     },
-    titleTemplate: '%s - 紙マップ',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '印刷できる災害情報サイト' },
-      { hid: 'og:site_name', property: 'og:site_name', content: '紙マップ' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:title', property: 'og:title', content: '紙マップ' },
-      { hid: 'og:description', property: 'og:description', content: '印刷できる災害情報サイト' },
       { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/ogp_main.png' },
       { name: 'twitter:card', content: 'summary_large_image' }
     ],

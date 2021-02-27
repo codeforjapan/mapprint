@@ -53,7 +53,7 @@
                   i.fas.fa-arrow-up
             .navigation-legend.legend-navi-inner.print-exclude
               .legend-navi-icon
-                img(:src='imageLegendMark[$i18n.locale]' width="60" height="60" :alt='$t("PrintableMap.legend")')
+                img(:src='legendMark' width="60" height="60" :alt='$t("PrintableMap.legend")')
               .legend-list-outer
                 simplebar(data-simplebar-auto-hide="false")
                   ul.legend-list
@@ -62,7 +62,7 @@
                         i(:class="[setting.icon_class]")
               .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{active: activeCategory}')
                 .legend-navi-button
-                  img.legend-navi-img(:src='imageActiveText[$i18n.locale]' width="40" height="40" :alt='$t("PrintableMap.show_all")')
+                  img.legend-navi-img(:src='legendActive' width="40" height="40" :alt='$t("PrintableMap.show_all")')
           .list-outer(:class='{open: isOpenList}')
             section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
               h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
@@ -86,16 +86,17 @@
 import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import { getNowYMD } from '~/lib/displayHelper.ts'
-import imageLegendMarkJa from '@/assets/images/fukidashi_obj_ja.svg'
-import imageLegendMarkEn from '@/assets/images/fukidashi_obj_en.svg'
-import imageActiveTextJa from '@/assets/images/active_txt_ja.svg'
-import imageActiveTextEn from '@/assets/images/active_txt_en.svg'
 
 const crc16 = require('js-crc').crc16
 let helper
 export default {
   props: ['map_config'],
   data () {
+    // 日本語と英語以外の画像素材ファイルはないので英語を優先する
+    let locale = 'en'
+    if (this.$i18n.locale === 'ja') {
+      locale = 'ja'
+    }
     return {
       layers: [],
       map: null,
@@ -125,14 +126,8 @@ export default {
           'maxzoom': 22
         }]
       },
-      imageLegendMark: {
-        ja: imageLegendMarkJa,
-        en: imageLegendMarkEn
-      },
-      imageActiveText: {
-        ja: imageActiveTextJa,
-        en: imageActiveTextEn
-      }
+      legendMark: require(`@/assets/images/fukidashi_obj_${locale}.svg`),
+      legendActive: require(`@/assets/images/active_txt_${locale}.svg`)
     }
   },
   computed: {

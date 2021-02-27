@@ -86,7 +86,7 @@ export default {
     PrintableMap, VueQrcode, Modal
   },
   asyncData ({ app }) {
-    const locale = app.i18n.locale;
+    const locale = app.i18n.locale
     const updated_at = getNowYMD(new Date(), locale)
     return { updated_at }
   },
@@ -113,7 +113,7 @@ export default {
         break
     }
     return {
-      title: title+ ' - ' + this.$i18n.t('common.site_name'),
+      title: title + ' - ' + this.$i18n.t('common.site_name'),
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + image },

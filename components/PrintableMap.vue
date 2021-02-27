@@ -53,7 +53,7 @@
                   i.fas.fa-arrow-up
             .navigation-legend.legend-navi-inner.print-exclude
               .legend-navi-icon
-                img(:src='imageLegendMark[$i18n.locale]' width="60" height="60" :alt='$t("PrintableMap.legend")')
+                img(:src='legendMark' width="60" height="60" :alt='$t("PrintableMap.legend")')
               .legend-list-outer
                 simplebar(data-simplebar-auto-hide="false")
                   ul.legend-list
@@ -62,7 +62,7 @@
                         i(:class="[setting.icon_class]")
               .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{active: activeCategory}')
                 .legend-navi-button
-                  img.legend-navi-img(:src='imageActiveText[$i18n.locale]' width="40" height="40" :alt='$t("PrintableMap.show_all")')
+                  img.legend-navi-img(:src='legendActive' width="40" height="40" :alt='$t("PrintableMap.show_all")')
           .list-outer(:class='{open: isOpenList}')
             section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
               h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
@@ -87,16 +87,17 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import MapLibre from 'maplibre-gl'
 import { getNowYMD } from '~/lib/displayHelper.ts'
-import imageLegendMarkJa from '@/assets/images/fukidashi_obj_ja.svg'
-import imageLegendMarkEn from '@/assets/images/fukidashi_obj_en.svg'
-import imageActiveTextJa from '@/assets/images/active_txt_ja.svg'
-import imageActiveTextEn from '@/assets/images/active_txt_en.svg'
 
 const crc16 = require('js-crc').crc16
 let helper
 export default {
   props: ['map_config'],
   data () {
+    // 日本語と英語以外の画像素材ファイルはないので英語を優先する
+    let locale = 'en'
+    if (this.$i18n.locale === 'ja') {
+      locale = 'ja'
+    }
     return {
       layers: [],
       map: null,
@@ -108,6 +109,7 @@ export default {
       isOpenAreaSelect: false,
       isOpenList: false,
       isDisplayAllCategory: true,
+<<<<<<< HEAD
       mapStyle: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
       imageLegendMark: {
         ja: imageLegendMarkJa,
@@ -117,6 +119,28 @@ export default {
         ja: imageActiveTextJa,
         en: imageActiveTextEn
       }
+=======
+      mapStyle: {
+        'version': 8,
+        'sources': {
+          'OSM': {
+            'type': 'raster',
+            'tiles': [this.$i18n.t("PrintableMap.map_url")],
+            'tileSize': 256,
+            'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
+          }
+        },
+        'layers': [{
+          'id': 'OSM',
+          'type': 'raster',
+          'source': 'OSM',
+          'minzoom': 0,
+          'maxzoom': 22
+        }]
+      },
+      legendMark: require(`@/assets/images/fukidashi_obj_${locale}.svg`),
+      legendActive: require(`@/assets/images/active_txt_${locale}.svg`)
+>>>>>>> 2d697ed5abdb865d350ae52c52861ce357c46e65
     }
   },
   computed: {

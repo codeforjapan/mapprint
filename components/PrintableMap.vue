@@ -109,38 +109,9 @@ export default {
       isOpenAreaSelect: false,
       isOpenList: false,
       isDisplayAllCategory: true,
-<<<<<<< HEAD
       mapStyle: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
-      imageLegendMark: {
-        ja: imageLegendMarkJa,
-        en: imageLegendMarkEn
-      },
-      imageActiveText: {
-        ja: imageActiveTextJa,
-        en: imageActiveTextEn
-      }
-=======
-      mapStyle: {
-        'version': 8,
-        'sources': {
-          'OSM': {
-            'type': 'raster',
-            'tiles': [this.$i18n.t("PrintableMap.map_url")],
-            'tileSize': 256,
-            'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
-          }
-        },
-        'layers': [{
-          'id': 'OSM',
-          'type': 'raster',
-          'source': 'OSM',
-          'minzoom': 0,
-          'maxzoom': 22
-        }]
-      },
       legendMark: require(`@/assets/images/fukidashi_obj_${locale}.svg`),
       legendActive: require(`@/assets/images/active_txt_${locale}.svg`)
->>>>>>> 2d697ed5abdb865d350ae52c52861ce357c46e65
     }
   },
   computed: {

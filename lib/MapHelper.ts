@@ -1,10 +1,8 @@
 /// <reference path="../node_modules/@types/geojson/index.d.ts" />
-/// <reference path="../node_modules/@types/leaflet/index.d.ts" />
 /// <reference path="../@types/config.d.ts" />
 
 import * as MapLibre from 'maplibre-gl';
 import * as geoJson from 'geojson';
-import * as L from 'leaflet';
 import * as tj from '@mapbox/togeojson';
 
 export interface Category {
@@ -44,13 +42,6 @@ export interface Legend {
   name: string;
   class: string;
   iconClass: string;
-}
-
-/**
- * extend L.Layer to store category data
- */
-export interface MyLayer extends L.Layer {
-  category: Category;
 }
 
 export var DEFAULT_ICON_COLOR: string = "lightgreen";

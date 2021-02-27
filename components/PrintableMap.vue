@@ -40,6 +40,10 @@
                     | {{source.updated_at}}
                   a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
+          .navigation-area.print-exclude
+            .legend-navi-icon.active
+              .legend-navi-button.print-button(@click="clickPrintButton()")
+                span.fa.fa-print(alt="印刷")
           .navigation-area
             .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
               .area-array-outer
@@ -254,6 +258,9 @@ export default {
     },
     selectCategory (category) {
       this.activeCategory = category
+    },
+    clickPrintButton () {
+      window.print()
     },
     getCategoryText (category, locale) {
       if (locale === 'ja') {

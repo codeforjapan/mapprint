@@ -84,7 +84,7 @@ export default {
           '/en/map/' + name.replace('.json', '')
         ]
       })
-      return mapped
+      return [].concat(...mapped)
     },
     fallback: true
   },

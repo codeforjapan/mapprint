@@ -19,11 +19,9 @@
                     div.popup-type
                       i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                       span.popup-poi-type
-                        | {{getCategoryText(marker.category, $i18n.locale)}}
-                    p(v-if="$i18n.locale === 'ja'")
-                      | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties.name}}
-                    p(v-else)
-                      | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties["name:en"]}}
+                        | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
+                    p
+                      | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
                     div.popup-detail-content
                       p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
         .legend-navi
@@ -75,8 +73,7 @@
               ul.list-items.grid-noGutter
                 li.col-12_xs-6(v-for="marker in group.markers")
                   span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
-                  span.item-name(v-if="$i18n.locale === 'ja'") {{marker.feature.properties.name}}
-                  span.item-name(v-else) {{marker.feature.properties["name:en"]}}
+                  span.item-name {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
             .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
               p
                 | {{$t("PrintableMap.no_point_in_map")}}
@@ -270,12 +267,19 @@ export default {
     clickPrintButton () {
       window.print()
     },
-    getCategoryText (category, locale) {
+    getMarkerCategoryText (category, locale) {
       if (locale === 'ja') {
         return this.map_config.layer_settings[category].name
       } else {
         return this.map_config.layer_settings[category].name_en
       }
+    },
+    getMarkerNameText (markerProperties, locale) {
+      let name = markerProperties.name;
+      if (markerProperties.hasOwnProperty("name:"+locale)) {
+        name = markerProperties["name:"+locale]
+      }
+      return name
     }
   }
 }

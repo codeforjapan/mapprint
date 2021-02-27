@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import 'mapbox-gl/dist/mapbox-gl.css'
+import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 

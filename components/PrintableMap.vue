@@ -86,10 +86,6 @@
 import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import { getNowYMD } from '~/lib/displayHelper.ts'
-import imageLegendMarkJa from '@/assets/images/fukidashi_obj_ja.svg'
-import imageLegendMarkEn from '@/assets/images/fukidashi_obj_en.svg'
-import imageActiveTextJa from '@/assets/images/active_txt_ja.svg'
-import imageActiveTextEn from '@/assets/images/active_txt_en.svg'
 
 const crc16 = require('js-crc').crc16
 let helper

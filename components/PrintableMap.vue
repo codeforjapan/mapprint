@@ -118,10 +118,6 @@ export default {
             'tiles': [this.$i18n.t("PrintableMap.map_url")],
             'tileSize': 256,
             'attribution': 'Map data © <a href="http://openstreetmap.org/">OpenStreetMap</a>'
-          },
-          'mapprint': {
-            'type': 'vector',
-            'url': `https://kamimap.com/data/${this.map_config.map_id}/tilejson.json`
           }
         },
         'layers': [{
@@ -134,11 +130,11 @@ export default {
       },
       imageLegendMark: {
         ja: imageLegendMarkJa,
-        en: imageLegendMarkEn,
+        en: imageLegendMarkEn
       },
       imageActiveText: {
         ja: imageActiveTextJa,
-        en: imageActiveTextEn,
+        en: imageActiveTextEn
       }
     }
   },
@@ -228,7 +224,6 @@ export default {
               name: category,
               color,
               bg_color
-
             }
           }
         })

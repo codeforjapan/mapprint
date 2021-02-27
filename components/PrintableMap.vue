@@ -1,87 +1,88 @@
 <template lang="pug">
-  client-only
-    div(v-if='layers.length')
-      .map-outer
-        MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
-        )#map
-          MglGeolocateControl
-          template(v-for='layer in layers', v-if="checkedArea.includes(layer.source.title)")
-            MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
-              template(slot="marker")
-                div.marker
-                  span(:style="{background:map_config.layer_settings[marker.category].color}"
-                       :class="{show: isDisplayAllCategory || activeCategory === marker.category}")
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                    b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
-              MglPopup
-                div
-                  div.popup-type
-                    i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                    span.popup-poi-type
-                      | {{getCategoryText(marker.category, $i18n.locale)}}
-                  p(v-if="$i18n.locale === 'ja'")
-                    | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties.name}}
-                  p(v-else)
-                    | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties["name:en"]}}
-                  div.popup-detail-content
-                    p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
-      .legend-navi
-        .area-select(:class='{open: isOpenAreaSelect}')
-          .area-close(@click="isOpenAreaSelect=false")
-            | {{$t("PrintableMap.close_area_select")}}
-            i.fas.fa-arrow-down
-          .area-list-outer(:class='{open: isOpenAreaSelect}')
-            ul.area-list.grid
-              li.area-item.col-12_xs-6(v-for='source in map_config.sources')
-                label.area-label
-                  input.area-input(type='checkbox', :value='source.title', v-model='selectArea')
-                  | {{source.title}}
-                  span
-                    | {{source.updated_at}}
-                  a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
-        .navigation
-          .navigation-area.print-exclude
-            .legend-navi-icon.active
-              .legend-navi-button.print-button(@click="clickPrintButton()")
-                span.fa.fa-print(alt="印刷")
-          .navigation-area
-            .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
-              .area-array-outer
-                i.fas.fa-check-square
-                .area-array
-                  | {{checkedArea.join(', ')}}
-              .area-select-button-icon.print-exclude
-                i.fas.fa-arrow-up
-          .navigation-legend.legend-navi-inner.print-exclude
-            .legend-navi-icon
-              img(:src='imageLegendMark[$i18n.locale]' width="60" height="60" :alt='$t("PrintableMap.legend")')
-            .legend-list-outer
-              simplebar(data-simplebar-auto-hide="false")
-                ul.legend-list
-                  li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
-                    span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
-                      i(:class="[setting.icon_class]")
-            .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{active: activeCategory}')
-              .legend-navi-button
-                img.legend-navi-img(:src='imageActiveText[$i18n.locale]' width="40" height="40" :alt='$t("PrintableMap.show_all")')
-        .list-outer(:class='{open: isOpenList}')
-          section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
-            h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
-              span.list-title-mark
-                i(:class="map_config.layer_settings[group.category].icon_class")
-              span(v-if="$i18n.locale === 'ja'") {{group.name}}
-              span(v-else) {{group.name_en}}
-            ul.list-items.grid-noGutter
-              li.col-12_xs-6(v-for="marker in group.markers")
-                span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
-                span.item-name(v-if="$i18n.locale === 'ja'") {{marker.feature.properties.name}}
-                span.item-name(v-else) {{marker.feature.properties["name:en"]}}
-          .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
-            p
-              | {{$t("PrintableMap.no_point_in_map")}}
-      .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")
-        | {{$t("PrintableMap.close_list")}}
-        i.fas.fa-arrow-down
+  div
+    client-only
+      div(v-if='layers.length')
+        .map-outer
+          MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
+          )#map
+            MglGeolocateControl
+            template(v-for='layer in layers', v-if="checkedArea.includes(layer.source.title)")
+              MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
+                template(slot="marker")
+                  div.marker
+                    span(:style="{background:map_config.layer_settings[marker.category].color}"
+                        :class="{show: isDisplayAllCategory || activeCategory === marker.category}")
+                      i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                      b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
+                MglPopup
+                  div
+                    div.popup-type
+                      i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                      span.popup-poi-type
+                        | {{getCategoryText(marker.category, $i18n.locale)}}
+                    p(v-if="$i18n.locale === 'ja'")
+                      | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties.name}}
+                    p(v-else)
+                      | {{$i18n.t("PrintableMap.name")}} {{marker.feature.properties["name:en"]}}
+                    div.popup-detail-content
+                      p(v-html="marker.feature.properties.description ? marker.feature.properties.description : ''")
+        .legend-navi
+          .area-select(:class='{open: isOpenAreaSelect}')
+            .area-close(@click="isOpenAreaSelect=false")
+              | {{$t("PrintableMap.close_area_select")}}
+              i.fas.fa-arrow-down
+            .area-list-outer(:class='{open: isOpenAreaSelect}')
+              ul.area-list.grid
+                li.area-item.col-12_xs-6(v-for='source in map_config.sources')
+                  label.area-label
+                    input.area-input(type='checkbox', :value='source.title', v-model='selectArea')
+                    | {{source.title}}
+                    span
+                      | {{source.updated_at}}
+                    a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
+          .navigation
+            .navigation-area.print-exclude
+              .legend-navi-icon.active
+                .legend-navi-button.print-button(@click="clickPrintButton()")
+                  span.fa.fa-print(alt="印刷")
+            .navigation-area
+              .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
+                .area-array-outer
+                  i.fas.fa-check-square
+                  .area-array
+                    | {{checkedArea.join(', ')}}
+                .area-select-button-icon.print-exclude
+                  i.fas.fa-arrow-up
+            .navigation-legend.legend-navi-inner.print-exclude
+              .legend-navi-icon
+                img(:src='imageLegendMark[$i18n.locale]' width="60" height="60" :alt='$t("PrintableMap.legend")')
+              .legend-list-outer
+                simplebar(data-simplebar-auto-hide="false")
+                  ul.legend-list
+                    li.legend-item(v-for='(setting, name) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.name === name)")
+                      span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(name), isOpenList=name, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === name}')
+                        i(:class="[setting.icon_class]")
+              .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{active: activeCategory}')
+                .legend-navi-button
+                  img.legend-navi-img(:src='imageActiveText[$i18n.locale]' width="40" height="40" :alt='$t("PrintableMap.show_all")')
+          .list-outer(:class='{open: isOpenList}')
+            section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
+              h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
+                span.list-title-mark
+                  i(:class="map_config.layer_settings[group.category].icon_class")
+                span(v-if="$i18n.locale === 'ja'") {{group.name}}
+                span(v-else) {{group.name_en}}
+              ul.list-items.grid-noGutter
+                li.col-12_xs-6(v-for="marker in group.markers")
+                  span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
+                  span.item-name(v-if="$i18n.locale === 'ja'") {{marker.feature.properties.name}}
+                  span.item-name(v-else) {{marker.feature.properties["name:en"]}}
+            .list-section-none(v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0")
+              p
+                | {{$t("PrintableMap.no_point_in_map")}}
+        .legend-close.print-exclude(:class='{open: isOpenList}' @click="isOpenList=false")
+          | {{$t("PrintableMap.close_list")}}
+          i.fas.fa-arrow-down
 </template>
 
 <script>

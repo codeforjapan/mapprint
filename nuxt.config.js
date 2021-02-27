@@ -96,6 +96,7 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+      config.resolve.alias['mapbox-gl'] = 'maplibre-gl'
     },
     postcss: {
       plugins: {

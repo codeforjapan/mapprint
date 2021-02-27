@@ -2,7 +2,7 @@
 /// <reference path="../node_modules/@types/leaflet/index.d.ts" />
 /// <reference path="../@types/config.d.ts" />
 
-import * as MapboxGL from 'mapbox-gl';
+import * as MapLibre from 'maplibre-gl';
 import * as geoJson from 'geojson';
 import * as L from 'leaflet';
 import * as tj from '@mapbox/togeojson';
@@ -36,7 +36,7 @@ export interface IPrintableMap {
 }
 
 export interface IPrintableMapListener {
-  POIFiltered(targets: MapboxGL.Marker[]): void;
+  POIFiltered(targets: MapLibre.Marker[]): void;
 }
 
 export interface Legend {
@@ -169,7 +169,7 @@ export default class MapHelper implements IPrintableMap {
     return [markers, updated_at];
   }
 
-  inBounds(point: any, bounds: MapboxGL.LngLatBounds) {
+  inBounds(point: any, bounds: MapLibre.LngLatBounds) {
     var lng = (point[0] - bounds.getNorthEast().lng) * (point[0] - bounds.getSouthWest().lng) < 0;
     var lat = (point[1] - bounds.getNorthEast().lat) * (point[1] - bounds.getSouthWest().lat) < 0;
     return lng && lat;
@@ -203,13 +203,13 @@ export default class MapHelper implements IPrintableMap {
     let [slat, slng] = s.split(',', 2);
     let lng = parseFloat(slng);
     let lat = parseFloat(slat);
-    return new MapboxGL.LngLat(lng,lat);
+    return new MapLibre.LngLat(lng,lat);
   }
   public deserializeBounds(s) {
     try{
       let _this = this;
       if (process.client) {
-        return new MapboxGL.LngLatBounds(s.split('-', 2).map(function(d) {return _this.deserializeLatLng(d);}));
+        return new MapLibre.LngLatBounds(s.split('-', 2).map(function(d) {return _this.deserializeLatLng(d);}));
         //return undefined;
       }else{
         return undefined;

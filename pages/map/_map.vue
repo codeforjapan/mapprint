@@ -88,7 +88,7 @@ export default {
   asyncData ({ app }) {
     const locale = app.i18n.locale;
     const updated_at = getNowYMD(new Date(), locale)
-    return { updated_at, locale }
+    return { updated_at }
   },
   data () {
     return {
@@ -102,7 +102,7 @@ export default {
   head () {
     let title, description, image;
     image = this.map_config.map_image ? this.map_config.map_image : 'logo.png';
-    switch (this.locale) {
+    switch (this.$i18n.locale) {
       case 'ja':
         title = this.map_config.map_title;
         description = this.map_config.map_description;
@@ -111,16 +111,15 @@ export default {
         title = this.map_config.map_title_en;
         description = this.map_config.map_description_en;
         break;
-        
     }
     
     return {
-      title: title,
+      title: title + ' - ' + this.$i18n.t('common.site_name'),
       meta: [
         { hid: 'description', name: 'description', content: description },
         { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + image },
         { hid: 'og:description', name: 'og:description', content: description },
-        { hid: 'og:title', name: 'og:title', content: title + ' - 紙マップ' }
+        { hid: 'og:title', name: 'og:title', content: title + this.$i18n.t('common.site_name') }
       ]
     }
   },

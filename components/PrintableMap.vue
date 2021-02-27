@@ -44,7 +44,7 @@
             .navigation-area.print-exclude
               .legend-navi-icon.active
                 .legend-navi-button.print-button(@click="clickPrintButton()")
-                  span.fa.fa-print(alt="印刷")
+                  span.fa.fa-print(:alt='$t("PrintableMap.print")')
             .navigation-area
               .area-select-button(@click="isOpenAreaSelect=!isOpenAreaSelect")
                 .area-array-outer

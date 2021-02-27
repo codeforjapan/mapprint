@@ -41,7 +41,7 @@
                   a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
         .navigation
           .navigation-area.print-exclude
-            .legend-navi-icon
+            .legend-navi-icon.active
               .legend-navi-button.print-button(@click="clickPrintButton()")
                 span.fa.fa-print(alt="印刷")
           .navigation-area

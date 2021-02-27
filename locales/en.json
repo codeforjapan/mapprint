@@ -18,6 +18,7 @@
   },
   "PrintableMap": {
     "name": "Name: ",
+    "print": "Print",
     "legend": "Legend",
     "show_all": "Show all",
     "close_area_select": "Close area select",

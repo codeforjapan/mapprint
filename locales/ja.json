@@ -18,6 +18,7 @@
   },
   "PrintableMap": {
     "name": "名称：",
+    "print": "印刷",
     "legend": "凡例",
     "show_all": "すべて表示",
     "close_area_select": "地域選択を閉じる",

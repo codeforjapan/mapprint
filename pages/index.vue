@@ -66,16 +66,16 @@ export default {
     }
   },
   head () {
-    let siteName, siteDesc;
+    let siteName, siteDesc
     switch (this.$i18n.locale) {
       case 'ja':
-        siteName = this.$i18n.t('common.site_name');
-        siteDesc = this.$i18n.t('common.site_desc');
-        break;
+        siteName = this.$i18n.t('common.site_name')
+        siteDesc = this.$i18n.t('common.site_desc')
+        break
       case 'en':
-        siteName = this.$i18n.t('common.site_name');
-        siteDesc = this.$i18n.t('common.site_desc');
-        break;
+        siteName = this.$i18n.t('common.site_name')
+        siteDesc = this.$i18n.t('common.site_desc')
+        break
     }
     return {
       title: siteName,
@@ -83,7 +83,7 @@ export default {
         { hid: 'description', name: 'description', content: siteDesc },
         { hid: 'og:site_name', property: 'og:site_name', content: siteName },
         { hid: 'og:title', property: 'og:title', content: siteName },
-        { hid: 'og:description', property: 'og:description', content: siteDesc },
+        { hid: 'og:description', property: 'og:description', content: siteDesc }
       ],
       script: [
         { src: 'https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v4.0', async: true, defer: true, crossorigin: 'anonymous' },

@@ -6,8 +6,8 @@
           MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap"
           )#map
             MglGeolocateControl
-            template(v-for='layer in layers', v-if="checkedArea.includes(layer.source.title)")
-              MglMarker(v-for="(marker, index) in layer.markers", :key="index", :coordinates="marker.feature.geometry.coordinates")
+            template(v-for='(layer, indexOfLayer) in layers', v-if="checkedArea.includes(layer.source.title)")
+              MglMarker(v-for="(marker, index) in layer.markers", :key="String(indexOfLayer)+String(index)", :coordinates="marker.feature.geometry.coordinates")
                 template(slot="marker")
                   div.marker
                     span(:style="{background:map_config.layer_settings[marker.category].color}"

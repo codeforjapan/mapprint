@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/codeforjapan/mapprint/tree/master.svg?style=svg)](https://circleci.com/gh/codeforjapan/mapprint/tree/master)
+[![github pages](https://github.com/codeforjapan/mapprint/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/codeforjapan/mapprint/actions/workflows/gh-pages.yml)
 
 紙マップ
 ===

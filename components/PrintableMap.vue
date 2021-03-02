@@ -136,7 +136,6 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
-        const config = this.map_config.layer_settings[current.category]
         let group = groups.find(g => g.category === current.category)
         if (!group) {
           group = {
@@ -248,8 +247,8 @@ export default {
       if (category === undefined) {
         category = "未分類"
       }
-      const key = 'category.'+category;
-      let categoryText = this.$i18n.t(key)
+      const key = 'category.' + category
+      const categoryText = this.$i18n.t(key)
       if (categoryText !== key) {
         return categoryText
       } else {

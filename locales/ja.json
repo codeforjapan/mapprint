@@ -28,5 +28,15 @@
     "no_point_in_map": "表示中のマップにはどのポイントも存在しません",
     "close_list": "リストを閉じる",
     "map_url": "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/{z}/{x}/{y}.png"
+  },
+  "category": {
+    "未分類": "未分類",
+    "避難所": "避難所",
+    "自主避難所": "自主避難者",
+    "給水所": "給水所",
+    "入浴施設": "入浴施設",
+    "携帯充電": "携帯充電",
+    "無料Wi-Fi": "無料Wi-Fi",
+    "ガソリンスタンド": "ガソリンスタンド"
   }
 }

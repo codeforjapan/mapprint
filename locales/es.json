@@ -1,5 +1,7 @@
 {
   "common": {
+    "site_name": null,
+    "site_desc": null,
     "about": "Sobre este sitio web",
     "contribute": "Bienvenido a contribuir",
     "title": "Mapa de Papel para información de mapa imprimible"
@@ -25,5 +27,15 @@
     "no_point_in_map": "Ninguno de los puntos existe en el mapa mostrado",
     "close_list": "Cerrar lista",
     "map_url": "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/{z}/{x}/{y}.png"
+  },
+  "category": {
+    "未分類": null,
+    "避難所": null,
+    "自主避難所": null,
+    "給水所": null,
+    "入浴施設": null,
+    "携帯充電": null,
+    "無料Wi-Fi": null,
+    "ガソリンスタンド": null
   }
 }

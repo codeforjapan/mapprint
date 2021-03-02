@@ -248,18 +248,12 @@ export default {
       if (category === undefined) {
         category = "未分類"
       }
-      console.log(category)
       const key = 'category.'+category;
       let categoryText = this.$i18n.t(key)
-      console.log('categoryText:'+categoryText)
       if (categoryText !== key) {
         return categoryText
       } else {
-        if (locale === 'ja') {
-          return this.map_config.layer_settings[category].name
-        } else {
-          return this.map_config.layer_settings[category].name_en
-        }
+        return category
       }
     },
     getMarkerNameText (markerProperties, locale) {

@@ -19,6 +19,12 @@ export default {
       file: 'tw.json'
     },
     {
+      code: 'kr',
+      iso: 'kr',
+      name: '한국어',
+      file: 'kr.json'
+    },
+    {
       code: 'ja',
       iso: 'ja',
       name: '日本語',

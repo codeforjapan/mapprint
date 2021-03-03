@@ -25,7 +25,7 @@ The internationalization settings of this project is `./nuxt-i18n.config.js` fil
 - Fork https://github.com/codeforjapan/mapprint to your account.
 - Add/refine language JSON files at `./locales/`. 
 - update `./nuxt-i18n.config.js` file for add new language.
-- type `npm run dev` command.
+- type `yarn run dev` command.
 - check your new language is working at http://localhost:3000/
 - Create Pull Request to https://github.com/codeforjapan/mapprint
 - We will review Pull Request

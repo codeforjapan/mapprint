@@ -9,24 +9,24 @@
   "root": {
   },
   "map": {
-    "desc_1": "다양한 사람들에 의해 수집된 지도 정보",
-    "desc_2": "필요한 지역에 맞추면",
-    "desc_3": "인쇄에 최적화된 멥정보가 보입니다",
-    "desc_4": "그때 그때에 따라 정보를 골라 주십시오",
-    "desc_5": "인쇄용지에 딱 맞습니다",
-    "desc_6": "인쇄해서 정보를 필요하는 사람에게",
-    "desc_7": "부디 부쳐 주세요!",
+    "desc_1": "여러 사람들에 의해 수집된 지도 정보",
+    "desc_2": "보고싶은 지역을 설정하면",
+    "desc_3": "인쇄에 최적화된 멥 정보가 표시됩니다",
+    "desc_4": "상황에 따라 정보를 골라주세요",
+    "desc_5": "인쇄 용지에 딱 맞습니다",
+    "desc_6": "인쇄해서 지도가 필요한 사람에게",
+    "desc_7": "부디 전해주세요!",
     "printed_at": "인쇄일: "
   },
   "PrintableMap": {
     "name": "명칭: ",
     "print": "인쇄",
     "legend": "범례",
-    "show_all": "다 보기",
+    "show_all": "모두 보기",
     "close_area_select": "지역 선택 닫기",
-    "back_to_map": "제자리고",
-    "no_point_in_map": "보이는 맵에는 아무 포인트도 없습니다",
-    "close_list": "리스트 닫기",
+    "back_to_map": "제자리로",
+    "no_point_in_map": "표시되는 맵에는 아무 포인트도 없습니다",
+    "close_list": "목록 닫기",
     "map_url": "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/{z}/{x}/{y}.png"
   },
   "category": {

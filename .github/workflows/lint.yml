@@ -9,6 +9,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14
-      - run: yarn ci
+      - run: yarn install
       - run: yarn run lint
 

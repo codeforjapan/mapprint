@@ -27,9 +27,6 @@ jobs:
     - name: install
       run: yarn install
 
-    - name: test
-      run: yarn test
-
     - name: generate
       run: yarn run generate --fail-on-error
 

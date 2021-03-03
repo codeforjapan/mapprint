@@ -28,5 +28,15 @@
     "no_point_in_map": "None of the points are present on the map being displayed",
     "close_list": "Close list",
     "map_url": "https://tile.openstreetmap.jp/styles/maptiler-basic-en/{z}/{x}/{y}.png"
+  },
+  "category": {
+    "未分類": "Not categorized",
+    "避難所": "Shelter",
+    "自主避難所": "Voluntary shelter",
+    "給水所": "Water Supply Office",
+    "入浴施設": "Bathing facilities",
+    "携帯充電": "Cell phone charging",
+    "無料Wi-Fi": "Free Wi-Fi",
+    "ガソリンスタンド": "Gas station"
   }
 }

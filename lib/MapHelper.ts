@@ -109,7 +109,7 @@ export default class MapHelper implements IPrintableMap {
     let markers = [];
     data["features"].forEach((feature) => {
       let category = "未分類"
-      if (feature.property["category"]) {
+      if (feature.properties["category"]) {
         category = feature.properties["category"];
       }
       markers.push({feature, category});

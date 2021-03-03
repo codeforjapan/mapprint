@@ -19,8 +19,6 @@
   "type":"geojson",
   "layer_settings":{
     "未分類": {
-      "name": "未分類",
-      "name_en": "Not categorized",
       "class": "layer_not_categorized",
       "color": "#C0C0C0",
       "bg_color": "#808080"
@@ -34,24 +32,18 @@
       "class": "layer_temporary_houses"
     },
     "給水所":  {
-      "name": "給水所",
-      "name_en": "Water Supply Office",
       "color": "#001D96",
       "bg_color": "#1CA3EA",
       "icon_class": "fas fa-tint",
       "class": "layer_water"
     },
     "入浴施設": {
-      "name": "入浴施設",
-      "name_en": "Bathing facilities",
       "color": "#c43895",
       "bg_color": "#f9b3e2",
       "icon_class": "fas fa-shower",
       "class": "layer_shower"
     },
     "携帯充電": {
-      "name": "携帯充電",
-      "name_en": "Cell phone charging",
       "color": "#6D4615",
       "bg_color": "#C1B17E",
       "icon_class": "fas fa-plug",

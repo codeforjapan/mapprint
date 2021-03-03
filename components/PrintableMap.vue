@@ -64,12 +64,11 @@
                 .legend-navi-button
                   img.legend-navi-img(:src='legendActive' width="40" height="40" :alt='$t("PrintableMap.show_all")')
           .list-outer(:class='{open: isOpenList}')
-            section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === group.name}')
+            section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}')
               h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
                 span.list-title-mark
                   i(:class="map_config.layer_settings[group.category].icon_class")
-                span(v-if="$i18n.locale === 'ja'") {{group.name}}
-                span(v-else) {{group.name_en}}
+                span {{getMarkerCategoryText(group.category, $i18n.locale)}}
               ul.list-items.grid-noGutter
                 li.col-12_xs-6(v-for="marker in group.markers")
                   span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
@@ -137,13 +136,10 @@ export default {
     },
     displayMarkersGroupByCategory () {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
-        const config = this.map_config.layer_settings[current.category]
-        let group = groups.find(g => g.name === current.category)
+        let group = groups.find(g => g.category === current.category)
         if (!group) {
           group = {
             category: current.category,
-            name: config.name,
-            name_en: config.name_en,
             prop: current.category,
             markers: []
           }
@@ -248,10 +244,15 @@ export default {
       window.print()
     },
     getMarkerCategoryText (category, locale) {
-      if (locale === 'ja') {
-        return this.map_config.layer_settings[category].name
+      if (category === undefined) {
+        category = "未分類"
+      }
+      const key = 'category.' + category
+      const categoryText = this.$i18n.t(key)
+      if (categoryText !== key) {
+        return categoryText
       } else {
-        return this.map_config.layer_settings[category].name_en
+        return category
       }
     },
     getMarkerNameText (markerProperties, locale) {

@@ -93,6 +93,6 @@
   - 上記の「紙マップに新しい地図を追加する手順」に従って新しい地図を追加するなど
 - `forked-release` で、 `.gitignore` から `dist` を消す
 - `forked-release` で、 `nuxt.config.js` の `router { base: '/' }` を `router { base: '/mapprint/' }` に書き換える
-- `npm run generate` で `dist` を生成する
+- `yarn run generate` で `dist` を生成する
 - `git subtree push --prefix dist/ origin forked-pages` で `forked-pages` というブランチを作る
 - GithubのリポジトリのページのSettingsタブから、GitHub Pagesとして公開するページとして `forked-pages` ブランチのrootを選択する

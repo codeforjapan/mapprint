@@ -104,10 +104,11 @@ export default {
     const image = this.map_config.map_image ? this.map_config.map_image : 'logo.png'
     switch (this.$i18n.locale) {
       case 'ja':
-        title = this.map_config.map_title
-        description = this.map_config.map_description
-        break
       case 'en':
+        title = this.map_config.map_title_en
+        description = this.map_config.map_description_en
+        break
+      default:
         title = this.map_config.map_title_en
         description = this.map_config.map_description_en
         break

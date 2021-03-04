@@ -69,12 +69,14 @@ export default {
     let siteName, siteDesc
     switch (this.$i18n.locale) {
       case 'ja':
+      case 'en':
+      case 'kr':
         siteName = this.$i18n.t('common.site_name')
         siteDesc = this.$i18n.t('common.site_desc')
         break
-      case 'en':
-        siteName = this.$i18n.t('common.site_name')
-        siteDesc = this.$i18n.t('common.site_desc')
+      default:
+        siteName = 'KamiMap'
+        siteDesc = 'Paper Map for printable map information'
         break
     }
     return {

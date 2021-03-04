@@ -2,6 +2,7 @@
   "common": {
     "site_name": null,
     "site_desc": null,
+    "share": "Compartir",
     "about": "Sobre este sitio web",
     "contribute": "Bienvenido a contribuir",
     "title": "Mapa de Papel para información de mapa imprimible"

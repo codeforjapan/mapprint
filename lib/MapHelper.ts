@@ -217,7 +217,6 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
   let name;
   let color:string = "red";
   let iconUrl;
-  console.log(folder);
   try {
     name = folder.getElementsByTagName("name")[0].textContent!;
     let styleUrl:string = folder.getElementsByTagName("styleUrl")[0].textContent!;

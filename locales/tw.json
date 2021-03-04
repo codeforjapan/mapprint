@@ -2,6 +2,7 @@
   "common": {
     "site_name": null,
     "site_desc": null,
+    "share": "分享",
     "about": "關於這個網站",
     "contribute": "歡迎貢獻",
     "title": "可列印的紙本地圖資訊站"

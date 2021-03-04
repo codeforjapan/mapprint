@@ -67,6 +67,12 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {},
+
+  i18n: {
+    vueI18n: {
+      silentTranslationWarn: true
+    }
+  },
   /*
   ** Build configuration
   */

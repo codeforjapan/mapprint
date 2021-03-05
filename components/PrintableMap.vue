@@ -3,21 +3,28 @@
     client-only
       div(v-if='layers.length')
         .map-outer
-          MglMap(:mapStyle.sync="mapStyle", :center='center', :zoom='15', @load="load", preserveDrawingBuffer=true, sourceId="basemap", ref="map_obj"
+          MglMap(:mapStyle.sync="mapStyle",
+            :center='center', :zoom='15', @load="load",
+            preserveDrawingBuffer=true, sourceId="basemap", ref="map_obj"
           )#map
             MglGeolocateControl
-            template(v-for='(layer, indexOfLayer) in layers', v-if="checkedArea.includes(layer.source.title)")
-              MglMarker(v-for="(marker, index) in layer.markers", :key="String(indexOfLayer)+String(index)", :coordinates="marker.feature.geometry.coordinates")
+            template(v-for='(layer, indexOfLayer) in layers',
+                v-if="checkedArea.includes(layer.source.title)")
+              MglMarker(v-for="(marker, index) in layer.markers",
+                  :key="String(indexOfLayer)+String(index)",
+                  :coordinates="marker.feature.geometry.coordinates")
                 template(slot="marker")
                   div.marker
                     span(:style="{background:map_config.layer_settings[marker.category].color}"
                         :class="{show: isDisplayAllCategory || activeCategory === marker.category}")
-                      i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
-                      b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) +1}}
+                      i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]"
+                         :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                      b.number(:style="{background:map_config.layer_settings[marker.category].bg_color}") {{inBoundsMarkers.indexOf(marker) + 1}}
                 MglPopup
                   div
                     div.popup-type
-                      i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]" :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
+                      i(:class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]"
+                          :style="{backgroundColor:map_config.layer_settings[marker.category].color}")
                       span.popup-poi-type
                         | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
                     p
@@ -37,7 +44,8 @@
                     | {{source.title}}
                     span
                       | {{source.updated_at}}
-                    a(v-if='source.link', :href='source.link', target='blank') [{{$t("PrintableMap.back_to_map")}}]
+                    a(v-if='source.link', :href='source.link',
+                        target='blank') [{{$t("PrintableMap.back_to_map")}}]
           .navigation
             .navigation-area.print-exclude
               .legend-navi-icon.active
@@ -57,14 +65,20 @@
               .legend-list-outer
                 simplebar(data-simplebar-auto-hide="false")
                   ul.legend-list
-                    li.legend-item(v-for='(setting, category) in map_config.layer_settings' v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)")
-                      span.legend-mark(:style="{backgroundColor:setting.color}" @click="selectCategory(category), isOpenList=category, isDisplayAllCategory=false" :class='{open: isDisplayAllCategory || activeCategory === category}')
+                    li.legend-item(v-for='(setting, category) in map_config.layer_settings'
+                        v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)")
+                      span.legend-mark(:style="{backgroundColor:setting.color}"
+                          @click="selectCategory(category), isOpenList=category, isDisplayAllCategory=false"
+                          :class='{open: isDisplayAllCategory || activeCategory === category}')
                         i(:class="[setting.icon_class]")
-              .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true" :class='{active: activeCategory}')
+              .legend-navi-icon(@click="selectCategory(''), isDisplayAllCategory=true, isOpenList=true"
+                  :class='{active: activeCategory}')
                 .legend-navi-button
-                  img.legend-navi-img(:src='legendActive' width="40" height="40" :alt='$t("PrintableMap.show_all")')
+                  img.legend-navi-img(:src='legendActive' width="40" height="40"
+                      :alt='$t("PrintableMap.show_all")')
           .list-outer(:class='{open: isOpenList}')
-            section.list-section(v-for='group in displayMarkersGroupByCategory' :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}')
+            section.list-section(v-for='group in displayMarkersGroupByCategory'
+                :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}')
               h2.list-title(:style="{backgroundColor:map_config.layer_settings[group.category].color}")
                 span.list-title-mark
                   i(:class="map_config.layer_settings[group.category].icon_class")

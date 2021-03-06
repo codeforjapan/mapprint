@@ -1,12 +1,9 @@
-name: github pages
+name: generate pages
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 jobs:
-  build-deploy:
+  generate-pages:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -29,9 +26,3 @@ jobs:
 
     - name: generate
       run: yarn run generate --fail-on-error
-
-    - name: deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./dist

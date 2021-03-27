@@ -1,3 +1,4 @@
+import * as fs from 'fs'
 import sortCSSmq from 'sort-css-media-queries'
 import i18n from './nuxt-i18n.config'
 
@@ -5,7 +6,9 @@ let router = {
   base: '/'
 }
 try {
-  router = require('./nuxt-router-override.config')
+  if (fs.existsSync('./nuxt-router-override.config.js')) {
+    router = require('./nuxt-router-override.config')
+  }
 } finally {}
 
 export default {

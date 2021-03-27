@@ -7,9 +7,11 @@ let router = {
 }
 try {
   if (fs.existsSync('./nuxt-router-override.config.js')) {
-    router = require('./nuxt-router-override.config')
+    router = require('./nuxt-router-override.config').default
   }
 } finally {}
+
+console.log(router)
 
 export default {
   mode: 'universal',

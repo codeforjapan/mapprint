@@ -11,8 +11,6 @@ try {
   }
 } finally {}
 
-console.log(router)
-
 export default {
   mode: 'universal',
   /*

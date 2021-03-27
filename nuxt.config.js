@@ -3,12 +3,12 @@ import i18n from './nuxt-i18n.config'
 
 let router = {
   base: '/'
-};
+}
 try {
   import('./nuxt-router-override.config')
-  .then((module) => {
-    router = module;
-  })
+    .then((module) => {
+      router = module
+    })
 } finally {}
 
 export default {

@@ -13,39 +13,6 @@
               v-for='(layer, indexOfLayer) in layers'
               v-if="checkedArea.includes(layer.source.title)"
             )
-              MglMarker(
-                v-for="(marker, index) in layer.markers"
-                :key="String(indexOfLayer)+String(index)"
-                :coordinates="marker.feature.geometry.coordinates"
-              )
-                template(slot="marker")
-                  div.marker
-                    span(
-                      :style="{background:map_config.layer_settings[marker.category].color}"
-                      :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
-                    )
-                      i(
-                        :class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]"
-                        :style="{backgroundColor:map_config.layer_settings[marker.category].color}"
-                      )
-                      b.number(
-                        :style="{background:map_config.layer_settings[marker.category].bg_color}"
-                      ) {{inBoundsMarkers.indexOf(marker) + 1}}
-                MglPopup
-                  div
-                    div.popup-type
-                      i(
-                        :class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]"
-                        :style="{backgroundColor:map_config.layer_settings[marker.category].color}"
-                      )
-                      span.popup-poi-type
-                        | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
-                    p
-                      | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
-                    div.popup-detail-content
-                      p(
-                        v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
-                      )
         .legend-navi
           .area-select(:class='{open: isOpenAreaSelect}')
             .area-close(@click="isOpenAreaSelect=false")
@@ -146,6 +113,8 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import MapLibre from 'maplibre-gl'
 import { getNowYMD } from '~/lib/displayHelper.ts'
+import '@turf/helpers'
+import { featureCollection } from '@turf/helpers'
 
 const crc16 = require('js-crc').crc16
 let helper
@@ -187,7 +156,7 @@ export default {
           if (!this.bounds) {
             return
           }
-          if (helper.inBounds(marker.feature.geometry.coordinates, this.bounds)) {
+          if (this.bounds.contains(MapLibre.LngLat.convert(marker.feature.geometry.coordinates))) {
             inBoundsMarkers.push(marker)
           }
         })
@@ -237,6 +206,8 @@ export default {
         const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings, source.updated_search_key)
         markers.map((marker) => {
           categories[marker.category] = true
+          //console.log(marker.feature.properties)
+          marker.feature.properties['category'] = marker.category
         })
         source.updated_at = updated_at
         Object.keys(categories).map((category) => {
@@ -280,11 +251,92 @@ export default {
           this.map.map.fitBounds(initbounds, { linear: false })
         }
       }
-      this.map.map.on('moveend', this.etmitBounds)
-      this.etmitBounds()
+      const self = this
+      // const images = {}
+      Object.keys(this.map_config.layer_settings).map((category) => {
+        const current_category = self.map_config.layer_settings[category]
+        const size = 40
+        const image = {
+          width: size,
+          height: size,
+          data: new Uint8Array(size * size * 4),
+          onAdd: function(map) {
+            const canvas = document.createElement('canvas')
+            canvas.width = this.width
+            canvas.height = this.height
+            this.context = canvas.getContext('2d')
+            this.map = map
+          },
+
+          render: function() {
+            const context = this.context
+            const radius = (size / 2) * 0.3
+            const outerRadius = (size / 2) * 0.7 + radius
+            context.clearRect(0, 0, this.width, this.height)
+            context.beginPath()
+            context.arc(
+              this.width / 2,
+              this.height / 2,
+              outerRadius,
+              0,
+              Math.PI * 2
+            )
+            context.fillStyle = 'rbga(5, 5, 5, 1)'
+            context.fill()
+            // draw inner circle
+            context.beginPath()
+            context.arc(
+              this.width / 2,
+              this.height / 2,
+              radius,
+              0,
+              Math.PI * 2
+            )
+            context.fillStyle = current_category['bg_color']
+            context.strokeStyle = current_category['color']
+            context.fill()
+            context.stroke()
+            this.data = context.getImageData(
+              0,
+              0,
+              this.width,
+              this.height,
+            ).data
+            this.map.triggerRepaint()
+            return true
+          }
+        }
+        self.map.map.addImage(category, image)
+      })
+      let markers = this.layers.map(l => l['markers']).flat()
+      // KML hack
+      markers = markers.map(m => m["feature"])
+
+      const geojson = featureCollection(markers)
+
+      this.map.map.addSource('markers', {
+        type: 'geojson',
+        data: geojson
+      })
+      Object.keys(this.map_config.layer_settings).map((category) => {
+        const current_category = self.map_config.layer_settings[category]
+        self.map.map.addLayer({
+          'id': category,
+          'type': 'symbol',
+          'source': 'markers',
+          'layout': {
+            'icon-image': category,
+            'icon-allow-overlap': true,
+          },
+          'filter': ['==', 'category', category]
+        })
+      })
+      console.log(this.map.map)
+      this.map.map.on('moveend', this.emitBounds)
+      this.emitBounds()
       this.map.map.addControl(new MapLibre.NavigationControl())
     },
-    etmitBounds () {
+    emitBounds () {
       this.bounds = this.map.map.getBounds()
       this.setHash(this.bounds)
       this.$emit('bounds-changed')

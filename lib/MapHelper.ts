@@ -160,12 +160,6 @@ export default class MapHelper implements IPrintableMap {
     return [markers, updated_at];
   }
 
-  inBounds(point: any, bounds: MapLibre.LngLatBounds) {
-    var lng = (point[0] - bounds.getNorthEast().lng) * (point[0] - bounds.getSouthWest().lng) < 0;
-    var lat = (point[1] - bounds.getNorthEast().lat) * (point[1] - bounds.getSouthWest().lat) < 0;
-    return lng && lat;
-  }
-
   convertCategoryStyle(category: Category, layer_settings): Category {
     if (layer_settings == undefined) {
       return category;

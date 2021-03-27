@@ -36,12 +36,13 @@
         i.fab.fa-github.fa-lg
         a(href="https://github.com/codeforjapan/mapprint") {{$t('common.contribute')}}
     footer.index-footer
-      .sub-button(v-for="locale in $i18n.locales")
-        nuxt-link(
-          :key="locale.code"
-          :to="switchLocalePath(locale.code)"
-        )
-          span {{ locale.name }}
+      .sub-button
+        i.fas.fa-language.fa-lg
+        select(onChange="location.href=value;")
+          option.language(disabled selected)
+            | Language: {{$i18n.locales.filter((i) => { return i.code === $i18n.locale })[0].name}}
+          option(v-for="locale in $i18n.locales" :value="switchLocalePath(locale.code)")
+            | {{ locale.name }}
     modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>
 

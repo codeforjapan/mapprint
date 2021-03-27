@@ -8,8 +8,6 @@ try {
   router = require('./nuxt-router-override.config')
 } finally {}
 
-console.log(router)
-
 export default {
   mode: 'universal',
   /*

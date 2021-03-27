@@ -1,5 +1,15 @@
+import * as fs from 'fs'
 import sortCSSmq from 'sort-css-media-queries'
 import i18n from './nuxt-i18n.config'
+
+let router = {
+  base: '/'
+}
+try {
+  if (fs.existsSync('./nuxt-router-override.config.js')) {
+    router = require('./nuxt-router-override.config').default
+  }
+} finally {}
 
 export default {
   mode: 'universal',
@@ -89,9 +99,7 @@ export default {
     },
     fallback: true
   },
-  router: {
-    base: '/'
-  },
+  router,
   build: {
     /*
     ** You can extend webpack config here

@@ -13,6 +13,12 @@ export default {
       file: 'es.json'
     },
     {
+      code: 'pt',
+      iso: 'pt',
+      name: 'português',
+      file: 'pt.json'
+    },
+    {
       code: 'tw',
       iso: 'tw',
       name: '正體中文 (繁體)',

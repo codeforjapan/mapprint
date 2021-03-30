@@ -1,7 +1,7 @@
 {
   "common": {
-    "site_name": null,
-    "site_desc": null,
+    "site_name": "KamiMap",
+    "site_desc": "Mapa de Papel para información de mapa imprimible",
     "share": "Compartir",
     "about": "Sobre este sitio web",
     "contribute": "Bienvenido a contribuir",
@@ -21,7 +21,8 @@
   },
   "PrintableMap": {
     "name": "Nombre：",
-    "legend": "Guía de uso",
+    "print": "Imprimir：",
+    "legend": "Leyenda",
     "show_all": "Mostrar todo",
     "close_area_select": "Cerrar selección de región",
     "back_to_map": "Al mapa original",
@@ -30,13 +31,13 @@
     "map_url": "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/{z}/{x}/{y}.png"
   },
   "category": {
-    "未分類": null,
-    "避難所": null,
-    "自主避難所": null,
-    "給水所": null,
-    "入浴施設": null,
-    "携帯充電": null,
-    "無料Wi-Fi": null,
-    "ガソリンスタンド": null
+    "未分類": "Sin categoría",
+    "避難所": "Refugio",
+    "自主避難所": "Refugio voluntaria",
+    "給水所": "Las estaciones de agua",
+    "入浴施設": "Instalaciones del baño",
+    "携帯充電": "Cargador del celular",
+    "無料Wi-Fi": "Wi-Fi gratis",
+    "ガソリンスタンド": "Gasolinera"
   }
 }

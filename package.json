@@ -22,31 +22,31 @@
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@mapbox/togeojson": "^0.16.0",
-    "@nuxt/typescript-runtime": "^0.1.7",
+    "@nuxt/typescript-runtime": "^2.1.0",
     "@nuxtjs/axios": "^5.13.1",
     "@types/maplibre-gl": "^1.13.0",
     "geojson": "^0.5.0",
     "js-crc": "^0.2.0",
-    "ky": "^0.15.0",
+    "ky": "^0.27.0",
     "maplibre-gl": "^1.13.0-rc.5",
     "nuxt": "^2.14.7",
     "nuxt-i18n": "^6.20.4",
     "simplebar-vue": "^1.6.0",
-    "ts-node": "^8.10.2",
+    "ts-node": "^9.1.1",
     "viewport-units-buggyfill": "^0.6.2",
     "vue": "^2.6.12",
     "vue-i18n": "^8.23.0",
     "vue-mapbox": "^0.4.1"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.2.10",
-    "@nuxtjs/eslint-config": "^1.0.1",
-    "@nuxtjs/eslint-module": "^1.2.0",
+    "@nuxt/typescript-build": "^2.1.0",
+    "@nuxtjs/eslint-config": "^6.0.0",
+    "@nuxtjs/eslint-module": "^3.0.2",
     "@types/geojson": "^7946.0.7",
     "babel-eslint": "^10.1.0",
-    "cross-env": "^6.0.3",
+    "cross-env": "^7.0.3",
     "css-mqpacker": "^7.0.0",
-    "eslint": "^6.8.0",
+    "eslint": "^7.23.0",
     "eslint-plugin-html": "^6.1.1",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.7.0",
@@ -58,6 +58,6 @@
     "sass-loader": "^10.0.4",
     "shelljs": "^0.8.4",
     "sort-css-media-queries": "^1.5.4",
-    "ts-loader": "^6.2.2"
+    "ts-loader": "^8.1.0"
   }
 }

@@ -113,11 +113,11 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
 import '~/assets/fonts/fontawesome/css/fontawesome.min.css'
 import MapLibre from 'maplibre-gl'
-import { getNowYMD } from '~/lib/displayHelper.ts'
 import { featureCollection } from '@turf/helpers'
-const fontawesomeMapping = require('~/lib/font-awesome-mapping.json')
-
+import { getNowYMD } from '~/lib/displayHelper.ts'
 const crc16 = require('js-crc').crc16
+
+const fontawesomeMapping = require('~/lib/font-awesome-mapping.json')
 let helper
 export default {
   props: ['map_config'],
@@ -207,8 +207,7 @@ export default {
         const [markers, updated_at] = helper.parse(source.type, data, self.map_config.layer_settings, source.updated_search_key)
         markers.map((marker) => {
           categories[marker.category] = true
-          //console.log(marker.feature.properties)
-          marker.feature.properties['category'] = marker.category
+          marker.feature.properties.category = marker.category
         })
         source.updated_at = updated_at
         Object.keys(categories).map((category) => {
@@ -244,111 +243,126 @@ export default {
       const locationhash = window.location.hash.substr(1)
       let initbounds = helper.deserializeBounds(locationhash)
       this.map = this.$refs.map_obj
-      if (initbounds != undefined) {
+      if (initbounds !== undefined) {
         this.map.map.fitBounds(initbounds, { linear: false })
       } else {
         initbounds = helper.deserializeBounds(this.map_config.default_hash)
-        if (initbounds != undefined) {
+        if (initbounds !== undefined) {
           this.map.map.fitBounds(initbounds, { linear: false })
         }
       }
       const self = this
       const font = '600 14px "Font Awesome 5 Free"'
-      document.fonts.load(font).then(_ => {
-        console.log(_)
+      document.fonts.load(font).then((_) => {
+        Object.keys(this.map_config.layer_settings).map((category) => {
+          const current_category = self.map_config.layer_settings[category]
+          const size = 40
+          const image = {
+            width: size,
+            height: size,
+            data: new Uint8Array(size * size * 4),
 
-      // const images = {}
-      Object.keys(this.map_config.layer_settings).map((category) => {
-        const current_category = self.map_config.layer_settings[category]
-        const size = 40
-        const image = {
-          width: size,
-          height: size,
-          data: new Uint8Array(size * size * 4),
-          onAdd: function(map) {
-            const canvas = document.createElement('canvas')
-            canvas.width = this.width
-            canvas.height = this.height
-            canvas.style.fontFamily = 'Font Awesome 5 Free'
-            canvas.style.fontWeight = 600
-            this.context = canvas.getContext('2d')
-            this.map = map
-          },
+            onAdd (map) {
+              const canvas = document.createElement('canvas')
+              canvas.width = this.width
+              canvas.height = this.height
+              canvas.style.fontFamily = 'Font Awesome 5 Free'
+              canvas.style.fontWeight = 600
+              this.context = canvas.getContext('2d')
+              this.map = map
+            },
 
-          render: function() {
-            //this.map.triggerRepaint()
-            const context = this.context
-            const radius = (size / 2) * 0.3
-            const outerRadius = (size / 2) * 0.7 + radius
-            context.clearRect(0, 0, this.width, this.height)
-            context.beginPath()
-            context.arc(
-              this.width / 2,
-              this.height / 2,
-              outerRadius,
-              0,
-              Math.PI * 2
-            )
-            context.fillStyle = 'rbga(5, 5, 5, 1)'
-            context.fill()
-            // draw inner circle
-            context.beginPath()
-            context.arc(
-              this.width / 2,
-              this.height / 2,
-              radius,
-              0,
-              Math.PI * 2
-            )
-            context.fillStyle = current_category['bg_color']
-            context.strokeStyle = current_category['color']
-            context.fill()
-            context.stroke()
-            if (current_category['icon_class']) {
+            render () {
+              const context = this.context
+              const radius = (size / 2) * 0.5
+              const outerRadius = (size / 2) * 0.7
+              context.clearRect(0, 0, this.width, this.height)
+              // draw icon
+              context.beginPath()
+              context.moveTo(this.width / 2, this.height)
+              context.lineTo(0, this.height / 2)
+              context.quadraticCurveTo(0, 0, this.width / 2, 0)
+              context.quadraticCurveTo(this.width, 0, this.width, this.height / 2)
+              context.lineTo(this.width / 2, this.height)
+              context.fillStyle = current_category.color
+              context.fill()
+              // draw inner circle 1
+              context.beginPath()
+              context.moveTo(this.width / 2, this.height / 2)
+              context.arc(
+                this.width / 2,
+                this.height / 2.5,
+                outerRadius,
+                0,
+                Math.PI * 2
+              )
+              context.fillStyle = "rgba(255, 255, 255, 1)"
+              context.fill()
+              // draw inner circle 2
+              context.beginPath()
+              context.arc(
+                this.width / 2,
+                this.height / 2.5,
+                radius,
+                0,
+                Math.PI * 2
+              )
+              context.fillStyle = current_category.bg_color
+              context.fill()
+              if (current_category.icon_class) {
+                // header icon circle 1
+                context.beginPath()
+                context.arc(
+                  this.width * 0.75,
+                  this.height * 0.25,
+                  size * 0.25,
+                  0,
+                  Math.PI * 2
+                )
+                context.fillStyle = current_category.color
+                context.fill()
                 context.beginPath()
                 context.font = font
-                const icon_class = current_category['icon_class'].split(" ")[1]
-                context.strokeText(String.fromCharCode(parseInt(fontawesomeMapping[icon_class].split("&#x")[1], 16)), 20, 20, 20)
-                //console.log()
-                //context.strokeText("\uf00c", 10, 10)
+                const icon_class = current_category.icon_class.split(" ")[1]
+                context.strokeStyle = "white"
+                context.strokeText(String.fromCharCode(parseInt(fontawesomeMapping[icon_class].split("&#x")[1], 16)), this.width * 0.8 - (size * 0.2 / 2), this.height * 0.2 + (size * 0.2 / 2), size * 0.15)
+              }
 
+              this.data = context.getImageData(
+                0,
+                0,
+                this.width,
+                this.height
+              ).data
+              this.map.triggerRepaint()
+              return true
             }
-
-            this.data = context.getImageData(
-              0,
-              0,
-              this.width,
-              this.height,
-            ).data
-            this.map.triggerRepaint()
-            return true
           }
-        }
-        self.map.map.addImage(category, image)
-      })
-      let markers = this.layers.map(l => l['markers']).flat()
-      // KML hack
-      markers = markers.map(m => m["feature"])
-
-      const geojson = featureCollection(markers)
-
-      this.map.map.addSource('markers', {
-        type: 'geojson',
-        data: geojson
-      })
-      Object.keys(this.map_config.layer_settings).map((category) => {
-        const current_category = self.map_config.layer_settings[category]
-        self.map.map.addLayer({
-          'id': category,
-          'type': 'symbol',
-          'source': 'markers',
-          'layout': {
-            'icon-image': category,
-            'icon-allow-overlap': true,
-          },
-          'filter': ['==', 'category', category]
+          self.map.map.addImage(category, image)
         })
-      })
+        let markers = this.layers.map(l => l.markers).flat()
+        // KML hack
+        markers = markers.map(m => m.feature)
+
+        const geojson = featureCollection(markers)
+
+        this.map.map.addSource('markers', {
+          type: 'geojson',
+          data: geojson
+        })
+        Object.keys(this.map_config.layer_settings).map((category) => {
+          // const current_category = self.map_config.layer_settings[category]
+          self.map.map.addLayer({
+            'id': category,
+            'type': 'symbol',
+            'source': 'markers',
+            'layout': {
+              'icon-image': category,
+              'icon-allow-overlap': true
+            },
+            'filter': ['==', 'category', category]
+          })
+        })
       })
       console.log(this.map.map)
       this.map.map.on('moveend', this.emitBounds)

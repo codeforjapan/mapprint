@@ -111,10 +111,11 @@
 <script>
 import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
+import '~/assets/fonts/fontawesome/css/fontawesome.min.css'
 import MapLibre from 'maplibre-gl'
 import { getNowYMD } from '~/lib/displayHelper.ts'
-import '@turf/helpers'
 import { featureCollection } from '@turf/helpers'
+const fontawesomeMapping = require('~/lib/font-awesome-mapping.json')
 
 const crc16 = require('js-crc').crc16
 let helper
@@ -252,6 +253,10 @@ export default {
         }
       }
       const self = this
+      const font = '600 14px "Font Awesome 5 Free"'
+      document.fonts.load(font).then(_ => {
+        console.log(_)
+
       // const images = {}
       Object.keys(this.map_config.layer_settings).map((category) => {
         const current_category = self.map_config.layer_settings[category]
@@ -264,11 +269,14 @@ export default {
             const canvas = document.createElement('canvas')
             canvas.width = this.width
             canvas.height = this.height
+            canvas.style.fontFamily = 'Font Awesome 5 Free'
+            canvas.style.fontWeight = 600
             this.context = canvas.getContext('2d')
             this.map = map
           },
 
           render: function() {
+            //this.map.triggerRepaint()
             const context = this.context
             const radius = (size / 2) * 0.3
             const outerRadius = (size / 2) * 0.7 + radius
@@ -296,6 +304,16 @@ export default {
             context.strokeStyle = current_category['color']
             context.fill()
             context.stroke()
+            if (current_category['icon_class']) {
+                context.beginPath()
+                context.font = font
+                const icon_class = current_category['icon_class'].split(" ")[1]
+                context.strokeText(String.fromCharCode(parseInt(fontawesomeMapping[icon_class].split("&#x")[1], 16)), 20, 20, 20)
+                //console.log()
+                //context.strokeText("\uf00c", 10, 10)
+
+            }
+
             this.data = context.getImageData(
               0,
               0,
@@ -330,6 +348,7 @@ export default {
           },
           'filter': ['==', 'category', category]
         })
+      })
       })
       console.log(this.map.map)
       this.map.map.on('moveend', this.emitBounds)

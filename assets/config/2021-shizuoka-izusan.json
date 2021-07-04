@@ -1,6 +1,6 @@
 {
   "map_id":"2021-shizuoka-izusan",
-  "map_title":"2021年 静岡県熱海市伊豆山 土砂崩れ 災害支援情報",
+  "map_title":"2021年 静岡県熱海市伊豆山 土砂崩れ 災害情報",
   "map_title_en":"2021 Landslide at Izusan, Atami, Shizuoka",
   "map_description":"",
   "map_image": null,
@@ -9,7 +9,7 @@
       "id" : "shizuoka-izusan",
       "url" : "https://script.google.com/macros/s/AKfycbw0D0AjIFPBGbBXj3Zr5X1j_34fwIj8RSflwc6EJrDp97pMdRRnyNcMOOHvuRHZOslJdg/exec?confirmed=true",
       "type" : "geojson",
-      "title" : "2021年 静岡県熱海市伊豆山 土砂崩れ 災害支援情報",
+      "title" : "2021年 静岡県熱海市伊豆山 土砂崩れ 災害情報",
       "title_en" : "2021 Landslide at Izusan, Atami, Shizuoka",
       "show" : true
     }

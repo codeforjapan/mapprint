@@ -42,9 +42,17 @@
       "icon_class": "fas fa-tint",
       "class": "layer_water"
     },
-    "通行止め":  {
-      "name": "通行止め",
+    "車両通行止め":  {
+      "name": "車両通行止め",
       "name_en": "Road closed",
+      "color": "#ff0000",
+      "bg_color": "#ff0080",
+      "icon_class": "fas fa-ban",
+      "class": "layer_water"
+    },
+    "鉄道運行見合わせ":  {
+      "name": "鉄道運行見合わせ",
+      "name_en": "Railway operation suspension",
       "color": "#ff0000",
       "bg_color": "#ff0080",
       "icon_class": "fas fa-ban",

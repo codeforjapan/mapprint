@@ -41,6 +41,14 @@
       "icon_class": "fas fa-tint",
       "class": "layer_water"
     },
+    "通行止め":  {
+      "name": "通行止め",
+      "name_en": "Road closed",
+      "color": "#ff0000",
+      "bg_color": "#ff0080",
+      "icon_class": "fas fa-ban",
+      "class": "layer_water"
+    },
     "入浴施設": {
       "name": "入浴施設",
       "name_en": "Bathing facility",

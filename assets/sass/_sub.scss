@@ -1,8 +1,13 @@
 .sub-outer {
-  display: grid;
-  grid-template-columns: 2fr 2fr;
-  justify-content: center;
-  width: 40%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  @include bp(md) {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    justify-content: center;
+    width: 40%;
+  }
 }
 
 .sub-button {
@@ -13,10 +18,11 @@
   border-radius: 3em;
   text-align: center;
   line-height: 1.1;
-  padding: .5em 1em;
-  margin-left: 1em;
-  margin-bottom: 0.5em;
+  margin: 0.5em 1em 0.5em 0;
   @include bp(md) {
+    padding: .5em 1em;
+    margin-left: 1em;
+    margin-bottom: 0.5em;
     box-shadow: 2px 2px 5px $color-alpha-black;
   }
   i {

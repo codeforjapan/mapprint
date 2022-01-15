@@ -56,7 +56,7 @@
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.4",
-    "shelljs": "^0.8.4",
+    "shelljs": "^0.8.5",
     "sort-css-media-queries": "^1.5.4",
     "ts-loader": "^6.2.2"
   }

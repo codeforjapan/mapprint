@@ -34,7 +34,7 @@
     "simplebar-vue": "^1.6.0",
     "ts-node": "^8.10.2",
     "viewport-units-buggyfill": "^0.6.2",
-    "vue": "^2.6.12",
+    "vue": "^2.7.0",
     "vue-i18n": "^8.23.0",
     "vue-mapbox": "^0.4.1"
   },
@@ -55,7 +55,7 @@
     "pug": "^3.0.2",
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.1.0",
-    "sass": "^1.27.0",
+    "sass": "^1.69.6",
     "sass-loader": "^10.0.4",
     "shelljs": "^0.8.5",
     "sort-css-media-queries": "^1.5.4",

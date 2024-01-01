@@ -73,7 +73,7 @@ div.layout-map
   modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>
 
-<script>
+<script lang="js">
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import PrintableMap from '~/components/PrintableMap'
 import { getNowYMD } from '~/lib/displayHelper.ts'

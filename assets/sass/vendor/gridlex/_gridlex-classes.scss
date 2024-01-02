@@ -66,6 +66,7 @@
   // Horizontal alignment on center
   &[#{$gl-attributeName}*="-center"] {
     justify-content: center;
+    align-self: center;
   }
   // Horizontal alignment on right
   &[#{$gl-attributeName}*="-right"] {

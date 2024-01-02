@@ -1,3 +1,4 @@
 {
-  "eslint.validate": []
+  "eslint.validate": [],
+  "prettier.configPath": "./.prettierrc.yaml"
 }

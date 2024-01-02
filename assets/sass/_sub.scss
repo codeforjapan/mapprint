@@ -5,7 +5,7 @@
   @include bp(md) {
     display: grid;
     grid-template-columns: 2fr 2fr;
-    justify-content: center;
+    grid-template-rows: auto;
     width: 40%;
   }
 }
@@ -20,13 +20,13 @@
   line-height: 1.1;
   margin: 0.5em 1em 0.5em 0;
   @include bp(md) {
-    padding: .5em 1em;
+    padding: 0.5em 1em;
     margin-left: 1em;
     margin-bottom: 0.5em;
     box-shadow: 2px 2px 5px $color-alpha-black;
   }
   i {
-    padding-right: .2em;
+    padding-right: 0.2em;
   }
   a {
     color: inherit;

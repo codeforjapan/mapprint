@@ -181,6 +181,20 @@ export default {
     center() {
       return this.mapConfig.center;
     },
+
+    setLayerSettings(name, color, bg_color, icon_class) {
+      const newConfig = this.mapConfig;
+      newConfig.layer_settings[name] = {
+        color,
+        bg_color
+      };
+      if (icon_class) {
+        newConfig.layer_settings[name].icon_class = icon_class;
+    
+      }
+      this.$emit("update:mapConfig", newConfig);
+      return newConfig;
+    },
     inBoundsMarkers() {
       const inBoundsMarkers = [];
       this.layers.map((layer) => {
@@ -261,11 +275,11 @@ export default {
             bg_color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16);
             bg_color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16);
             bg_color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16);
-            self.mapConfig.layer_settings[category] = {
+            this.$emit('setLayerSettings', {
               name: category,
               color,
               bg_color,
-            };
+            })
           }
         });
         self.layers.push({

@@ -150,7 +150,12 @@ import { getNowYMD } from "~/lib/displayHelper";
 const crc16 = require("js-crc").crc16;
 let helper;
 export default {
-  props: ["mapConfig"],
+  props: {
+    mapConfig: {
+      type: Object,
+      required: true,
+    },
+  },
   data() {
     let locale = "en";
     if (this.$i18n.locale === "ja") {

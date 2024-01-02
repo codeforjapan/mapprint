@@ -14,7 +14,12 @@ div
 
 <script lang="js">
 export default {
-  props: ['isOpen'],
+  props: {
+    isOpen: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {
       mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ''
@@ -22,7 +27,7 @@ export default {
   },
   methods: {
     handleClick () {
-      this.isOpen = false
+      this.$emit('update:isOpen', false)
       this.$emit('closeModal')
     }
   }

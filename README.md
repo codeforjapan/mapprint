@@ -19,8 +19,8 @@ https://codeforjapan.github.io/mapprint/
 
 ## LICENSE/ライセンス
 
-本ソフトウェアは、MITライセンスの元提供されています。詳しくは docs/LICENSE.txt を確認してください。  
-This software is released under the MIT License, see docs/LICENSE.txt.
+本ソフトウェアは、MITライセンスの元提供されています。詳しくは LICENSE.txt を確認してください。  
+This software is released under the MIT License, see LICENSE.txt.
 
 ## Help Wanted!!
 

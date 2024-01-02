@@ -13,8 +13,8 @@
 }
 
 .index-item {
-  padding: .8em;
-  background-color: rgba(0,0,0,.2);
+  padding: 0.8em;
+  background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   a {
     color: $color-base;
@@ -29,6 +29,7 @@
 .index-link-inner {
   display: grid;
   grid-template-rows: max-content;
+  grid-template-columns: auto;
   height: 100%;
   background-color: #fff;
   border-radius: 10px;
@@ -42,19 +43,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .5em;
+  padding: 0.5em;
 }
 
 .index-arrow-icon {
   font-size: 2em;
-  padding-left: .5em;
+  padding-left: 0.5em;
 }
 
 .index-item-sns {
   display: flex;
-  padding: .5em 0;
+  padding: 0.5em 0;
   > div {
-    margin-right: .5em;
+    margin-right: 0.5em;
   }
 }
 
@@ -67,6 +68,6 @@
   display: flex;
   justify-content: center;
   > div {
-    margin: 0 .5em;
+    margin: 0 0.5em;
   }
 }

@@ -30,14 +30,8 @@ module.exports = {
     'func-call-spacing': [2, 'never'],
     // true/falseを無駄に使うな
     'no-unneeded-ternary': 2,
-    // セミコロンは禁止
-    semi: [2, 'never'],
-    // 文字列はシングルクオートのみ
-    quotes: [2, 'single'],
     // varは禁止
     'no-var': 2,
-    // jsのインデントは２
-    indent: [2, 2],
     // かっこの中はスペースなし！違和感
     'space-in-parens': [2, 'never'],
     // コンソールは許可
@@ -50,5 +44,6 @@ module.exports = {
     'key-spacing': 2,
     // キーワードの前後には適切なスペースを
     'keyword-spacing': 2,
+    'camelcase': 0,
   },
 }

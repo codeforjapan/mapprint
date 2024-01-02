@@ -21,22 +21,22 @@ div
               template(slot="marker")
                 div.marker
                   span(
-                    :style="{background:map_config.layer_settings[marker.category].color}"
+                    :style="{background:mapConfig.layer_settings[marker.category].color}"
                     :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
                   )
                     i(
-                      :class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]"
-                      :style="{backgroundColor:map_config.layer_settings[marker.category].color}"
+                      :class="[mapConfig.layer_settings[marker.category].icon_class, mapConfig.layer_settings[marker.category].class]"
+                      :style="{backgroundColor:mapConfig.layer_settings[marker.category].color}"
                     )
                     b.number(
-                      :style="{background:map_config.layer_settings[marker.category].bg_color}"
+                      :style="{background:mapConfig.layer_settings[marker.category].bg_color}"
                     ) {{inBoundsMarkers.indexOf(marker) + 1}}
               MglPopup
                 div
                   div.popup-type
                     i(
-                      :class="[map_config.layer_settings[marker.category].icon_class, map_config.layer_settings[marker.category].class]"
-                      :style="{backgroundColor:map_config.layer_settings[marker.category].color}"
+                      :class="[mapConfig.layer_settings[marker.category].icon_class, mapConfig.layer_settings[marker.category].class]"
+                      :style="{backgroundColor:mapConfig.layer_settings[marker.category].color}"
                     )
                     span.popup-poi-type
                       | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
@@ -53,7 +53,7 @@ div
             i.fas.fa-arrow-down
           .area-list-outer(:class='{open: isOpenAreaSelect}')
             ul.area-list.grid
-              li.area-item.col-12_xs-6(v-for='source in map_config.sources')
+              li.area-item.col-12_xs-6(v-for='source in mapConfig.sources')
                 label.area-label
                   input.area-input(
                     type='checkbox'
@@ -92,7 +92,7 @@ div
               simplebar(data-simplebar-auto-hide="false")
                 ul.legend-list
                   li.legend-item(
-                    v-for='(setting, category) in map_config.layer_settings'
+                    v-for='(setting, category) in mapConfig.layer_settings'
                     v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
                   )
                     span.legend-mark(
@@ -117,11 +117,11 @@ div
             :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
           )
             h2.list-title(
-              :style="{backgroundColor:map_config.layer_settings[group.category].color}"
+              :style="{backgroundColor:mapConfig.layer_settings[group.category].color}"
             )
               span.list-title-mark
                 i(
-                  :class="map_config.layer_settings[group.category].icon_class"
+                  :class="mapConfig.layer_settings[group.category].icon_class"
                 )
               span {{getMarkerCategoryText(group.category, $i18n.locale)}}
             ul.list-items.grid-noGutter
@@ -150,7 +150,7 @@ import { getNowYMD } from "~/lib/displayHelper";
 const crc16 = require("js-crc").crc16;
 let helper;
 export default {
-  props: ["map_config"],
+  props: ["mapConfig"],
   data() {
     let locale = "en";
     if (this.$i18n.locale === "ja") {
@@ -174,7 +174,7 @@ export default {
   },
   computed: {
     center() {
-      return this.map_config.center;
+      return this.mapConfig.center;
     },
     inBoundsMarkers() {
       const inBoundsMarkers = [];
@@ -225,7 +225,7 @@ export default {
     const area = [];
     const categories = {};
     const self = this;
-    this.map_config.sources.forEach((source) => {
+    this.mapConfig.sources.forEach((source) => {
       (async () => {
         if (source.show) {
           area.push(source.title);
@@ -236,7 +236,7 @@ export default {
         const [markers, updated_at] = helper.parse(
           source.type,
           data,
-          self.map_config.layer_settings,
+          self.mapConfig.layer_settings,
           source.updated_search_key
         );
         markers.map((marker) => {
@@ -244,7 +244,7 @@ export default {
         });
         source.updated_at = updated_at;
         Object.keys(categories).map((category) => {
-          const categoryExists = self.map_config.layer_settings[category];
+          const categoryExists = self.mapConfig.layer_settings[category];
 
           if (!categoryExists) {
             let color = "#";
@@ -256,7 +256,7 @@ export default {
             bg_color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16);
             bg_color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16);
             bg_color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16);
-            self.map_config.layer_settings[category] = {
+            self.mapConfig.layer_settings[category] = {
               name: category,
               color,
               bg_color,
@@ -275,11 +275,11 @@ export default {
       const locationhash = window.location.hash.substr(1);
       let initbounds = helper.deserializeBounds(locationhash);
       this.map = this.$refs.map_obj;
-      if (initbounds != undefined) {
+      if (initbounds !== undefined) {
         this.map.map.fitBounds(initbounds, { linear: false });
       } else {
-        initbounds = helper.deserializeBounds(this.map_config.default_hash);
-        if (initbounds != undefined) {
+        initbounds = helper.deserializeBounds(this.mapConfig.default_hash);
+        if (initbounds !== undefined) {
           this.map.map.fitBounds(initbounds, { linear: false });
         }
       }
@@ -295,7 +295,7 @@ export default {
     setHash(bounds) {
       const s = helper.serializeBounds(bounds);
       const path = location.pathname;
-      if (s != this.previous_hash) {
+      if (s !== this.previous_hash) {
         window.history.pushState("", "", path + "#" + s);
       }
       this.previous_hash = s;

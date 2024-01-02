@@ -58,15 +58,15 @@ div.layout-map
                   option(v-for="locale in $i18n.locales" :value="switchLocalePath(locale.code)")
                     | {{ locale.name }}
             .title-outer
-              h1.title(v-if="map_config && $i18n.locale === 'ja'")
-                | {{map_config.map_title}}
+              h1.title(v-if="mapConfig && $i18n.locale === 'ja'")
+                | {{mapConfig.map_title}}
               h1.title(v-else)
-                | {{map_config.map_title_en}}
+                | {{mapConfig.map_title_en}}
               .datetime
                 | {{$t('map.printed_at')}} {{updated_at}}
           .qrcode
             vue-qrcode(v-bind:value='fullURL' tag="img")
-        printable-map(:map_config='map_config', v-if="map_config", @bounds-changed="updateQRCode")
+        printable-map(:mapConfig='mapConfig', v-if="mapConfig", @bounds-changed="updateQRCode")
         footer.footer
           .footer-logo
             img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
@@ -93,7 +93,7 @@ export default {
   },
   data () {
     return {
-      map_config: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
+      mapConfig: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
       locale: null,
       isOpenExplain: false,
       fullURL: null,
@@ -102,19 +102,19 @@ export default {
   },
   head () {
     let title, description
-    const image = this.map_config.map_image ? this.map_config.map_image : 'logo.png'
+    const image = this.mapConfig.map_image ? this.mapConfig.map_image : 'logo.png'
     switch (this.$i18n.locale) {
       case 'ja':
-        title = this.map_config.map_title
-        description = this.map_config.map_description
+        title = this.mapConfig.map_title
+        description = this.mapConfig.map_description
         break
       case 'en':
-        title = this.map_config.map_title_en
-        description = this.map_config.map_description_en
+        title = this.mapConfig.map_title_en
+        description = this.mapConfig.map_description_en
         break
       default:
-        title = this.map_config.map_title_en
-        description = this.map_config.map_description_en
+        title = this.mapConfig.map_title_en
+        description = this.mapConfig.map_description_en
         break
     }
     return {

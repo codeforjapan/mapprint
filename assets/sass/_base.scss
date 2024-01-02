@@ -1,9 +1,11 @@
+@use "sass:list";
+
 :root {
   height: 100%;
   background-color: $root-background-color;
   box-sizing: $root-box-sizing;
   color: $root-color;
-  font: #{$root-font-size}/#{$root-line-height} $root-font-family;
+  font: list.slash($root-font-size, $root-line-height) $root-font-family;
   @include bp(xs) {
     font-size: calc(1rem + ((1vw - 0.355rem) * 0.3165));
   }

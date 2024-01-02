@@ -1,4 +1,6 @@
 // Make the breakpoints
+@use "sass:math";
+
 @mixin bp($breakpoint) {
   $query: map-get($gl-mq-list, $breakpoint);
   @if $query != null {
@@ -15,7 +17,7 @@
       [#{$gl-attributeName}*="#{$grid}-#{$i}"] > [#{$gl-attributeName}~="#{$gl-colName}"],
       [#{$gl-attributeName}*="#{$grid}-#{$i}"] > [#{$gl-attributeName}*="#{$gl-colName}-"],
       [#{$gl-attributeName}*="#{$grid}-#{$i}"] > [#{$gl-attributeName}*="#{$gl-colName}_"] {
-        $fraction: 1 / $i;
+        $fraction: math.div(1, $i);
 
         flex-basis: map-get($gl-colFractions, $fraction);
         max-width: map-get($gl-colFractions, $fraction);

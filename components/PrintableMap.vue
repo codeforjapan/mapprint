@@ -21,22 +21,22 @@ div
               template(slot="marker")
                 div.marker
                   span(
-                    :style="{background:mapConfig.layer_settings[marker.category].color}"
+                    :style="{background:mapConfig.layer_settings[marker.category]?.color}"
                     :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
                   )
                     i(
-                      :class="[mapConfig.layer_settings[marker.category].icon_class, mapConfig.layer_settings[marker.category].class]"
-                      :style="{backgroundColor:mapConfig.layer_settings[marker.category].color}"
+                      :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
+                      :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
                     )
                     b.number(
-                      :style="{background:mapConfig.layer_settings[marker.category].bg_color}"
+                      :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
                     ) {{inBoundsMarkers.indexOf(marker) + 1}}
               MglPopup
                 div
                   div.popup-type
                     i(
-                      :class="[mapConfig.layer_settings[marker.category].icon_class, mapConfig.layer_settings[marker.category].class]"
-                      :style="{backgroundColor:mapConfig.layer_settings[marker.category].color}"
+                      :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
+                      :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
                     )
                     span.popup-poi-type
                       | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
@@ -117,11 +117,11 @@ div
             :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
           )
             h2.list-title(
-              :style="{backgroundColor:mapConfig.layer_settings[group.category].color}"
+              :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color}"
             )
               span.list-title-mark
                 i(
-                  :class="mapConfig.layer_settings[group.category].icon_class"
+                  :class="mapConfig.layer_settings[group.category]?.icon_class"
                 )
               span {{getMarkerCategoryText(group.category, $i18n.locale)}}
             ul.list-items.grid-noGutter

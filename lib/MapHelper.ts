@@ -232,7 +232,7 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
             let style = document.querySelector(styleUrl);
             try{
               const c: String = style.querySelector("IconStyle color").textContent;
-              const a = parseInt('0x'+c.substring(0,2))
+              const a = parseInt('0x'+c.substring(0,2)) / 255
               const b = parseInt('0x'+c.substring(2,4))
               const g = parseInt('0x'+c.substring(4,6))
               const r = parseInt('0x'+c.substring(6,8))

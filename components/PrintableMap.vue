@@ -21,12 +21,12 @@ div
               template(slot="marker")
                 div.marker
                   span(
-                    :style="{background:mapConfig.layer_settings[marker.category]?.color}"
+                    :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
                     :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
                   )
                     i(
                       :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
-                      :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
+                      :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color, display:mapConfig.layer_settings[marker.category]?'inline':'none'}"
                     )
                     b.number(
                       :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"

@@ -194,7 +194,7 @@ export default {
     },
     inBoundsMarkers() {
       const inBoundsMarkers = this.layers
-        .filter(l => l.source.show)
+        .filter(l => l.source.show && this.checkedArea.includes(l.source.title))
         .map(l => l.markers).flat()
         .filter((marker) => {
           if (!this.bounds) return true;

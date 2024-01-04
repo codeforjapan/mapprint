@@ -119,6 +119,9 @@ export default {
      */
     extend(config, ctx) {
       config.resolve.alias["mapbox-gl"] = "maplibre-gl";
+      if (ctx.isDev) {
+        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+      }
     },
     postcss: {
       postcssOptions: {

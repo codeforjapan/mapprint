@@ -5,9 +5,11 @@ span 存在しないページ、またはエラーが発生したページです
 <script>
 export default {
   mounted () {
-    setTimeout(() => {
-      location.href = '/'
-    }, 5000)
+    if (process.env.NODE_ENV === 'production') {
+      setTimeout(() => {
+        location.href = '/'
+      }, 5000)
+    }
   }
 }
 </script>

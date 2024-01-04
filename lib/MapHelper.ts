@@ -139,7 +139,7 @@ export default class MapHelper implements IPrintableMap {
     }
     let markers = [];
     Array.prototype.forEach.call(folders, (folder) => {
-      let category = readCategoryOfFolder(folder, data).name;
+      let category = readCategoryOfFolder(folder, data);
 
       if (tj.kml(folder).type == "FeatureCollection") {
         let geojsondata: geoJson.FeatureCollection = tj.kml(folder, {styles: true});
@@ -147,14 +147,16 @@ export default class MapHelper implements IPrintableMap {
           //that.addFeatureCollection(geojsondata, category);
           const result =  geojsondata.features.map((feature: geoJson.Feature) => {
             if (feature.geometry.type == "Point") {
-              markers.push({feature, category});
+              feature.properties['marker-color'] = category.color;
+              markers.push({feature, category: category.name});
             }
           });
           return result;
         }
       } else {
         let geojsondata: geoJson.Feature = tj.kml(folder, {styles: true});
-        markers.push({geojsondata, category});
+        geojsondata.properties['marker-color'] = category.color;
+        markers.push({geojsondata, category: category.name});
       }
     });
     return [markers, updated_at];
@@ -229,7 +231,12 @@ export function readCategoryOfFolder(folder:Element, document:Document):Category
             let styleUrl = elem.querySelector("styleUrl").textContent;
             let style = document.querySelector(styleUrl);
             try{
-              color = "#" + style.querySelector("IconStyle color").textContent.substr(0,6); // dirty fix
+              const c: String = style.querySelector("IconStyle color").textContent;
+              const a = parseInt('0x'+c.substring(0,2)) / 255
+              const b = parseInt('0x'+c.substring(2,4))
+              const g = parseInt('0x'+c.substring(4,6))
+              const r = parseInt('0x'+c.substring(6,8))
+              color = `rgba(${r},${g},${b},${a})`
             }catch(e){
               color = DEFAULT_ICON_COLOR;
             }

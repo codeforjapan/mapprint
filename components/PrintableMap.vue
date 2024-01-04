@@ -9,43 +9,40 @@ div
           sourceId="basemap", ref="map_obj"
         )#map
           MglGeolocateControl
-          template(
-            v-for='(layer, indexOfLayer) in layers'
-            v-if="checkedArea.includes(layer.source.title)"
+          MglMarker(
+            v-for="(marker, index) in inBoundsMarkers"
+            :key="String(index)"
+            :coordinates="marker.feature.geometry.coordinates"
+            anchor="top-left"
           )
-            MglMarker(
-              v-for="(marker, index) in layer.markers"
-              :key="String(indexOfLayer)+String(index)"
-              :coordinates="marker.feature.geometry.coordinates"
-            )
-              template(slot="marker")
-                div.marker
-                  span(
-                    :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
-                    :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
+            template(slot="marker")
+              div.marker
+                span(
+                  :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
+                  :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
+                )
+                  i(
+                    :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
+                    :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color, display:mapConfig.layer_settings[marker.category]?'inline':'none'}"
                   )
-                    i(
-                      :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
-                      :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color, display:mapConfig.layer_settings[marker.category]?'inline':'none'}"
-                    )
-                    b.number(
-                      :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
-                    ) {{inBoundsMarkers.indexOf(marker) + 1}}
-              MglPopup
-                div
-                  div.popup-type
-                    i(
-                      :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
-                      :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
-                    )
-                    span.popup-poi-type
-                      | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
-                  p
-                    | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
-                  div.popup-detail-content
-                    p(
-                      v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
-                    )
+                  b.number(
+                    :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
+                  ) {{index + 1}}
+            MglPopup
+              div
+                div.popup-type
+                  i(
+                    :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
+                    :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
+                  )
+                  span.popup-poi-type
+                    | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
+                p
+                  | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
+                div.popup-detail-content
+                  p(
+                    v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
+                  )
       .legend-navi
         .area-select(:class='{open: isOpenAreaSelect}')
           .area-close(@click="isOpenAreaSelect=false")
@@ -196,20 +193,13 @@ export default {
       return newConfig;
     },
     inBoundsMarkers() {
-      const inBoundsMarkers = [];
-      this.layers.map((layer) => {
-        if (!layer.source.show) {
-          return;
-        }
-        layer.markers.map((marker) => {
-          if (!this.bounds) {
-            return;
-          }
-          if (helper.inBounds(marker.feature.geometry.coordinates, this.bounds)) {
-            inBoundsMarkers.push(marker);
-          }
+      const inBoundsMarkers = this.layers
+        .filter(l => l.source.show && this.checkedArea.includes(l.source.title))
+        .map(l => l.markers).flat()
+        .filter((marker) => {
+          if (!this.bounds) return true;
+          return helper.inBounds(marker.feature.geometry.coordinates, this.bounds);
         });
-      });
       return inBoundsMarkers;
     },
     displayMarkersGroupByCategory() {
@@ -347,4 +337,3 @@ export default {
   },
 };
 </script>
-

@@ -3,7 +3,7 @@
   "map_title":"令和6年能登半島地震関連情報",
   "map_title_en":"Noto Peninsula Earthquake Information (2024)",
   "map_description":"SNSで流れる情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。 ぜひ印刷して必要な人に届けてあげてください！",
-  "map_image":  "",
+  "map_image":  "ogp_2024-noto-earthquake.png",
   "sources": [
     {
       "id" : "noto",

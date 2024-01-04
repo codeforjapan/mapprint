@@ -1,0 +1,34 @@
+{
+  "map_id":"2024-noto-earthquake",
+  "map_title":"2024年能登半島地震",
+  "map_title_en":"2024-noto-peninsulla-earthquake",
+  "map_description":"TODO: 新しく地図を追加します",
+  "map_description_en":"TODO: Add new map",
+  "map_image": null,
+  "sources": [
+    {
+      "id" : "test_kml",
+      "url" : "https://www.google.com/maps/d/kml?forcekml=1&mid=1w0z1l210ymUPeQTgPnfZxqgh_jf5Pws",
+      "type" : "kml",
+      "title" : "Test用KML",
+      "title_en" : "KML for test",
+      "show" : true
+    }
+  ],
+  "default_hash": "37.5,136.8-37.3,137.5",
+  "center" : [139, 37.5],
+  "layer_settings": {
+    "避難所": {
+      "color": "#276445",
+      "bg_color": "#A4C1B0",
+      "icon_class": "fas fa-street-view",
+      "class": "layer_temporary_houses"
+    },
+    "給水所": {
+      "color": "#285797",
+      "bg_color": "#A3BBDA",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
+    }
+  }
+}

@@ -7,7 +7,7 @@
   "sources": [
     {
       "id" : "noto",
-      "url" : "/data/kml/2024-noto.kml",
+      "url" : "https://www.google.com/maps/d/kml?forcekml=1&mid=1w0z1l210ymUPeQTgPnfZxqgh_jf5Pws",
       "type" : "kml",
       "title" : "避難所",
       "show" : true

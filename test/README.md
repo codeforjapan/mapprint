@@ -61,9 +61,7 @@ https://github.com/vuejs/vue-test-utils/
 ### 設定ファイル郡
 
 - jest.config.js ： Vue2 で jest を動かすための設定を書いています。
-  - 例）test/lib/displayHelper.spec.js
 - .babelrc ： jest 実行時にバベルで ECMAScript から CommonJS に変換しています。
-  - 例）test/components/Logo.vue.spec.js
 
 ### テスト実施方法
 
@@ -88,6 +86,8 @@ Done in 6.35s.
 ### サンプルテストコード
 
 - js/ts ファイル　：　 jest のみ利用。関数に対してテストコードを書きます。
+  - 例）test/lib/displayHelper.spec.js
 - vue ファイル　：　@vue/test-utils を利用。Vue がレンダリングする仮想 DOM （\*1）に対してテストコードを書きます。
+  - 例）test/components/Logo.vue.spec.js
 
 （\*1）jest.config.js にて「testEnvironment: 'jsdom'」を指定して仮想 DOM を jest から扱えるようにしています。

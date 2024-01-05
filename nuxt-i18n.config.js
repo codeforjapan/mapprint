@@ -25,10 +25,10 @@ export default {
       file: 'ja.json'
     },
     {
-      code: 'kr',
-      iso: 'kr',
+      code: 'ko',
+      iso: 'ko',
       name: '한국어',
-      file: 'kr.json'
+      file: 'ko.json'
     },
     {
       code: 'my',

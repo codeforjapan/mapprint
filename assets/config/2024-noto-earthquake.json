@@ -1,23 +1,44 @@
 {
-  "map_id":"2024-noto-earthquake",
-  "map_title":"令和6年能登半島地震関連情報",
-  "map_title_en":"Noto Peninsula Earthquake Information (2024)",
-  "map_description":"SNSで流れる情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。 ぜひ印刷して必要な人に届けてあげてください！",
-  "map_image":  "ogp_2024-noto-earthquake.png",
+  "map_id": "2024-noto-earthquake",
+  "map_title": "令和6年能登半島地震関連情報",
+  "map_title_en": "Noto Peninsula Earthquake Information (2024)",
+  "map_description": "SNSで流れる情報をネットを見れない地域の人にも伝えられるよう、印刷に最適化したマップです。マップを必要な地域のところに調整すると、A4サイズにちょうどよく印刷され、かつ必要な場所の情報がリストとして表示されます。 ぜひ印刷して必要な人に届けてあげてください！",
+  "map_image": "ogp_2024-noto-earthquake.png",
   "sources": [
     {
-      "id" : "noto",
-      "url" : "https://www.google.com/maps/d/kml?forcekml=1&mid=1w0z1l210ymUPeQTgPnfZxqgh_jf5Pws",
-      "type" : "kml",
-      "title" : "避難所",
-      "show" : true
+      "id": "noto",
+      "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1w0z1l210ymUPeQTgPnfZxqgh_jf5Pws",
+      "type": "kml",
+      "title": "避難所",
+      "show": true
+    },
+    {
+      "id": "noto_kyusui",
+      "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1YXwD9l2SbmCQO4SYDmTee4nrAQFiJfE",
+      "type": "kml",
+      "title": "給水所",
+      "show": true
+    },
+    {
+      "id": "niigata_kyusui",
+      "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1s5C7_A9ZKbBcvmdg-MZSBnHhjGJDGXA",
+      "type": "kml",
+      "title": "給水所",
+      "show": true
+    },
+    {
+      "id": "gas_station_noto",
+      "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1JBE8Bncl9LpfLlybDzoQ-T-eTicZcQo",
+      "type": "kml",
+      "title": "ガソリンスタンド",
+      "show": true
     }
   ],
   "default_hash": "37.47529547606749,136.86173646804122-37.23376666876564,137.36853736803096",
-  "center" : [137.11023611290682,37.36081513528843],
-  "type":"KML",
-  "layer_settings":{
-    "能登町":  {
+  "center": [137.11023611290682, 37.36081513528843],
+  "type": "KML",
+  "layer_settings": {
+    "能登町": {
       "name": "能登町",
       "name_en": "Noto Town",
       "color": "#992222",
@@ -25,7 +46,7 @@
       "icon_class": "fa-solid fa-1",
       "class": "layer_gs_ok"
     },
-  "能登町避難所": {
+    "能登町避難所": {
       "name": "能登町避難所",
       "name_en": "Evacuation center in Noto Town",
       "color": "#4F4F5A",
@@ -33,7 +54,7 @@
       "icon_class": "fa-solid fa-2",
       "class": "layer_gs_undefined"
     },
-  "他自治体": {
+    "他自治体": {
       "name": "他自治体",
       "name_en": "Other municipalities",
       "color": "#285797",
@@ -41,21 +62,45 @@
       "icon_class": "fa-solid fa-3",
       "class": "layer_water_chibacity"
     },
-  "SNS情報": {
+    "SNS情報": {
       "name": "SNS情報",
       "name_en": "SNS information",
       "color": "#276445",
       "bg_color": "#A4C1B0",
       "icon_class": "fas fa-street-view",
       "class": "layer_temporary_houses"
-  },
-  "通行可能道路(1/3 10:30)": {
+    },
+    "通行可能道路(1/3 10:30)": {
       "name": "通行可能道路(1/3 10:30)",
       "name_en": "Passable roads (1/3 10:30)",
       "color": "#6D4615",
       "bg_color": "#C1B17E",
       "icon_class": "fas fa-plug",
       "class": "layer_charger"
+    },
+    "能登半島地震 給水": {
+      "name": "給水",
+      "name_en": "Noto Peninsula Earthquake Water Supply",
+      "color": "#2196f3",
+      "bg_color": "#2196f3",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
+    },
+    "能登半島地震 給水_新潟県": {
+      "name": "給水",
+      "name_en": "Noto Peninsula Earthquake Water Supply",
+      "color": "#2196f3",
+      "bg_color": "#2196f3",
+      "icon_class": "fas fa-tint",
+      "class": "layer_water"
+    },
+    "営業中のガソリンスタンド": {
+      "name": "ガソリンスタンド",
+      "name_en": "Gas Station",
+      "color": "#ffc107",
+      "bg_color": "#ffc107",
+      "icon_class": "fas fa-gas-pump",
+      "class": "layer_gas_station"
     }
   }
 }

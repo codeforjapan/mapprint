@@ -1,0 +1,13 @@
+// .babelrc
+{
+  "presets": [
+    "vue",
+    "@babel/preset-typescript",
+    ["@babel/preset-env", { "modules": "commonjs" }]
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-async-to-generator"
+  ]
+}

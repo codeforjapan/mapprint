@@ -144,7 +144,6 @@ export default class MapHelper implements IPrintableMap {
       if (tj.kml(folder).type == "FeatureCollection") {
         let geojsondata: geoJson.FeatureCollection = tj.kml(folder, {styles: true});
         if (geojsondata.features.length > 0) {
-          //that.addFeatureCollection(geojsondata, category);
           const result =  geojsondata.features.map((feature: geoJson.Feature) => {
             if (feature.geometry.type == "Point") {
               markers.push({feature, category: category.name});

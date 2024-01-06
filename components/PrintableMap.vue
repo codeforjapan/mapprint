@@ -142,9 +142,8 @@ div
 import "maplibre-gl/dist/maplibre-gl.css";
 import "simplebar/dist/simplebar.min.css";
 import MapLibre from "maplibre-gl";
+import Supercluster from 'supercluster';
 import { getNowYMD } from "~/lib/displayHelper";
-
-import clusterDbscan from '@turf/clusters-dbscan';
 
 const crc16 = require("js-crc").crc16;
 let helper;
@@ -195,25 +194,38 @@ export default {
       return newConfig;
     },
     inBoundsMarkers() {
+      if (!this.bounds) return [];
       
+      // SuperClusterに食わせるためにGeoJSON-Featureの配列を作成
       const features = this.layers
-        .filter(l => l.source.show && this.checkedArea.includes(l.source.title))
+        .filter(l => l.source.show && this.checkedArea.includes(l.source.title)) // 表示中のソースのみ
         .map(l => l.markers).flat()
-        .map(m => m.feature);
+        .filter((marker) => helper.inBounds(marker.feature.geometry.coordinates, this.bounds)) // 表示範囲内のマーカーのみ
+        .map(m => ({...m.feature, properties: {...m.feature.properties, category: m.category}})); // categoryを保存
       
-      const gj = {
-        type: 'FeatureCollection',
-        features
-      }
-
-      const clustered = clusterDbscan(gj, 1000, { minPoints: 2 });
-      console.log(clustered)
-      const inBoundsMarkers = clustered.features
-        .filter((feature) => {
-          if (!this.bounds) return true;
-          return helper.inBounds(feature.geometry.coordinates, this.bounds);
+      // SuperClusterでクラスタリング
+      const index = new Supercluster({
+        radius: 20, // px: クラスタリングする範囲
+        maxZoom: 9 // クラスタリングする最大のズームレベル
+      });
+      index.load(features);
+      const clustered = index.getClusters([-180, -85, 180, 85], Math.floor(this.map.map.getZoom()));
+      
+      // システムに準拠した構造に変換: Array<{feature: GeoJSON-Feature, category: カテゴリ名}>
+      const markers = clustered
+        .map((feature) => {
+          let _feature = feature;
+          if (feature.properties.cluster) {
+            _feature = index.getLeaves(feature.properties.cluster_id, 1)[0];
+          }
+          const marker = {
+            feature: _feature,
+            category: _feature.properties.category,
+          };
+          return marker;
         });
-      return inBoundsMarkers;
+      
+      return markers;
     },
     displayMarkersGroupByCategory() {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {

@@ -42,7 +42,7 @@
       "name": "地域の目印（ランドマーク）",
       "name_en": "Landmark",
       "color": "#4f4f5a",
-      "bg_color": "#9a9aab",
+      "bg_color": "#B7B7BE",
       "icon_class": "fa-solid fa-map-pin",
       "class": "layer_gs_ok"
     },

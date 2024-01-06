@@ -18,7 +18,7 @@ div
             template(slot="marker")
               div.marker
                 span(
-                  :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
+                  :style="{background:mapConfig.layer_settings[marker.category]?.color||'red'}"
                   :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
                 )
                   i(
@@ -114,7 +114,7 @@ div
             :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
           )
             h2.list-title(
-              :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color}"
+              :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color ?? 'red'}"
             )
               span.list-title-mark
                 i(

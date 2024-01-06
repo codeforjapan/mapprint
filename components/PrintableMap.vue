@@ -36,7 +36,7 @@ div
                     :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
                   )
                   span.popup-poi-type
-                    | {{getMarkerCategoryText(marker.category, $i18n.locale)}}
+                    | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, $i18n.locale)}}
                 p
                   | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
                 div.popup-detail-content
@@ -120,7 +120,7 @@ div
                 i(
                   :class="mapConfig.layer_settings[group.category]?.icon_class"
                 )
-              span {{getMarkerCategoryText(group.category, $i18n.locale)}}
+              span {{getMarkerCategoryText(mapConfig.layer_settings[group.category]?.name||group.category, $i18n.locale)}}
             ul.list-items.grid-noGutter
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}

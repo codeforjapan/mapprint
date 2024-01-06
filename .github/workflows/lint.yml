@@ -14,6 +14,6 @@ jobs:
       - name: setup node
         uses: actions/setup-node@v4
         with:
-          node-version: '20.10.0'
+          node-version-file: '.node-version'
       - run: yarn install
       - run: yarn run lint

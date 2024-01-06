@@ -24,11 +24,12 @@ export default {
     }
   },
   data() {
-    // Languages other than Japanese are automatically changed to English.
+    // Languages other than Japanese or English are automatically changed to English.
     // Once you support all the languages, please just put "let about = this.$t('about')" here.
     let about;
     switch (this.$i18n.locale) {
         case "ja":
+        case "en":
           about = this.$t('about')
           break;
         default:

@@ -1,6 +1,10 @@
 # see https://playwright.dev/docs/ci-intro
 name: e2e
-on: push
+on:
+  push:
+    branches:
+      - master
+  pull_request_target:
 
 jobs:
   test:

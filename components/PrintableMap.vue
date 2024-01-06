@@ -335,7 +335,7 @@ export default {
       return name;
     },
     getCategoryColor(category) {
-      const fallbackColor = "#666"; // config-JSONで未定義のカテゴリが地物に設定されている場合の色
+      const fallbackColor = "red"; // config-JSONで未定義のカテゴリが地物に設定されている場合の色
       return this.mapConfig.layer_settings[category]?.color ?? fallbackColor;
     },
   },

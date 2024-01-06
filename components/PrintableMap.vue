@@ -88,10 +88,10 @@ div
             .legend-list-outer
               simplebar(data-simplebar-auto-hide="false")
                 ul.legend-list
-                li.legend-item(
-                  v-for='(setting, category) in Object.entries(mapConfig.layer_settings)'
-                  v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
-                )
+                  li.legend-item(
+                    v-for='(setting, category) in mapConfig.layer_settings'
+                    v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
+                  )
                     span.legend-mark(
                       :style="{backgroundColor:setting.color}"
                       @click="selectCategory(category), isOpenList=category, isDisplayAllCategory=false"

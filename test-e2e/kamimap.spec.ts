@@ -9,7 +9,7 @@ test('URL Check', async () => {
   try {
     await page.goto('https://kamimap.com/');
     await page.waitForLoadState('load');
-    await expect(page.url()).toBe('https://kamimap.com/en');
+    await expect(page.url()).toBe('https://kamimap.com/en/');
   } catch (error) {
     console.error('Error during page navigation:', error);
   }

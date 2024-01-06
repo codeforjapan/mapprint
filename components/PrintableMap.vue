@@ -143,6 +143,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import "simplebar/dist/simplebar.min.css";
 import MapLibre from "maplibre-gl";
 import { getNowYMD } from "~/lib/displayHelper";
+import MapHelper, { DEFAULT_ICON_COLOR } from "~/lib/MapHelper";
 
 const crc16 = require("js-crc").crc16;
 let helper;
@@ -228,7 +229,6 @@ export default {
     },
   },
   mounted() {
-    const MapHelper = require("~/lib/MapHelper.ts").default;
     const ky = require("ky").default;
     helper = new MapHelper();
     const area = [];
@@ -335,7 +335,7 @@ export default {
       return name;
     },
     getCategoryColor(category) {
-      const fallbackColor = "red"; // config-JSONで未定義のカテゴリが地物に設定されている場合の色
+      const fallbackColor = DEFAULT_ICON_COLOR; // config-JSONで未定義のカテゴリが地物に設定されている場合の色
       return this.mapConfig.layer_settings[category]?.color ?? fallbackColor;
     },
   },

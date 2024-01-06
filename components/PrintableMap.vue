@@ -144,6 +144,8 @@ import "simplebar/dist/simplebar.min.css";
 import MapLibre from "maplibre-gl";
 import { getNowYMD } from "~/lib/displayHelper";
 
+import clusterDbscan from '@turf/clusters-dbscan';
+
 const crc16 = require("js-crc").crc16;
 let helper;
 export default {
@@ -193,12 +195,23 @@ export default {
       return newConfig;
     },
     inBoundsMarkers() {
-      const inBoundsMarkers = this.layers
+      
+      const features = this.layers
         .filter(l => l.source.show && this.checkedArea.includes(l.source.title))
         .map(l => l.markers).flat()
-        .filter((marker) => {
+        .map(m => m.feature);
+      
+      const gj = {
+        type: 'FeatureCollection',
+        features
+      }
+
+      const clustered = clusterDbscan(gj, 1000, { minPoints: 2 });
+      console.log(clustered)
+      const inBoundsMarkers = clustered.features
+        .filter((feature) => {
           if (!this.bounds) return true;
-          return helper.inBounds(marker.feature.geometry.coordinates, this.bounds);
+          return helper.inBounds(feature.geometry.coordinates, this.bounds);
         });
       return inBoundsMarkers;
     },

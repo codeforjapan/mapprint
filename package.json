@@ -16,7 +16,8 @@
     "test": "npm-run-all --sequential test:unit test:e2e",
     "test:unit": "jest",
     "test:jest:coverage": "jest --coverage",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:e2e:trace": "playwright test --trace on"
   },
   "browserslist": [
     "last 2 version",

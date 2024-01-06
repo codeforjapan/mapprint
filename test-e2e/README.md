@@ -22,6 +22,14 @@ Playwright を導入する。
 
 ※Windows の方はコマンドプロンプトから実行してください
 
+### テストコードの作成方法
+- Playwright には画面操作を行うことでテストコードを生成する機能があります。画面操作を行いテストコードを追加してください。
+
+` npx playwright codegen kamimap.com `
+
+https://playwright.dev/docs/codegen-intro
+
+
 ### [WIP] WSL 向けの環境構築手順
 
 - Playwright は WSL ではすぐに動かないため以下の対応をお願いします。

@@ -36,9 +36,17 @@
       "type": "kml",
       "title": "ガソリンスタンド",
       "show": true
+    },
+    {
+      "id": "https://www.pref.ishikawa.lg.jp/opendata/index.html",
+      "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1_dm0h_aB9fEO8ns7AqpOxg67VxjaI1E",
+      "link": "https://www.google.com/maps/d/u/1/viewer?mid=1_dm0h_aB9fEO8ns7AqpOxg67VxjaI1E",
+      "type": "kml",
+      "title": "石川県オープンデータ",
+      "show": true
     }
   ],
-  "default_hash": "37.47529547606749,136.86173646804122-37.23376666876564,137.36853736803096",
+  "default_hash": "37.31194035058337,137.1330341663824-37.29683469768453,137.1655380352522",
   "center": [137.11023611290682, 37.36081513528843],
   "type": "KML",
   "layer_settings": {
@@ -105,6 +113,87 @@
       "bg_color": "#CA9491",
       "icon_class": "fas fa-gas-pump",
       "class": "layer_gas_station"
+    },
+
+    "指定緊急避難所一覧": {
+      "name": "指定緊急避難所",
+      "name_en": "Evacuation center",
+      "color": "#276445",
+      "bg_color": "#A4C1B0",
+      "icon_class": "fa-solid fa-street-view",
+      "class": "layer_gas_station"
+    },
+    "石川県が所管する公共施設一覧": {
+      "name": "石川県が所管する公共施設一覧",
+      "name_en": "public facility",
+      "color": "#4f4f5a",
+      "bg_color": "#B7B7BE",
+      "icon_class": "fa-solid fa-landmark",
+      "class": "layer_public_facility"
+    },
+    "石川県の病院一覧": {
+      "name": "石川県の病院一覧",
+      "name_en": "hospital",
+      "color": "#e60012",
+      "bg_color": "#CA9491",
+      "icon_class": "fa-solid fa-hospital",
+      "class": "layer_hospical"
+    },
+    "石川県所管のAED一覧": {
+      "name": "石川県所管のAED一覧",
+      "name_en": "AED",
+      "color": "#e60012",
+      "bg_color": "#CA9491",
+      "icon_class": "fa-solid fa-heart-circle-bolt",
+      "class": "layer_aed"
+    },
+    "石川県が所管する公衆トイレ一覧": {
+      "name": "石川県が所管する公衆トイレ一覧",
+      "name_en": "toilet",
+      "color": "#BE4BDB",
+      "bg_color": "#d6b1e0",
+      "icon_class": "fas fa-toilet",
+      "class": "layer_toilet"
+    },
+    "石川県内の子育て施設（市町オープンデータ参照）": {
+      "name": "石川県内の子育て施設（市町オープンデータ参照）",
+      "name_en": "childcare",
+      "color": "#992222",
+      "bg_color": "#CA9491",
+      "icon_class": "fa-solid fa-baby",
+      "class": "layer_childcare"
+    },
+    "介護サービス事業所（金沢市所管）": {
+      "name": "介護サービス事業所（金沢市所管）",
+      "name_en": "care service",
+      "color": "#992222",
+      "bg_color": "#CA9491",
+      "icon_class": "fa-solid fa-hand-holding-hand",
+      "class": "layer_care_service"
+    },
+    "介護サービス事業所（石川県所管　能登地区）": {
+      "name": "介護サービス事業所（石川県所管　能登地区）",
+      "name_en": "care service",
+      "color": "#992222",
+      "bg_color": "#CA9491",
+      "icon_class": "fa-solid fa-hand-holding-hand",
+      "class": "layer_care_service"
+    },
+    "介護サービス事業所（石川県所管　加賀地区）": {
+      "name": "介護サービス事業所（石川県所管　加賀地区）",
+      "name_en": "care service",
+      "color": "#992222",
+      "bg_color": "#CA9491",
+      "icon_class": "fa-solid fa-hand-holding-hand",
+      "class": "layer_care_service"
+    },
+    "石川県の観光施設": {
+      "name": "石川県の観光施設",
+      "name_en": "sightseeing spot",
+      "color": "#4f4f5a",
+      "bg_color": "#B7B7BE",
+      "icon_class": "fa-solid fa-mountain-sun",
+      "class": "layer_sightseeing_spot"
     }
   }
 }

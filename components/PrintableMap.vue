@@ -18,7 +18,7 @@ div
             template(slot="marker")
               div.marker
                 span(
-                  :style="{background:mapConfig.layer_settings[marker.category]?.color||'red'}"
+                  :style="{background:getCategoryColor(marker.category)}"
                   :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
                 )
                   i(
@@ -114,7 +114,7 @@ div
             :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
           )
             h2.list-title(
-              :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color ?? 'red'}"
+              :style="{backgroundColor:getCategoryColor(group.category)}"
             )
               span.list-title-mark
                 i(
@@ -333,6 +333,10 @@ export default {
         name = markerProperties["name:" + locale];
       }
       return name;
+    },
+    getCategoryColor(category) {
+      const fallbackColor = "#666"; // config-JSONで未定義のカテゴリが地物に設定されている場合の色
+      return this.mapConfig.layer_settings[category]?.color ?? fallbackColor;
     },
   },
 };

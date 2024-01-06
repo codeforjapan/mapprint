@@ -8,6 +8,7 @@
     {
       "id": "noto",
       "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1w0z1l210ymUPeQTgPnfZxqgh_jf5Pws",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1w0z1l210ymUPeQTgPnfZxqgh_jf5Pws",
       "type": "kml",
       "title": "避難所",
       "show": true
@@ -15,6 +16,7 @@
     {
       "id": "noto_kyusui",
       "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1YXwD9l2SbmCQO4SYDmTee4nrAQFiJfE",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1YXwD9l2SbmCQO4SYDmTee4nrAQFiJfE",
       "type": "kml",
       "title": "給水所",
       "show": true
@@ -22,6 +24,7 @@
     {
       "id": "niigata_kyusui",
       "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1s5C7_A9ZKbBcvmdg-MZSBnHhjGJDGXA",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1s5C7_A9ZKbBcvmdg-MZSBnHhjGJDGXA",
       "type": "kml",
       "title": "給水所",
       "show": true
@@ -29,6 +32,7 @@
     {
       "id": "gas_station_noto",
       "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1JBE8Bncl9LpfLlybDzoQ-T-eTicZcQo",
+      "link": "https://www.google.com/maps/d/u/0/viewer?mid=1JBE8Bncl9LpfLlybDzoQ-T-eTicZcQo",
       "type": "kml",
       "title": "ガソリンスタンド",
       "show": true

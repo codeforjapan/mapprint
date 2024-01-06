@@ -20,23 +20,23 @@ div
 </template>
 
 <script lang="js">
-  export default {
-    props: {
-      isOpen: {
-        type: Boolean,
-        default: false
-      }
-    },
-    data () {
-      return {
-        mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ''
-      }
-    },
-    methods: {
-      handleClick () {
-        this.$emit('update:isOpen', false)
-        this.$emit('closeModal')
-      }
+export default {
+  props: {
+    isOpen: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : ''
+    }
+  },
+  methods: {
+    handleClick () {
+      this.$emit('update:isOpen', false)
+      this.$emit('closeModal')
     }
   }
+}
 </script>

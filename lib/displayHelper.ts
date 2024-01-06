@@ -37,7 +37,3 @@ export function getNowYMD(dt:Date, locale?:string):string{
       return dt.toLocaleString('ja-JP');
   }
 }
-
-export function getPrintDate(dt:Date):string{
-  return `このマップは ${this.getNowYMD(dt)} に印刷しました。`;
-}

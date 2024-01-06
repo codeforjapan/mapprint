@@ -1,4 +1,3 @@
-import { describe } from 'node:test';
 import { getNowYMD } from '~/lib/displayHelper';
 
 describe('getNowYMD', () => {

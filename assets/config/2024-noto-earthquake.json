@@ -39,7 +39,7 @@
     },
     {
       "id": "https://www.pref.ishikawa.lg.jp/opendata/index.html",
-      "url": "https://www.google.com/maps/d/kml?forcekml=1&mid=1_dm0h_aB9fEO8ns7AqpOxg67VxjaI1E",
+      "url": "/data/kml/石川県のオープンデータ.kml",
       "link": "https://www.google.com/maps/d/u/1/viewer?mid=1_dm0h_aB9fEO8ns7AqpOxg67VxjaI1E",
       "type": "kml",
       "title": "石川県オープンデータ",

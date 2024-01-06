@@ -3,7 +3,7 @@ import { getNowYMD } from '~/lib/displayHelper';
 describe('getNowYMD', () => {
   test('returns the formatted date in Japanese by default', () => {
     const mockDate = new Date('2022-01-05T12:34:56');
-    const result = getNowYMD(mockDate);
+    const result = getNowYMD(mockDate, 'ja');
     expect(result).toBe('2022年01月05日12時34分');
   });
 

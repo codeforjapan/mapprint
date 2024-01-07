@@ -146,6 +146,7 @@ export default class MapHelper implements IPrintableMap {
         if (geojsondata.features.length > 0) {
           const result =  geojsondata.features.map((feature: geoJson.Feature) => {
             if (feature.geometry.type == "Point") {
+              feature.properties['marker-color'] = category.color;
               markers.push({feature, category: category.name});
             }
           });
@@ -153,6 +154,7 @@ export default class MapHelper implements IPrintableMap {
         }
       } else {
         let geojsondata: geoJson.Feature = tj.kml(folder, {styles: true});
+        geojsondata.properties['marker-color'] = category.color;
         markers.push({geojsondata, category: category.name});
       }
     });

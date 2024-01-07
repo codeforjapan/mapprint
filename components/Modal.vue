@@ -4,11 +4,16 @@ div
     p(v-if="mapConfig")
       span(v-if="$i18n.locale === 'ja' || !mapConfig.map_description_en") {{mapConfig.map_description}}
       span(v-else) {{mapConfig.map_description_en}}
-    p(v-if="about")
-      span
-        | {{about.desc_1}}
-        a(href="https://github.com/codeforjapan/mapprint") {{about.desc_2}}
-        | {{about.desc_3}}
+    p
+      //- Remove this v-if conditional branching and just use the i18n tag when the translation is complete.
+      span(v-if="$i18n.locale === 'ja' || $i18n.locale === 'en'")
+        i18n(path="about.desc")
+          template(#githubRepo)
+            a(href="https://github.com/codeforjapan/mapprint") {{$t('about.github_repository')}}
+      span(v-else) 
+        | This site is open source. If you want to contribute to this project, please visit the
+        a(href="https://github.com/codeforjapan/mapprint") Code for Japan's Github repository
+        | . Everyone is welcome, and we especially invite those with JavaScript or Leaflet experience to join us.
     div
       span.modal-close(@click='handleClick')
         | × close
@@ -24,25 +29,8 @@ export default {
     }
   },
   data() {
-    // Languages other than Japanese or English are automatically changed to English.
-    // Once you support all the languages, please just put "let about = this.$t('about')" here.
-    let about;
-    switch (this.$i18n.locale) {
-        case "ja":
-        case "en":
-          about = this.$t('about')
-          break;
-        default:
-          about = {
-            "desc_1": "This site is open source. If you want to contribute to this project, please visit the ",
-            "desc_2": "Code for Japan's Github repository",
-            "desc_3": ". Everyone is welcome, and we especially invite those with JavaScript or Leaflet experience to join us."
-          };
-          break;
-      }
     return {
       mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : '',
-      about,
     }
   },
   methods: {

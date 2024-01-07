@@ -8,9 +8,8 @@
     "title": "Paper Map for printable map information"
   },
   "about": {
-    "desc_1": "This site is open source. If you want to contribute to this project, please visit the ",
-    "desc_2": "Code for Japan's Github repository",
-    "desc_3": ". Everyone is welcome, and we especially invite those with JavaScript or Leaflet experience to join us."
+    "desc": "This site is open source. If you want to contribute to this project, please visit the {githubRepo}. Everyone is welcome, and we especially invite those with JavaScript or Leaflet experience to join us.",
+    "github_repository": "Code for Japan's Github repository"
   },
   "root": {
   },

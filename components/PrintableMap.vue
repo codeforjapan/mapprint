@@ -18,7 +18,7 @@ div
             template(slot="marker")
               div.marker
                 span(
-                  :style="{background:getCategoryColor(marker.category)}"
+                  :style="{background:getCategoryColor(marker.category, marker.feature.properties['marker-color'] ?? null)}"
                   :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
                 )
                   i(
@@ -334,9 +334,16 @@ export default {
       }
       return name;
     },
-    getCategoryColor(category) {
-      const fallbackColor = DEFAULT_ICON_COLOR; // config-JSONで未定義のカテゴリが地物に設定されている場合の色
-      return this.mapConfig.layer_settings[category]?.color ?? fallbackColor;
+    /**
+     * config-JSONで定義された、カテゴリの設定色を返す
+     * カテゴリが未定義の場合はfallbackColorを返す
+     * fallbackColorが渡されていない場合はシステムデフォルトの色を返す
+     * @param {*} category - カテゴリ名
+     * @param {*} fallbackColor - カテゴリが未定義の場合の色
+     */
+    getCategoryColor(category, fallbackColor=null) {
+      const _fallbackColor = fallbackColor ?? DEFAULT_ICON_COLOR;
+      return this.mapConfig.layer_settings[category]?.color ?? _fallbackColor;
     },
   },
 };

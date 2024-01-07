@@ -111,7 +111,7 @@ div
         .list-outer(:class='{open: isOpenList}')
           section.list-section(
             v-for='group in displayMarkersGroupByCategory'
-            :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
+            :class='{show: isDisplayAllCategory || activeCategory === group.category}'
           )
             h2.list-title(
               :style="{backgroundColor:getCategoryColor(group.category)}"

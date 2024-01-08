@@ -7,6 +7,10 @@
     "contribute": "Welcome to contribute",
     "title": "Paper Map for printable map information"
   },
+  "about": {
+    "desc": "This site is open source. If you want to contribute to this project, please visit the {githubRepo}. Everyone is welcome, and we especially invite those with JavaScript or Leaflet experience to join us.",
+    "github_repository": "Code for Japan's Github repository"
+  },
   "root": {
   },
   "map": {

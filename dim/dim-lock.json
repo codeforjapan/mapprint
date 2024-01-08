@@ -1,0 +1,148 @@
+{
+  "lockFileVersion": "1.1",
+  "contents": [
+    {
+      "name": "石川県指定緊急避難所一覧",
+      "url": "https://www.pref.ishikawa.lg.jp/opendata/documents/170003_evacuation_space.csv",
+      "path": "./data_files/石川県指定緊急避難所一覧/170003_evacuation_space.csv",
+      "catalogUrl": null,
+      "catalogResourceId": null,
+      "lastModified": "2023-09-07T12:00:16.000Z",
+      "eTag": "5ae55-604c39a6a0e36",
+      "lastDownloaded": "2024-01-07T09:10:30.125Z",
+      "integrity": "6bc5145d69fb91e8ba4a65d63637595e65f74ca5",
+      "postProcesses": [
+        "encode utf-8"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "災害拠点病院一覧_災害拠点病院一覧",
+      "url": "http://www.pref.ishikawa.lg.jp/opendata/documents/saigai_hospital.csv",
+      "path": "./data_files/災害拠点病院一覧_災害拠点病院一覧/saigai_hospital.csv",
+      "catalogUrl": "https://www.geospatial.jp/ckan/dataset/ishikawa-saigai-hospital",
+      "catalogResourceId": "f74a383d-9097-466c-945c-9c736e9bc945",
+      "lastModified": "2023-01-25T08:00:03.000Z",
+      "eTag": "3b8-5f312050dda22",
+      "lastDownloaded": "2024-01-07T09:11:23.789Z",
+      "integrity": "ac292e33cbb02022f4e50c6ce74e04798a804bde",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17205_石川県_珠洲市_避難施設_指定避難所",
+      "url": "https://www.geospatial.jp/ckan/dataset/c56cbd72-7458-4802-a90b-43a7785eda5b/resource/7b9af02c-d85f-4df7-b7b8-6c94a8fa3109/download/suzusiteishelter.csv",
+      "path": "./data_files/17205_石川県_珠洲市_避難施設_指定避難所/suzusiteishelter.csv",
+      "catalogUrl": "https://www.geospatial.jp/ckan/dataset/17205-002",
+      "catalogResourceId": "7b9af02c-d85f-4df7-b7b8-6c94a8fa3109",
+      "lastModified": "2017-11-27T03:55:51.000Z",
+      "eTag": "04b741eb42667785b12edaf420768bc0",
+      "lastDownloaded": "2024-01-07T14:19:35.766Z",
+      "integrity": "796891adee7e0b01c8805c7170cf7582163370d6",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17205_石川県_珠洲市_避難施設_津波襲来時緊急一時避難所",
+      "url": "https://www.geospatial.jp/ckan/dataset/c56cbd72-7458-4802-a90b-43a7785eda5b/resource/036f9491-f37f-404d-93da-4c2144d71f85/download/suzukinkyushelter.csv",
+      "path": "./data_files/17205_石川県_珠洲市_避難施設_津波襲来時緊急一時避難所/suzukinkyushelter.csv",
+      "catalogUrl": "https://www.geospatial.jp/ckan/dataset/17205-002",
+      "catalogResourceId": "036f9491-f37f-404d-93da-4c2144d71f85",
+      "lastModified": "2017-11-27T03:55:54.000Z",
+      "eTag": "2de46712268baf806572fa0a27245f33",
+      "lastDownloaded": "2024-01-07T14:19:37.394Z",
+      "integrity": "1ba340f74b47f0253b59f45d5428742e80d76366",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17003_石川県_指定緊急避難所一覧",
+      "url": "https://www.pref.ishikawa.lg.jp/opendata/documents/170003_evacuation_space.csv",
+      "path": "./data_files/17003_石川県_指定緊急避難所一覧/170003_evacuation_space.csv",
+      "catalogUrl": null,
+      "catalogResourceId": null,
+      "lastModified": "2023-09-07T12:00:16.000Z",
+      "eTag": "5ae55-604c39a6a0e36",
+      "lastDownloaded": "2024-01-07T14:19:39.489Z",
+      "integrity": "6bc5145d69fb91e8ba4a65d63637595e65f74ca5",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17003_石川県_公衆無線LANアクセスポイント一覧",
+      "url": "https://www.pref.ishikawa.lg.jp/opendata/documents/170003_public_wireless_lan.csv",
+      "path": "./data_files/17003_石川県_公衆無線LANアクセスポイント一覧/170003_public_wireless_lan.csv",
+      "catalogUrl": null,
+      "catalogResourceId": null,
+      "lastModified": "2023-09-07T12:00:16.000Z",
+      "eTag": "ab9-604c39a6bfa67",
+      "lastDownloaded": "2024-01-07T14:19:40.167Z",
+      "integrity": "b3347e68c8dbef547d9619695d115ece87a5214d",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17003_石川県_AED設置箇所一覧",
+      "url": "https://www.pref.ishikawa.lg.jp/opendata/documents/170003_aed.csv",
+      "path": "./data_files/17003_石川県_AED設置箇所一覧/170003_aed.csv",
+      "catalogUrl": null,
+      "catalogResourceId": null,
+      "lastModified": "2023-09-07T12:00:09.000Z",
+      "eTag": "1a889-604c39a09b9b2",
+      "lastDownloaded": "2024-01-07T14:19:40.876Z",
+      "integrity": "5994a86812b72af6d05de06fe1f523c60ee8189d",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17003_石川県_公衆トイレ一覧",
+      "url": "https://www.pref.ishikawa.lg.jp/opendata/documents/170003_public_toilet.csv",
+      "path": "./data_files/17003_石川県_公衆トイレ一覧/170003_public_toilet.csv",
+      "catalogUrl": null,
+      "catalogResourceId": null,
+      "lastModified": "2023-09-07T12:00:15.000Z",
+      "eTag": "7f68-604c39a6927bd",
+      "lastDownloaded": "2024-01-07T14:19:41.091Z",
+      "integrity": "0bbe1bbaeb1a828843c93a7f4a4a79aca1ac0722",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    },
+    {
+      "name": "17003_石川県_災害拠点病院一覧_災害拠点病院一覧",
+      "url": "http://www.pref.ishikawa.lg.jp/opendata/documents/saigai_hospital.csv",
+      "path": "./data_files/17003_石川県_災害拠点病院一覧_災害拠点病院一覧/saigai_hospital.csv",
+      "catalogUrl": "https://www.geospatial.jp/ckan/dataset/ishikawa-saigai-hospital",
+      "catalogResourceId": "f74a383d-9097-466c-945c-9c736e9bc945",
+      "lastModified": "2023-01-25T08:00:03.000Z",
+      "eTag": "3b8-5f312050dda22",
+      "lastDownloaded": "2024-01-07T14:19:41.330Z",
+      "integrity": "ac292e33cbb02022f4e50c6ce74e04798a804bde",
+      "postProcesses": [
+        "encode utf-8",
+        "csv-to-json"
+      ],
+      "headers": {}
+    }
+  ]
+}

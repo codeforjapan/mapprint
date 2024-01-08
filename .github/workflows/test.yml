@@ -1,8 +1,13 @@
 name: test
-on: push
+on:
+  push:
+    branches:
+      - master
+  pull_request_target:
 
 jobs:
   test:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

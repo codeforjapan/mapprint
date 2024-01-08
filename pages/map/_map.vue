@@ -6,9 +6,11 @@ div.layout-map
         .aside-grid
           .aside-item1
             h2.aside-title-sp
-              img(src="~/assets/images/sp_logo.png" width="607" height="452" :alt='$t("common.title")')
+              nuxt-link(to='/')
+                img(src="~/assets/images/sp_logo.png" width="607" height="452" :alt='$t("common.title")')
             h2.aside-title-pc
-              img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
+              nuxt-link(to='/')
+                img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
           .aside-item2
             p
               | {{$t('map.desc_1')}}
@@ -41,7 +43,8 @@ div.layout-map
               i.far.fa-arrow-alt-circle-left.fa-2x
           .banner
             .logo.print-exclude
-              img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
+              nuxt-link(to='/')
+                img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
             .sub-outer.print-exclude
               .sub-button(@click='isOpenExplain=!isOpenExplain')
                 i.fas.fa-info-circle.fa-lg

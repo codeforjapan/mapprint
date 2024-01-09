@@ -46,4 +46,16 @@ module.exports = {
     'keyword-spacing': 2,
     'camelcase': 0,
   },
+  overrides: [
+    {
+      files: [
+        'layouts/*.vue',
+        'pages/*.vue'
+      ],
+      rules: {
+        // 1単語のコンポーネント名を許容
+        'vue/multi-word-component-names': 'off'
+      }
+    }
+  ]
 }

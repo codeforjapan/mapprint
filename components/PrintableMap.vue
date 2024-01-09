@@ -329,6 +329,7 @@ export default {
     },
     getMarkerNameText(markerProperties, locale) {
       let name = markerProperties.name;
+      // eslint-disable-next-line no-prototype-builtins
       if (markerProperties.hasOwnProperty("name:" + locale)) {
         name = markerProperties["name:" + locale];
       }

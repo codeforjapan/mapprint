@@ -114,8 +114,8 @@ div
             :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
           )
             h2.list-title(
-              :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color}"
-            )
+              :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color||group.markers[0]?.feature?.properties['marker-color']||'darkgreen'}"
+            ) 
               span.list-title-mark
                 i(
                   :class="mapConfig.layer_settings[group.category]?.icon_class"

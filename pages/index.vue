@@ -3,7 +3,8 @@
   #fb-root
   header
     h1.index-title
-      img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
+      nuxt-link(to='/')
+        img(src="~/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")')
   main.index-main
     ul.index-list.grid-center-equalHeight
       li.col-12_xs-6_lg-4(v-for='(map, index) in maps')

@@ -33,6 +33,7 @@ const _make_tilejson = (dir, base_name) => {
 
 // load config
 const list = require(`${CONFIG_DIR}list.json`)
+// eslint-disable-next-line array-callback-return
 list.map((name) => {
   // load map config
   console.log(`loading ${CONFIG_DIR}${name}`)

@@ -9,6 +9,7 @@ try {
   if (fs.existsSync("./nuxt-router-override.config.js")) {
     router = require("./nuxt-router-override.config").default;
   }
+// eslint-disable-next-line no-empty
 } finally {
 }
 

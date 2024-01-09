@@ -248,10 +248,12 @@ export default {
           self.mapConfig.layer_settings,
           source.updated_search_key
         );
+        // eslint-disable-next-line array-callback-return
         markers.map((marker) => {
           categories[marker.category] = true;
         });
         source.updated_at = updated_at;
+        // eslint-disable-next-line array-callback-return
         Object.keys(categories).map((category) => {
           const categoryExists = self.mapConfig.layer_settings[category];
 

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template lang="pug">
 div
   .modal(v-bind:class='{open: isOpen}')

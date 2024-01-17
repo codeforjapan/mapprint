@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template lang="pug">
 <div class="VueToNuxtLogo">
   <div class="Triangle Triangle--two" />

@@ -28,7 +28,7 @@
     "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@mapbox/togeojson": "^0.16.0",
     "@nuxt/typescript-runtime": "^0.1.7",
-    "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/axios": "^5.13.6",
     "@types/maplibre-gl": "^1.13.0",
     "geojson": "^0.5.0",
     "js-crc": "^0.2.0",

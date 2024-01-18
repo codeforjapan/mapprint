@@ -51,7 +51,7 @@
     "@babel/plugin-transform-runtime": "^7.23.7",
     "@babel/preset-env": "^7.23.7",
     "@babel/preset-typescript": "^7.23.3",
-    "@nuxt/test-utils": "^3.9.0",
+    "@nuxt/test-utils": "^3.10.0",
     "@nuxt/typescript-build": "^0.2.10",
     "@nuxtjs/eslint-config": "^8.0.0",
     "@nuxtjs/eslint-module": "^4.1.0",

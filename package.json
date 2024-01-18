@@ -52,7 +52,7 @@
     "@babel/preset-env": "^7.23.7",
     "@babel/preset-typescript": "^7.23.3",
     "@nuxt/test-utils": "^3.10.0",
-    "@nuxt/typescript-build": "^1.0.3",
+    "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config": "^8.0.0",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@playwright/test": "^1.40.1",

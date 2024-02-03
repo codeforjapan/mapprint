@@ -17,6 +17,7 @@ describe('getNowYMD', () => {
     const mockDate = new Date('2022-01-05T12:34:56');
     const result = getNowYMD(mockDate, 'en');
     const expected = mockDate.toLocaleString('en-US');
-    expect(result).toBe(expected);
+    // TODO: 意図的に失敗するようにしている
+    expect(result).toBe(expected + '_foo');
   });
 });

@@ -38,6 +38,7 @@
     "nuxt": "^2.17.3",
     "nuxt-i18n": "^6.20.4",
     "simplebar-vue": "^1.6.0",
+    "supercluster": "7.1.5",
     "ts-node": "^8.10.2",
     "viewport-units-buggyfill": "^0.6.2",
     "vue": "^2.7.16",

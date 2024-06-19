@@ -8,7 +8,8 @@ export function getNowYMD(dt:Date, locale?:string):string{
       const hh = ("00" + dt.getHours()).slice(-2);
       const mm = ("00" + dt.getMinutes()).slice(-2);
       const result = y + "年" + m + "月" + d + "日" + hh + "時" + mm + "分";
-      return result
+      // TODO: 意図的に失敗するようにしている
+      return result + '_bar'
     case 'en':
       return dt.toLocaleString('en-JP');
     case 'es':

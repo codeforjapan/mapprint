@@ -40,7 +40,7 @@
     "simplebar-vue": "^1.6.0",
     "ts-node": "^8.10.2",
     "viewport-units-buggyfill": "^0.6.2",
-    "vue": "^2.7.16",
+    "vue": "^3.0.0",
     "vue-i18n": "^8.28.2",
     "vue-mapbox": "^0.4.1"
   },

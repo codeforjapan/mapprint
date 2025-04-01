@@ -12929,10 +12929,10 @@ sort-asc@^0.2.0:
   resolved "https://registry.yarnpkg.com/sort-asc/-/sort-asc-0.2.0.tgz#00a49e947bc25d510bfde2cbb8dffda9f50eb2fc"
   integrity sha512-umMGhjPeHAI6YjABoSTrFp2zaBtXBej1a0yKkuMUyjjqu6FJsTF+JYwCswWDg+zJfk/5npWUUbd33HH/WLzpaA==
 
-sort-css-media-queries@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/sort-css-media-queries/-/sort-css-media-queries-3.0.1.tgz#b3951c648c4f38e3acfed4d0dc7bbcd0cad5e7e3"
-  integrity sha512-7yMdW7AzHlWt7CLGgA6JW0rdZg/sURDVRuqHRtRjJwte96i41ksEo7BzYTqO/DLd3QfYnx7mwEdJZ+yYn1w6ag==
+sort-css-media-queries@1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/sort-css-media-queries/-/sort-css-media-queries-1.5.4.tgz#24182b12002a13d01ba943ddf74f5098d7c244ce"
+  integrity sha512-YP5W/h4Sid/YP7Lp87ejJ5jP13/Mtqt2vx33XyhO+IAugKlufRPbOrPlIiEUuxmpNBSBd3EeeQpFhdu3RfI2Ag==
 
 sort-desc@^0.2.0:
   version "0.2.0"

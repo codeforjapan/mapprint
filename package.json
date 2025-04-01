@@ -11,7 +11,7 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "createtiles": "node createtiles.js",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "eslint --ext .js,.vue --ignore-pattern \"node_modules\" .",
     "dev-debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt",
     "test": "jest"
   },

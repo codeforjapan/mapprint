@@ -6,7 +6,7 @@
   "vetur.validation.template": false,
   "vetur.validation.script": false,
   "vetur.validation.style": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.tsdk": "nuxt3-migration/node_modules/typescript/lib",
   "files.associations": {
     "*.css": "postcss"
   },
@@ -16,6 +16,12 @@
   "js/ts.implicitProjectConfig.checkJs": true,
   "editor.quickSuggestions": {
     "strings": true
+  },
+  "debug.javascript.autoAttachFilter": "smart",
+  "debug.javascript.terminalOptions": {
+    "skipFiles": [
+      "<node_internals>/**"
+    ]
   },
   "workbench.colorCustomizations": {
     "activityBar.background": "#0C332A",

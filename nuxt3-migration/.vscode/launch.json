@@ -21,18 +21,30 @@
       "request": "launch",
       "name": "server: nuxt",
       "outputCapture": "std",
-      "program": "${workspaceFolder}/nuxt3-migration/node_modules/nuxi/bin/nuxi.mjs",
-      "args": [
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
         "dev"
       ],
       "cwd": "${workspaceFolder}/nuxt3-migration",
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "serverReadyAction": {
+        "pattern": "Local:\\s+http://localhost:(\\d+)/",
+        "uriFormat": "http://localhost:%s",
+        "action": "debugWithChrome"
+      }
     }
   ],
   "compounds": [
     {
       "name": "fullstack: nuxt",
-      "configurations": ["server: nuxt", "client: chrome"]
+      "configurations": ["server: nuxt"],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "Nuxt",
+        "order": 1
+      }
     }
   ]
 }

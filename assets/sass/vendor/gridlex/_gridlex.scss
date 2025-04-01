@@ -2,7 +2,7 @@
     GRIDLEX
     Just a Flexbox Grid System - v. 2.7.1
 ========================================================================== */
-@import "gridlex-vars";
-@import "gridlex-preprocessing";
-@import "gridlex-mixins";
-@import "gridlex-classes";
+@use "gridlex-vars";
+@use "gridlex-preprocessing";
+@use "gridlex-mixins";
+@use "gridlex-classes";

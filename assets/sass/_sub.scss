@@ -1,8 +1,11 @@
+@use "mixin";
+@use "variables";
+
 .sub-outer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  @include bp(md) {
+  @include mixin.bp(md) {
     display: grid;
     grid-template-columns: 2fr 2fr;
     grid-template-rows: auto;
@@ -11,19 +14,19 @@
 }
 
 .sub-button {
-  font-size: $font-size-sm;
+  font-size: variables.$font-size-sm;
   cursor: pointer;
   background-color: #fff;
-  color: $color-base;
+  color: variables.$color-base;
   border-radius: 3em;
   text-align: center;
   line-height: 1.1;
   margin: 0.5em 1em 0.5em 0;
-  @include bp(md) {
+  @include mixin.bp(md) {
     padding: 0.5em 1em;
     margin-left: 1em;
     margin-bottom: 0.5em;
-    box-shadow: 2px 2px 5px $color-alpha-black;
+    box-shadow: 2px 2px 5px variables.$color-alpha-black;
   }
   i {
     padding-right: 0.2em;

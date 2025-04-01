@@ -1,15 +1,17 @@
 // Add math functions to use division
 @use "sass:math";
+@use "sass:map";
+@use "gridlex-vars";
 
 // calculate width of one col in %
-$gl-colUnit: math.div(100%, $gl-colCount);
+$gl-colUnit: math.div(100%, gridlex-vars.$gl-colCount);
 
 // calculate and store nth portions for grid by columns
 $gl-colPortions: (
   0: 0,
 );
-@for $i from 1 through $gl-colCount {
-  $gl-colPortions: map-merge(
+@for $i from 1 through gridlex-vars.$gl-colCount {
+  $gl-colPortions: map.merge(
     $gl-colPortions,
     (
       $i: (
@@ -23,9 +25,9 @@ $gl-colPortions: (
 $gl-colFractions: (
   0: 0 // Avoid division by zero if $i would start at 0,,,
 );
-@for $i from 1 through $gl-colCount {
+@for $i from 1 through gridlex-vars.$gl-colCount {
   $fraction: math.div(1, $i);
-  $gl-colFractions: map-merge(
+  $gl-colFractions: map.merge(
     $gl-colFractions,
     (
       $fraction: $fraction * 100%,

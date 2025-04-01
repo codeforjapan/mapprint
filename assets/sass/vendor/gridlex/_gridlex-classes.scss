@@ -1,46 +1,48 @@
 // Add math functions to use division
 @use "sass:math";
+@use "gridlex-vars";
+@use "gridlex-mixins";
 
 //************************
 //    CLASSES
 //************************
 // GRID
-[#{$gl-attributeName}~="#{$gl-gridName}"],
-[#{$gl-attributeName}*="#{$gl-gridName}-"],
-[#{$gl-attributeName}*="#{$gl-gridName}_"] {
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"] {
   box-sizing: border-box;
   display: flex;
   flex-flow: row wrap;
-  margin: 0 math.div(-$gl-gutter, 2);
+  margin: 0 math.div(- gridlex-vars.$gl-gutter, 2);
 }
 // COLS
-[#{$gl-attributeName}~="#{$gl-colName}"],
-[#{$gl-attributeName}*="#{$gl-colName}-"],
-[#{$gl-attributeName}*="#{$gl-colName}_"] {
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
   box-sizing: border-box;
-  padding: 0 math.div($gl-gutter, 2) $gl-gutter-vertical;
+  padding: 0 math.div(gridlex-vars.$gl-gutter, 2) gridlex-vars.$gl-gutter-vertical;
   max-width: 100%;
 }
 // JUST "COL" & "COL_"
-[#{$gl-attributeName}~="#{$gl-colName}"],
-[#{$gl-attributeName}*="#{$gl-colName}_"] {
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
   flex: 1 1 0%;
 }
 // JUST "COL-"
-[#{$gl-attributeName}*="#{$gl-colName}-"] {
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
   flex: none;
 }
 
 // COL & GRID
-[#{$gl-attributeName}~="#{$gl-gridName}"][#{$gl-attributeName}~="#{$gl-colName}"],
-[#{$gl-attributeName}~="#{$gl-gridName}"][#{$gl-attributeName}*="#{$gl-colName}-"],
-[#{$gl-attributeName}~="#{$gl-gridName}"][#{$gl-attributeName}*="#{$gl-colName}_"],
-[#{$gl-attributeName}*="#{$gl-gridName}-"][#{$gl-attributeName}~="#{$gl-colName}"],
-[#{$gl-attributeName}*="#{$gl-gridName}-"][#{$gl-attributeName}*="#{$gl-colName}-"],
-[#{$gl-attributeName}*="#{$gl-gridName}-"][#{$gl-attributeName}*="#{$gl-colName}_"],
-[#{$gl-attributeName}*="#{$gl-gridName}_"][#{$gl-attributeName}~="#{$gl-colName}"],
-[#{$gl-attributeName}*="#{$gl-gridName}_"][#{$gl-attributeName}*="#{$gl-colName}-"],
-[#{$gl-attributeName}*="#{$gl-gridName}_"][#{$gl-attributeName}*="#{$gl-colName}_"] {
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"][#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"][#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"][#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
   margin: 0;
   padding: 0;
 }
@@ -49,138 +51,138 @@
     HELPERS SUFFIXES
 *************************/
 // FOR GRID
-[#{$gl-attributeName}*="#{$gl-gridName}-"] {
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"] {
   // No spacing between cols : noGutter
-  &[#{$gl-attributeName}*="-noGutter"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-noGutter"] {
     margin: 0;
-    > [#{$gl-attributeName}~="#{$gl-colName}"],
-    > [#{$gl-attributeName}*="#{$gl-colName}-"] {
+    > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
       padding: 0;
     }
   }
 
   // No Wrapping
-  &[#{$gl-attributeName}*="-noWrap"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-noWrap"] {
     flex-wrap: nowrap;
   }
   // Horizontal alignment on center
-  &[#{$gl-attributeName}*="-center"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-center"] {
     justify-content: center;
     align-self: center;
   }
   // Horizontal alignment on right
-  &[#{$gl-attributeName}*="-right"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-right"] {
     justify-content: flex-end;
     align-self: flex-end;
     margin-left: auto;
   }
   // Vertical alignment on top
-  &[#{$gl-attributeName}*="-top"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-top"] {
     align-items: flex-start;
   }
   // Vertical alignment on middle
-  &[#{$gl-attributeName}*="-middle"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-middle"] {
     align-items: center;
   }
   // Vertical alignment on bottom
-  &[#{$gl-attributeName}*="-bottom"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-bottom"] {
     align-items: flex-end;
   }
 
   // Orders
-  &[#{$gl-attributeName}*="-reverse"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-reverse"] {
     flex-direction: row-reverse;
   }
-  &[#{$gl-attributeName}*="-column"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-column"] {
     flex-direction: column;
-    > [#{$gl-attributeName}*="#{$gl-colName}-"] {
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
       flex-basis: auto;
     }
   }
-  &[#{$gl-attributeName}*="-column-reverse"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-column-reverse"] {
     flex-direction: column-reverse;
   }
 
   // Spaces between and around cols
-  &[#{$gl-attributeName}*="-spaceBetween"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-spaceBetween"] {
     justify-content: space-between;
   }
-  &[#{$gl-attributeName}*="-spaceAround"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-spaceAround"] {
     justify-content: space-around;
   }
 
   // Equal heights columns
-  &[#{$gl-attributeName}*="-equalHeight"]
-    > [#{$gl-attributeName}~="#{$gl-colName}"],
-  &[#{$gl-attributeName}*="-equalHeight"]
-    > [#{$gl-attributeName}*="#{$gl-colName}-"],
-  &[#{$gl-attributeName}*="-equalHeight"]
-    > [#{$gl-attributeName}*="#{$gl-colName}_"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-equalHeight"]
+    > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+  &[#{gridlex-vars.$gl-attributeName}*="-equalHeight"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+  &[#{gridlex-vars.$gl-attributeName}*="-equalHeight"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
     align-self: stretch;
     > * {
       height: 100%;
     }
   }
   // Removes the padding-bottom
-  &[#{$gl-attributeName}*="-noBottom"]
-    > [#{$gl-attributeName}~="#{$gl-colName}"],
-  &[#{$gl-attributeName}*="-noBottom"]
-    > [#{$gl-attributeName}*="#{$gl-colName}-"],
-  &[#{$gl-attributeName}*="-noBottom"]
-    > [#{$gl-attributeName}*="#{$gl-colName}_"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-noBottom"]
+    > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+  &[#{gridlex-vars.$gl-attributeName}*="-noBottom"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+  &[#{gridlex-vars.$gl-attributeName}*="-noBottom"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
     padding-bottom: 0;
   }
 }
 
 // FOR COL
-[#{$gl-attributeName}*="#{$gl-colName}-"] {
-  &[#{$gl-attributeName}*="-top"] {
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-top"] {
     align-self: flex-start;
   }
-  &[#{$gl-attributeName}*="-middle"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-middle"] {
     align-self: center;
   }
-  &[#{$gl-attributeName}*="-bottom"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-bottom"] {
     align-self: flex-end;
   }
-  &[#{$gl-attributeName}*="-first"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-first"] {
     order: -1;
   }
-  &[#{$gl-attributeName}*="-last"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-last"] {
     order: 1;
   }
 }
 /************************
     GRID BY NUMBER
 *************************/
-@include makeGridByNumber(#{$gl-gridName});
-@each $mq-key, $mq-value in $gl-mq-list {
-  @include bp(#{$mq-key}) {
+@include gridlex-mixins.makeGridByNumber(#{gridlex-vars.$gl-gridName});
+@each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
+  @include gridlex-mixins.bp(#{$mq-key}) {
     //@media #{$mq-value} {
-    @include makeGridByNumber(_#{$mq-key});
+    @include gridlex-mixins.makeGridByNumber(_#{$mq-key});
   }
 }
 
 /************************
     COLS SIZES
 *************************/
-@include makeCol(#{$gl-colName});
-@include makeOff(off);
+@include gridlex-mixins.makeCol(#{gridlex-vars.$gl-colName});
+@include gridlex-mixins.makeOff(off);
 
-@each $mq-key, $mq-value in $gl-mq-list {
-  @include bp(#{$mq-key}) {
-    @include makeCol(_#{$mq-key});
-    @include makeOff(_#{$mq-key});
-    @include makeFirstLast(_#{$mq-key});
+@each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
+  @include gridlex-mixins.bp(#{$mq-key}) {
+    @include gridlex-mixins.makeCol(_#{$mq-key});
+    @include gridlex-mixins.makeOff(_#{$mq-key});
+    @include gridlex-mixins.makeFirstLast(_#{$mq-key});
   }
 }
 
 /************************
     HIDING COLS
 *************************/
-@each $mq-key, $mq-value in $gl-mq-list {
-  @include bp(#{$mq-key}) {
-    [#{$gl-attributeName}*="#{$mq-key}-hidden"] {
+@each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
+  @include gridlex-mixins.bp(#{$mq-key}) {
+    [#{gridlex-vars.$gl-attributeName}*="#{$mq-key}-hidden"] {
       display: none;
     }
   }

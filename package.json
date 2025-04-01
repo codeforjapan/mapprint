@@ -13,7 +13,9 @@
     "createtiles": "node createtiles.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "dev-debug": "node --inspect-brk=9229 node_modules/nuxt/bin/nuxt",
-    "test": "jest",
+    "test": "npm-run-all --sequential test:unit test:e2e",
+    "test:unit": "jest",
+    "test:jest:coverage": "jest --coverage",
     "test:e2e": "echo 'No e2e tests configured yet'"
   },
   "browserslist": [

@@ -1,0 +1,26 @@
+{
+  "common": {
+    "title": "Paper Map",
+    "site_name": "Paper Map",
+    "site_desc": "Service for printing web maps",
+    "contribute": "Contribute to development",
+    "about": "About Paper Map",
+    "share": "Share"
+  },
+  "Map": {
+    "qrcode": "QR Code",
+    "back_to_map": "Back to original map"
+  },
+  "PrintableMap": {
+    "legend": "Legend",
+    "show_all": "Show all",
+    "close_list": "Close list",
+    "print": "Print",
+    "close_area_select": "Close selection",
+    "no_point_in_map": "No information in this area. Try moving the map."
+  },
+  "error": {
+    "not_found": "This page does not exist or an error has occurred.",
+    "return_home": "Returning to the home page."
+  }
+}

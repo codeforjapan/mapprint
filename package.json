@@ -28,7 +28,7 @@
     "@types/maplibre-gl": "^1.13.0",
     "geojson": "^0.5.0",
     "js-crc": "0.2.0",
-    "ky": "^1.8.0",
+    "ky": "0.15.0",
     "maplibre-gl": "^1.13.0-rc.5",
     "nuxt": "^2.14.7",
     "nuxt-i18n": "^6.20.4",
@@ -83,7 +83,7 @@
     "shelljs": "^0.9.2",
     "sort-css-media-queries": "1.5.4",
     "ts-jest": "^29.3.1",
-    "ts-loader": "^9.5.2",
+    "ts-loader": "6.2.2",
     "typescript": "^5.8.2",
     "vue-eslint-parser": "^10.1.1"
   }

@@ -109,7 +109,6 @@ import ky from 'ky'
 import SimpleBar from 'simplebar-vue'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import 'simplebar/dist/simplebar.min.css'
-import type { MapPrint } from '~/types'
 
 // Define props and emits
 const props = defineProps<{

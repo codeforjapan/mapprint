@@ -4,7 +4,7 @@
   header.print-header
     h1.map-title
       NuxtLink(:to="locale === 'ja' ? '/' : '/' + locale")
-        img.map-title-logo(src="~/assets/images/logo_l.png", width="140", height="36", :alt='t("common.title")')
+        img.map-title-logo(:src="'/images/logo_l.png'" width="140" height="36" :alt='t("common.title")')
       span(v-if="locale === 'ja' || !mapConfig.map_title_en") {{mapConfig.map_title}}
       span(v-else) {{mapConfig.map_title_en}}
     .qrcode-section
@@ -30,7 +30,6 @@ import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { getNowYMD } from '~/lib/displayHelper'
-import type { MapPrint } from '~/types'
 
 // Components
 import Modal from '~/components/Modal.vue'
@@ -85,30 +84,30 @@ onMounted(async () => {
   }
 
   try {
-    // In a real app, you would load this from an API or dynamic import
-    // For this example, we'll use placeholder data
-    // const config = await import(`~/assets/config/${route.params.map}.json`)
-    // mapConfig.value = config.default
-
-    // Placeholder data
+    // Load the map configuration from assets directory
+    const mapId = route.params.map as string
+    const config = await import(`~/assets/config/${mapId}.json`)
+    
+    // Transform the config format if needed
+    const loadedConfig = config.default
+    
+    // Set up the map configuration with proper structure
     mapConfig.value = {
-      map_title: 'Example Map',
-      map_title_en: 'Example Map',
-      sources: [
-        {
-          title: 'Example Source',
-          show: true,
-          url: 'example.json',
-          type: 'geojson',
-          updated_at: '2023-01-01'
-        }
-      ],
-      layer_settings: {},
-      center: [139.7670, 35.6814], // Tokyo
-      default_hash: ''
+      map_title: loadedConfig.map_title || 'Map',
+      map_title_en: loadedConfig.map_title_en || '',
+      map_description: loadedConfig.map_description || '',
+      sources: loadedConfig.sources || [],
+      layer_settings: loadedConfig.layer_settings || {},
+      center: loadedConfig.center || [139.7670, 35.6814], // Default to Tokyo
+      default_hash: loadedConfig.default_hash || ''
     }
+    
+    // Initialize the PrintableMap with the loaded configuration
+    console.log('Map configuration loaded:', mapId)
   } catch (error) {
     console.error('Error loading map configuration', error)
+    // Navigate back to home page if config can't be loaded
+    router.push('/')
   }
 })
 

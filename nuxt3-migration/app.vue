@@ -6,6 +6,7 @@
     <!-- Add debug information in development mode -->
     <div v-if="isDev" class="debug-info">
       <pre>Current route: {{ route.path }}</pre>
+      <pre>Current locale: {{ locale }}</pre>
     </div>
   </div>
 </template>
@@ -15,6 +16,13 @@
 // It serves as the root component that wraps around all pages
 const route = useRoute()
 const isDev = process.env.NODE_ENV !== 'production'
+
+// Access i18n
+const { locale } = useI18n()
+
+// Log information to help debug routing issues
+console.log('App mounted, current route:', route.path)
+console.log('Current locale:', locale.value)
 </script>
 
 <style>

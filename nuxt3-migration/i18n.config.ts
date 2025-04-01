@@ -1,12 +1,7 @@
-import en from './locales/en.json'
-import ja from './locales/ja.json'
-
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'ja',
   fallbackLocale: 'ja',
-  messages: {
-    en,
-    ja
-  }
+  // When using lazy loading, messages are loaded by the i18n module
+  messages: {}
 }))

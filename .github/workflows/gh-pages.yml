@@ -4,22 +4,20 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:
 
 jobs:
   build-deploy:
-    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: setup node
       uses: actions/setup-node@v4
       with:
-        node-version-file: '.node-version'
+        node-version: '20.10.0'
 
     - name: Cache dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/.yarn
         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

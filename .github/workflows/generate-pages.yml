@@ -16,7 +16,7 @@ jobs:
         node-version-file: '.node-version'
 
     - name: Cache dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       with:
         path: ~/.yarn
         key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

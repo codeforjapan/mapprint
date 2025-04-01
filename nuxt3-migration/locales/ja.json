@@ -1,32 +1,26 @@
 {
   "common": {
     "title": "紙マップ",
-    "site_name": "紙マップ - 地図情報を印刷できるサイト",
-    "site_desc": "災害時に役立つ地図情報を印刷できるサイトです。",
-    "contribute": "開発に参加",
-    "about": "サイトについて",
-    "share": "シェア"
-  },
-  "PrintableMap": {
-    "print": "印刷",
-    "legend": "凡例",
-    "show_all": "すべて表示",
-    "no_point_in_map": "この範囲にポイントはありません。",
-    "close_list": "リストを閉じる",
-    "close_area_select": "エリア選択を閉じる",
-    "back_to_map": "地図に戻る",
-    "name": "名称:"
+    "site_name": "紙マップ",
+    "site_desc": "Web地図を印刷できるサービス",
+    "contribute": "開発に参加する",
+    "about": "紙マップについて",
+    "share": "シェアする"
   },
   "Map": {
-    "qrcode": "最新情報はこちらから："
+    "qrcode": "QRコード",
+    "back_to_map": "元のマップを見る"
   },
-  "about": {
-    "desc": "このサイトはオープンソースで開発されています。開発に参加したい方は {githubRepo} にアクセスしてください。 JavaScriptやLeafletの経験がある方、大歓迎です。",
-    "github_repository": "Code for Japanのレポジトリ"
+  "PrintableMap": {
+    "legend": "凡例",
+    "show_all": "全て表示",
+    "close_list": "一覧を閉じる",
+    "print": "印刷する",
+    "close_area_select": "選択を閉じる",
+    "no_point_in_map": "この場所に情報はありません。地図を動かしてみてください。"
   },
-  "category": {
-    "evacuation_center": "避難所",
-    "temporary_toilet": "仮設トイレ",
-    "water_supply": "給水所"
+  "error": {
+    "not_found": "存在しないページ、またはエラーが発生したページです。",
+    "return_home": "トップページへ戻ります。"
   }
 }

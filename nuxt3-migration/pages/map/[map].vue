@@ -3,7 +3,7 @@
   #fb-root
   header.print-header
     h1.map-title
-      NuxtLink(:to="locale === 'ja' ? '/' : '/' + locale")
+      NuxtLink(:to="homePath")
         img.map-title-logo(:src="'/images/logo_l.png'" width="140" height="36" :alt='t("common.title")')
       span(v-if="locale === 'ja' || !mapConfig.map_title_en") {{mapConfig.map_title}}
       span(v-else) {{mapConfig.map_title_en}}
@@ -28,6 +28,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
+import { useHead } from 'nuxt/app'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { getNowYMD } from '~/lib/displayHelper'
 
@@ -40,11 +41,26 @@ const { t, locale } = useI18n()
 const route = useRoute()
 const router = useRouter()
 
+// Get custom i18n router functions
+import { useNuxtApp } from 'nuxt/app'
+const nuxtApp = useNuxtApp()
+const $i18nRouter = nuxtApp.$i18nRouter as {
+  currentLocale: () => string;
+  localePath: (path: string) => string;
+  switchLocalePath: (locale: string) => string;
+}
+
+// Create a computed property for the home path with current locale
+const homePath = computed(() => {
+  return $i18nRouter.localePath('/')
+})
+
 // State
 const isOpenExplain = ref(false)
-const mapConfig = ref({
+const mapConfig = ref<MapPrint.MapConfig>({
   map_title: 'Loading...',
   map_title_en: '',
+  map_description: '',
   sources: [],
   layer_settings: {},
   center: [0, 0],
@@ -68,10 +84,13 @@ const closeModalMethod = () => {
 
 const updateLayerSettings = (settings: any) => {
   const { name, color, bg_color, icon_class } = settings
-  mapConfig.value.layer_settings[name] = {
-    color,
-    bg_color,
-    icon_class: icon_class || ''
+  if (mapConfig.value.layer_settings) {
+    mapConfig.value.layer_settings[name] = {
+      name,
+      color,
+      bg_color,
+      icon_class: icon_class || ''
+    }
   }
 }
 

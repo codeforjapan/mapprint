@@ -50,8 +50,8 @@ export const DEFAULT_ICON_COLOR: string = "lightgreen";
  * main class of PrintableMap
  */
 export default class MapHelper implements IPrintableMap {
-  updated: Date;
-  markers: Marker[];
+  updated: Date = new Date();
+  markers: Marker[] = [];
 
   /**
    * constructor
@@ -102,9 +102,9 @@ export default class MapHelper implements IPrintableMap {
     });
   }
 
-  loadGeoJSONData(data: any): [any, string] {
+  loadGeoJSONData(data: any): [any[], string] {
     const updated_at = new Date().toLocaleString();
-    const markers = [];
+    const markers: any[] = [];
     data["features"].forEach((feature: any) => {
       let category = "未分類"
       if (feature.properties["category"]) {
@@ -115,7 +115,7 @@ export default class MapHelper implements IPrintableMap {
     return [markers, updated_at];
   }
 
-  loadKMLData(data: Document, layer_setting: any, updated_search_key?: UpdatedSearchKey): [any, string] {
+  loadKMLData(data: Document, layer_setting: any, updated_search_key?: UpdatedSearchKey): [any[], string] {
     let folders: HTMLCollectionOf<Element> = data.getElementsByTagName('Folder');
     if (folders.length == 0) {
       folders = data.getElementsByTagName('Document');
@@ -138,19 +138,24 @@ export default class MapHelper implements IPrintableMap {
     Array.from(folders).forEach((folder) => {
       const category = readCategoryOfFolder(folder, data);
 
-      if (tj.kml(folder).type == "FeatureCollection") {
-        const geojsondata: geoJson.FeatureCollection = tj.kml(folder, { styles: true });
-        if (geojsondata.features.length > 0) {
+      const result = tj.kml(folder);
+      if (result.type == "FeatureCollection") {
+        const geojsondata = result as geoJson.FeatureCollection;
+        if (geojsondata.features && geojsondata.features.length > 0) {
           geojsondata.features.forEach((feature: geoJson.Feature) => {
             if (feature.geometry.type == "Point") {
-              feature.properties['marker-color'] = category.color;
+              if (feature.properties) {
+                feature.properties['marker-color'] = category.color;
+              }
               markers.push({ feature, category: category.name });
             }
           });
         }
       } else {
-        const geojsondata: geoJson.Feature = tj.kml(folder, { styles: true });
-        geojsondata.properties['marker-color'] = category.color;
+        const geojsondata = result as geoJson.Feature;
+        if (geojsondata.properties) {
+          geojsondata.properties['marker-color'] = category.color;
+        }
         markers.push({ geojsondata, category: category.name });
       }
     });
@@ -198,8 +203,14 @@ export default class MapHelper implements IPrintableMap {
 
   public deserializeBounds(s: string): MapLibre.LngLatBounds | undefined {
     try {
-      const _this = this;
-      return new MapLibre.LngLatBounds(s.split('-', 2).map(function (d) { return _this.deserializeLatLng(d); }));
+      const parts = s.split('-', 2);
+      if (parts.length === 2) {
+        const sw = this.deserializeLatLng(parts[0]);
+        const ne = this.deserializeLatLng(parts[1]);
+        // Create bounds object with southwest and northeast corners
+        return new MapLibre.LngLatBounds([sw.lng, sw.lat], [ne.lng, ne.lat]);
+      }
+      return undefined;
     } catch (e) {
       return undefined;
     }

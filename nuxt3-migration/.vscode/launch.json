@@ -6,14 +6,11 @@
       "request": "launch",
       "name": "client: chrome",
       "url": "http://localhost:3000",
-      "webRoot": "${workspaceFolder}/nuxt3-migration",
+      "webRoot": "${workspaceFolder}",
       "sourceMapPathOverrides": {
-        "webpack:///*": "${workspaceFolder}/nuxt3-migration/*"
+        "webpack:///*": "${workspaceFolder}/*"
       },
-      "skipFiles": [
-        "chrome-error://**",
-        "<node_internals>/**"
-      ],
+      "skipFiles": ["chrome-error://**", "<node_internals>/**"],
       "disableNetworkCache": true
     },
     {
@@ -22,11 +19,8 @@
       "name": "server: nuxt",
       "outputCapture": "std",
       "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run",
-        "dev"
-      ],
-      "cwd": "${workspaceFolder}/nuxt3-migration",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}/",
       "console": "integratedTerminal",
       "serverReadyAction": {
         "pattern": "Local:\\s+http://localhost:(\\d+)/",

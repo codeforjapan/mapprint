@@ -1,4 +1,5 @@
-export default defineI18nConfig(() => ({
+// Define i18n configuration
+export default {
   legacy: false,
   locale: 'ja',
   fallbackLocale: 'ja',
@@ -8,4 +9,4 @@ export default defineI18nConfig(() => ({
   missingWarn: process.env.NODE_ENV === 'development',
   // When using lazy loading, messages are loaded by the i18n module
   messages: {}
-}))
+}

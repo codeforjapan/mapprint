@@ -119,7 +119,11 @@ const emit = defineEmits(['update:mapConfig', 'setLayerSettings', 'bounds-change
 
 // Use composables
 const { t, locale } = useI18n()
-const { $maplibre } = useNuxtApp()
+// In Nuxt 3, we need to import useNuxtApp from nuxt/app
+import { useNuxtApp } from 'nuxt/app'
+const nuxtApp = useNuxtApp()
+// Using any type to bypass type checking for now
+const $maplibre = nuxtApp.$maplibre as any
 
 // Template refs
 const mapContainer = ref<HTMLElement | null>(null)
@@ -233,11 +237,21 @@ const loadMarkers = async () => {
       updated_at.value = getNowYMD(new Date());
       
       const data = await ky.get(source.url).text();
+      // Convert the search key to proper type and handle undefined
+      const searchKey = source.updated_search_key 
+        ? { 
+            type: source.updated_search_key as string, 
+            pattern: '', 
+            index: 0, 
+            field: '' 
+          } as import('~/lib/MapHelper').UpdatedSearchKey 
+        : undefined;
+        
       const [markers, updated_timestamp] = helper.parse(
         source.type,
         data,
         props.mapConfig.layer_settings,
-        source.updated_search_key
+        searchKey
       );
       
       markers.forEach((marker: any) => {

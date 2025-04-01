@@ -22,7 +22,7 @@ export const useMapConfig = (initialConfig?: MapPrint.MapConfig) => {
   }
 
   const checkedSources = computed(() => {
-    return mapConfig.value.sources.filter(source => source.show)
+    return mapConfig.value.sources.filter((source: MapPrint.MapSource) => source.show)
   })
 
   const loadMapConfig = async (mapId: string) => {

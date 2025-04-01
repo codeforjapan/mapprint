@@ -99,20 +99,30 @@ If you see the error page with "存在しないページ、またはエラーが
 The project is configured for debugging with VSCode:
 
 1. Install the recommended extensions (Vue Language Features, ESLint, Prettier)
-2. Open the Debug panel in VSCode
+2. Open the Debug panel in VSCode (View > Run)
 3. Select "fullstack: nuxt" from the dropdown
 4. Press F5 or click the green play button
 
 This will:
 - Start the Nuxt dev server in debug mode
-- Launch Chrome with debugger attached
+- Automatically launch Chrome when the server is ready
 - Allow you to set breakpoints in both server and client code
 - Enable source maps for accurate debugging
 
-You can also debug server-side only by selecting "server: nuxt" or client-side only with "client: chrome".
+Troubleshooting debugging:
+- If the debugging doesn't start properly, try:
+  1. Running `npm install` in the nuxt3-migration directory first
+  2. Close all Chrome windows before starting the debugger
+  3. Make sure your VSCode has the "JavaScript Debugger" extension enabled
+  4. Try the "server: nuxt" configuration option instead
 
-Debugging features:
-- Set breakpoints in .vue files
-- Inspect variables and call stack
-- Use the debug console to evaluate expressions
-- Hot reloading still works while debugging
+When debugging:
+- Set breakpoints directly in .vue files by clicking in the gutter
+- Use the Debug Console to evaluate expressions
+- Check the Call Stack and Variables panels to inspect state
+- The server will automatically reload when you make changes
+
+For the best debugging experience:
+- Use Chrome-based browsers for client debugging
+- You can add more console.log statements with specific labels to track execution flow
+- Explore the "debugger" statement to create code breakpoints

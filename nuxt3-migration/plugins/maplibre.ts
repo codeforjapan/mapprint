@@ -1,9 +1,9 @@
 // Maplibre plugin for Nuxt 3
-import { defineNuxtPlugin } from '#app'
+import { defineNuxtPlugin } from 'nuxt/app'
 import MapLibre from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin((nuxtApp: any) => {
   // Make MapLibre available in the app
   nuxtApp.provide('maplibre', MapLibre)
   

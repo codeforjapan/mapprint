@@ -1,4 +1,5 @@
 /// <reference path="../@types/config.d.ts" />
+/// <reference path="./i18n-router.d.ts" />
 
 // Re-export the MapPrint namespace for global use
 import type { MapPrint } from '../@types/config.d.ts';

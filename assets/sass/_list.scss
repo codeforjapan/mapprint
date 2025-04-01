@@ -1,3 +1,6 @@
+@use "mixin";
+@use "variables";
+
 .list-outer {
   padding: 0 1em;
   overflow-y: auto;
@@ -6,7 +9,7 @@
   &.open {
     max-height: 40vh;
   }
-  @include bp(md) {
+  @include mixin.bp(md) {
     padding: 0;
     overflow: visible;
     max-height: none;
@@ -21,7 +24,7 @@
   &.show {
     display: block;
     padding-bottom: 2em;
-    @include bp(md) {
+    @include mixin.bp(md) {
       padding-bottom: 0;
     }
   }
@@ -29,7 +32,7 @@
 
 .list-section-none {
   padding-bottom: 2em;
-  @include bp(md) {
+  @include mixin.bp(md) {
     padding-bottom: 0;
   }
 }
@@ -37,7 +40,7 @@
 .list-title {
   display: flex;
   align-items: center;
-  font-size: $font-size-base;
+  font-size: variables.$font-size-base;
   color: #fff;
   padding: .3em 1em;
   margin-bottom: 0;
@@ -52,7 +55,7 @@
   padding: 0;
   li {
     display: flex;
-    font-size: $font-size-sm;
+    font-size: variables.$font-size-sm;
     margin: .3em 0;
   }
 }
@@ -61,15 +64,15 @@
   flex: 0 0 3em;
   padding: .3em 0;
   text-align: center;
-  border-right: 1px solid $color-gray;
-  @include bp(xs) {
+  border-right: 1px solid variables.$color-gray;
+  @include mixin.bp(xs) {
     padding: 0;
   }
 }
 
 .item-name {
   padding: .3em .5em;
-  @include bp(xs) {
+  @include mixin.bp(xs) {
     padding: 0 .5em;
   }
 }

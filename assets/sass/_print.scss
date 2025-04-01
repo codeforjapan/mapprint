@@ -1,3 +1,5 @@
+@use "variables";
+
 @page {
   size: A4;
   margin: 15mm 5mm 15mm;
@@ -9,7 +11,7 @@
   }
   :root {
     background-color: #fff;
-    font-size: $font-size-sm;
+    font-size: variables.$font-size-sm;
   }
   .layout-container {
     margin: 0 auto;
@@ -31,9 +33,9 @@
     align-items: center;
     justify-content: space-between;
     background-color: #fff;
-    color: $color-base;
+    color: variables.$color-base;
     .title {
-      font-size: $font-size-h2;
+      font-size: variables.$font-size-h2;
     }
     .datetime {
       display: block;
@@ -72,7 +74,7 @@
   .footer {
     display: flex;
     justify-content: flex-end;
-    border-top: 1px solid $color-base;
+    border-top: 1px solid variables.$color-base;
     padding-top: 5mm;
     margin-top: 10mm;
   }

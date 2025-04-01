@@ -1,3 +1,6 @@
+@use "mixin";
+@use "variables";
+
 .map-outer {
   position: relative;
   overflow: hidden;
@@ -7,13 +10,13 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  @include bp(md) {
-    border: 1px solid $color-base;
+  @include mixin.bp(md) {
+    border: 1px solid variables.$color-base;
     height: 140mm;
   }
   .mapboxgl-popup {
     max-width: 200px;
-    z-index: z(mapboxgl-popup);
+    z-index: mixin.z(mapboxgl-popup);
   }
 }
 

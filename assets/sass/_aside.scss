@@ -1,19 +1,21 @@
+@use "mixin";
+
 .aside-inner {
   padding: 0 1.5em;
-  @include bp(md) {
+  @include mixin.bp(md) {
     padding: 2.5em 1.5em 5em;
   }
-  @include bp(lg) {
+  @include mixin.bp(lg) {
     padding: 2.5em 5em 5em;
   }
 }
 
 .aside-grid {
   display: none;
-  @include bp(md) {
+  @include mixin.bp(md) {
     display: block;
   }
-  @include bp(xl) {
+  @include mixin.bp(xl) {
     display: grid;
     grid-template-columns: 50% auto;
     grid-template-rows: auto auto auto auto auto auto;
@@ -58,14 +60,14 @@
 .aside-title-sp {
   max-width: 250px;
   margin: 0 auto 2em;
-  @include bp(xl) {
+  @include mixin.bp(xl) {
     display: none;
   }
 }
 
 .aside-title-pc {
   display: none;
-  @include bp(xl) {
+  @include mixin.bp(xl) {
     display: block;
     max-width: 700px;
     margin: 0 auto 2em;

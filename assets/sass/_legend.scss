@@ -1,10 +1,13 @@
+@use "mixin";
+@use "variables";
+
 .legend-navi {
   position: absolute;
-  z-index: z(legend-navi);
+  z-index: mixin.z(legend-navi);
   bottom: 0;
   width: 100%;
   background-color: #fff;
-  @include bp(md) {
+  @include mixin.bp(md) {
     position: relative;
   }
 }
@@ -12,19 +15,19 @@
 .legend-close {
   display: none;
   position: absolute;
-  z-index: z(legend-close);
+  z-index: mixin.z(legend-close);
   bottom: 0;
   width: 100%;
-  background-color: $color-alpha-black;
+  background-color: variables.$color-alpha-black;
   color: #fff;
-  font-size: $font-size-xs;
+  font-size: variables.$font-size-xs;
   text-align: right;
   padding: .5em;
   cursor: pointer;
   &.open {
     display: block;
   }
-  @include bp(md) {
+  @include mixin.bp(md) {
     display: none;
     position: relative;
     &.open {
@@ -55,7 +58,7 @@
   line-height: 2.75rem;
   text-align: center;
   border-radius: 5px;
-  box-shadow: 2px 2px 4px $color-gray;
+  box-shadow: 2px 2px 4px variables.$color-gray;
 }
 
 .legend-navi-img {
@@ -86,7 +89,7 @@
   line-height: 2.75rem;
   text-align: center;
   border-radius: 50%;
-  box-shadow: 2px 2px 2px $color-gray;
+  box-shadow: 2px 2px 2px variables.$color-gray;
   cursor: pointer;
   i {
     font-size: 1.25em;

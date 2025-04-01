@@ -1,3 +1,5 @@
+@use "variables";
+
 .index-title {
   max-width: 500px;
   margin: 0 auto;
@@ -17,7 +19,7 @@
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   a {
-    color: $color-base;
+    color: variables.$color-base;
     text-decoration: none;
   }
 }

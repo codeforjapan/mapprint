@@ -1,10 +1,14 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'variables';
+
 // -----------------------------------------------------------------
 // Media Queries (Variables for gridlex is required)
 // -----------------------------------------------------------------
 @mixin bp($breakpoint) {
-  $query: map-get($gl-mq-list, $breakpoint);
+  $query: map.get(variables.$gl-mq-list, $breakpoint);
   @if $query != null {
-    @media ($gl-mq-width: #{nth($query, 1)}) {
+    @media (variables.$gl-mq-width: #{list.nth($query, 1)}) {
       @content;
     }
   }
@@ -70,5 +74,5 @@ $z-map: (
 );
 
 @function z($name) {
-  @return index($z-map, $name);
+  @return list.index($z-map, $name);
 }

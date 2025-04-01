@@ -1,9 +1,11 @@
+@use "mixin";
+
 .modal {
   display: none;
   &.open {
     display: block;
     position: fixed;
-    z-index: z(modal);
+    z-index: mixin.z(modal);
     width: 90vw;
     height: auto;
     max-height: 80vh;
@@ -13,7 +15,7 @@
     background-color: #fff;
     padding: 1em;
     overflow: auto;
-    @include bp(md) {
+    @include mixin.bp(md) {
       width: 50%;
     }
   }
@@ -28,7 +30,7 @@
   &.open {
     display: block;
     position: fixed;
-    z-index: z(modal-background);
+    z-index: mixin.z(modal-background);
     width: 100vw;
     height: 100vh;
     top: 0;

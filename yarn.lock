@@ -9262,10 +9262,10 @@ js-cookie@^3.0.0:
   resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.5.tgz#0b7e2fd0c01552c58ba86e0841f94dc2557dcdbc"
   integrity sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==
 
-js-crc@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/js-crc/-/js-crc-0.3.0.tgz#50fc882d449c805d0dc1fb0a7b6d3953085eaf84"
-  integrity sha512-zGWE0PF6ure5DOjBQElaGXPtGo8/14AXtbYiZbjpySlKL8wJXezkz6jptOTHSRUrXkjOR2QhSUPHxfVBbuBAmA==
+js-crc@0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/js-crc/-/js-crc-0.2.0.tgz#f72c5c7618176bff75cc812a1cedbde3d8eb6839"
+  integrity sha512-8DdCSAOACpF8WDAjyDFBC2rj8OS4HUP9mNZBDfl8jCiPCnJG+2bkuycalxwZh6heFy6PrMvoWTp47lp6gzT65A==
 
 js-stringify@^1.0.2:
   version "1.0.2"

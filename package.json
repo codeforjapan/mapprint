@@ -27,7 +27,7 @@
     "@nuxtjs/axios": "^5.13.1",
     "@types/maplibre-gl": "^1.13.0",
     "geojson": "^0.5.0",
-    "js-crc": "^0.3.0",
+    "js-crc": "0.2.0",
     "ky": "^1.8.0",
     "maplibre-gl": "^1.13.0-rc.5",
     "nuxt": "^2.14.7",

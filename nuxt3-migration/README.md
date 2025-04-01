@@ -93,3 +93,26 @@ If you see the error page with "存在しないページ、またはエラーが
    export NUXT_TYPESCRIPT_CHECK=false
    npm run dev
    ```
+
+## Debugging with VSCode
+
+The project is configured for debugging with VSCode:
+
+1. Install the recommended extensions (Vue Language Features, ESLint, Prettier)
+2. Open the Debug panel in VSCode
+3. Select "fullstack: nuxt" from the dropdown
+4. Press F5 or click the green play button
+
+This will:
+- Start the Nuxt dev server in debug mode
+- Launch Chrome with debugger attached
+- Allow you to set breakpoints in both server and client code
+- Enable source maps for accurate debugging
+
+You can also debug server-side only by selecting "server: nuxt" or client-side only with "client: chrome".
+
+Debugging features:
+- Set breakpoints in .vue files
+- Inspect variables and call stack
+- Use the debug console to evaluate expressions
+- Hot reloading still works while debugging

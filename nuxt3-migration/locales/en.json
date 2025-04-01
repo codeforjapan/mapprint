@@ -1,32 +1,26 @@
 {
   "common": {
-    "title": "KamiMap",
-    "site_name": "KamiMap - Paper Map for Information",
-    "site_desc": "A map tool which specializes in printable map for disaster response.",
-    "contribute": "Contribute",
-    "about": "About",
+    "title": "Paper Map",
+    "site_name": "Paper Map",
+    "site_desc": "Service for printing web maps",
+    "contribute": "Contribute to development",
+    "about": "About Paper Map",
     "share": "Share"
   },
+  "Map": {
+    "qrcode": "QR Code",
+    "back_to_map": "Back to original map"
+  },
   "PrintableMap": {
-    "print": "Print",
     "legend": "Legend",
     "show_all": "Show all",
-    "no_point_in_map": "No points in the current view.",
     "close_list": "Close list",
-    "close_area_select": "Close area selection",
-    "back_to_map": "Back to map",
-    "name": "Name:"
+    "print": "Print",
+    "close_area_select": "Close selection",
+    "no_point_in_map": "No information in this area. Try moving the map."
   },
-  "Map": {
-    "qrcode": "Scan for latest information:"
-  },
-  "about": {
-    "desc": "This site is open source. If you want to contribute to this project, please visit the {githubRepo}. Everyone is welcome, and we especially invite those with JavaScript or Leaflet experience to join us.",
-    "github_repository": "Code for Japan's Github repository"
-  },
-  "category": {
-    "evacuation_center": "Evacuation Center",
-    "temporary_toilet": "Temporary Toilet",
-    "water_supply": "Water Supply"
+  "error": {
+    "not_found": "This page does not exist or an error has occurred.",
+    "return_home": "Returning to the home page."
   }
 }

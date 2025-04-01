@@ -79,7 +79,7 @@
     "pug-loader": "^2.4.0",
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.86.1",
-    "sass-loader": "^10.0.4",
+    "sass-loader": "10.0.4",
     "shelljs": "^0.9.2",
     "sort-css-media-queries": "1.5.4",
     "ts-jest": "^29.3.1",

@@ -3,7 +3,7 @@
 
 .header {
   position: absolute;
-  z-index: z(header);
+  z-index: mixin.z(header);
   background-color: #fff;
   padding: 0 1em;
   @include mixin.bp(md) {

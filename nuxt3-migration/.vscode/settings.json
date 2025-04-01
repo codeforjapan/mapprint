@@ -1,0 +1,28 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "vetur.validation.template": false,
+  "vetur.validation.script": false,
+  "vetur.validation.style": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "vue.features.codeActions.enable": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#0C332A",
+    "titleBar.activeBackground": "#11463B",
+    "titleBar.activeForeground": "#F3FCF9"
+  },
+  "vue.inlayHints.optionsWrapper": false,
+  "vue.complete.casing.props": "kebab",
+  "vue.complete.casing.tags": "kebab"
+}

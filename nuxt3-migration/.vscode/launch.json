@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "client: chrome",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/nuxt3-migration",
+      "sourceMapPathOverrides": {
+        "webpack:///*": "${workspaceFolder}/nuxt3-migration/*"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "server: nuxt",
+      "outputCapture": "std",
+      "program": "${workspaceFolder}/nuxt3-migration/node_modules/nuxi/bin/nuxi.mjs",
+      "args": [
+        "dev"
+      ],
+      "cwd": "${workspaceFolder}/nuxt3-migration",
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "fullstack: nuxt",
+      "configurations": ["server: nuxt", "client: chrome"]
+    }
+  ]
+}

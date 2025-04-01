@@ -98,12 +98,15 @@ export default defineNuxtConfig({
     ],
   },
 
-  // TypeScript - disable type checking until migration is complete
+  // TypeScript - configuration for debugging
   typescript: {
     strict: false,
-    typeCheck: false,
+    typeCheck: true, // Enable for VSCode debugging
     shim: false
   },
+
+  // Enable source maps for debugging
+  sourcemap: true,
 
   // Vite
   vite: {

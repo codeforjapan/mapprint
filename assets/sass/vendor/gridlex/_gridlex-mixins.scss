@@ -9,7 +9,7 @@
 @mixin bp($breakpoint) {
   $query: map.get(gridlex-vars.$gl-mq-list, $breakpoint);
   @if $query != null {
-    @media screen and (min-width: #{$query}) {
+    @media (#{gridlex-vars.$gl-mq-width}: #{list.nth($query, 1)}) {
       @content;
     }
   }

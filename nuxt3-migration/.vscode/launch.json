@@ -9,7 +9,12 @@
       "webRoot": "${workspaceFolder}/nuxt3-migration",
       "sourceMapPathOverrides": {
         "webpack:///*": "${workspaceFolder}/nuxt3-migration/*"
-      }
+      },
+      "skipFiles": [
+        "chrome-error://**",
+        "<node_internals>/**"
+      ],
+      "disableNetworkCache": true
     },
     {
       "type": "node",

@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  // Set compatibility date for Nuxt
+  compatibilityDate: '2025-04-01',
   // General
   app: {
     head: {

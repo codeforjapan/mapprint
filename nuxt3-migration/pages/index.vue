@@ -48,53 +48,48 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRouter } from '#app'
+import { navigateTo } from '#app'
 
 // Components
 import Modal from '~/components/Modal.vue'
 
+// Load map configurations directly
+import mapList from '~/assets/config/list.json'
+
 // Use composables
-const { t, locale } = useI18n()
+const { t, locale, locales, switchLocalePath } = useI18n()
 const router = useRouter()
 
 // State
 const isOpenExplain = ref(false)
-const maps = ref([]) // This will be populated from your API or static files
+const maps = ref([])
 
-// In Nuxt 3, we'll use async loading for the maps
-// You may want to use useFetch or useAsyncData
-// For now, we'll leave this as a placeholder
-onMounted(async () => {
-  try {
-    // Example of how you might load config files in Nuxt 3
-    // const mapList = await import('~/assets/config/list.json')
-    // for (const name of mapList.default) {
-    //   maps.value.push(await import(`~/assets/config/${name}`))
-    // }
-    
-    // Placeholder data
-    maps.value = [
-      {
-        map_id: 'example',
-        map_title: '例マップ',
-        map_title_en: 'Example Map',
-        map_image: 'logo.png'
-      }
-    ]
-  } catch (error) {
-    console.error('Failed to load maps', error)
+// Pre-load maps immediately
+const loadMapConfigsSimple = () => {
+  maps.value = []
+  for (const name of mapList) {
+    const mapConfig = require(`~/assets/config/${name}`)
+    maps.value.push(mapConfig)
   }
-})
+}
+
+// Use this instead of the async version for now
+loadMapConfigsSimple()
+
+// We'll leave the async version commented out for future reference
+// onMounted(() => {
+//   loadMapConfigs()
+// })
+
+// Use i18n locales from nuxt config
+const { locales } = useI18n()
 
 // Computed properties
 const availableLocales = computed(() => {
-  // This will depend on your i18n configuration
-  return [
-    { code: 'ja', name: '日本語' },
-    { code: 'en', name: 'English' }
-  ]
+  return locales.value
 })
 
 const currentLocaleName = computed(() => {
@@ -110,10 +105,13 @@ const closeModalMethod = () => {
 const onLocaleChange = (event: Event) => {
   const select = event.target as HTMLSelectElement
   const newLocale = select.value
-  // Change the locale
-  locale.value = newLocale
-  // You might also want to update the route to reflect the new locale
-  // This depends on your i18n routing strategy
+  
+  // Get the path for the new locale
+  const path = switchLocalePath(newLocale)
+  if (path) {
+    // Navigate to the new locale path
+    navigateTo(path)
+  }
 }
 
 // SEO setup with useHead

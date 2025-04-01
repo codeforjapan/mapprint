@@ -1,5 +1,6 @@
 import { ref, computed } from 'vue'
 import type { Ref } from 'vue'
+import type { MapPrint } from '~/types'
 
 export const useMapConfig = (initialConfig?: MapPrint.MapConfig) => {
   const mapConfig: Ref<MapPrint.MapConfig> = ref(initialConfig || {

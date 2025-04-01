@@ -30,6 +30,7 @@ import { useI18n } from 'vue-i18n'
 import { useRoute, useRouter } from 'vue-router'
 import VueQrcode from '@chenfengyuan/vue-qrcode'
 import { getNowYMD } from '~/lib/displayHelper'
+import type { MapPrint } from '~/types'
 
 // Components
 import Modal from '~/components/Modal.vue'

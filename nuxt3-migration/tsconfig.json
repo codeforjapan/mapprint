@@ -4,6 +4,16 @@
   "compilerOptions": {
     "strict": true,
     "skipLibCheck": true,
-    "types": ["node", "vue"]
-  }
+    "types": ["node", "vue"],
+    "typeRoots": ["./node_modules/@types", "./@types"],
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.vue",
+    "./@types/**/*.d.ts"
+  ]
 }

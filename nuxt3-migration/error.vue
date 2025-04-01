@@ -1,18 +1,13 @@
 <template lang="pug">
 .error-page
   .error-content
-    h1 {{ t('error.not_found') }}
-    p {{ t('error.return_home') }}
-    button(@click="goHome") {{ t('common.title') }}
+    h1 存在しないページ、またはエラーが発生したページです。
+    p トップページへ戻ります。
+    button(@click="goHome") 紙マップ
 </template>
 
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { useI18n } from 'vue-i18n'
-
-// Composables
-const { t, locale } = useI18n()
-const router = useRouter()
 
 // Methods
 const goHome = () => {
@@ -21,7 +16,7 @@ const goHome = () => {
 
 // Redirect after delay in production
 onMounted(() => {
-  console.log('Error page mounted, current locale:', locale.value)
+  console.log('Error page mounted')
   
   if (process.env.NODE_ENV === 'production') {
     setTimeout(() => {

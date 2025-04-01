@@ -3,7 +3,7 @@
     <header>
       <h1 class="title">
         <NuxtLink to="/">
-          <Logo alt="カミマップ" />
+          <Logo :alt="$t('common.title')" />
         </NuxtLink>
       </h1>
     </header>
@@ -20,7 +20,7 @@
                 <img :src="`/images/${map.map_image || 'logo.png'}`" alt="" />
               </div>
               <div class="map-title">
-                {{ map.map_title }}
+                {{ locale === 'ja' ? map.map_title : map.map_title_en }}
               </div>
             </NuxtLink>
           </div>
@@ -31,26 +31,56 @@
     <footer class="footer">
       <div class="footer-item">
         <i class="fas fa-info-circle"></i>
-        <span>このサイトについて</span>
+        <span>{{ $t('common.about') }}</span>
       </div>
       <div class="footer-item">
         <i class="fas fa-github"></i>
-        <a href="https://github.com/codeforjapan/mapprint">貢献する</a>
+        <a href="https://github.com/codeforjapan/mapprint">{{ $t('common.contribute') }}</a>
+      </div>
+      <!-- Language switcher -->
+      <div class="footer-item language-switcher">
+        <i class="fas fa-language"></i>
+        <select v-model="locale" @change="switchLanguage">
+          <option v-for="locale in availableLocales" :key="locale.code" :value="locale.code">
+            {{ locale.name }}
+          </option>
+        </select>
       </div>
     </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-// Sample data - in a real app, you would fetch this from an API
-const maps = ref([
-  {
-    map_id: 'sample-map',
-    map_title: 'サンプルマップ',
-    map_title_en: 'Sample Map',
-    map_image: 'logo.png'
-  }
-]);
+// i18n setup
+const { locale, t, locales } = useI18n();
+const switchLocalePath = useLocalePath();
+const router = useRouter();
+
+// Computed values for available locales
+const availableLocales = computed(() => {
+  return (locales.value || [])
+    .filter(l => l.code !== locale.value)
+    .map(l => ({ code: l.code, name: l.name }));
+});
+
+// Function to switch language
+const switchLanguage = () => {
+  // Get the path for the new locale
+  const path = switchLocalePath(locale.value);
+  // Navigate to the new path
+  router.push(path);
+};
+
+// Use our composable to get map configuration data
+const { mapConfigs: maps, getLocalizedTitle } = useMapConfig();
+
+// Page title and meta setup
+useHead({
+  title: t('common.site_name'),
+  meta: [
+    { name: 'description', content: t('common.site_desc') }
+  ]
+});
 </script>
 
 <style scoped>
@@ -130,5 +160,19 @@ const maps = ref([
 
 .footer-item a:hover {
   text-decoration: underline;
+}
+
+.language-switcher select {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.language-switcher select:focus {
+  outline: none;
+  border-color: #aaa;
 }
 </style>

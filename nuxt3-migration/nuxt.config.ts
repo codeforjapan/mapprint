@@ -1,6 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
 
   app: {
@@ -27,7 +26,13 @@ export default defineNuxtConfig({
   i18n: {
     strategy: 'prefix_except_default',
     defaultLocale: 'ja',
-    locales: ['ja', 'en']
+    locales: [
+      { code: 'ja', name: '日本語', file: 'ja.ts' },
+      { code: 'en', name: 'English', file: 'en.ts' }
+    ],
+    langDir: 'locales',
+    lazy: true,
+    defaultDirection: 'ltr'
   },
 
   css: [

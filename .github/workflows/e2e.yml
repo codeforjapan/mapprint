@@ -18,9 +18,14 @@ jobs:
       - name: Install dependencies
         run: yarn install
       - name: Install Playwright Browsers
-        run: yarn playwright install --with-deps
+        run: |
+          # Install Playwright without trying to install system dependencies
+          yarn playwright install
+          # Install specific browsers needed
+          yarn playwright install chromium
       - name: Run Playwright tests
         run: yarn test:e2e
+      # Update to v4 to fix the deprecated action issue
       - uses: actions/upload-artifact@v4
         if: always()
         with:

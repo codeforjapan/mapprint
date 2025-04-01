@@ -84,9 +84,6 @@ loadMapConfigsSimple()
 //   loadMapConfigs()
 // })
 
-// Use i18n locales from nuxt config
-const { locales } = useI18n()
-
 // Computed properties
 const availableLocales = computed(() => {
   return locales.value

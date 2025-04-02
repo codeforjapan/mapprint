@@ -8,7 +8,11 @@ export default defineI18nLocale(async () => ({
     share: "共有",
     language: "言語",
     printed_at: "印刷日時:",
-    back_to_home: "ホームに戻る"
+    back_to_home: "ホームに戻る",
+    loading: "読み込み中...",
+    error_loading_maps: "マップの読み込みエラー",
+    retry: "再試行",
+    no_maps_available: "利用可能なマップがありません"
   },
   map: {
     desc_1: "スマホの電池は地震の時に貴重です。紙の地図を持っておきましょう。",
@@ -17,7 +21,12 @@ export default defineI18nLocale(async () => ({
     desc_4: "このマップを印刷して避難や支援に役立ててください。",
     desc_5: "右上の「印刷」ボタンを押すと、印刷用ページが表示されます。",
     desc_6: "地図上で縮尺や表示エリアを調整したあとに印刷すると、見やすい地図が印刷できます。",
-    desc_7: "タブレットやスマホで見ている人は、画面をスクロールすると地図エリアの下に詳細な情報一覧が表示されます。"
+    desc_7: "タブレットやスマホで見ている人は、画面をスクロールすると地図エリアの下に詳細な情報一覧が表示されます。",
+    loading: "マップを読み込んでいます...",
+    error_loading: "マップデータの読み込みエラー",
+    not_found: "マップが見つかりません",
+    back_to_maps: "マップ一覧に戻る",
+    printed_at: "印刷日時:"
   },
   PrintableMap: {
     name: "名称:",

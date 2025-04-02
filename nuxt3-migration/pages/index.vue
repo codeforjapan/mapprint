@@ -10,9 +10,21 @@
     
     <main class="main">
       <div class="maps">
-        <p v-if="maps.length === 0">
-          マップがロード中...
-        </p>
+        <div v-if="loading" class="loading-state">
+          <p>{{ $t('common.loading') || 'Loading maps...' }}</p>
+        </div>
+        
+        <div v-else-if="error" class="error-state">
+          <p>{{ $t('common.error_loading_maps') || 'Error loading maps.' }}</p>
+          <button @click="loadAllMapConfigs" class="retry-button">
+            {{ $t('common.retry') || 'Retry' }}
+          </button>
+        </div>
+        
+        <div v-else-if="maps.length === 0" class="empty-state">
+          <p>{{ $t('common.no_maps_available') || 'No maps available.' }}</p>
+        </div>
+        
         <div v-else class="map-grid">
           <div v-for="(map, index) in maps" :key="index" class="map-item">
             <NuxtLink :to="`/map/${map.map_id}`" class="map-link">
@@ -20,7 +32,7 @@
                 <img :src="`/images/${map.map_image || 'logo.png'}`" alt="" />
               </div>
               <div class="map-title">
-                {{ locale === 'ja' ? map.map_title : map.map_title_en }}
+                {{ getLocalizedTitle(map, locale) }}
               </div>
             </NuxtLink>
           </div>
@@ -51,6 +63,8 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue';
+
 // i18n setup
 const { locale, t, locales } = useI18n();
 const switchLocalePath = useLocalePath();
@@ -72,7 +86,16 @@ const switchLanguage = () => {
 };
 
 // Use our composable to get map configuration data
-const { mapConfigs: maps, getLocalizedTitle } = useMapConfig();
+const { mapConfigs: maps, loading, error, loadAllMapConfigs, getLocalizedTitle } = useMapConfig();
+
+// Load map configurations on component mount
+onMounted(async () => {
+  try {
+    await loadAllMapConfigs();
+  } catch (err) {
+    console.error('Failed to load map configurations:', err);
+  }
+});
 
 // Page title and meta setup
 useHead({
@@ -174,5 +197,35 @@ useHead({
 .language-switcher select:focus {
   outline: none;
   border-color: #aaa;
+}
+
+/* Loading, error, and empty states */
+.loading-state,
+.error-state,
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 2rem;
+  text-align: center;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+}
+
+.retry-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.retry-button:hover {
+  background-color: #3367d6;
 }
 </style>

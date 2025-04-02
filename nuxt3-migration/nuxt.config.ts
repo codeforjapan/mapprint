@@ -43,7 +43,10 @@ export default defineNuxtConfig({
     ],
     langDir: 'locales',
     lazy: true,
-    defaultDirection: 'ltr'
+    defaultDirection: 'ltr',
+    bundle: {
+      optimizeTranslationDirective: false
+    }
   },
 
   css: [

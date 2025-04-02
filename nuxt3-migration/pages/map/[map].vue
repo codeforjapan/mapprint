@@ -32,15 +32,30 @@
     <main class="main-content">
       <div class="map-container">
         <ClientOnly>
+          <div v-if="loading" class="loading-indicator">
+            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+          </div>
+          
+          <div v-else-if="error" class="error-indicator">
+            <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
+            <button @click="loadMapData" class="retry-button">
+              {{ $t('common.retry') || 'Retry' }}
+            </button>
+          </div>
+          
           <PrintableMap 
-            v-if="mapConfig && mapConfig.center" 
+            v-else-if="mapConfig && mapConfig.center" 
             :mapConfig="mapConfig" 
             @update:mapConfig="updateMapConfig"
             @bounds-changed="handleBoundsChanged"
             @setLayerSettings="setLayerSettings" 
           />
-          <div v-else class="loading-indicator">
-            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+          
+          <div v-else class="not-found-indicator">
+            <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
+            <NuxtLink to="/" class="back-link">
+              {{ $t('map.back_to_maps') || 'Back to Maps' }}
+            </NuxtLink>
           </div>
         </ClientOnly>
       </div>
@@ -55,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 
 // i18n setup
@@ -68,6 +83,8 @@ const route = useRoute();
 const mapId = computed(() => route.params.map as string);
 const mapConfig = ref<any>(null);
 const updatedDate = ref('');
+const loading = ref(false);
+const error = ref<Error | null>(null);
 
 // Format date for current locale
 const formatDate = (date: Date) => {
@@ -135,37 +152,80 @@ useHead(() => ({
   ]
 }));
 
-// Load map data
-onMounted(async () => {
+// Get map config composable
+const { loadMapConfig, loadMapConfigsList } = useMapConfig();
+
+// Function to load map data
+const loadMapData = async () => {
+  loading.value = true;
+  error.value = null;
+  
   try {
-    // In a real application, we'd fetch this from an API or data file
-    // For now, we'll create mock data
+    // First, load the list of available configs
+    const configsList = await loadMapConfigsList();
+    
+    if (!configsList || configsList.length === 0) {
+      console.error('No map configurations available');
+      throw new Error('No map configurations found');
+    }
+    
+    // Try to find a config file that matches the map ID
+    let configFile = null;
+    
+    // First strategy: Direct match with filename (without extension)
+    configFile = configsList.find(filename => 
+      filename.replace('.json', '') === mapId.value
+    );
+    
+    // Second strategy: Filename includes the map ID
+    if (!configFile) {
+      configFile = configsList.find(filename => 
+        filename.toLowerCase().includes(mapId.value.toLowerCase())
+      );
+    }
+    
+    // Fallback: Use the first config file
+    if (!configFile) {
+      console.warn(`No config found matching ID: ${mapId.value}, using first available config`);
+      configFile = configsList[0];
+    }
+    
+    // Load the specific map configuration
+    const config = await loadMapConfig(configFile);
+    
+    if (!config) {
+      throw new Error(`Failed to load map configuration from ${configFile}`);
+    }
+    
+    // Extend the config with additional properties
     mapConfig.value = {
-      map_id: mapId.value,
-      map_title: 'サンプルマップ',
-      map_title_en: 'Sample Map',
-      map_description: 'サンプルマップの説明',
-      map_description_en: 'Sample map description',
-      map_image: 'logo.png',
-      center: [135.5, 34.7],
-      default_hash: '34.7,135.5-34.8,135.6',
-      layer_settings: {},
-      sources: [
-        {
-          title: 'Sample Data',
-          url: '/data/sample.geojson',
-          type: 'geojson',
-          show: true
-        }
-      ]
+      ...config,
+      map_id: config.map_id || mapId.value,
+      // Set default center if not provided
+      center: config.center || [135.5, 34.7],
+      // Ensure layer_settings exists
+      layer_settings: config.layer_settings || {},
     };
     
     // Set current date
     updatedDate.value = formatDate(new Date());
-  } catch (error) {
-    console.error('Error loading map data:', error);
+    
+    // Force refresh of page title
+    nextTick(() => {
+      document.title = `${mapTitle.value} - ${t('common.site_name')}`;
+    });
+    
+  } catch (err) {
+    console.error('Error loading map data:', err);
+    error.value = err as Error;
+    mapConfig.value = null;
+  } finally {
+    loading.value = false;
   }
-});
+};
+
+// Load map data on component mount
+onMounted(loadMapData);
 </script>
 
 <style scoped>
@@ -208,13 +268,37 @@ onMounted(async () => {
   position: relative;
 }
 
-.loading-indicator {
+.loading-indicator,
+.error-indicator,
+.not-found-indicator {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   min-height: 300px;
+  padding: 2rem;
+  text-align: center;
   background-color: #f5f5f5;
+}
+
+.retry-button,
+.back-link {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.retry-button:hover,
+.back-link:hover {
+  background-color: #3367d6;
 }
 
 .footer {

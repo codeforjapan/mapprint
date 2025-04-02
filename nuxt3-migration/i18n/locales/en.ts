@@ -8,7 +8,11 @@ export default defineI18nLocale(async () => ({
     share: "Share",
     language: "Language",
     printed_at: "Printed at:",
-    back_to_home: "Back to Home"
+    back_to_home: "Back to Home",
+    loading: "Loading...",
+    error_loading_maps: "Error loading maps",
+    retry: "Retry",
+    no_maps_available: "No maps available"
   },
   map: {
     desc_1: "Smartphone battery is precious during an earthquake. Let's have a paper map.",
@@ -17,7 +21,12 @@ export default defineI18nLocale(async () => ({
     desc_4: "Please print this map for evacuation and support.",
     desc_5: "Press the \"Print\" button in the upper right to display the print page.",
     desc_6: "After adjusting the scale and display area on the map, you can print a clear map.",
-    desc_7: "If you are viewing on a tablet or smartphone, scroll the screen to see a detailed information list below the map area."
+    desc_7: "If you are viewing on a tablet or smartphone, scroll the screen to see a detailed information list below the map area.",
+    loading: "Loading map...",
+    error_loading: "Error loading map data",
+    not_found: "Map not found",
+    back_to_maps: "Back to Maps",
+    printed_at: "Printed at:"
   },
   PrintableMap: {
     name: "Name:",

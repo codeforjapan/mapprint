@@ -41,3 +41,25 @@ global.HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
   beginPath: vi.fn(),
   closePath: vi.fn(),
 }));
+
+// Mock Vue Router
+vi.mock('vue-router', () => ({
+  useRoute: () => ({
+    params: {
+      map: 'test-map'
+    }
+  })
+}));
+
+// Mock Vue i18n
+vi.mock('vue-i18n', () => ({
+  useI18n: () => ({
+    t: (key: string) => key,
+    locale: { value: 'en' }
+  })
+}));
+
+// Mock dynamic imports for tests
+vi.mock('#imports', () => ({
+  // Add any composables or imports that might be needed
+}));

@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import Logo from '../../components/Logo.vue';
 
 describe('Logo', () => {
   it('renders properly', () => {
-    const wrapper = mount(Logo);
+    const wrapper = shallowMount(Logo);
     
     // Check if component is mounted and has the right structure
     expect(wrapper.exists()).toBe(true);

@@ -36,6 +36,8 @@
     "@types/geojson": "^7946.0.16",
     "@types/maplibre-gl": "^1.14.0",
     "@types/node": "^22.13.15",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/test-utils": "^2.4.6",
     "cross-env": "^7.0.3",
     "eslint": "^9.0.0",
     "jsdom": "^24.0.0",

@@ -7,8 +7,8 @@ import 'simplebar/dist/simplebar.min.css';
 import SimpleBar from 'simplebar-vue';
 import ky from 'ky';
 import { crc16 } from 'js-crc';
-import MapHelper from '~/lib/MapHelper';
-import { getNowYMD } from '~/lib/displayHelper';
+import MapHelper from '../lib/MapHelper';
+import { getNowYMD } from '../lib/displayHelper';
 
 // Props
 const props = defineProps({

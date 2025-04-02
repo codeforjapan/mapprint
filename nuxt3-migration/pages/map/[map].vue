@@ -25,16 +25,24 @@
       </div>
       <div class="map-title">
         <h1>{{ mapTitle }}</h1>
-        <div class="map-date">{{ $t('common.printed_at') }} {{ updatedDate }}</div>
+        <div class="map-date">{{ $t('map.printed_at') }} {{ updatedDate }}</div>
       </div>
     </header>
 
     <main class="main-content">
       <div class="map-container">
-        <div class="map-placeholder">
-          <!-- Will replace with actual PrintableMap component -->
-          <div class="placeholder-text">Map will be displayed here</div>
-        </div>
+        <ClientOnly>
+          <PrintableMap 
+            v-if="mapConfig && mapConfig.center" 
+            :mapConfig="mapConfig" 
+            @update:mapConfig="updateMapConfig"
+            @bounds-changed="handleBoundsChanged"
+            @setLayerSettings="setLayerSettings" 
+          />
+          <div v-else class="loading-indicator">
+            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+          </div>
+        </ClientOnly>
       </div>
     </main>
 
@@ -48,6 +56,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue';
+import { getNowYMD } from '~/lib/displayHelper';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -57,18 +66,12 @@ const route = useRoute();
 
 // Map data
 const mapId = computed(() => route.params.map as string);
-const mapConfig = ref(null);
+const mapConfig = ref<any>(null);
 const updatedDate = ref('');
 
 // Format date for current locale
 const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat(locale.value, {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric'
-  }).format(date);
+  return getNowYMD(date, locale.value);
 };
 
 // Get the map title based on locale
@@ -92,6 +95,31 @@ const switchLanguage = () => {
   router.push(path);
 };
 
+// Handler for updating map configuration
+const updateMapConfig = (newConfig: any) => {
+  mapConfig.value = newConfig;
+};
+
+// Handler for bounds changed event
+const handleBoundsChanged = () => {
+  // Update any UI elements that depend on the map bounds
+};
+
+// Handler for setting layer settings
+const setLayerSettings = (settings: any) => {
+  if (!mapConfig.value.layer_settings) {
+    mapConfig.value.layer_settings = {};
+  }
+  
+  mapConfig.value.layer_settings[settings.name] = {
+    color: settings.color,
+    bg_color: settings.bg_color,
+    icon_class: settings.icon_class || 'fas fa-map-marker',
+    class: settings.class || '',
+    name: settings.name
+  };
+};
+
 // Update meta tags
 useHead(() => ({
   title: mapConfig.value ? 
@@ -107,22 +135,36 @@ useHead(() => ({
   ]
 }));
 
-// Load map data - normally this would be an API call or data import
-onMounted(() => {
-  // Mock data until we implement the actual data loading
-  mapConfig.value = {
-    map_id: mapId.value,
-    map_title: 'サンプルマップ',
-    map_title_en: 'Sample Map',
-    map_description: 'サンプルマップの説明',
-    map_description_en: 'Sample map description',
-    map_image: 'logo.png',
-    center: [135.5, 34.7],
-    sources: []
-  };
-  
-  // Set current date
-  updatedDate.value = formatDate(new Date());
+// Load map data
+onMounted(async () => {
+  try {
+    // In a real application, we'd fetch this from an API or data file
+    // For now, we'll create mock data
+    mapConfig.value = {
+      map_id: mapId.value,
+      map_title: 'サンプルマップ',
+      map_title_en: 'Sample Map',
+      map_description: 'サンプルマップの説明',
+      map_description_en: 'Sample map description',
+      map_image: 'logo.png',
+      center: [135.5, 34.7],
+      default_hash: '34.7,135.5-34.8,135.6',
+      layer_settings: {},
+      sources: [
+        {
+          title: 'Sample Data',
+          url: '/data/sample.geojson',
+          type: 'geojson',
+          show: true
+        }
+      ]
+    };
+    
+    // Set current date
+    updatedDate.value = formatDate(new Date());
+  } catch (error) {
+    console.error('Error loading map data:', error);
+  }
 });
 </script>
 
@@ -162,21 +204,17 @@ onMounted(() => {
 .map-container {
   border: 1px solid #ccc;
   border-radius: 4px;
-  height: 500px;
+  min-height: 500px;
   position: relative;
 }
 
-.map-placeholder {
+.loading-indicator {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
+  min-height: 300px;
   background-color: #f5f5f5;
-}
-
-.placeholder-text {
-  color: #666;
-  font-style: italic;
 }
 
 .footer {

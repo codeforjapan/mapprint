@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-
+  devtools: { enabled: false },
+  
   app: {
     head: {
       meta: [
@@ -28,7 +28,18 @@ export default defineNuxtConfig({
     defaultLocale: 'ja',
     locales: [
       { code: 'ja', name: '日本語', file: 'ja.ts' },
-      { code: 'en', name: 'English', file: 'en.ts' }
+      { code: 'en', name: 'English', file: 'en.ts' },
+      { code: 'es', name: 'Español', file: 'es.ts' },
+      { code: 'hi', name: 'हिंदी', file: 'hi.ts' },
+      { code: 'ko', name: '한국어', file: 'ko.ts' },
+      { code: 'my', name: 'မြန်မာ', file: 'my.ts' },
+      { code: 'ne', name: 'नेपाली', file: 'ne.ts' },
+      { code: 'pt', name: 'português', file: 'pt.ts' },
+      { code: 'si', name: 'සිංහල', file: 'si.ts' },
+      { code: 'th', name: 'แบบไทย', file: 'th.ts' },
+      { code: 'tw', name: '正體中文 (繁體)', file: 'tw.ts' },
+      { code: 'vn', name: 'Tiếng Việt', file: 'vn.ts' },
+      { code: 'zh', name: '中文（简体）', file: 'zh.ts' }
     ],
     langDir: 'locales',
     lazy: true,

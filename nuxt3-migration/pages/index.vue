@@ -3,7 +3,7 @@
     <header>
       <h1 class="title">
         <NuxtLink to="/">
-          <Logo :alt="$t('common.title')" />
+          <img src="~/assets/images/logo.png" width="895" height="160" :alt="$t('common.title')" />
         </NuxtLink>
       </h1>
     </header>

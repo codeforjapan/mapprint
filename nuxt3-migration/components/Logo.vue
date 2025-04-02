@@ -1,9 +1,3 @@
-<template>
-  <div class="logo">
-    <img src="~/assets/images/logo.png" :alt="alt" />
-  </div>
-</template>
-
 <script setup lang="ts">
 defineProps({
   alt: {
@@ -13,14 +7,12 @@ defineProps({
 });
 </script>
 
-<style scoped>
-.logo {
-  display: inline-block;
-  max-width: 100%;
-}
+<template>
+  <img src="/images/logo.png" :alt="alt">
+</template>
 
-.logo img {
+<style scoped>
+img {
   max-width: 100%;
-  height: auto;
 }
 </style>

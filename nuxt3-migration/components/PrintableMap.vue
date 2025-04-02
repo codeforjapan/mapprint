@@ -163,13 +163,72 @@ const getMarkerNameText = (markerProperties: any, currentLocale?: string) => {
   return name;
 };
 
+// Method to initialize map
+const initializeMap = async () => {
+  try {
+    // Get the map container element
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) {
+      console.error('Map container not found');
+      return;
+    }
+
+    // Create the map instance
+    const mapInstance = new MapLibre.Map({
+      container: 'map',
+      style: mapStyle.value,
+      center: props.mapConfig.center || [135.5, 34.7],
+      zoom: 15
+    });
+
+    // Save the map instance
+    map.value = mapInstance;
+
+    // Add navigation control
+    mapInstance.addControl(new MapLibre.NavigationControl());
+
+    // Setup event handlers once the map is loaded
+    mapInstance.on('load', () => {
+      // Check for hash in URL
+      const locationhash = window.location.hash.substr(1);
+      let initbounds = helper.deserializeBounds(locationhash);
+      
+      if (initbounds !== undefined) {
+        mapInstance.fitBounds(initbounds, { linear: false });
+      } else if (props.mapConfig.default_hash) {
+        initbounds = helper.deserializeBounds(props.mapConfig.default_hash);
+        if (initbounds !== undefined) {
+          mapInstance.fitBounds(initbounds, { linear: false });
+        }
+      }
+
+      // Set up the moveend event to update bounds
+      mapInstance.on('moveend', etmitBounds);
+      
+      // Initial bounds calculation
+      etmitBounds();
+    });
+  } catch (error) {
+    console.error('Error initializing map:', error);
+  }
+};
+
 // Lifecycle hooks
-onMounted(() => {
+onMounted(async () => {
+  // Initialize the map
+  await initializeMap();
+  
+  // Initialize data
   const area: string[] = [];
   const categories: Record<string, boolean> = {};
   
-  props.mapConfig.sources.forEach((source: any) => {
-    (async () => {
+  if (!props.mapConfig.sources || props.mapConfig.sources.length === 0) {
+    return;
+  }
+  
+  // Process each data source
+  for (const source of props.mapConfig.sources) {
+    try {
       if (source.show) {
         area.push(source.title);
       }
@@ -181,20 +240,37 @@ onMounted(() => {
       const [markers, source_updated_at] = helper.parse(
         source.type,
         data,
-        props.mapConfig.layer_settings,
+        props.mapConfig.layer_settings || {},
         source.updated_search_key
       );
       
       markers.forEach((marker: any) => {
         categories[marker.category] = true;
+        
+        // Create a marker element and add it to the map
+        if (map.value && marker.feature.geometry.type === 'Point') {
+          const coordinates = marker.feature.geometry.coordinates;
+          
+          const el = document.createElement('div');
+          el.className = 'marker';
+          el.innerHTML = `<span style="background-color: ${
+            props.mapConfig.layer_settings?.[marker.category]?.color || 
+            marker.feature.properties['marker-color'] || 
+            'red'
+          }"></span>`;
+          
+          // Add marker to map
+          new MapLibre.Marker(el)
+            .setLngLat(coordinates)
+            .addTo(map.value);
+        }
       });
       
       source.updated_at = source_updated_at;
       
+      // Set layer settings for categories
       Object.keys(categories).forEach((category) => {
-        const categoryExists = props.mapConfig.layer_settings[category];
-        
-        if (!categoryExists) {
+        if (!props.mapConfig.layer_settings || !props.mapConfig.layer_settings[category]) {
           let color = "#";
           color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 64).toString(16);
           color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 64).toString(16);
@@ -213,28 +289,25 @@ onMounted(() => {
         }
       });
       
+      // Add to layers
       layers.value.push({
         source,
         markers,
       });
-    })();
-  });
+    } catch (error) {
+      console.error(`Error processing source '${source.title}':`, error);
+    }
+  }
 });
 </script>
 
 <template>
   <div>
     <ClientOnly>
-      <div v-if="layers.length">
+      <div v-if="layers.length || true">
         <div class="map-outer">
-          <!-- Replace MglMap with appropriate Nuxt 3 MapLibre component -->
           <div id="map" ref="map_obj" class="map-container">
-            <!-- Map will be initialized here -->
-          </div>
-
-          <!-- Markers can be added using the MapLibre API -->
-          <div v-for="(marker, index) in inBoundsMarkers" :key="index" class="marker-container">
-            <!-- Marker elements will be created in JavaScript -->
+            <!-- Map will be initialized in onMounted -->
           </div>
         </div>
 
@@ -406,5 +479,282 @@ onMounted(() => {
 </template>
 
 <style>
-/* Styles need to be added separately as they would be quite extensive */
+/* Map Styles */
+.map-container {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+.map-outer {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+/* Marker Styles */
+.marker {
+  display: block;
+  cursor: pointer;
+}
+
+.marker span {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.marker:hover span {
+  transform: scale(1.2);
+}
+
+/* Legend Styles */
+.legend-navi {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.navigation-area {
+  display: flex;
+  align-items: center;
+}
+
+.area-select {
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.area-select.open {
+  max-height: 500px;
+  margin-bottom: 1rem;
+}
+
+.area-close {
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #eee;
+}
+
+.area-list-outer {
+  padding: 1rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.area-list-outer.open {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.area-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.area-item {
+  margin-bottom: 0.5rem;
+}
+
+.area-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.area-input {
+  margin-right: 0.5rem;
+}
+
+/* Legend List Styles */
+.legend-list-outer {
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 0 1rem;
+}
+
+.legend-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  margin: 0.25rem;
+}
+
+.legend-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.legend-mark.open {
+  transform: scale(1.2);
+}
+
+.legend-mark i {
+  color: white;
+  font-size: 0.8rem;
+}
+
+/* Button Styles */
+.print-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.print-button:hover {
+  background-color: #eee;
+}
+
+.area-select-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.area-array-outer {
+  display: flex;
+  align-items: center;
+}
+
+.area-array {
+  margin-left: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+/* List Styles */
+.list-outer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.list-outer.open {
+  max-height: 500px;
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+
+.list-section {
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.list-section.show {
+  display: block;
+}
+
+.list-title {
+  background-color: #333;
+  color: white;
+  padding: 0.5rem;
+  margin: 0;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.list-title-mark {
+  margin-right: 0.5rem;
+}
+
+.list-items {
+  list-style: none;
+  padding: 0.5rem;
+  margin: 0;
+  background-color: #f8f8f8;
+}
+
+.list-items li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.item-number {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  line-height: 24px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.legend-close {
+  text-align: center;
+  padding: 0.5rem;
+  background-color: #f8f8f8;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.legend-close.open {
+  display: block;
+}
+
+/* Print Styles */
+@media print {
+  .print-exclude {
+    display: none !important;
+  }
+  
+  .map-container {
+    height: 70vh;
+    page-break-after: always;
+  }
+  
+  .list-outer {
+    max-height: none !important;
+    display: block !important;
+  }
+  
+  .list-section {
+    display: block !important;
+    page-break-inside: avoid;
+  }
+}
 </style>

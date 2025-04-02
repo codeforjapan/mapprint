@@ -1,21 +1,24 @@
+@use "mixin";
+@use "variables";
+
 .header {
   position: absolute;
-  z-index: z(header);
+  z-index: mixin.z(header);
   background-color: #fff;
   padding: 0 1em;
-  @include bp(md) {
+  @include mixin.bp(md) {
     display: flex;
     align-items: center;
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: $color-alpha-black;
+    background-color: variables.$color-alpha-black;
     color: #fff;
   }
   .to-top {
     display: none;
-    @include bp(md) {
+    @include mixin.bp(md) {
       display: block;
       flex: 0 0 3em;
       padding: 0;
@@ -33,47 +36,47 @@
     flex-wrap: wrap;
     align-items: center;
     padding: 1em 0;
-    @include bp(md) {
+    @include mixin.bp(md) {
       padding: 0.5em 0 0.5em 0.5em;
       flex-wrap: nowrap;
       justify-content: space-between;
-      border-left: 1px solid $color-light-gray;
+      border-left: 1px solid variables.$color-light-gray;
     }
   }
   .logo {
     width: 60%;
     margin-bottom: .5em;
-    @include bp(md) {
+    @include mixin.bp(md) {
       display: none;
     }
   }
   .title-outer {
     order: 1;
-    @include bp(md) {
+    @include mixin.bp(md) {
       order: -1;
     }
   }
   .title {
-    font-size: $font-size-base;
+    font-size: variables.$font-size-base;
     line-height: 1.1;
     font-weight: normal;
     margin: 0;
-    @include bp(md) {
-      font-size: $font-size-xl;
+    @include mixin.bp(md) {
+      font-size: variables.$font-size-xl;
     }
   }
   .datetime {
-    font-size: $font-size-sm;
+    font-size: variables.$font-size-sm;
     line-height: 1.1;
     display: none;
-    @include bp(md) {
+    @include mixin.bp(md) {
       display: block;
       padding-top: .5em;
     }
   }
   .github-link {
     display: none;
-    @include bp(md) {
+    @include mixin.bp(md) {
       display: block;
     }
   }

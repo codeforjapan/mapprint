@@ -1,3 +1,5 @@
+@use "variables";
+
 .popup-type {
   display: flex;
   align-items: center;
@@ -20,7 +22,7 @@
 }
 
 .popup-poi-type {
-  font-size: $font-size-sm;
+  font-size: variables.$font-size-sm;
 }
 
 .popup-detail-content {

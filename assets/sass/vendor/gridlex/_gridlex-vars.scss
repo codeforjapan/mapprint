@@ -5,12 +5,14 @@ $gl-colCount:   12 !default;
 $gl-gridName:   grid !default;
 $gl-colName:   col !default;
 $gl-attributeName: class !default;
-$gl-gutter:    1rem !default; // Total left + right
-$gl-gutter-vertical:    1rem !default;
-$gl-mq-width: 'max-width' !default;
+// Note: Those values are from ../../_variables.scss, this fixes the bug when moving @use instead of @import 
+$gl-gutter: 1.5em;
+$gl-gutter-vertical: 1.5em;
+$gl-mq-width: 'min-width';
 $gl-mq-list: (
-        lg: 80em,
-        md: 64em,
-        sm: 48em,
-        xs: 36em
-) !default;
+  xl: 93em,
+  lg: 75em,
+  md: 52.625em,
+  sm: 48em,
+  xs: 35.5em
+);

@@ -1,3 +1,5 @@
+@use "mixin";
+
 .layout-container {
   position: relative;
   max-width: 100vw;
@@ -9,7 +11,7 @@
   background-size: 500px 500px;
   min-height: 100vh;
   padding: 2em;
-  @include bp(md) {
+  @include mixin.bp(md) {
     padding-left: 5em;
     padding-right: 5em;
   }

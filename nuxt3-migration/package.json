@@ -21,6 +21,7 @@
   "dependencies": {
     "@chenfengyuan/vue-qrcode": "^2.0.0",
     "@mapbox/togeojson": "^0.16.0",
+    "@nuxt/content": "^3.4.0",
     "@nuxtjs/i18n": "^8.2.0",
     "geojson": "^0.5.0",
     "js-crc": "^0.2.0",
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "^1.10.0",
     "@nuxt/test-utils": "^3.17.2",
     "@playwright/test": "^1.51.1",
     "@types/geojson": "^7946.0.16",

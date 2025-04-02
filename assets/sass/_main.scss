@@ -1,7 +1,9 @@
+@use "mixin";
+
 .main {
   background: #FFF;
   order: 1;
-  @include bp(md) {
+  @include mixin.bp(md) {
     position: relative;
     order: -1;
     &::before {
@@ -18,7 +20,7 @@
 }
 
 .main-sheet {
-  @include bp(md) {
+  @include mixin.bp(md) {
     padding: 1.5em 1.5em 6em;
   }
 }

@@ -1,13 +1,16 @@
+@use "variables";
+@use "mixin";
+
 :root {
   height: 100%;
-  background-color: $root-background-color;
-  box-sizing: $root-box-sizing;
-  color: $root-color;
-  font: #{$root-font-size}/#{$root-line-height} $root-font-family;
-  @include bp(xs) {
+  background-color: variables.$root-background-color;
+  box-sizing: variables.$root-box-sizing;
+  color: variables.$root-color;
+  font: #{variables.$root-font-size}/#{variables.$root-line-height} variables.$root-font-family;
+  @include mixin.bp(xs) {
     font-size: calc(1rem + ((1vw - 0.355rem) * 0.3165));
   }
-  @include bp(lg) {
+  @include mixin.bp(lg) {
     font-size: 1rem;
   }
 }
@@ -15,12 +18,12 @@
 *,
 ::before,
 ::after {
-  box-sizing: $root-box-sizing;
+  box-sizing: variables.$root-box-sizing;
 }
 
 body {
   position: relative;
-  font-size: $font-size-base;
+  font-size: variables.$font-size-base;
 }
 
 main {
@@ -28,13 +31,13 @@ main {
 }
 
 h1 {
-  font-size: $font-size-h1;
+  font-size: variables.$font-size-h1;
 }
 h2 {
-  font-size: $font-size-h2;
+  font-size: variables.$font-size-h2;
 }
-h3 { font-size: $font-size-h3; }
-h4,h5 { font-size: $font-size-base; }
+h3 { font-size: variables.$font-size-h3; }
+h4,h5 { font-size: variables.$font-size-base; }
 
 img {
   max-width:100%;
@@ -64,5 +67,5 @@ article {
 }
 
 button, input, optgroup, select, textarea {
-  font-family: $font-family-sans-serif;
+  font-family: variables.$font-family-sans-serif;
 }

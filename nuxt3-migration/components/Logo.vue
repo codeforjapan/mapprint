@@ -1,5 +1,10 @@
 <script setup lang="ts">
-// No props or additional logic needed
+defineProps({
+  alt: {
+    type: String,
+    default: 'Logo'
+  }
+});
 </script>
 
 <template>

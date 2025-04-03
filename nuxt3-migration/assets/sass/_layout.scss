@@ -1,0 +1,84 @@
+// Layout styles for Nuxt 3 version
+.layout-container {
+  position: relative;
+  max-width: 100vw;
+  min-height: 100vh;
+}
+
+.map-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 100%;
+}
+
+.header {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.map-title {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.map-title h1 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.map-date {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.map-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.footer {
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #ccc;
+  margin-top: 1rem;
+}
+
+.footer-logo {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    padding: 1rem;
+  }
+  
+  .map-title h1 {
+    font-size: 2rem;
+  }
+  
+  .map-container {
+    min-height: 500px;
+  }
+}

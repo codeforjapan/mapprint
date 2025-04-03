@@ -27,6 +27,9 @@
         <h1>{{ mapTitle }}</h1>
         <div class="map-date">{{ $t('map.printed_at') }} {{ updatedDate }}</div>
       </div>
+      <div class="qrcode print-only">
+        <QRCodeVue3 :value="currentUrl" :width="80" :height="80" />
+      </div>
     </header>
 
     <main class="main-content">
@@ -73,6 +76,7 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
+import { QRCodeVue3 } from 'vue3-qrcode';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -86,6 +90,7 @@ const mapConfig = ref<MapConfig | null>(null);
 const updatedDate = ref('');
 const loading = ref(false);
 const error = ref<Error | null>(null);
+const currentUrl = ref('');
 
 // Format date for current locale
 const formatDate = (date: Date) => {
@@ -120,7 +125,10 @@ const updateMapConfig = (newConfig: any) => {
 
 // Handler for bounds changed event
 const handleBoundsChanged = () => {
-  // Update any UI elements that depend on the map bounds
+  // Update QR code with current URL including map bounds
+  if (process.client) {
+    currentUrl.value = window.location.href;
+  }
 };
 
 // Handler for setting layer settings
@@ -251,48 +259,18 @@ const loadMapData = async () => {
 };
 
 // Load map data on component mount
-onMounted(loadMapData);
+onMounted(() => {
+  loadMapData();
+  
+  // Set initial URL for QR code
+  if (process.client) {
+    currentUrl.value = window.location.href;
+  }
+});
 </script>
 
 <style scoped>
-.map-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.header {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
-}
-
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.map-title {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.map-date {
-  font-size: 0.8rem;
-  color: #666;
-}
-
-.main-content {
-  flex: 1;
-  padding: 1rem;
-}
-
-.map-container {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  min-height: 500px;
-  position: relative;
-}
+/* Most styles moved to global SASS files */
 
 .loading-indicator,
 .error-indicator,
@@ -327,12 +305,6 @@ onMounted(loadMapData);
   background-color: #3367d6;
 }
 
-.footer {
-  padding: 1rem;
-  text-align: center;
-  border-top: 1px solid #eee;
-}
-
 .language-switcher select {
   background: transparent;
   border: 1px solid #ddd;
@@ -352,6 +324,4 @@ onMounted(loadMapData);
 .back-to-home i {
   margin-right: 0.5rem;
 }
-
-/* Print styles moved to _print.scss */
 </style>

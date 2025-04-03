@@ -26,11 +26,25 @@
   .header {
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem 0;
     border-bottom: 1px solid #000;
+  }
+  
+  .header-inner {
+    flex-grow: 0;
+  }
+  
+  .map-title {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .qrcode {
+    flex-grow: 0;
+    margin-right: 10px;
   }
   
   .main-content {

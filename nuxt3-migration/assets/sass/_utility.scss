@@ -1,0 +1,12 @@
+// Utility styles for Nuxt 3 version
+
+// Print-only elements (hidden in normal view, visible when printed)
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  .print-only {
+    display: block !important;
+  }
+}

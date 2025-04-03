@@ -40,7 +40,7 @@ const mapMarkers = ref<{marker: MapLibre.Marker, category: string, element: HTML
 
 // Get the appropriate SVG based on locale
 const localeForSvg = computed(() => locale.value === 'ja' ? 'ja' : 'en');
-// Use runtime config for assets in Nuxt 3
+// In Nuxt 3, public directory contents are directly served at the server root
 const legendMark = computed(() => `/images/fukidashi_obj_${localeForSvg.value}.svg`);
 const legendActive = computed(() => `/images/active_txt_${localeForSvg.value}.svg`);
 
@@ -536,7 +536,7 @@ onMounted(async () => {
             <div class="navigation-area print-exclude">
               <div class="legend-navi-icon active">
                 <div class="legend-navi-button print-button" @click="clickPrintButton()">
-                  <span class="fa fa-print" :alt="t('PrintableMap.print')"></span>
+                  <span class="fas fa-print" :alt="t('PrintableMap.print')"></span>
                 </div>
               </div>
               <!-- List is always visible now -->

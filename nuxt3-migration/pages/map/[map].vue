@@ -28,7 +28,9 @@
         <div class="map-date">{{ $t('map.printed_at') }} {{ updatedDate }}</div>
       </div>
       <div class="qrcode print-only">
-        <QRCodeVue3 :value="currentUrl" :width="80" :height="80" />
+        <client-only>
+          <QRCodeVue3 v-if="currentUrl" :value="currentUrl" :width="80" :height="80" />
+        </client-only>
       </div>
     </header>
 
@@ -77,6 +79,7 @@ import { ref, computed, onMounted, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
 import { QRCodeVue3 } from 'vue3-qrcode';
+import PrintableMap from '~/components/PrintableMap.vue';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -87,6 +90,10 @@ const route = useRoute();
 // Map data
 const mapId = computed(() => {
   const id = route.params.map as string;
+  if (!id) {
+    console.error('Map ID is undefined in route params');
+    return '';
+  }
   // Normalize the ID by removing .json extension if present
   return id.replace('.json', '');
 });
@@ -184,6 +191,8 @@ const loadMapData = async () => {
   error.value = null;
   
   try {
+    console.log(`Loading map with ID: ${mapId.value}`);
+    
     // First try to get the map directly by ID
     const directMap = getMapById(mapId.value);
     

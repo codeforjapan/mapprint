@@ -29,9 +29,8 @@
       </div>
       <div class="qrcode print-only">
         <client-only>
-          <component 
-            v-if="currentUrl && process.client"
-            :is="QRCodeVue3" 
+          <QRCodeVue3 
+            v-if="currentUrl"
             :value="currentUrl" 
             :width="80" 
             :height="80" 
@@ -85,8 +84,9 @@ import { ref, computed, onMounted, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
 
-// Only import client components when needed
-const QRCodeVue3 = process.client ? require('vue3-qrcode').QRCodeVue3 : null;
+// Import without using require
+import { defineAsyncComponent } from 'vue';
+const QRCodeVue3 = defineAsyncComponent(() => import('vue3-qrcode').then(mod => ({ default: mod.QRCodeVue3 })));
 
 // Note: Nuxt should auto-import components, but we'll import explicitly to be safe
 import PrintableMap from '~/components/PrintableMap.vue';
@@ -283,26 +283,25 @@ const loadMapData = async () => {
 
 // This will run during SSR and client-side
 const initMapData = async () => {
-  if (process.server) {
-    console.log('Running on server, only initializing basic data');
-    // On server, just set loading to true to show loading state
-    loading.value = true;
-    return;
+  // Always show loading initially
+  loading.value = true;
+  
+  try {
+    // Only attempt to load map data on client-side
+    if (typeof window !== 'undefined') {
+      await loadMapData();
+      // Set initial URL for QR code
+      currentUrl.value = window.location.href;
+    }
+  } catch (error) {
+    console.error('Error initializing map data:', error);
   }
-  
-  // This will only run on client
-  await loadMapData();
-  
-  // Set initial URL for QR code
-  currentUrl.value = window.location.href;
 };
 
 // Load map data 
 onMounted(() => {
-  // Make sure we're on client side
-  if (process.client) {
-    initMapData();
-  }
+  // Run init function
+  initMapData();
 });
 </script>
 

@@ -422,7 +422,7 @@ const initializeMap = async () => {
 // Lifecycle hooks
 onMounted(async () => {
   // Only run if we're on the client side
-  if (!process.client) {
+  if (typeof window === 'undefined') {
     console.log('Not initializing map on server side');
     return;
   }

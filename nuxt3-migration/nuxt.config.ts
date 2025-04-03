@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: false },
+  devtools: { enabled: true }, // Enable devtools for debugging
   
   app: {
     head: {
@@ -14,13 +14,29 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' },
+        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' }
+      ],
+      script: [
+        { 
+          src: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js',
+          defer: true
+        }
       ]
     }
   },
 
+  // Auto-import components
+  components: true,
+
   modules: [
     '@nuxtjs/i18n'
+  ],
+  
+  // Register plugins
+  plugins: [
+    '~/plugins/maplibre.ts',
+    '~/plugins/simplebar.ts'
   ],
 
   i18n: {

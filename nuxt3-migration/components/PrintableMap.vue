@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ref, computed, onMounted, nextTick } from 'vue';
 import * as MapLibre from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'simplebar/dist/simplebar.min.css';
 import SimpleBar from 'simplebar-vue';
 import ky from 'ky';
 import { crc16 } from 'js-crc';
-import MapHelper from '../lib/MapHelper';
-import { getNowYMD } from '../lib/displayHelper';
+import MapHelper from '@/lib/MapHelper';
+import { getNowYMD } from '@/lib/displayHelper';
 
 // Props
 const props = defineProps({
@@ -39,8 +38,9 @@ const mapStyle = ref<string>('https://tile.openstreetmap.jp/styles/maptiler-basi
 
 // Get the appropriate SVG based on locale
 const localeForSvg = computed(() => locale.value === 'ja' ? 'ja' : 'en');
-const legendMark = computed(() => `/assets/images/fukidashi_obj_${localeForSvg.value}.svg`);
-const legendActive = computed(() => `/assets/images/active_txt_${localeForSvg.value}.svg`);
+// Use runtime config for assets in Nuxt 3
+const legendMark = computed(() => `/images/fukidashi_obj_${localeForSvg.value}.svg`);
+const legendActive = computed(() => `/images/active_txt_${localeForSvg.value}.svg`);
 
 // Create helper
 const helper = new MapHelper();
@@ -98,25 +98,8 @@ const setLayerSettings = (name: string, color: string, bg_color: string, icon_cl
   return newConfig;
 };
 
-const load = () => {
-  const locationhash = window.location.hash.substr(1);
-  let initbounds = helper.deserializeBounds(locationhash);
-  
-  map.value = map.value.map;
-  
-  if (initbounds !== undefined) {
-    map.value.fitBounds(initbounds, { linear: false });
-  } else {
-    initbounds = helper.deserializeBounds(props.mapConfig.default_hash);
-    if (initbounds !== undefined) {
-      map.value.fitBounds(initbounds, { linear: false });
-    }
-  }
-  
-  map.value.on("moveend", etmitBounds);
-  etmitBounds();
-  map.value.addControl(new MapLibre.NavigationControl());
-};
+// This function is no longer needed as it's replaced by initializeMap
+// Keeping as a reference for now, but not using it
 
 const etmitBounds = () => {
   bounds.value = map.value.getBounds();
@@ -166,137 +149,182 @@ const getMarkerNameText = (markerProperties: any, currentLocale?: string) => {
 // Method to initialize map
 const initializeMap = async () => {
   try {
+    console.log('Initializing map with center:', props.mapConfig.center);
+    
+    // Wait for DOM to be ready
+    await nextTick();
+    
     // Get the map container element
     const mapContainer = document.getElementById('map');
     if (!mapContainer) {
       console.error('Map container not found');
       return;
     }
-
+    
+    console.log('Creating MapLibre map instance');
+    
     // Create the map instance
     const mapInstance = new MapLibre.Map({
       container: 'map',
       style: mapStyle.value,
-      center: props.mapConfig.center || [135.5, 34.7],
-      zoom: 15
+      center: props.mapConfig.center || [135.5, 34.7], // Default center if not provided
+      zoom: props.mapConfig.initial_zoom || 15
     });
-
+    
     // Save the map instance
     map.value = mapInstance;
-
-    // Add navigation control
-    mapInstance.addControl(new MapLibre.NavigationControl());
-
+    
+    console.log('Map instance created');
+    
     // Setup event handlers once the map is loaded
     mapInstance.on('load', () => {
+      console.log('Map loaded event fired');
+      
+      // Add navigation control
+      mapInstance.addControl(new MapLibre.NavigationControl());
+      
       // Check for hash in URL
       const locationhash = window.location.hash.substr(1);
       let initbounds = helper.deserializeBounds(locationhash);
       
       if (initbounds !== undefined) {
+        console.log('Fitting to bounds from URL hash');
         mapInstance.fitBounds(initbounds, { linear: false });
       } else if (props.mapConfig.default_hash) {
+        console.log('Fitting to default bounds from config');
         initbounds = helper.deserializeBounds(props.mapConfig.default_hash);
         if (initbounds !== undefined) {
           mapInstance.fitBounds(initbounds, { linear: false });
         }
       }
-
+      
       // Set up the moveend event to update bounds
       mapInstance.on('moveend', etmitBounds);
       
       // Initial bounds calculation
-      etmitBounds();
+      bounds.value = mapInstance.getBounds();
+      setHash(bounds.value);
+      emit("bounds-changed");
+      
+      console.log('Map initialization complete');
     });
+    
+    // Handle errors
+    mapInstance.on('error', (e) => {
+      console.error('MapLibre error:', e);
+    });
+    
+    return mapInstance;
   } catch (error) {
     console.error('Error initializing map:', error);
+    throw error;
   }
 };
 
 // Lifecycle hooks
 onMounted(async () => {
-  // Initialize the map
-  await initializeMap();
-  
-  // Initialize data
-  const area: string[] = [];
-  const categories: Record<string, boolean> = {};
-  
-  if (!props.mapConfig.sources || props.mapConfig.sources.length === 0) {
-    return;
-  }
-  
-  // Process each data source
-  for (const source of props.mapConfig.sources) {
-    try {
-      if (source.show) {
-        area.push(source.title);
-      }
-      
-      checkedArea.value = area;
-      updated_at.value = getNowYMD(new Date());
-      
-      const data = await ky.get(source.url).text();
-      const [markers, source_updated_at] = helper.parse(
-        source.type,
-        data,
-        props.mapConfig.layer_settings || {},
-        source.updated_search_key
-      );
-      
-      markers.forEach((marker: any) => {
-        categories[marker.category] = true;
-        
-        // Create a marker element and add it to the map
-        if (map.value && marker.feature.geometry.type === 'Point') {
-          const coordinates = marker.feature.geometry.coordinates;
-          
-          const el = document.createElement('div');
-          el.className = 'marker';
-          el.innerHTML = `<span style="background-color: ${
-            props.mapConfig.layer_settings?.[marker.category]?.color || 
-            marker.feature.properties['marker-color'] || 
-            'red'
-          }"></span>`;
-          
-          // Add marker to map
-          new MapLibre.Marker(el)
-            .setLngLat(coordinates)
-            .addTo(map.value);
-        }
-      });
-      
-      source.updated_at = source_updated_at;
-      
-      // Set layer settings for categories
-      Object.keys(categories).forEach((category) => {
-        if (!props.mapConfig.layer_settings || !props.mapConfig.layer_settings[category]) {
-          let color = "#";
-          color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 64).toString(16);
-          color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 64).toString(16);
-          color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 64).toString(16);
-          
-          let bg_color = "#";
-          bg_color += ((parseInt(crc16(category.substr(0)), 16) % 32) + 128).toString(16);
-          bg_color += ((parseInt(crc16(category.substr(1)), 16) % 32) + 128).toString(16);
-          bg_color += ((parseInt(crc16(category.substr(2)), 16) % 32) + 128).toString(16);
-          
-          emit('setLayerSettings', {
-            name: category,
-            color,
-            bg_color,
-          });
-        }
-      });
-      
-      // Add to layers
-      layers.value.push({
-        source,
-        markers,
-      });
-    } catch (error) {
-      console.error(`Error processing source '${source.title}':`, error);
+  try {
+    console.log('PrintableMap component mounted');
+    
+    // Initialize the map
+    await initializeMap();
+    
+    // Wait for map to fully initialize
+    await nextTick();
+    
+    console.log('Map initialized, processing data sources');
+    
+    // Initialize data
+    const area: string[] = [];
+    const categories: Record<string, boolean> = {};
+    
+    if (!props.mapConfig.sources || props.mapConfig.sources.length === 0) {
+      console.warn('No sources defined in map config');
+      return;
     }
+    
+    // Process each data source
+    for (const source of props.mapConfig.sources) {
+      try {
+        console.log(`Processing source: ${source.id}`);
+        
+        if (source.show) {
+          area.push(source.title);
+        }
+        
+        checkedArea.value = area;
+        updated_at.value = getNowYMD(new Date());
+        
+        console.log(`Fetching data from: ${source.url}`);
+        const data = await ky.get(source.url).text();
+        console.log(`Data fetched, parsing as ${source.type}`);
+        
+        const [markers, source_updated_at] = helper.parse(
+          source.type,
+          data,
+          props.mapConfig.layer_settings || {},
+          source.updated_search_key
+        );
+        
+        console.log(`Parsed ${markers.length} markers`);
+        
+        markers.forEach((marker: any) => {
+          categories[marker.category] = true;
+          
+          // Create a marker element and add it to the map
+          if (map.value && marker.feature.geometry && marker.feature.geometry.type === 'Point') {
+            const coordinates = marker.feature.geometry.coordinates;
+            
+            const el = document.createElement('div');
+            el.className = 'marker';
+            el.innerHTML = `<span style="background-color: ${
+              props.mapConfig.layer_settings?.[marker.category]?.color || 
+              marker.feature.properties['marker-color'] || 
+              'red'
+            }"></span>`;
+            
+            // Add marker to map
+            new MapLibre.Marker(el)
+              .setLngLat(coordinates)
+              .addTo(map.value);
+          }
+        });
+        
+        source.updated_at = source_updated_at;
+        
+        // Set layer settings for categories
+        Object.keys(categories).forEach((category) => {
+          if (!props.mapConfig.layer_settings || !props.mapConfig.layer_settings[category]) {
+            let color = "#";
+            color += ((parseInt(crc16(category.substring(0, 1)), 16) % 32) + 64).toString(16);
+            color += ((parseInt(crc16(category.substring(1, 2)), 16) % 32) + 64).toString(16);
+            color += ((parseInt(crc16(category.substring(2, 3)), 16) % 32) + 64).toString(16);
+            
+            let bg_color = "#";
+            bg_color += ((parseInt(crc16(category.substring(0, 1)), 16) % 32) + 128).toString(16);
+            bg_color += ((parseInt(crc16(category.substring(1, 2)), 16) % 32) + 128).toString(16);
+            bg_color += ((parseInt(crc16(category.substring(2, 3)), 16) % 32) + 128).toString(16);
+            
+            emit('setLayerSettings', {
+              name: category,
+              color,
+              bg_color,
+            });
+          }
+        });
+        
+        // Add to layers
+        layers.value.push({
+          source,
+          markers,
+        });
+        
+      } catch (error) {
+        console.error(`Error processing source '${source.title}':`, error);
+      }
+    }
+  } catch (error) {
+    console.error('Error in PrintableMap onMounted:', error);
   }
 });
 </script>

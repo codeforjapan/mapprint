@@ -9,7 +9,7 @@
         </div>
         <div class="logo">
           <NuxtLink to="/">
-            <Logo :alt="$t('common.title')" />
+            <Logo :alt="$t('common.title')" size="small" />
           </NuxtLink>
         </div>
         <div class="header-actions">

@@ -3,7 +3,7 @@
     <header>
       <h1 class="title">
         <NuxtLink to="/">
-          <img src="~/assets/images/logo.png" width="895" height="160" :alt="$t('common.title')" />
+          <Logo :alt="$t('common.title')" size="large" />
         </NuxtLink>
       </h1>
     </header>
@@ -63,7 +63,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed } from 'vue';
+import Logo from '~/components/Logo.vue';
 import type { MapConfig } from '@/types';
 
 // i18n setup

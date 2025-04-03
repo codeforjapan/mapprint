@@ -85,7 +85,11 @@ const router = useRouter();
 const route = useRoute();
 
 // Map data
-const mapId = computed(() => route.params.map as string);
+const mapId = computed(() => {
+  const id = route.params.map as string;
+  // Normalize the ID by removing .json extension if present
+  return id.replace('.json', '');
+});
 const mapConfig = ref<MapConfig | null>(null);
 const updatedDate = ref('');
 const loading = ref(false);

@@ -19,8 +19,18 @@ Object.entries(configImports).forEach(([path, module]) => {
   // Skip list.json since it's not a map config
   if (filename === 'list.json') return;
   
-  // Add to our configs map
-  configFiles[filename] = module.default || module as unknown as MapConfig;
+  // Add to our configs map with normalized map_id (without .json extension)
+  const config = module.default || module as unknown as MapConfig;
+  
+  // Ensure map_id doesn't have .json extension (could have been set in the file)
+  if (config.map_id) {
+    config.map_id = config.map_id.replace('.json', '');
+  } else {
+    // If map_id wasn't in the file, use the filename without extension
+    config.map_id = filename.replace('.json', '');
+  }
+  
+  configFiles[filename] = config;
 });
 
 export const useMapConfig = () => {
@@ -101,22 +111,27 @@ export const useMapConfig = () => {
   };
 
   /**
-   * Get a specific map by its ID (without extension)
+   * Get a specific map by its ID (with or without extension)
    */
   const getMapById = (id: string): MapConfig | undefined => {
-    // First try with .json extension
-    const configWithExt = configFiles[`${id}.json`];
+    // Normalize the id by removing .json extension if present
+    const normalizedId = id.replace('.json', '');
+    
+    // First try with .json extension in the filename
+    const configWithExt = configFiles[`${normalizedId}.json`];
     if (configWithExt) return configWithExt;
     
     // Then try to find by name match in filenames
     const matchingFile = Object.keys(configFiles).find(filename => 
-      filename.replace('.json', '') === id
+      filename.replace('.json', '') === normalizedId
     );
     
     if (matchingFile) return configFiles[matchingFile];
     
     // Finally look through the actual config content for map_id
-    return Object.values(configFiles).find(config => config.map_id === id);
+    return Object.values(configFiles).find(config => 
+      config.map_id === normalizedId
+    );
   };
 
   /**

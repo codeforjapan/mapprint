@@ -27,7 +27,7 @@
         
         <div v-else class="map-grid">
           <div v-for="(map, index) in maps" :key="index" class="map-item">
-            <NuxtLink :to="localePath(`/map/${map.map_id}`)" class="map-link">
+            <NuxtLink :to="`/map/${map.map_id}`" class="map-link">
               <div class="map-image">
                 <img :src="`/images/${map.map_image || 'logo.png'}`" alt="" />
               </div>

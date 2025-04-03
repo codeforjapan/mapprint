@@ -275,17 +275,58 @@ onMounted(async () => {
           if (map.value && marker.feature.geometry && marker.feature.geometry.type === 'Point') {
             const coordinates = marker.feature.geometry.coordinates;
             
+            // Create a marker element with number
             const el = document.createElement('div');
             el.className = 'marker';
-            el.innerHTML = `<span style="background-color: ${
-              props.mapConfig.layer_settings?.[marker.category]?.color || 
-              marker.feature.properties['marker-color'] || 
-              'red'
-            }"></span>`;
             
-            // Add marker to map
+            // Set the marker's color based on category
+            const bgColor = props.mapConfig.layer_settings?.[marker.category]?.bg_color || '#808080';
+            const color = props.mapConfig.layer_settings?.[marker.category]?.color || 
+                          marker.feature.properties['marker-color'] || 
+                          'red';
+            const iconClass = props.mapConfig.layer_settings?.[marker.category]?.icon_class || '';
+            
+            // Store the marker index to use for numbering
+            const markerIndex = markers.indexOf(marker) + 1;
+            
+            // Create marker content with icon and number
+            el.innerHTML = `
+              <span style="background-color: ${color}" 
+                    class="${isDisplayAllCategory.value || activeCategory.value === marker.category ? 'show' : ''}">
+                <i class="${iconClass}" style="background-color: ${color}; display: ${iconClass ? 'inline' : 'none'}"></i>
+                <b class="number" style="background: ${bgColor}">${markerIndex}</b>
+              </span>
+            `;
+            
+            // Create popup content
+            const popupContent = document.createElement('div');
+            popupContent.innerHTML = `
+              <div>
+                <div class="popup-type">
+                  <i class="${props.mapConfig.layer_settings?.[marker.category]?.icon_class || ''}" 
+                     style="background-color: ${props.mapConfig.layer_settings?.[marker.category]?.color || 'red'}"></i>
+                  <span class="popup-poi-type">
+                    ${getMarkerCategoryText(props.mapConfig.layer_settings?.[marker.category]?.name || marker.category, locale.value)}
+                  </span>
+                </div>
+                <p>${t('PrintableMap.name')} ${getMarkerNameText(marker.feature.properties, locale.value)}</p>
+                <div class="popup-detail-content">
+                  <p>${marker.feature.properties.description || ''}</p>
+                </div>
+              </div>
+            `;
+            
+            // Create popup
+            const popup = new MapLibre.Popup({ 
+              offset: 25,
+              closeButton: true,
+              closeOnClick: true
+            }).setDOMContent(popupContent);
+            
+            // Add marker to map with popup
             new MapLibre.Marker(el)
               .setLngLat(coordinates)
+              .setPopup(popup)
               .addTo(map.value);
           }
         });
@@ -535,10 +576,74 @@ onMounted(async () => {
   color: white;
   font-weight: bold;
   transition: all 0.2s ease;
+  position: relative;
+}
+
+.marker span.show {
+  transform: scale(1.2);
 }
 
 .marker:hover span {
   transform: scale(1.2);
+}
+
+.marker span i {
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.marker span .number {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Popup Styles */
+.maplibregl-popup-content {
+  padding: 10px;
+  border-radius: 4px;
+  max-width: 250px;
+}
+
+.popup-type {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.popup-type i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-right: 8px;
+  font-size: 10px;
+}
+
+.popup-poi-type {
+  font-weight: bold;
+}
+
+.popup-detail-content {
+  font-size: 13px;
+  margin-top: 8px;
+  max-height: 150px;
+  overflow-y: auto;
 }
 
 /* Legend Styles */

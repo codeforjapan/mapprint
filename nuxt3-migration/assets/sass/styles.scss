@@ -1,4 +1,4 @@
 // Import all styles for Nuxt 3 version
 
-// Import print styles
-@import 'print';
+// Import print styles using modern @use syntax instead of deprecated @import
+@use 'print';

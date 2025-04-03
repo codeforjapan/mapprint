@@ -121,6 +121,9 @@ const setHash = (newBounds: MapLibre.LngLatBounds) => {
 const selectCategory = (category: string) => {
   activeCategory.value = category;
   
+  // Open the list when a category is selected
+  isOpenList.value = true;
+  
   // Update marker visibility based on selected category
   updateMarkerVisibility();
 };
@@ -536,6 +539,7 @@ onMounted(async () => {
                   <span class="fa fa-print" :alt="t('PrintableMap.print')"></span>
                 </div>
               </div>
+              <!-- List is always visible now -->
             </div>
             <div class="navigation-area">
               <div class="area-select-button" @click="isOpenAreaSelect = !isOpenAreaSelect">
@@ -607,15 +611,13 @@ onMounted(async () => {
           </div>
 
           <div class="list-outer" :class="{ open: isOpenList }">
+            <h3 class="list-header">{{ t('PrintableMap.poi_list') || 'Points of Interest in this area' }}</h3>
             <section
               class="list-section"
               v-for="group in displayMarkersGroupByCategory"
               :key="group.category"
               :class="{
-                show:
-                  isDisplayAllCategory ||
-                  activeCategory === group.category ||
-                  activeCategory === getMarkerCategoryText(group.category, locale),
+                show: true
               }"
             >
               <h2
@@ -655,14 +657,7 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div
-          class="legend-close print-exclude"
-          :class="{ open: isOpenList }"
-          @click="isOpenList = false"
-        >
-          {{ t("PrintableMap.close_list") }}
-          <i class="fas fa-arrow-down"></i>
-        </div>
+        <!-- List is always visible now, no need for close button -->
       </div>
     </ClientOnly>
   </div>
@@ -920,8 +915,20 @@ onMounted(async () => {
   transition: background-color 0.2s ease;
 }
 
-.print-button:hover {
+.print-button:hover, .list-button:hover {
   background-color: #eee;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.list-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
 .area-select-button {
@@ -949,24 +956,38 @@ onMounted(async () => {
 
 /* List Styles */
 .list-outer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
+  max-height: none;
+  overflow: visible;
+  margin-top: 1rem;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  padding: 0.5rem;
 }
 
+/* For backwards compatibility, keep the .open class */
 .list-outer.open {
-  max-height: 500px;
-  overflow-y: auto;
+  max-height: none;
+  overflow-y: visible;
   margin-top: 1rem;
 }
 
 .list-section {
   margin-bottom: 1rem;
-  display: none;
+  display: block; /* Show all sections by default */
 }
 
+/* For backwards compatibility */
 .list-section.show {
   display: block;
+}
+
+.list-header {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
 }
 
 .list-title {
@@ -1034,11 +1055,18 @@ onMounted(async () => {
   .list-outer {
     max-height: none !important;
     display: block !important;
+    overflow: visible !important;
+    margin-top: 1rem !important;
   }
   
   .list-section {
     display: block !important;
     page-break-inside: avoid;
+  }
+  
+  /* Make all sections visible in print mode */
+  .list-section.show {
+    display: block !important;
   }
 }
 </style>

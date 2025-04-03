@@ -14,15 +14,9 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' },
-        { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans' }
       ],
-      script: [
-        { 
-          src: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js',
-          defer: true
-        }
-      ]
+      script: []
     }
   },
 
@@ -66,8 +60,8 @@ export default defineNuxtConfig({
   },
 
   css: [
-    // Will add Font Awesome later
-    // '@/assets/fonts/fontawesome/css/all.css',
+    // Include Font Awesome
+    '@fortawesome/fontawesome-free/css/all.css',
     // Will add SASS styles later
     // '@/assets/sass/styles.scss',
   ],

@@ -40,7 +40,7 @@ const mapMarkers = ref<{marker: MapLibre.Marker, category: string, element: HTML
 
 // Get the appropriate SVG based on locale
 const localeForSvg = computed(() => locale.value === 'ja' ? 'ja' : 'en');
-// Use runtime config for assets in Nuxt 3
+// In Nuxt 3, public directory contents are directly served at the server root
 const legendMark = computed(() => `/images/fukidashi_obj_${localeForSvg.value}.svg`);
 const legendActive = computed(() => `/images/active_txt_${localeForSvg.value}.svg`);
 
@@ -119,10 +119,13 @@ const setHash = (newBounds: MapLibre.LngLatBounds) => {
 };
 
 const selectCategory = (category: string) => {
+  console.log(`Selecting category: ${category}`);
   activeCategory.value = category;
   
   // Open the list when a category is selected
   isOpenList.value = true;
+  
+  console.log(`Available marker groups:`, displayMarkersGroupByCategory.value.map(g => g.category));
   
   // Update marker visibility based on selected category
   updateMarkerVisibility();
@@ -130,17 +133,36 @@ const selectCategory = (category: string) => {
 
 // Update marker visibility when category changes
 const updateMarkerVisibility = () => {
+  console.log('Updating marker visibility:');
+  console.log('- Active category:', activeCategory.value);
+  console.log('- isDisplayAllCategory:', isDisplayAllCategory.value);
+  console.log('- Total markers:', mapMarkers.value.length);
+  
+  // Count for stats
+  let showing = 0;
+  let hiding = 0;
+  
   mapMarkers.value.forEach(({ marker, category, element }) => {
     const span = element.querySelector('span');
     
     if (span) {
       if (isDisplayAllCategory.value || activeCategory.value === category) {
         span.classList.add('show');
+        showing++;
+        
+        // Also make sure the marker itself is visible
+        marker.getElement().style.display = 'block';
       } else {
         span.classList.remove('show');
+        hiding++;
+        
+        // Hide the marker completely
+        marker.getElement().style.display = 'none';
       }
     }
   });
+  
+  console.log(`Updated markers: ${showing} showing, ${hiding} hiding`);
 };
 
 // Helper function to add a marker to the map
@@ -168,14 +190,22 @@ const addMarkerToMap = (marker: any, index: number) => {
                   'red';
     const iconClass = props.mapConfig.layer_settings?.[marker.category]?.icon_class || '';
     
+    // Determine if the marker should be shown initially
+    const isVisible = isDisplayAllCategory.value || activeCategory.value === marker.category;
+    
     // Create marker content with icon and number
     el.innerHTML = `
       <span style="background-color: ${color}" 
-            class="${isDisplayAllCategory.value || activeCategory.value === marker.category ? 'show' : ''}">
+            class="${isVisible ? 'show' : ''}">
         <i class="${iconClass}" style="background-color: ${color}; display: ${iconClass ? 'inline' : 'none'}"></i>
         <b class="number" style="background: ${bgColor}">${index + 1}</b>
       </span>
     `;
+    
+    // Set initial display style
+    if (!isVisible && activeCategory.value !== '') {
+      el.style.display = 'none';
+    }
     
     // Create popup content
     const popupContent = document.createElement('div');
@@ -256,6 +286,10 @@ const getMarkerNameText = (markerProperties: any, currentLocale?: string) => {
 
 // Watch for changes to isDisplayAllCategory and activeCategory
 watch([isDisplayAllCategory, activeCategory], () => {
+  console.log('Category selection changed:', { 
+    isDisplayAllCategory: isDisplayAllCategory.value, 
+    activeCategory: activeCategory.value 
+  });
   updateMarkerVisibility();
 });
 
@@ -269,6 +303,11 @@ const updateVisibleMarkers = () => {
   // If map is not initialized, do nothing
   if (!map.value) return;
   
+  console.log('Updating visible markers');
+  console.log('- Checked areas:', checkedArea.value);
+  console.log('- Layers available:', layers.value.length);
+  console.log('- displayMarkersGroupByCategory:', displayMarkersGroupByCategory.value);
+  
   // First remove all markers from map
   mapMarkers.value.forEach(({ marker }) => {
     marker.remove();
@@ -279,6 +318,8 @@ const updateVisibleMarkers = () => {
   
   // Re-add markers that should be visible
   const visibleMarkers = inBoundsMarkers.value;
+  console.log(`Adding ${visibleMarkers.length} visible markers to map`);
+  
   visibleMarkers.forEach((marker, index) => {
     addMarkerToMap(marker, index);
   });
@@ -401,6 +442,11 @@ onMounted(async () => {
     const area: string[] = [];
     const categories: Record<string, boolean> = {};
     
+    // Debug information
+    console.log('Starting data processing with:');
+    console.log('- Map config:', props.mapConfig);
+    console.log('- Layer settings:', props.mapConfig.layer_settings);
+    
     if (!props.mapConfig.sources || props.mapConfig.sources.length === 0) {
       console.warn('No sources defined in map config');
       // Don't return early - still keep the map displaying
@@ -471,6 +517,8 @@ onMounted(async () => {
           }
         });
         
+        console.log(`Processed ${markers.length} markers for source: ${source.id}`);
+        
         // Add to layers
         layers.value.push({
           source,
@@ -536,7 +584,7 @@ onMounted(async () => {
             <div class="navigation-area print-exclude">
               <div class="legend-navi-icon active">
                 <div class="legend-navi-button print-button" @click="clickPrintButton()">
-                  <span class="fa fa-print" :alt="t('PrintableMap.print')"></span>
+                  <span class="fas fa-print" :alt="t('PrintableMap.print')"></span>
                 </div>
               </div>
               <!-- List is always visible now -->
@@ -569,7 +617,6 @@ onMounted(async () => {
                     <li
                       class="legend-item"
                       v-for="(setting, category) in mapConfig.layer_settings"
-                      v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
                       :key="category"
                     >
                       <span
@@ -577,7 +624,7 @@ onMounted(async () => {
                         :style="{ backgroundColor: setting.color }"
                         @click="
                           selectCategory(category);
-                          isOpenList = category;
+                          isOpenList = true;
                           isDisplayAllCategory = false;
                         "
                         :class="{ open: isDisplayAllCategory || activeCategory === category }"
@@ -617,8 +664,9 @@ onMounted(async () => {
               v-for="group in displayMarkersGroupByCategory"
               :key="group.category"
               :class="{
-                show: true
+                show: isDisplayAllCategory || activeCategory === group.category
               }"
+              v-show="isDisplayAllCategory || activeCategory === group.category"
             >
               <h2
                 class="list-title"
@@ -794,12 +842,47 @@ onMounted(async () => {
 
 /* Legend Styles */
 .legend-navi {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
   border: 1px solid #eee;
   border-radius: 4px;
   padding: 0.5rem;
+}
+
+.legend-navi-inner {
+  display: flex;
+  align-items: center;
+}
+
+.legend-navi-icon {
+  flex: 0 0 3.5em;
+  padding: 0.3em;
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.legend-navi-icon.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.legend-navi-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #ccc;
+}
+
+.legend-navi-img {
+  padding: 3px;
+  vertical-align: middle;
 }
 
 .navigation {
@@ -869,49 +952,58 @@ onMounted(async () => {
 
 /* Legend List Styles */
 .legend-list-outer {
-  max-height: 200px;
-  overflow-y: auto;
-  margin: 0 1rem;
+  flex: 1 1 auto;
 }
 
 .legend-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 0.3em;
+  margin: 0.5em 0;
+  list-style: none;
 }
 
 .legend-item {
-  margin: 0.25rem;
+  margin-right: 0.5em;
+  flex: 0 0 auto;
 }
 
 .legend-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
   border-radius: 50%;
+  box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.5);
   cursor: pointer;
-  transition: transform 0.2s ease;
+}
+
+.legend-mark:not(.open) {
+  opacity: 0.5;
 }
 
 .legend-mark.open {
-  transform: scale(1.2);
+  opacity: 1;
 }
 
 .legend-mark i {
   color: white;
-  font-size: 0.8rem;
+  font-size: 1.25em;
+  vertical-align: middle;
 }
 
 /* Button Styles */
 .print-button {
   cursor: pointer;
-  padding: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #ccc;
   background-color: #f8f8f8;
-  border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
@@ -925,9 +1017,13 @@ onMounted(async () => {
 
 .list-button {
   cursor: pointer;
-  padding: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #ccc;
   background-color: #f8f8f8;
-  border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
@@ -973,10 +1069,10 @@ onMounted(async () => {
 
 .list-section {
   margin-bottom: 1rem;
-  display: block; /* Show all sections by default */
+  display: none; /* Hide sections by default */
 }
 
-/* For backwards compatibility */
+/* Show sections that match the category */
 .list-section.show {
   display: block;
 }
@@ -1029,16 +1125,27 @@ onMounted(async () => {
 }
 
 .legend-close {
-  text-align: center;
-  padding: 0.5rem;
-  background-color: #f8f8f8;
-  cursor: pointer;
-  margin-top: 0.5rem;
   display: none;
+  position: absolute;
+  z-index: 15;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: right;
+  padding: 0.5em;
+  cursor: pointer;
 }
 
 .legend-close.open {
   display: block;
+}
+
+@media (min-width: 768px) {
+  .legend-close, .legend-close.open {
+    display: none;
+  }
 }
 
 /* Print Styles */

@@ -18,21 +18,5 @@ body {
   padding: 1rem;
 }
 
-@media print {
-  body {
-    background-color: #fff;
-    font-size: 14px;
-  }
-  
-  .layout-container {
-    margin: 0 auto;
-    padding: 0;
-    width: 100%;
-  }
-  
-  /* Hide elements not needed in print */
-  button, .print-exclude {
-    display: none !important;
-  }
-}
+/* Print styles moved to _print.scss */
 </style>

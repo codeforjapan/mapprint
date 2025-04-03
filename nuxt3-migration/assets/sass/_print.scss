@@ -1,0 +1,81 @@
+// Print styles for Nuxt 3 version
+@page {
+  size: A4;
+  margin: 15mm 5mm 15mm;
+}
+
+@media print {
+  .print-exclude {
+    display: none !important;
+  }
+  
+  :root {
+    background-color: #fff;
+    font-size: 14px;
+  }
+  
+  .layout-container {
+    margin: 0 auto;
+  }
+  
+  .map-page {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #000;
+  }
+  
+  .main-content {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+    padding: 0;
+  }
+  
+  #map {
+    height: 140mm;
+  }
+  
+  .marker span {
+    display: flex !important;
+  }
+  
+  .area-select-button {
+    box-shadow: none;
+  }
+  
+  .area-array {
+    white-space: normal;
+    overflow: auto;
+    max-width: 100%;
+  }
+  
+  .legend-navi {
+    position: relative;
+  }
+  
+  .list-outer {
+    max-height: none !important;
+    display: block !important;
+  }
+  
+  .list-section {
+    display: block !important;
+    page-break-inside: avoid;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #000;
+    padding-top: 5mm;
+    margin-top: 10mm;
+  }
+}

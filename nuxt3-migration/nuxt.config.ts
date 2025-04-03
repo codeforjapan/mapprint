@@ -62,8 +62,8 @@ export default defineNuxtConfig({
   css: [
     // Include Font Awesome
     '@fortawesome/fontawesome-free/css/all.css',
-    // Will add SASS styles later
-    // '@/assets/sass/styles.scss',
+    // Include main styles with print styles
+    '@/assets/sass/styles.scss',
   ],
 
   // Configure Vite for processing JSON files and other static assets

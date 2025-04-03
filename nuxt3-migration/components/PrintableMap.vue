@@ -119,10 +119,13 @@ const setHash = (newBounds: MapLibre.LngLatBounds) => {
 };
 
 const selectCategory = (category: string) => {
+  console.log(`Selecting category: ${category}`);
   activeCategory.value = category;
   
   // Open the list when a category is selected
   isOpenList.value = true;
+  
+  console.log(`Available marker groups:`, displayMarkersGroupByCategory.value.map(g => g.category));
   
   // Update marker visibility based on selected category
   updateMarkerVisibility();
@@ -661,8 +664,9 @@ onMounted(async () => {
               v-for="group in displayMarkersGroupByCategory"
               :key="group.category"
               :class="{
-                show: true
+                show: isDisplayAllCategory || activeCategory === group.category
               }"
+              v-show="isDisplayAllCategory || activeCategory === group.category"
             >
               <h2
                 class="list-title"
@@ -1065,10 +1069,10 @@ onMounted(async () => {
 
 .list-section {
   margin-bottom: 1rem;
-  display: block; /* Show all sections by default */
+  display: none; /* Hide sections by default */
 }
 
-/* For backwards compatibility */
+/* Show sections that match the category */
 .list-section.show {
   display: block;
 }

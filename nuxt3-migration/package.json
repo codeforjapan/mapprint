@@ -32,7 +32,8 @@
     "magicast": "^0.3.5",
     "maplibre-gl": "^3.6.2",
     "simplebar-vue": "^2.3.3",
-    "viewport-units-buggyfill": "^0.6.2"
+    "viewport-units-buggyfill": "^0.6.2",
+    "vue3-qrcode": "^0.0.2"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue';
+import { ref, computed, onMounted, nextTick, watch } from 'vue';
 import * as MapLibre from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import 'simplebar/dist/simplebar.min.css';
@@ -36,6 +36,7 @@ const isOpenList = ref<boolean>(false);
 const isDisplayAllCategory = ref<boolean>(true);
 const mapStyle = ref<string>('https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json');
 const mapLoading = ref<boolean>(true); // Track map loading state
+const mapMarkers = ref<{marker: MapLibre.Marker, category: string, element: HTMLElement}[]>([]); // Store markers for reactive updates
 
 // Get the appropriate SVG based on locale
 const localeForSvg = computed(() => locale.value === 'ja' ? 'ja' : 'en');
@@ -119,6 +120,109 @@ const setHash = (newBounds: MapLibre.LngLatBounds) => {
 
 const selectCategory = (category: string) => {
   activeCategory.value = category;
+  
+  // Update marker visibility based on selected category
+  updateMarkerVisibility();
+};
+
+// Update marker visibility when category changes
+const updateMarkerVisibility = () => {
+  mapMarkers.value.forEach(({ marker, category, element }) => {
+    const span = element.querySelector('span');
+    
+    if (span) {
+      if (isDisplayAllCategory.value || activeCategory.value === category) {
+        span.classList.add('show');
+      } else {
+        span.classList.remove('show');
+      }
+    }
+  });
+};
+
+// Helper function to add a marker to the map
+const addMarkerToMap = (marker: any, index: number) => {
+  try {
+    if (!map.value || !marker.feature.geometry || marker.feature.geometry.type !== 'Point') {
+      return;
+    }
+    
+    // Ensure coordinates are valid
+    const coordinates = marker.feature.geometry.coordinates;
+    if (!coordinates || coordinates.length < 2) {
+      console.error('Invalid coordinates for marker:', marker);
+      return;
+    }
+    
+    // Create marker element with number
+    const el = document.createElement('div');
+    el.className = 'marker';
+    
+    // Set marker's color based on category
+    const bgColor = props.mapConfig.layer_settings?.[marker.category]?.bg_color || '#808080';
+    const color = props.mapConfig.layer_settings?.[marker.category]?.color || 
+                  marker.feature.properties?.['marker-color'] || 
+                  'red';
+    const iconClass = props.mapConfig.layer_settings?.[marker.category]?.icon_class || '';
+    
+    // Create marker content with icon and number
+    el.innerHTML = `
+      <span style="background-color: ${color}" 
+            class="${isDisplayAllCategory.value || activeCategory.value === marker.category ? 'show' : ''}">
+        <i class="${iconClass}" style="background-color: ${color}; display: ${iconClass ? 'inline' : 'none'}"></i>
+        <b class="number" style="background: ${bgColor}">${index + 1}</b>
+      </span>
+    `;
+    
+    // Create popup content
+    const popupContent = document.createElement('div');
+    const markerName = marker.feature.properties ? getMarkerNameText(marker.feature.properties, locale.value) : '';
+    const description = marker.feature.properties?.description || '';
+    
+    popupContent.innerHTML = `
+      <div>
+        <div class="popup-type">
+          <i class="${props.mapConfig.layer_settings?.[marker.category]?.icon_class || ''}" 
+             style="background-color: ${props.mapConfig.layer_settings?.[marker.category]?.color || 'red'}"></i>
+          <span class="popup-poi-type">
+            ${getMarkerCategoryText(props.mapConfig.layer_settings?.[marker.category]?.name || marker.category, locale.value)}
+          </span>
+        </div>
+        <p>${t('PrintableMap.name')} ${markerName}</p>
+        <div class="popup-detail-content">
+          <p>${description}</p>
+        </div>
+      </div>
+    `;
+    
+    // Create popup
+    const popup = new MapLibre.Popup({ 
+      offset: 25,
+      closeButton: true,
+      closeOnClick: true
+    }).setDOMContent(popupContent);
+    
+    // Add marker to map with popup
+    const mapMarker = new MapLibre.Marker({
+      element: el,
+      anchor: 'top-left' // Match the anchor setting from Nuxt 2 version
+    })
+      .setLngLat(coordinates)
+      .setPopup(popup)
+      .addTo(map.value);
+    
+    // Store reference to the marker and its category for reactive updates
+    mapMarkers.value.push({
+      marker: mapMarker,
+      category: marker.category,
+      element: el
+    });
+    
+    return mapMarker;
+  } catch (error) {
+    console.error('Error adding marker to map:', error);
+    return null;
+  }
 };
 
 const clickPrintButton = () => {
@@ -145,6 +249,36 @@ const getMarkerNameText = (markerProperties: any, currentLocale?: string) => {
     name = markerProperties[localeProp];
   }
   return name;
+};
+
+// Watch for changes to isDisplayAllCategory and activeCategory
+watch([isDisplayAllCategory, activeCategory], () => {
+  updateMarkerVisibility();
+});
+
+// Watch for changes to checkedArea (selected layers)
+watch(checkedArea, () => {
+  updateVisibleMarkers();
+});
+
+// Update marker visibility based on selected layers
+const updateVisibleMarkers = () => {
+  // If map is not initialized, do nothing
+  if (!map.value) return;
+  
+  // First remove all markers from map
+  mapMarkers.value.forEach(({ marker }) => {
+    marker.remove();
+  });
+  
+  // Clear markers array
+  mapMarkers.value = [];
+  
+  // Re-add markers that should be visible
+  const visibleMarkers = inBoundsMarkers.value;
+  visibleMarkers.forEach((marker, index) => {
+    addMarkerToMap(marker, index);
+  });
 };
 
 // Method to initialize map
@@ -187,6 +321,18 @@ const initializeMap = async () => {
       // Add navigation control
       mapInstance.addControl(new MapLibre.NavigationControl());
       
+      // Add geolocation control
+      mapInstance.addControl(
+        new MapLibre.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+          },
+          trackUserLocation: true,
+          showUserLocation: true
+        }),
+        'top-right'
+      );
+      
       // Check for hash in URL
       const locationhash = window.location.hash.substr(1);
       let initbounds = helper.deserializeBounds(locationhash);
@@ -203,7 +349,11 @@ const initializeMap = async () => {
       }
       
       // Set up the moveend event to update bounds
-      mapInstance.on('moveend', etmitBounds);
+      mapInstance.on('moveend', () => {
+        etmitBounds();
+        // Update markers when the map bounds change
+        updateVisibleMarkers();
+      });
       
       // Initial bounds calculation
       bounds.value = mapInstance.getBounds();
@@ -279,84 +429,16 @@ onMounted(async () => {
         
         console.log(`Parsed ${markers.length} markers`);
         
+        // First register all categories from the markers
         markers.forEach((marker: any) => {
           categories[marker.category] = true;
-          
+        });
+        
+        // Then add all markers
+        markers.forEach((marker: any, index: number) => {
           try {
-            // Create a marker element and add it to the map
-            if (map.value && map.value.loaded && marker.feature.geometry && marker.feature.geometry.type === 'Point') {
-              // Ensure coordinates are valid
-              const coordinates = marker.feature.geometry.coordinates;
-              if (!coordinates || coordinates.length < 2) {
-                console.error('Invalid coordinates for marker:', marker);
-                return; // Skip this marker by returning from the callback
-              }
-              
-              // Create a marker element with number
-              const el = document.createElement('div');
-              el.className = 'marker';
-              
-              // Set the marker's color based on category
-              const bgColor = props.mapConfig.layer_settings?.[marker.category]?.bg_color || '#808080';
-              const color = props.mapConfig.layer_settings?.[marker.category]?.color || 
-                           marker.feature.properties?.['marker-color'] || 
-                           'red';
-              const iconClass = props.mapConfig.layer_settings?.[marker.category]?.icon_class || '';
-              
-              // Store the marker index to use for numbering
-              const markerIndex = markers.indexOf(marker) + 1;
-              
-              // Create marker content with icon and number
-              el.innerHTML = `
-                <span style="background-color: ${color}" 
-                      class="${isDisplayAllCategory.value || activeCategory.value === marker.category ? 'show' : ''}">
-                  <i class="${iconClass}" style="background-color: ${color}; display: ${iconClass ? 'inline' : 'none'}"></i>
-                  <b class="number" style="background: ${bgColor}">${markerIndex}</b>
-                </span>
-              `;
-              
-              try {
-                // Create popup content
-                const popupContent = document.createElement('div');
-                const markerName = marker.feature.properties ? getMarkerNameText(marker.feature.properties, locale.value) : '';
-                const description = marker.feature.properties?.description || '';
-                
-                popupContent.innerHTML = `
-                  <div>
-                    <div class="popup-type">
-                      <i class="${props.mapConfig.layer_settings?.[marker.category]?.icon_class || ''}" 
-                         style="background-color: ${props.mapConfig.layer_settings?.[marker.category]?.color || 'red'}"></i>
-                      <span class="popup-poi-type">
-                        ${getMarkerCategoryText(props.mapConfig.layer_settings?.[marker.category]?.name || marker.category, locale.value)}
-                      </span>
-                    </div>
-                    <p>${t('PrintableMap.name')} ${markerName}</p>
-                    <div class="popup-detail-content">
-                      <p>${description}</p>
-                    </div>
-                  </div>
-                `;
-                
-                // Create popup
-                const popup = new MapLibre.Popup({ 
-                  offset: 25,
-                  closeButton: true,
-                  closeOnClick: true
-                }).setDOMContent(popupContent);
-                
-                // Add marker to map with popup
-                new MapLibre.Marker(el)
-                  .setLngLat(coordinates)
-                  .setPopup(popup)
-                  .addTo(map.value);
-              } catch (popupError) {
-                console.error('Error creating popup for marker:', popupError);
-                
-                // Still add the marker even if popup fails
-                new MapLibre.Marker(el)
-                  .setLngLat(coordinates)
-                  .addTo(map.value);
-              }
+            if (map.value && map.value.loaded) {
+              addMarkerToMap(marker, index);
             }
           } catch (markerError) {
             console.error('Error processing marker:', markerError);
@@ -532,6 +614,7 @@ onMounted(async () => {
               :class="{
                 show:
                   isDisplayAllCategory ||
+                  activeCategory === group.category ||
                   activeCategory === getMarkerCategoryText(group.category, locale),
               }"
             >

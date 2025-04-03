@@ -130,17 +130,36 @@ const selectCategory = (category: string) => {
 
 // Update marker visibility when category changes
 const updateMarkerVisibility = () => {
+  console.log('Updating marker visibility:');
+  console.log('- Active category:', activeCategory.value);
+  console.log('- isDisplayAllCategory:', isDisplayAllCategory.value);
+  console.log('- Total markers:', mapMarkers.value.length);
+  
+  // Count for stats
+  let showing = 0;
+  let hiding = 0;
+  
   mapMarkers.value.forEach(({ marker, category, element }) => {
     const span = element.querySelector('span');
     
     if (span) {
       if (isDisplayAllCategory.value || activeCategory.value === category) {
         span.classList.add('show');
+        showing++;
+        
+        // Also make sure the marker itself is visible
+        marker.getElement().style.display = 'block';
       } else {
         span.classList.remove('show');
+        hiding++;
+        
+        // Hide the marker completely
+        marker.getElement().style.display = 'none';
       }
     }
   });
+  
+  console.log(`Updated markers: ${showing} showing, ${hiding} hiding`);
 };
 
 // Helper function to add a marker to the map
@@ -168,14 +187,22 @@ const addMarkerToMap = (marker: any, index: number) => {
                   'red';
     const iconClass = props.mapConfig.layer_settings?.[marker.category]?.icon_class || '';
     
+    // Determine if the marker should be shown initially
+    const isVisible = isDisplayAllCategory.value || activeCategory.value === marker.category;
+    
     // Create marker content with icon and number
     el.innerHTML = `
       <span style="background-color: ${color}" 
-            class="${isDisplayAllCategory.value || activeCategory.value === marker.category ? 'show' : ''}">
+            class="${isVisible ? 'show' : ''}">
         <i class="${iconClass}" style="background-color: ${color}; display: ${iconClass ? 'inline' : 'none'}"></i>
         <b class="number" style="background: ${bgColor}">${index + 1}</b>
       </span>
     `;
+    
+    // Set initial display style
+    if (!isVisible && activeCategory.value !== '') {
+      el.style.display = 'none';
+    }
     
     // Create popup content
     const popupContent = document.createElement('div');
@@ -256,6 +283,10 @@ const getMarkerNameText = (markerProperties: any, currentLocale?: string) => {
 
 // Watch for changes to isDisplayAllCategory and activeCategory
 watch([isDisplayAllCategory, activeCategory], () => {
+  console.log('Category selection changed:', { 
+    isDisplayAllCategory: isDisplayAllCategory.value, 
+    activeCategory: activeCategory.value 
+  });
   updateMarkerVisibility();
 });
 
@@ -590,7 +621,7 @@ onMounted(async () => {
                         :style="{ backgroundColor: setting.color }"
                         @click="
                           selectCategory(category);
-                          isOpenList = category;
+                          isOpenList = true;
                           isDisplayAllCategory = false;
                         "
                         :class="{ open: isDisplayAllCategory || activeCategory === category }"

@@ -63,7 +63,8 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import type { MapConfig } from '@/types';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -86,14 +87,27 @@ const switchLanguage = () => {
 };
 
 // Use our composable to get map configuration data
-const { mapConfigs: maps, loading, error, loadAllMapConfigs, getLocalizedTitle } = useMapConfig();
+const { loadAllMapConfigs, getLocalizedTitle } = useMapConfig();
+
+// Reactive state
+const loading = ref(false);
+const error = ref<Error | null>(null);
+const maps = ref<MapConfig[]>([]);
 
 // Load map configurations on component mount
 onMounted(async () => {
+  loading.value = true;
+  error.value = null;
+  
   try {
-    await loadAllMapConfigs();
+    const configs = await loadAllMapConfigs();
+    maps.value = configs;
+    error.value = null;
   } catch (err) {
     console.error('Failed to load map configurations:', err);
+    error.value = err as Error;
+  } finally {
+    loading.value = false;
   }
 });
 

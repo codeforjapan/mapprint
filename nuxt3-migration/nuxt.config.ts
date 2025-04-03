@@ -56,10 +56,33 @@ export default defineNuxtConfig({
     // '@/assets/sass/styles.scss',
   ],
 
+  // Configure Vite for processing JSON files and other static assets
   vite: {
     resolve: {
       alias: {
         'mapbox-gl': 'maplibre-gl'
+      }
+    },
+    json: {
+      stringify: true // This enables importing JSON as objects
+    }
+  },
+
+  // Add assets to be processed during build
+  nitro: {
+    publicAssets: [
+      {
+        dir: 'assets/config',
+        maxAge: 60 * 60 * 24 * 7 // 1 week
+      }
+    ]
+  },
+
+  // Parse and process JSON files in assets
+  webpack: {
+    loaders: {
+      json: {
+        stringify: true
       }
     }
   },

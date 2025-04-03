@@ -72,6 +72,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
+import type { MapConfig } from '@/types';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -81,7 +82,7 @@ const route = useRoute();
 
 // Map data
 const mapId = computed(() => route.params.map as string);
-const mapConfig = ref<any>(null);
+const mapConfig = ref<MapConfig | null>(null);
 const updatedDate = ref('');
 const loading = ref(false);
 const error = ref<Error | null>(null);
@@ -123,9 +124,19 @@ const handleBoundsChanged = () => {
 };
 
 // Handler for setting layer settings
-const setLayerSettings = (settings: any) => {
-  if (!mapConfig.value.layer_settings) {
-    mapConfig.value.layer_settings = {};
+const setLayerSettings = (settings: {
+  name: string;
+  color?: string;
+  bg_color?: string;
+  icon_class?: string;
+  class?: string;
+}) => {
+  if (!mapConfig.value || !mapConfig.value.layer_settings) {
+    if (mapConfig.value) {
+      mapConfig.value.layer_settings = {};
+    } else {
+      return; // Can't update settings if mapConfig is null
+    }
   }
   
   mapConfig.value.layer_settings[settings.name] = {
@@ -153,7 +164,7 @@ useHead(() => ({
 }));
 
 // Get map config composable
-const { loadMapConfig, loadMapConfigsList } = useMapConfig();
+const { loadMapConfig, loadMapConfigsList, getMapById } = useMapConfig();
 
 // Function to load map data
 const loadMapData = async () => {
@@ -161,51 +172,66 @@ const loadMapData = async () => {
   error.value = null;
   
   try {
-    // First, load the list of available configs
-    const configsList = await loadMapConfigsList();
+    // First try to get the map directly by ID
+    const directMap = getMapById(mapId.value);
     
-    if (!configsList || configsList.length === 0) {
-      console.error('No map configurations available');
-      throw new Error('No map configurations found');
-    }
-    
-    // Try to find a config file that matches the map ID
-    let configFile = null;
-    
-    // First strategy: Direct match with filename (without extension)
-    configFile = configsList.find(filename => 
-      filename.replace('.json', '') === mapId.value
-    );
-    
-    // Second strategy: Filename includes the map ID
-    if (!configFile) {
+    if (directMap) {
+      // We found a direct match
+      mapConfig.value = {
+        ...directMap,
+        map_id: directMap.map_id || mapId.value,
+        // Set default center if not provided
+        center: directMap.center || [135.5, 34.7],
+        // Ensure layer_settings exists
+        layer_settings: directMap.layer_settings || {},
+      };
+    } else {
+      // Fall back to searching through the list
+      const configsList = await loadMapConfigsList();
+      
+      if (!configsList || configsList.length === 0) {
+        console.error('No map configurations available');
+        throw new Error('No map configurations found');
+      }
+      
+      // Try to find a config file that matches the map ID
+      let configFile = null;
+      
+      // First strategy: Direct match with filename (without extension)
       configFile = configsList.find(filename => 
-        filename.toLowerCase().includes(mapId.value.toLowerCase())
+        filename.replace('.json', '') === mapId.value
       );
+      
+      // Second strategy: Filename includes the map ID
+      if (!configFile) {
+        configFile = configsList.find(filename => 
+          filename.toLowerCase().includes(mapId.value.toLowerCase())
+        );
+      }
+      
+      // Fallback: Use the first config file
+      if (!configFile) {
+        console.warn(`No config found matching ID: ${mapId.value}, using first available config`);
+        configFile = configsList[0];
+      }
+      
+      // Load the specific map configuration
+      const config = await loadMapConfig(configFile);
+      
+      if (!config) {
+        throw new Error(`Failed to load map configuration from ${configFile}`);
+      }
+      
+      // Extend the config with additional properties
+      mapConfig.value = {
+        ...config,
+        map_id: config.map_id || mapId.value,
+        // Set default center if not provided
+        center: config.center || [135.5, 34.7],
+        // Ensure layer_settings exists
+        layer_settings: config.layer_settings || {},
+      };
     }
-    
-    // Fallback: Use the first config file
-    if (!configFile) {
-      console.warn(`No config found matching ID: ${mapId.value}, using first available config`);
-      configFile = configsList[0];
-    }
-    
-    // Load the specific map configuration
-    const config = await loadMapConfig(configFile);
-    
-    if (!config) {
-      throw new Error(`Failed to load map configuration from ${configFile}`);
-    }
-    
-    // Extend the config with additional properties
-    mapConfig.value = {
-      ...config,
-      map_id: config.map_id || mapId.value,
-      // Set default center if not provided
-      center: config.center || [135.5, 34.7],
-      // Ensure layer_settings exists
-      layer_settings: config.layer_settings || {},
-    };
     
     // Set current date
     updatedDate.value = formatDate(new Date());

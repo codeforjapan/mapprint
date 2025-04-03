@@ -269,6 +269,11 @@ const updateVisibleMarkers = () => {
   // If map is not initialized, do nothing
   if (!map.value) return;
   
+  console.log('Updating visible markers');
+  console.log('- Checked areas:', checkedArea.value);
+  console.log('- Layers available:', layers.value.length);
+  console.log('- displayMarkersGroupByCategory:', displayMarkersGroupByCategory.value);
+  
   // First remove all markers from map
   mapMarkers.value.forEach(({ marker }) => {
     marker.remove();
@@ -279,6 +284,8 @@ const updateVisibleMarkers = () => {
   
   // Re-add markers that should be visible
   const visibleMarkers = inBoundsMarkers.value;
+  console.log(`Adding ${visibleMarkers.length} visible markers to map`);
+  
   visibleMarkers.forEach((marker, index) => {
     addMarkerToMap(marker, index);
   });
@@ -401,6 +408,11 @@ onMounted(async () => {
     const area: string[] = [];
     const categories: Record<string, boolean> = {};
     
+    // Debug information
+    console.log('Starting data processing with:');
+    console.log('- Map config:', props.mapConfig);
+    console.log('- Layer settings:', props.mapConfig.layer_settings);
+    
     if (!props.mapConfig.sources || props.mapConfig.sources.length === 0) {
       console.warn('No sources defined in map config');
       // Don't return early - still keep the map displaying
@@ -470,6 +482,8 @@ onMounted(async () => {
             });
           }
         });
+        
+        console.log(`Processed ${markers.length} markers for source: ${source.id}`);
         
         // Add to layers
         layers.value.push({
@@ -569,7 +583,6 @@ onMounted(async () => {
                     <li
                       class="legend-item"
                       v-for="(setting, category) in mapConfig.layer_settings"
-                      v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
                       :key="category"
                     >
                       <span

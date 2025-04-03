@@ -29,40 +29,46 @@
       </div>
       <div class="qrcode print-only">
         <client-only>
-          <QRCodeVue3 v-if="currentUrl" :value="currentUrl" :width="80" :height="80" />
+          <component 
+            v-if="currentUrl && process.client"
+            :is="QRCodeVue3" 
+            :value="currentUrl" 
+            :width="80" 
+            :height="80" 
+          />
         </client-only>
       </div>
     </header>
 
     <main class="main-content">
       <div class="map-container">
+        <div v-if="loading" class="loading-indicator">
+          <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+        </div>
+        
+        <div v-else-if="error" class="error-indicator">
+          <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
+          <button @click="loadMapData" class="retry-button">
+            {{ $t('common.retry') || 'Retry' }}
+          </button>
+        </div>
+        
         <ClientOnly>
-          <div v-if="loading" class="loading-indicator">
-            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
-          </div>
-          
-          <div v-else-if="error" class="error-indicator">
-            <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
-            <button @click="loadMapData" class="retry-button">
-              {{ $t('common.retry') || 'Retry' }}
-            </button>
-          </div>
-          
           <PrintableMap 
-            v-else-if="mapConfig && mapConfig.center" 
+            v-if="mapConfig && mapConfig.center" 
             :mapConfig="mapConfig" 
             @update:mapConfig="updateMapConfig"
             @bounds-changed="handleBoundsChanged"
             @setLayerSettings="setLayerSettings" 
           />
-          
-          <div v-else class="not-found-indicator">
-            <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
-            <NuxtLink to="/" class="back-link">
-              {{ $t('map.back_to_maps') || 'Back to Maps' }}
-            </NuxtLink>
-          </div>
         </ClientOnly>
+        
+        <div v-if="!loading && !error && (!mapConfig || !mapConfig.center)" class="not-found-indicator">
+          <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
+          <NuxtLink to="/" class="back-link">
+            {{ $t('map.back_to_maps') || 'Back to Maps' }}
+          </NuxtLink>
+        </div>
       </div>
     </main>
 
@@ -78,7 +84,11 @@
 import { ref, computed, onMounted, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
-import { QRCodeVue3 } from 'vue3-qrcode';
+
+// Only import client components when needed
+const QRCodeVue3 = process.client ? require('vue3-qrcode').QRCodeVue3 : null;
+
+// Note: Nuxt should auto-import components, but we'll import explicitly to be safe
 import PrintableMap from '~/components/PrintableMap.vue';
 
 // i18n setup
@@ -271,13 +281,27 @@ const loadMapData = async () => {
   }
 };
 
-// Load map data on component mount
-onMounted(() => {
-  loadMapData();
+// This will run during SSR and client-side
+const initMapData = async () => {
+  if (process.server) {
+    console.log('Running on server, only initializing basic data');
+    // On server, just set loading to true to show loading state
+    loading.value = true;
+    return;
+  }
+  
+  // This will only run on client
+  await loadMapData();
   
   // Set initial URL for QR code
+  currentUrl.value = window.location.href;
+};
+
+// Load map data 
+onMounted(() => {
+  // Make sure we're on client side
   if (process.client) {
-    currentUrl.value = window.location.href;
+    initMapData();
   }
 });
 </script>

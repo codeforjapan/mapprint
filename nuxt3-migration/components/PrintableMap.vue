@@ -421,6 +421,12 @@ const initializeMap = async () => {
 
 // Lifecycle hooks
 onMounted(async () => {
+  // Only run if we're on the client side
+  if (!process.client) {
+    console.log('Not initializing map on server side');
+    return;
+  }
+  
   try {
     console.log('PrintableMap component mounted');
     

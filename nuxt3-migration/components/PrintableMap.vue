@@ -121,6 +121,9 @@ const setHash = (newBounds: MapLibre.LngLatBounds) => {
 const selectCategory = (category: string) => {
   activeCategory.value = category;
   
+  // Open the list when a category is selected
+  isOpenList.value = true;
+  
   // Update marker visibility based on selected category
   updateMarkerVisibility();
 };
@@ -536,6 +539,11 @@ onMounted(async () => {
                   <span class="fa fa-print" :alt="t('PrintableMap.print')"></span>
                 </div>
               </div>
+              <div class="legend-navi-icon active ml-2">
+                <div class="legend-navi-button list-button" @click="isOpenList = !isOpenList">
+                  <span class="fa fa-list" :alt="t('PrintableMap.list') || 'List'"></span>
+                </div>
+              </div>
             </div>
             <div class="navigation-area">
               <div class="area-select-button" @click="isOpenAreaSelect = !isOpenAreaSelect">
@@ -920,8 +928,20 @@ onMounted(async () => {
   transition: background-color 0.2s ease;
 }
 
-.print-button:hover {
+.print-button:hover, .list-button:hover {
   background-color: #eee;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.list-button {
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
 }
 
 .area-select-button {
@@ -1034,11 +1054,18 @@ onMounted(async () => {
   .list-outer {
     max-height: none !important;
     display: block !important;
+    overflow: visible !important;
+    margin-top: 1rem !important;
   }
   
   .list-section {
     display: block !important;
     page-break-inside: avoid;
+  }
+  
+  /* Make all sections visible in print mode */
+  .list-section.show {
+    display: block !important;
   }
 }
 </style>

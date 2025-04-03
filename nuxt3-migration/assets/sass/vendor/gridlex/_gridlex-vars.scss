@@ -1,0 +1,18 @@
+//************************
+//    VARIABLES
+//************************
+$gl-colCount:   12 !default;
+$gl-gridName:   grid !default;
+$gl-colName:   col !default;
+$gl-attributeName: class !default;
+// Note: Those values are from ../../_variables.scss, this fixes the bug when moving @use instead of @import 
+$gl-gutter: 1.5em;
+$gl-gutter-vertical: 1.5em;
+$gl-mq-width: 'min-width';
+$gl-mq-list: (
+  xl: 93em,
+  lg: 75em,
+  md: 52.625em,
+  sm: 48em,
+  xs: 35.5em
+);

@@ -391,212 +391,24 @@ onUpdated(() => {
 </script>
 
 <style scoped>
-.layout-map {
-  min-height: 100vh;
-}
-
-.layout-map-inner {
-  display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
-}
-
-.layout-map-inner > * {
-  box-sizing: border-box;
-}
-
-/* Grid system */
-.grid-noGutter {
-  margin: 0;
-}
-
-/* Column classes */
-.col-12_md-3_xl-6 {
-  width: 100%;
-}
-
-.col-12_md-9_xl-6 {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .col-12_md-3_xl-6 {
-    width: 25%;
-  }
-  
-  .col-12_md-9_xl-6 {
-    width: 75%;
-  }
-}
-
-@media (min-width: 1200px) {
-  .col-12_md-3_xl-6 {
-    width: 50%;
-  }
-  
-  .col-12_md-9_xl-6 {
-    width: 50%;
-  }
-}
-
-/* Aside styles */
-.aside-inner {
-  padding: 1rem;
-  height: 100%;
-  overflow-y: auto;
-}
-
-.aside-grid {
-  display: grid;
-  grid-template-areas:
-    "item1"
-    "item2"
-    "item3"
-    "item4"
-    "item5"
-    "item6"
-    "item7";
-  gap: 1rem;
-}
-
-.aside-item1 { grid-area: item1; }
-.aside-item2 { grid-area: item2; }
-.aside-item3 { grid-area: item3; }
-.aside-item4 { grid-area: item4; }
-.aside-item5 { grid-area: item5; }
-.aside-item6 { grid-area: item6; }
-.aside-item7 { grid-area: item7; }
-
-.aside-title-sp {
-  display: block;
-}
-
-.aside-title-pc {
+/* Only QR code related styles kept in component */
+.qrcode.print-only {
   display: none;
 }
 
-@media (min-width: 768px) {
-  .aside-title-sp {
-    display: none;
-  }
-  
-  .aside-title-pc {
+@media print {
+  .qrcode.print-only {
     display: block;
-  }
-}
-
-.aside-item-illust1 img,
-.aside-item-illust2 img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Main content styles */
-.main {
-  display: flex;
-  flex-direction: column;
-  order: 1; /* Set the main content to appear first */
-}
-
-/* Set the sidebar to appear second */
-aside.col-12_md-3_xl-6 {
-  order: 2;
-}
-
-/* On larger screens, reverse the order to match original layout */
-@media (min-width: 768px) {
-  .main {
-    order: 1;
+    margin: 1rem 0;
+    text-align: center;
   }
   
-  aside.col-12_md-3_xl-6 {
-    order: 2;
+  #qrcode-container {
+    display: inline-block;
   }
 }
 
-.main-sheet {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding: 1rem;
-}
-
-/* Header styles */
-.header {
-  position: relative;
-}
-
-.to-top {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 1;
-}
-
-.banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
-}
-
-.logo {
-  margin-bottom: 1rem;
-}
-
-.sub-outer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.sub-button {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-
-.sub-button i {
-  margin-right: 0.5rem;
-}
-
-.sub-button a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.sub-button select {
-  background: transparent;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-.title-outer {
-  text-align: center;
-}
-
-.datetime {
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 0.5rem;
-}
-
-/* Map container */
-.map-container {
-  flex: 1;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  min-height: 500px;
-  position: relative;
-  margin: 1rem 0;
-}
-
-/* Status indicators */
+/* Loading/Error/Not-found states */
 .loading-indicator,
 .error-indicator,
 .not-found-indicator {
@@ -629,30 +441,4 @@ aside.col-12_md-3_xl-6 {
 .back-link:hover {
   background-color: #3367d6;
 }
-
-/* Footer */
-.footer {
-  margin-top: auto;
-  padding: 1rem;
-  text-align: center;
-}
-
-/* QR code */
-.qrcode.print-only {
-  display: none;
-}
-
-@media print {
-  .qrcode.print-only {
-    display: block;
-    margin: 1rem 0;
-    text-align: center;
-  }
-  
-  #qrcode-container {
-    display: inline-block;
-  }
-}
-
-/* Print styles moved to _print.scss */
 </style>

@@ -31,33 +31,33 @@
 
     <main class="main-content">
       <div class="map-container">
+        <div v-if="loading" class="loading-indicator">
+          <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+        </div>
+        
+        <div v-else-if="error" class="error-indicator">
+          <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
+          <button @click="loadMapData" class="retry-button">
+            {{ $t('common.retry') || 'Retry' }}
+          </button>
+        </div>
+        
         <ClientOnly>
-          <div v-if="loading" class="loading-indicator">
-            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
-          </div>
-          
-          <div v-else-if="error" class="error-indicator">
-            <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
-            <button @click="loadMapData" class="retry-button">
-              {{ $t('common.retry') || 'Retry' }}
-            </button>
-          </div>
-          
           <PrintableMap 
-            v-else-if="mapConfig && mapConfig.center" 
+            v-if="mapConfig && mapConfig.center" 
             :mapConfig="mapConfig" 
             @update:mapConfig="updateMapConfig"
             @bounds-changed="handleBoundsChanged"
             @setLayerSettings="setLayerSettings" 
           />
-          
-          <div v-else class="not-found-indicator">
-            <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
-            <NuxtLink to="/" class="back-link">
-              {{ $t('map.back_to_maps') || 'Back to Maps' }}
-            </NuxtLink>
-          </div>
         </ClientOnly>
+        
+        <div v-if="!loading && !error && (!mapConfig || !mapConfig.center)" class="not-found-indicator">
+          <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
+          <NuxtLink to="/" class="back-link">
+            {{ $t('map.back_to_maps') || 'Back to Maps' }}
+          </NuxtLink>
+        </div>
       </div>
     </main>
 
@@ -81,7 +81,11 @@ const router = useRouter();
 const route = useRoute();
 
 // Map data
-const mapId = computed(() => route.params.map as string);
+const mapId = computed(() => {
+  const id = route.params.map as string;
+  // Remove .json extension if present
+  return id ? id.replace(/\.json$/, '') : '';
+});
 const mapConfig = ref<MapConfig | null>(null);
 const updatedDate = ref('');
 const loading = ref(false);
@@ -168,14 +172,24 @@ const { loadMapConfig, loadMapConfigsList, getMapById } = useMapConfig();
 
 // Function to load map data
 const loadMapData = async () => {
+  // Set loading state immediately
   loading.value = true;
   error.value = null;
   
   try {
+    console.log(`Loading map with ID: ${mapId.value}`);
+    
+    // Validate map ID
+    if (!mapId.value) {
+      throw new Error('Invalid map ID');
+    }
+    
     // First try to get the map directly by ID
     const directMap = getMapById(mapId.value);
     
     if (directMap) {
+      console.log('Found direct map match:', directMap.map_title);
+      
       // We found a direct match
       mapConfig.value = {
         ...directMap,
@@ -186,8 +200,12 @@ const loadMapData = async () => {
         layer_settings: directMap.layer_settings || {},
       };
     } else {
+      console.log('No direct match, searching in configs list');
+      
       // Fall back to searching through the list
       const configsList = await loadMapConfigsList();
+      
+      console.log('Available configs:', configsList);
       
       if (!configsList || configsList.length === 0) {
         console.error('No map configurations available');
@@ -202,11 +220,19 @@ const loadMapData = async () => {
         filename.replace('.json', '') === mapId.value
       );
       
+      if (configFile) {
+        console.log(`Found config by filename match: ${configFile}`);
+      }
+      
       // Second strategy: Filename includes the map ID
       if (!configFile) {
         configFile = configsList.find(filename => 
           filename.toLowerCase().includes(mapId.value.toLowerCase())
         );
+        
+        if (configFile) {
+          console.log(`Found config by partial match: ${configFile}`);
+        }
       }
       
       // Fallback: Use the first config file
@@ -215,12 +241,16 @@ const loadMapData = async () => {
         configFile = configsList[0];
       }
       
+      console.log(`Loading config from file: ${configFile}`);
+      
       // Load the specific map configuration
       const config = await loadMapConfig(configFile);
       
       if (!config) {
         throw new Error(`Failed to load map configuration from ${configFile}`);
       }
+      
+      console.log('Loaded config:', config);
       
       // Extend the config with additional properties
       mapConfig.value = {

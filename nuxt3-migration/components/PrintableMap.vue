@@ -794,12 +794,47 @@ onMounted(async () => {
 
 /* Legend Styles */
 .legend-navi {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
   border: 1px solid #eee;
   border-radius: 4px;
   padding: 0.5rem;
+}
+
+.legend-navi-inner {
+  display: flex;
+  align-items: center;
+}
+
+.legend-navi-icon {
+  flex: 0 0 3.5em;
+  padding: 0.3em;
+  opacity: 0.5;
+  cursor: auto;
+}
+
+.legend-navi-icon.active {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.legend-navi-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #ccc;
+}
+
+.legend-navi-img {
+  padding: 3px;
+  vertical-align: middle;
 }
 
 .navigation {
@@ -869,49 +904,58 @@ onMounted(async () => {
 
 /* Legend List Styles */
 .legend-list-outer {
-  max-height: 200px;
-  overflow-y: auto;
-  margin: 0 1rem;
+  flex: 1 1 auto;
 }
 
 .legend-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 0.3em;
+  margin: 0.5em 0;
+  list-style: none;
 }
 
 .legend-item {
-  margin: 0.25rem;
+  margin-right: 0.5em;
+  flex: 0 0 auto;
 }
 
 .legend-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
   border-radius: 50%;
+  box-shadow: 2px 2px 2px rgba(128, 128, 128, 0.5);
   cursor: pointer;
-  transition: transform 0.2s ease;
+}
+
+.legend-mark:not(.open) {
+  opacity: 0.5;
 }
 
 .legend-mark.open {
-  transform: scale(1.2);
+  opacity: 1;
 }
 
 .legend-mark i {
   color: white;
-  font-size: 0.8rem;
+  font-size: 1.25em;
+  vertical-align: middle;
 }
 
 /* Button Styles */
 .print-button {
   cursor: pointer;
-  padding: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #ccc;
   background-color: #f8f8f8;
-  border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
@@ -925,9 +969,13 @@ onMounted(async () => {
 
 .list-button {
   cursor: pointer;
-  padding: 0.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px #ccc;
   background-color: #f8f8f8;
-  border-radius: 4px;
   transition: background-color 0.2s ease;
 }
 
@@ -1029,16 +1077,27 @@ onMounted(async () => {
 }
 
 .legend-close {
-  text-align: center;
-  padding: 0.5rem;
-  background-color: #f8f8f8;
-  cursor: pointer;
-  margin-top: 0.5rem;
   display: none;
+  position: absolute;
+  z-index: 15;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 0.8rem;
+  text-align: right;
+  padding: 0.5em;
+  cursor: pointer;
 }
 
 .legend-close.open {
   display: block;
+}
+
+@media (min-width: 768px) {
+  .legend-close, .legend-close.open {
+    display: none;
+  }
 }
 
 /* Print Styles */

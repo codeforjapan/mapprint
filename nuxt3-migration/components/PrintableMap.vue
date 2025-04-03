@@ -1149,14 +1149,42 @@ onMounted(async () => {
 }
 
 /* Print Styles */
+@page {
+  size: A4;
+  margin: 15mm 5mm 15mm;
+}
+
 @media print {
   .print-exclude {
     display: none !important;
   }
   
+  :root {
+    background-color: #fff;
+    font-size: 14px;
+  }
+  
   .map-container {
-    height: 70vh;
+    height: 140mm;
     page-break-after: always;
+  }
+  
+  .marker span {
+    display: flex !important;
+  }
+  
+  .area-select-button {
+    box-shadow: none;
+  }
+  
+  .area-array {
+    white-space: normal;
+    overflow: auto;
+    max-width: 100%;
+  }
+  
+  .legend-navi {
+    position: relative;
   }
   
   .list-outer {
@@ -1172,8 +1200,19 @@ onMounted(async () => {
   }
   
   /* Make all sections visible in print mode */
-  .list-section.show {
+  .list-section.show, .list-section {
     display: block !important;
+  }
+  
+  /* Make sure all markers are visible during print */
+  .marker, .marker span {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  
+  /* Ensure icons are visible */
+  .legend-mark {
+    opacity: 1 !important;
   }
 }
 </style>

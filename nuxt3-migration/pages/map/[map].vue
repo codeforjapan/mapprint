@@ -355,8 +355,61 @@ onMounted(loadMapData);
 
 @media print {
   .back-to-home,
-  .header-actions {
-    display: none;
+  .header-actions,
+  .retry-button,
+  .back-link {
+    display: none !important;
+  }
+  
+  .map-page {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #000;
+  }
+  
+  .header-inner {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .map-title {
+    margin: 0.5rem 0;
+  }
+  
+  .map-title h1 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .map-date {
+    font-size: 0.7rem;
+  }
+  
+  .main-content {
+    padding: 0;
+  }
+  
+  .map-container {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid #000;
+    padding-top: 0.5rem;
+    margin-top: 1rem;
   }
 }
 </style>

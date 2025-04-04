@@ -1,7 +1,7 @@
 <template>
   <div class="layout-map">
     <div class="layout-map-inner grid-noGutter">
-      <main class="main col-12_md-6_xl-6">
+      <main class="main col-12_md-9_xl-6">
         <div class="main-sheet">
           <header class="header">
             <div class="to-top">
@@ -95,7 +95,7 @@
         </div>
       </main>
 
-      <aside class="print-exclude col-12_md-6_xl-6">
+      <aside class="print-exclude col-12_md-3_xl-6">
         <div class="aside-inner">
           <div class="aside-grid">
             <div class="aside-item1">

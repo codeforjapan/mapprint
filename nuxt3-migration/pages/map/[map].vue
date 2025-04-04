@@ -1,58 +1,6 @@
 <template>
   <div class="layout-map">
     <div class="layout-map-inner grid-noGutter">
-      <aside class="print-exclude col-12_md-3_xl-6">
-        <div class="aside-inner">
-          <div class="aside-grid">
-            <div class="aside-item1">
-              <h2 class="aside-title-sp">
-                <NuxtLink to="/">
-                  <img src="@/assets/images/sp_logo.png" width="607" height="452" :alt="$t('common.title')" />
-                </NuxtLink>
-              </h2>
-              <h2 class="aside-title-pc">
-                <NuxtLink to="/">
-                  <img src="@/assets/images/logo.png" width="895" height="160" :alt='$t("common.title")' />
-                </NuxtLink>
-              </h2>
-            </div>
-            <div class="aside-item2">
-              <p>{{ $t('map.desc_1') }}</p>
-            </div>
-            <div class="aside-item3">
-              <div class="aside-item-illust1">
-                <img src="@/assets/images/illust_1.png" width="360" height="450" alt="" />
-              </div>
-            </div>
-            <div class="aside-item4">
-              <p>
-                {{ $t('map.desc_2') }}
-                <br />
-                {{ $t('map.desc_3') }}
-              </p>
-            </div>
-            <div class="aside-item5">
-              <p>
-                {{ $t('map.desc_4') }}
-                <br />
-                {{ $t('map.desc_5') }}
-              </p>
-            </div>
-            <div class="aside-item6">
-              <div class="aside-item-illust2">
-                <img src="@/assets/images/illust_2.png" width="640" height="435" alt="" />
-              </div>
-            </div>
-            <div class="aside-item7">
-              <p>
-                {{ $t('map.desc_6') }}
-                <br />
-                {{ $t('map.desc_7') }}
-              </p>
-            </div>
-          </div>
-        </div>
-      </aside>
       <main class="main col-12_md-9_xl-6">
         <div class="main-sheet">
           <header class="header">
@@ -134,15 +82,68 @@
               {{ $t('map.back_to_maps') || 'Back to Maps' }}
             </NuxtLink>
           </div>
-          
-          <footer class="footer">
-            <div class="footer-logo">
-              <Logo :alt="$t('common.title')" />
-            </div>
-          </footer>
         </div>
       </main>
+
+      <aside class="print-exclude col-12_md-3_xl-6">
+        <div class="aside-inner">
+          <div class="aside-grid">
+            <div class="aside-item1">
+              <h2 class="aside-title-sp">
+                <NuxtLink to="/">
+                  <img src="/images/sp_logo.png" width="607" height="452" :alt="$t('common.title')" />
+                </NuxtLink>
+              </h2>
+              <h2 class="aside-title-pc">
+                <NuxtLink to="/">
+                  <Logo :alt="$t('common.title')" />
+                </NuxtLink>
+              </h2>
+            </div>
+            <div class="aside-item2">
+              <p>{{ $t('map.desc_1') }}</p>
+            </div>
+            <div class="aside-item3">
+              <div class="aside-item-illust1">
+                <img src="/images/illust_1.png" width="360" height="450" alt="" />
+              </div>
+            </div>
+            <div class="aside-item4">
+              <p>
+                {{ $t('map.desc_2') }}
+                <br />
+                {{ $t('map.desc_3') }}
+              </p>
+            </div>
+            <div class="aside-item5">
+              <p>
+                {{ $t('map.desc_4') }}
+                <br />
+                {{ $t('map.desc_5') }}
+              </p>
+            </div>
+            <div class="aside-item6">
+              <div class="aside-item-illust2">
+                <img src="/images/illust_2.png" width="640" height="435" alt="" />
+              </div>
+            </div>
+            <div class="aside-item7">
+              <p>
+                {{ $t('map.desc_6') }}
+                <br />
+                {{ $t('map.desc_7') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
+    
+    <footer class="footer">
+      <div class="footer-logo">
+        <Logo :alt="$t('common.title')" />
+      </div>
+    </footer>
     
     <Modal :isOpen="isOpenExplain" @closeModal="closeModalMethod" />
   </div>

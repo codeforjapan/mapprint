@@ -1,0 +1,86 @@
+@use "mixin";
+@use "variables";
+
+.area-select {
+  position: absolute;
+  z-index: mixin.z(area-select);
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -3px);
+  overflow: hidden;
+  width: 98%;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 0;
+  transition: height .5s;
+  &.open {
+    height: auto;
+  }
+}
+
+.area-close {
+  border-radius: 5px 5px 0 0;
+  background-color: variables.$color-alpha-black;
+  color: #fff;
+  font-size: variables.$font-size-xs;
+  text-align: right;
+  padding: .5em;
+  cursor: pointer;
+}
+
+.area-list-outer {
+  overflow-y: auto;
+  max-height: 0;
+  transition: max-height .5s;
+  &.open {
+    max-height: 40vh;
+  }
+}
+
+.area-list {
+  padding: .5em;
+  margin: 0;
+}
+
+.area-item {
+  padding: .3em .5em;
+}
+
+.area-label {
+  margin: .5em 1em .5em 0;
+}
+
+.area-input {
+  margin-right: .3em;
+}
+
+.area-select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5em;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px variables.$color-gray;
+  cursor: pointer;
+}
+
+.area-array-outer {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.area-array {
+  font-size: variables.$font-size-sm;
+  width: calc(100% - 1em);
+  max-width: 300px;
+  padding: 0 .3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.area-select-button-icon {
+  flex: 0 0 1.5em;
+}

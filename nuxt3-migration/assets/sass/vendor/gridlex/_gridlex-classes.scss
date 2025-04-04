@@ -1,0 +1,189 @@
+// Add math functions to use division
+@use "sass:math";
+@use "gridlex-vars";
+@use "gridlex-mixins";
+
+//************************
+//    CLASSES
+//************************
+// GRID
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"] {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 math.div(- gridlex-vars.$gl-gutter, 2);
+}
+// COLS
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
+  box-sizing: border-box;
+  padding: 0 math.div(gridlex-vars.$gl-gutter, 2) gridlex-vars.$gl-gutter-vertical;
+  max-width: 100%;
+}
+// JUST "COL" & "COL_"
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
+  flex: 1 1 0%;
+}
+// JUST "COL-"
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
+  flex: none;
+}
+
+// COL & GRID
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"][#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"][#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"][#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"][#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
+  margin: 0;
+  padding: 0;
+}
+
+/************************
+    HELPERS SUFFIXES
+*************************/
+// FOR GRID
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"] {
+  // No spacing between cols : noGutter
+  &[#{gridlex-vars.$gl-attributeName}*="-noGutter"] {
+    margin: 0;
+    > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
+      padding: 0;
+    }
+  }
+
+  // No Wrapping
+  &[#{gridlex-vars.$gl-attributeName}*="-noWrap"] {
+    flex-wrap: nowrap;
+  }
+  // Horizontal alignment on center
+  &[#{gridlex-vars.$gl-attributeName}*="-center"] {
+    justify-content: center;
+    align-self: center;
+  }
+  // Horizontal alignment on right
+  &[#{gridlex-vars.$gl-attributeName}*="-right"] {
+    justify-content: flex-end;
+    align-self: flex-end;
+    margin-left: auto;
+  }
+  // Vertical alignment on top
+  &[#{gridlex-vars.$gl-attributeName}*="-top"] {
+    align-items: flex-start;
+  }
+  // Vertical alignment on middle
+  &[#{gridlex-vars.$gl-attributeName}*="-middle"] {
+    align-items: center;
+  }
+  // Vertical alignment on bottom
+  &[#{gridlex-vars.$gl-attributeName}*="-bottom"] {
+    align-items: flex-end;
+  }
+
+  // Orders
+  &[#{gridlex-vars.$gl-attributeName}*="-reverse"] {
+    flex-direction: row-reverse;
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-column"] {
+    flex-direction: column;
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
+      flex-basis: auto;
+    }
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-column-reverse"] {
+    flex-direction: column-reverse;
+  }
+
+  // Spaces between and around cols
+  &[#{gridlex-vars.$gl-attributeName}*="-spaceBetween"] {
+    justify-content: space-between;
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-spaceAround"] {
+    justify-content: space-around;
+  }
+
+  // Equal heights columns
+  &[#{gridlex-vars.$gl-attributeName}*="-equalHeight"]
+    > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+  &[#{gridlex-vars.$gl-attributeName}*="-equalHeight"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+  &[#{gridlex-vars.$gl-attributeName}*="-equalHeight"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
+    align-self: stretch;
+    > * {
+      height: 100%;
+    }
+  }
+  // Removes the padding-bottom
+  &[#{gridlex-vars.$gl-attributeName}*="-noBottom"]
+    > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+  &[#{gridlex-vars.$gl-attributeName}*="-noBottom"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+  &[#{gridlex-vars.$gl-attributeName}*="-noBottom"]
+    > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
+    padding-bottom: 0;
+  }
+}
+
+// FOR COL
+[#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"] {
+  &[#{gridlex-vars.$gl-attributeName}*="-top"] {
+    align-self: flex-start;
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-middle"] {
+    align-self: center;
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-bottom"] {
+    align-self: flex-end;
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-first"] {
+    order: -1;
+  }
+  &[#{gridlex-vars.$gl-attributeName}*="-last"] {
+    order: 1;
+  }
+}
+/************************
+    GRID BY NUMBER
+*************************/
+@include gridlex-mixins.makeGridByNumber(#{gridlex-vars.$gl-gridName});
+@each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
+  @include gridlex-mixins.bp(#{$mq-key}) {
+    //@media #{$mq-value} {
+    @include gridlex-mixins.makeGridByNumber(_#{$mq-key});
+  }
+}
+
+/************************
+    COLS SIZES
+*************************/
+@include gridlex-mixins.makeCol(#{gridlex-vars.$gl-colName});
+@include gridlex-mixins.makeOff(off);
+
+@each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
+  @include gridlex-mixins.bp(#{$mq-key}) {
+    @include gridlex-mixins.makeCol(_#{$mq-key});
+    @include gridlex-mixins.makeOff(_#{$mq-key});
+    @include gridlex-mixins.makeFirstLast(_#{$mq-key});
+  }
+}
+
+/************************
+    HIDING COLS
+*************************/
+@each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
+  @include gridlex-mixins.bp(#{$mq-key}) {
+    [#{gridlex-vars.$gl-attributeName}*="#{$mq-key}-hidden"] {
+      display: none;
+    }
+  }
+}

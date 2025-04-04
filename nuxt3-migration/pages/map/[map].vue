@@ -1,78 +1,163 @@
 <template>
-  <div class="map-page">
-    <header class="header">
-      <div class="header-inner">
-        <div class="back-to-home">
-          <NuxtLink to="/">
-            <i class="fas fa-arrow-left"></i> Back
-          </NuxtLink>
-        </div>
-        <div class="logo">
-          <NuxtLink to="/">
-            <Logo :alt="$t('common.title')" size="small" />
-          </NuxtLink>
-        </div>
-        <div class="header-actions">
-          <div class="language-switcher">
-            <i class="fas fa-language"></i>
-            <select v-model="locale" @change="switchLanguage">
-              <option v-for="localeOption in availableLocales" :key="localeOption.code" :value="localeOption.code">
-                {{ localeOption.name }}
-              </option>
-            </select>
-          </div>
-        </div>
-      </div>
-      <div class="map-title">
-        <h1>{{ mapTitle }}</h1>
-        <div class="map-date">{{ $t('map.printed_at') }} {{ updatedDate }}</div>
-      </div>
-    </header>
+  <div class="layout-map">
+    <div class="layout-map-inner grid-noGutter">
+      <main class="main col-12_md-9_xl-6">
+        <div class="main-sheet">
+          <header class="header">
+            <div class="to-top">
+              <NuxtLink to="/">
+                <i class="far fa-arrow-alt-circle-left fa-2x"></i>
+              </NuxtLink>
+            </div>
+            <div class="banner">
+              <div class="logo print-exclude">
+                <NuxtLink to="/">
+                  <Logo :alt="$t('common.title')" />
+                </NuxtLink>
+              </div>
+              <div class="sub-outer print-exclude">
+                <div class="sub-button" @click="isOpenExplain = !isOpenExplain">
+                  <i class="fas fa-info-circle fa-lg"></i>
+                  <span>{{ $t('common.about') }}</span>
+                </div>
+                <div class="sub-button github-link">
+                  <i class="fab fa-github fa-lg"></i>
+                  <a href="https://github.com/codeforjapan/mapprint">{{ $t('common.contribute') }}</a>
+                </div>
+                <div class="sub-button">
+                  <i class="fas fa-language fa-lg"></i>
+                  <select v-model="locale" @change="switchLanguage">
+                    <option disabled selected>
+                      Language: {{ locales.find(l => l.code === locale)?.name }}
+                    </option>
+                    <option v-for="localeOption in availableLocales" :key="localeOption.code" :value="localeOption.code">
+                      {{ localeOption.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="title-outer">
+                <h1 class="title" v-if="mapConfig && locale === 'ja' && mapConfig.map_title">
+                  {{ mapConfig.map_title }}
+                </h1>
+                <h1 class="title" v-else-if="mapConfig && mapConfig.map_title_en">
+                  {{ mapConfig.map_title_en }}
+                </h1>
+                <h1 class="title" v-else>
+                  {{ $t('common.site_name') }}
+                </h1>
+                <div class="datetime">
+                  {{ $t('map.printed_at') }} {{ updatedDate }}
+                </div>
+              </div>
+            </div>
+            <div class="qrcode print-only">
+              <!-- QR code canvas will be drawn here by script -->
+              <div id="qrcode-container"></div>
+            </div>
+          </header>
 
-    <main class="main-content">
-      <div class="map-container">
-        <ClientOnly>
-          <div v-if="loading" class="loading-indicator">
-            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+          <div class="map-container">
+            <ClientOnly>
+              <div v-if="loading" class="loading-indicator">
+                <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+              </div>
+              
+              <div v-else-if="error" class="error-indicator">
+                <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
+                <button @click="loadMapData" class="retry-button print-exclude">
+                  {{ $t('common.retry') || 'Retry' }}
+                </button>
+              </div>
+              
+              <PrintableMap 
+                v-else-if="mapConfig && mapConfig.center" 
+                :mapConfig="mapConfig" 
+                @update:mapConfig="updateMapConfig"
+                @bounds-changed="handleBoundsChanged"
+                @setLayerSettings="setLayerSettings" 
+              />
+              
+              <div v-else class="not-found-indicator">
+                <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
+                <NuxtLink to="/" class="back-link print-exclude">
+                  {{ $t('map.back_to_maps') || 'Back to Maps' }}
+                </NuxtLink>
+              </div>
+            </ClientOnly>
           </div>
           
-          <div v-else-if="error" class="error-indicator">
-            <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
-            <button @click="loadMapData" class="retry-button">
-              {{ $t('common.retry') || 'Retry' }}
-            </button>
-          </div>
-          
-          <PrintableMap 
-            v-else-if="mapConfig && mapConfig.center" 
-            :mapConfig="mapConfig" 
-            @update:mapConfig="updateMapConfig"
-            @bounds-changed="handleBoundsChanged"
-            @setLayerSettings="setLayerSettings" 
-          />
-          
-          <div v-else class="not-found-indicator">
-            <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
-            <NuxtLink to="/" class="back-link">
-              {{ $t('map.back_to_maps') || 'Back to Maps' }}
-            </NuxtLink>
-          </div>
-        </ClientOnly>
-      </div>
-    </main>
+          <footer class="footer">
+            <div class="footer-logo">
+              <Logo :alt="$t('common.title')" />
+            </div>
+          </footer>
+        </div>
+      </main>
 
-    <footer class="footer">
-      <div class="footer-logo">
-        <Logo :alt="$t('common.title')" />
-      </div>
-    </footer>
+      <aside class="print-exclude col-12_md-3_xl-6">
+        <div class="aside-inner">
+          <div class="aside-grid">
+            <div class="aside-item1">
+              <h2 class="aside-title-sp">
+                <NuxtLink to="/">
+                  <img src="/images/sp_logo.png" width="607" height="452" :alt="$t('common.title')" />
+                </NuxtLink>
+              </h2>
+              <h2 class="aside-title-pc">
+                <NuxtLink to="/">
+                  <Logo :alt="$t('common.title')" />
+                </NuxtLink>
+              </h2>
+            </div>
+            <div class="aside-item2">
+              <p>{{ $t('map.desc_1') }}</p>
+            </div>
+            <div class="aside-item3">
+              <div class="aside-item-illust1">
+                <img src="/images/illust_1.png" width="360" height="450" alt="" />
+              </div>
+            </div>
+            <div class="aside-item4">
+              <p>
+                {{ $t('map.desc_2') }}
+                <br />
+                {{ $t('map.desc_3') }}
+              </p>
+            </div>
+            <div class="aside-item5">
+              <p>
+                {{ $t('map.desc_4') }}
+                <br />
+                {{ $t('map.desc_5') }}
+              </p>
+            </div>
+            <div class="aside-item6">
+              <div class="aside-item-illust2">
+                <img src="/images/illust_2.png" width="640" height="435" alt="" />
+              </div>
+            </div>
+            <div class="aside-item7">
+              <p>
+                {{ $t('map.desc_6') }}
+                <br />
+                {{ $t('map.desc_7') }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+    
+    <Modal :isOpen="isOpenExplain" @closeModal="closeModalMethod" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, nextTick } from 'vue';
+import { ref, computed, onMounted, onUpdated, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
+import QRCode from 'qrcode';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -86,6 +171,8 @@ const mapConfig = ref<MapConfig | null>(null);
 const updatedDate = ref('');
 const loading = ref(false);
 const error = ref<Error | null>(null);
+const currentUrl = ref(''); // For QR code
+const isOpenExplain = ref(false); // Modal state
 
 // Format date for current locale
 const formatDate = (date: Date) => {
@@ -120,7 +207,8 @@ const updateMapConfig = (newConfig: any) => {
 
 // Handler for bounds changed event
 const handleBoundsChanged = () => {
-  // Update any UI elements that depend on the map bounds
+  // Update the QR code when map bounds change
+  generateQRCode();
 };
 
 // Handler for setting layer settings
@@ -250,50 +338,77 @@ const loadMapData = async () => {
   }
 };
 
+// Generate QR Code with current URL
+const generateQRCode = () => {
+  if (process.client && document) {
+    // Use the current URL
+    currentUrl.value = window.location.href;
+    
+    // Get the QR code container
+    const container = document.getElementById('qrcode-container');
+    if (container) {
+      // Clear any existing QR code
+      container.innerHTML = '';
+      
+      // Generate the QR code and append to container
+      QRCode.toCanvas(container, currentUrl.value, {
+        width: 150,
+        margin: 2,
+        color: {
+          dark: '#000',
+          light: '#fff'
+        }
+      }, (error) => {
+        if (error) {
+          console.error('Error generating QR code:', error);
+        }
+      });
+    }
+  }
+};
+
+// Close modal method
+const closeModalMethod = () => {
+  isOpenExplain.value = false;
+};
+
 // Load map data on component mount
-onMounted(loadMapData);
+onMounted(() => {
+  loadMapData();
+  // Generate QR code after component is mounted
+  nextTick(() => {
+    generateQRCode();
+  });
+});
+
+// Update QR code when component is updated
+onUpdated(() => {
+  // Generate QR code after component is updated
+  nextTick(() => {
+    generateQRCode();
+  });
+});
 </script>
 
 <style scoped>
-.map-page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+/* Only QR code related styles kept in component */
+.qrcode.print-only {
+  display: none;
 }
 
-.header {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
+@media print {
+  .qrcode.print-only {
+    display: block;
+    margin: 1rem 0;
+    text-align: center;
+  }
+  
+  #qrcode-container {
+    display: inline-block;
+  }
 }
 
-.header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.map-title {
-  text-align: center;
-  margin: 1rem 0;
-}
-
-.map-date {
-  font-size: 0.8rem;
-  color: #666;
-}
-
-.main-content {
-  flex: 1;
-  padding: 1rem;
-}
-
-.map-container {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  min-height: 500px;
-  position: relative;
-}
-
+/* Loading/Error/Not-found states */
 .loading-indicator,
 .error-indicator,
 .not-found-indicator {
@@ -326,32 +441,4 @@ onMounted(loadMapData);
 .back-link:hover {
   background-color: #3367d6;
 }
-
-.footer {
-  padding: 1rem;
-  text-align: center;
-  border-top: 1px solid #eee;
-}
-
-.language-switcher select {
-  background: transparent;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-.back-to-home a {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: inherit;
-}
-
-.back-to-home i {
-  margin-right: 0.5rem;
-}
-
-/* Print styles moved to _print.scss */
 </style>

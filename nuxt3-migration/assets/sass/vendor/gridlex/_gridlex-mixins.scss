@@ -1,0 +1,84 @@
+// Add math functions to use division
+@use "sass:list";
+@use "sass:math";
+@use "sass:map";
+@use "gridlex-vars";
+@use "gridlex-preprocessing";
+
+// Make the breakpoints
+@mixin bp($breakpoint) {
+  $query: map.get(gridlex-vars.$gl-mq-list, $breakpoint);
+  @if $query != null {
+    @media (#{gridlex-vars.$gl-mq-width}: #{list.nth($query, 1)}) {
+      @content;
+    }
+  }
+}
+
+// Function to generate the grid by number
+@mixin makeGridByNumber($grid) {
+  @for $i from 1 through gridlex-vars.$gl-colCount {
+    [#{gridlex-vars.$gl-attributeName}*="#{$grid}-#{$i}"]
+      > [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-colName}"],
+    [#{gridlex-vars.$gl-attributeName}*="#{$grid}-#{$i}"]
+      > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}-"],
+    [#{gridlex-vars.$gl-attributeName}*="#{$grid}-#{$i}"]
+      > [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-colName}_"] {
+      $fraction: math.div(1, $i);
+
+      flex-basis: map.get(gridlex-preprocessing.$gl-colFractions, $fraction);
+      max-width: map.get(gridlex-preprocessing.$gl-colFractions, $fraction);
+    }
+  }
+}
+
+// Function to generate the grid by columns
+@mixin makeCol($col) {
+  [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"] {
+    @for $i from 1 through gridlex-vars.$gl-colCount {
+      > [#{gridlex-vars.$gl-attributeName}*="#{$col}-#{$i}"] {
+        flex-basis: map.get(gridlex-preprocessing.$gl-colPortions, $i);
+        max-width: map.get(gridlex-preprocessing.$gl-colPortions, $i);
+      }
+    }
+  }
+}
+
+// Function to generate the -first & -last base on mq keys (as _lg-first)
+@mixin makeFirstLast($mq) {
+  [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"] {
+    [#{gridlex-vars.$gl-attributeName}*="#{$mq}-first"] {
+      order: -1;
+    }
+    [#{gridlex-vars.$gl-attributeName}*="#{$mq}-last"] {
+      order: 1;
+    }
+  }
+}
+
+// Function to generate the offset
+@mixin makeOff($off) {
+  [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"] {
+    @for $i from 0 through gridlex-vars.$gl-colCount - 1 {
+      > [data-push-left*="#{$off}-#{$i}"] {
+        margin-left: map.get(gridlex-preprocessing.$gl-colPortions, $i);
+      }
+    }
+  }
+
+  [#{gridlex-vars.$gl-attributeName}~="#{gridlex-vars.$gl-gridName}"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}-"],
+  [#{gridlex-vars.$gl-attributeName}*="#{gridlex-vars.$gl-gridName}_"] {
+    @for $i from 0 through gridlex-vars.$gl-colCount - 1 {
+      > [data-push-right*="#{$off}-#{$i}"] {
+        margin-right: map.get(gridlex-preprocessing.$gl-colPortions, $i);
+      }
+    }
+  }
+}

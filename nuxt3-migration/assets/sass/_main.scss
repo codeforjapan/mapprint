@@ -1,0 +1,26 @@
+@use "mixin";
+
+.main {
+  background: #FFF;
+  order: 1;
+  @include mixin.bp(md) {
+    position: relative;
+    order: -1;
+    &::before {
+      display: block;
+      content: '';
+      position: absolute;
+      right: -10px;
+      top: 0;
+      width: 10px;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(85,85,85,0.2) 0%, rgba(85,85,85,0) 100%);
+    }
+  }
+}
+
+.main-sheet {
+  @include mixin.bp(md) {
+    padding: 1.5em 1.5em 6em;
+  }
+}

@@ -14,6 +14,10 @@
   display: none;
   @include mixin.bp(md) {
     display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
   }
   @include mixin.bp(xl) {
     display: grid;
@@ -75,11 +79,21 @@
 }
 
 .aside-item-illust1 {
-  max-width: 250px;
+  max-width: 100%;
   margin: 2em auto;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 .aside-item-illust2 {
-  max-width: 450px;
+  max-width: 100%;
   margin: 2em auto;
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }

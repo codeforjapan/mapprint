@@ -573,7 +573,7 @@ onMounted(async () => {
                       v-if="source.link"
                       :href="source.link"
                       target="blank"
-                    >[{{ t("PrintableMap.back_to_map") }}]</a>
+                    >[{{ t("PrintableMap.open_datasource") }}]</a>
                   </label>
                 </li>
               </ul>

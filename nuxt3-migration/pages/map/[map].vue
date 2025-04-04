@@ -109,34 +109,30 @@
             </div>
           </header>
 
-          <div class="map-container">
-            <ClientOnly>
-              <div v-if="loading" class="loading-indicator">
-                <p>{{ $t('map.loading') || 'Loading map...' }}</p>
-              </div>
-              
-              <div v-else-if="error" class="error-indicator">
-                <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
-                <button @click="loadMapData" class="retry-button print-exclude">
-                  {{ $t('common.retry') || 'Retry' }}
-                </button>
-              </div>
-              
-              <PrintableMap 
-                v-else-if="mapConfig && mapConfig.center" 
-                :mapConfig="mapConfig" 
-                @update:mapConfig="updateMapConfig"
-                @bounds-changed="handleBoundsChanged"
-                @setLayerSettings="setLayerSettings" 
-              />
-              
-              <div v-else class="not-found-indicator">
-                <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
-                <NuxtLink to="/" class="back-link print-exclude">
-                  {{ $t('map.back_to_maps') || 'Back to Maps' }}
-                </NuxtLink>
-              </div>
-            </ClientOnly>
+          <div v-if="loading" class="loading-indicator">
+            <p>{{ $t('map.loading') || 'Loading map...' }}</p>
+          </div>
+          
+          <div v-else-if="error" class="error-indicator">
+            <p>{{ $t('map.error_loading') || 'Error loading map data.' }}</p>
+            <button @click="loadMapData" class="retry-button print-exclude">
+              {{ $t('common.retry') || 'Retry' }}
+            </button>
+          </div>
+          
+          <PrintableMap 
+            v-else-if="mapConfig && mapConfig.center" 
+            :mapConfig="mapConfig" 
+            @update:mapConfig="updateMapConfig"
+            @bounds-changed="handleBoundsChanged"
+            @setLayerSettings="setLayerSettings" 
+          />
+          
+          <div v-else class="not-found-indicator">
+            <p>{{ $t('map.not_found') || 'Map not found.' }}</p>
+            <NuxtLink to="/" class="back-link print-exclude">
+              {{ $t('map.back_to_maps') || 'Back to Maps' }}
+            </NuxtLink>
           </div>
           
           <footer class="footer">

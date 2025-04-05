@@ -79,12 +79,11 @@
                 </div>
                 <div class="sub-button">
                   <i class="fas fa-language fa-lg"></i>
-                  <select @change="$event => languageChanged($event.target.value)">
-                    <option disabled selected>
+                  <select @change="handleLanguageChange">
+                    <option value="" disabled selected>
                       Language: {{ locales.find(l => l.code === locale)?.name }}
                     </option>
-                    <option v-for="localeOption in locales" :key="localeOption.code" :value="localeOption.code" 
-                      :selected="localeOption.code === locale">
+                    <option v-for="localeOption in locales" :key="localeOption.code" :value="localeOption.code">
                       {{ localeOption.name }}
                     </option>
                   </select>
@@ -158,7 +157,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
-const switchLocalePath = useLocalePath();
+const switchLocalePath = useSwitchLocalePath(); // Function to get localized paths for language switching
 const router = useRouter();
 const route = useRoute();
 
@@ -191,14 +190,22 @@ const availableLocales = computed(() => {
     .map(l => ({ code: l.code, name: l.name }));
 });
 
-// Function to switch language
-const languageChanged = (newLocale: string) => {
-  if (newLocale === locale.value) return;
+// Function to handle language change
+const handleLanguageChange = (event: Event) => {
+  if (!process.client) return;
   
-  const path = switchLocalePath(newLocale);
-  if (path) {
-    console.log(`Switching to language: ${newLocale}, path: ${path}`);
-    navigateTo(path);
+  const select = event.target as HTMLSelectElement;
+  const newLocale = select.value;
+  
+  // Only proceed with navigation if we actually want to change languages
+  if (newLocale && newLocale !== locale.value) {
+    // Get the path for the selected language using switchLocalePath
+    const path = switchLocalePath(newLocale);
+    
+    if (path) {
+      // Navigate to the new path (preserves hash automatically)
+      window.location.href = path;
+    }
   }
 };
 

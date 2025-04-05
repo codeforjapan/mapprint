@@ -1,10 +1,7 @@
 <template>
   <div class="layout-index">
     <div id="fb-root"></div>
-    <!-- Debug element to show current breakpoint -->
-    <ClientOnly>
-      <div class="debug-grid"></div>
-    </ClientOnly>
+    <!-- Debug removed -->
     <header>
       <h1 class="index-title">
         <NuxtLink to="/">
@@ -47,27 +44,7 @@
         </div>
       </div>
       
-      <!-- Style inspector for debugging -->
-      <ClientOnly>
-        <div v-if="maps.length > 0" class="style-inspector">
-          <div class="style-info">
-            <h4>Style Inspector</h4>
-            <div v-if="computedStyles">
-              <p><strong>flex-basis:</strong> {{ computedStyles.flexBasis }}</p>
-              <p><strong>max-width:</strong> {{ computedStyles.maxWidth }}</p>
-              <p><strong>selector:</strong> {{ computedStyles.selector }}</p>
-              <p><strong>element classes:</strong> {{ computedStyles.elementClasses }}</p>
-              <p><strong>parent classes:</strong> {{ computedStyles.parentClasses }}</p>
-              <details>
-                <summary>CSS Text</summary>
-                <pre style="max-width: 300px; overflow: auto;">{{ computedStyles.cssText }}</pre>
-              </details>
-            </div>
-            <button @click="inspectStyles">Inspect Item 0</button>
-            <button @click="checkParent">Check Parent</button>
-          </div>
-        </div>
-      </ClientOnly>
+      <!-- Style inspector removed -->
     </main>
     
     <footer class="index-footer">
@@ -153,86 +130,7 @@ onMounted(async () => {
   }
 });
 
-// Add style inspector logic
-const computedStyles = ref<{
-  flexBasis: string, 
-  maxWidth: string, 
-  selector: string,
-  parentClasses?: string,
-  elementClasses?: string,
-  cssText?: string
-} | null>(null);
-
-// Function to inspect computed styles of an element
-const inspectStyles = () => {
-  // In Nuxt 3, we should use the appropriate way to check for client-side
-  if (typeof window === 'undefined') return;
-  
-  // Get the first map item
-  const element = document.getElementById('map-item-0');
-  
-  if (element) {
-    // Get computed styles
-    const styles = window.getComputedStyle(element);
-    
-    // Check parent element classes
-    const parent = element.parentElement;
-    const parentClasses = parent ? parent.className : 'No parent';
-    
-    // Extract the values we're interested in
-    computedStyles.value = {
-      flexBasis: styles.flexBasis,
-      maxWidth: styles.maxWidth,
-      selector: getAppliedSelector(element),
-      parentClasses: parentClasses,
-      elementClasses: element.className,
-      cssText: styles.cssText.substring(0, 300) + '...' // Show some CSS text
-    };
-  }
-};
-
-// Helper to find which selector was used to apply flex-basis
-const getAppliedSelector = (element: HTMLElement) => {
-  if (!element || typeof window === 'undefined') return 'Not found';
-  
-  // Try to detect what selector is being applied
-  let result = [];
-  
-  // Check if element matches different possible selectors
-  if (window.matchMedia('(min-width: 93em)').matches) {
-    result.push('XL breakpoint active');
-  }
-  
-  if (window.matchMedia('(min-width: 75em)').matches) {
-    result.push('LG breakpoint active');
-  }
-  
-  if (element.matches('.col-12_xs-6_lg-4')) {
-    result.push('Has class col-12_xs-6_lg-4');
-  }
-  
-  return result.join(', ');
-};
-
-// Function to check parent element
-const checkParent = () => {
-  if (typeof window === 'undefined') return;
-  
-  const element = document.getElementById('map-item-0');
-  if (!element || !element.parentElement) return;
-  
-  const parent = element.parentElement;
-  const styles = window.getComputedStyle(parent);
-  
-  computedStyles.value = {
-    flexBasis: 'N/A (parent)',
-    maxWidth: 'N/A (parent)',
-    selector: 'Checking parent: ' + parent.className,
-    parentClasses: 'N/A',
-    elementClasses: parent.className,
-    cssText: styles.cssText.substring(0, 300) + '...'
-  };
-};
+// Debug logic removed
 
 // Page title and meta setup
 useHead({

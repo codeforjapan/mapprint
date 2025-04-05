@@ -343,38 +343,6 @@ const initializeMap = async () => {
     // Ensure the map container has proper dimensions
     mapContainer.style.width = '100%';
     
-    // Log dimensions and breakpoint information for debugging
-    console.log('Map container dimensions:', {
-      containerWidth: mapContainer.offsetWidth,
-      containerClientWidth: mapContainer.clientWidth,
-      parentWidth: mapContainer.parentElement ? mapContainer.parentElement.offsetWidth : 0,
-      windowWidth: window.innerWidth,
-      isXLBreakpoint: window.matchMedia('(min-width: 93em)').matches,
-      isMDBreakpoint: window.matchMedia('(min-width: 52.625em)').matches
-    });
-    
-    // Debug all applied CSS rules for the map container
-    const mediaRules = [];
-    for (let i = 0; i < document.styleSheets.length; i++) {
-      try {
-        const sheet = document.styleSheets[i];
-        const rules = sheet.cssRules || sheet.rules;
-        for (let j = 0; j < rules.length; j++) {
-          const rule = rules[j];
-          if (rule instanceof CSSMediaRule && rule.media.mediaText.includes('min-width')) {
-            mediaRules.push({
-              media: rule.media.mediaText,
-              cssText: rule.cssText
-            });
-          }
-        }
-      } catch (e) {
-        // Skip over cross-origin stylesheets
-        continue;
-      }
-    }
-    console.log('Media queries found:', mediaRules);
-    
     console.log('Creating MapLibre map instance');
     
     // Create the map instance
@@ -393,24 +361,6 @@ const initializeMap = async () => {
     // Setup event handlers once the map is loaded
     mapInstance.on('load', () => {
       console.log('Map loaded event fired');
-      
-      // Re-check dimensions after map is loaded
-      const mainElement = document.querySelector('.main.col-12_md-9_xl-6');
-      const asideElement = document.querySelector('.aside.col-12_md-3_xl-6');
-      
-      console.log('Map dimensions after load:', {
-        containerWidth: mapContainer.offsetWidth,
-        containerClientWidth: mapContainer.clientWidth,
-        parentWidth: mapContainer.parentElement ? mapContainer.parentElement.offsetWidth : 0,
-        computedWidth: window.getComputedStyle(mapContainer).width,
-        mainColumnWidth: mainElement?.offsetWidth || 0,
-        mainComputedStyle: window.getComputedStyle(mainElement).getPropertyValue('max-width'),
-        asideColumnWidth: asideElement?.offsetWidth || 0,
-        asideComputedStyle: window.getComputedStyle(asideElement).getPropertyValue('max-width'),
-        windowWidth: window.innerWidth,
-        isXLBreakpoint: window.matchMedia('(min-width: 93em)').matches,
-        isMDBreakpoint: window.matchMedia('(min-width: 52.625em)').matches
-      });
       
       // Update loading state
       mapLoading.value = false;

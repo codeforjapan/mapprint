@@ -4,17 +4,26 @@ import Logo from '../../components/Logo.vue';
 
 describe('Logo', () => {
   it('renders properly', () => {
-    const wrapper = shallowMount(Logo);
+    const wrapper = shallowMount(Logo, {
+      props: {
+        alt: 'Test Logo',
+        size: 'small'
+      }
+    });
     
     // Check if component is mounted and has the right structure
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.find('.VueToNuxtLogo').exists()).toBe(true);
-    expect(wrapper.findAll('.Triangle').length).toBe(4);
+    expect(wrapper.find('img').exists()).toBe(true);
+    expect(wrapper.find('img').attributes('alt')).toBe('Test Logo');
+    expect(wrapper.find('img').classes()).toContain('logo-small');
     
-    // Check for specific triangles
-    expect(wrapper.find('.Triangle--one').exists()).toBe(true);
-    expect(wrapper.find('.Triangle--two').exists()).toBe(true);
-    expect(wrapper.find('.Triangle--three').exists()).toBe(true);
-    expect(wrapper.find('.Triangle--four').exists()).toBe(true);
+    // Test with different size
+    const largeWrapper = shallowMount(Logo, {
+      props: {
+        alt: 'Large Logo',
+        size: 'large'
+      }
+    });
+    expect(largeWrapper.find('img').classes()).toContain('logo-large');
   });
 });

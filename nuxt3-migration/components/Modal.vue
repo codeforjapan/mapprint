@@ -11,7 +11,9 @@ const props = defineProps({
 });
 
 const emit = defineEmits(['update:isOpen', 'closeModal']);
+// @ts-ignore - These will be provided by Nuxt in the app, and mocked in tests
 const route = useRoute();
+// @ts-ignore
 const { t, locale } = useI18n();
 
 const mapConfig = ref(null);

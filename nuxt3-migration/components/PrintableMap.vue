@@ -21,6 +21,7 @@ const props = defineProps({
 const emit = defineEmits(['update:mapConfig', 'bounds-changed', 'setLayerSettings']);
 
 // I18n
+// @ts-ignore - useI18n will be globally available in Nuxt but might be mocked in tests
 const { t, locale } = useI18n();
 
 // State

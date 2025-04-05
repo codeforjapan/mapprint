@@ -51,15 +51,19 @@ vi.mock('vue-router', () => ({
   })
 }));
 
-// Mock Vue i18n
-vi.mock('vue-i18n', () => ({
+// Mock Vue i18n and Nuxt composables
+vi.mock('#imports', () => ({
   useI18n: () => ({
     t: (key: string) => key,
-    locale: { value: 'en' }
-  })
-}));
-
-// Mock dynamic imports for tests
-vi.mock('#imports', () => ({
-  // Add any composables or imports that might be needed
+    locale: { value: 'en' },
+    locales: { value: [{ code: 'en', name: 'English' }] }
+  }),
+  useRoute: () => ({
+    params: { map: 'test-map' }
+  }),
+  useRouter: () => ({
+    push: vi.fn()
+  }),
+  useLocalePath: () => (path: string) => path,
+  definePageMeta: vi.fn()
 }));

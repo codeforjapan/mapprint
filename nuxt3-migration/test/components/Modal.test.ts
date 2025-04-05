@@ -2,6 +2,23 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import Modal from '../../components/Modal.vue';
 
+// Mock Vue I18n composable
+vi.mock('vue-i18n', () => ({
+  useI18n: () => ({
+    t: (key: string) => key,
+    locale: 'en'
+  })
+}));
+
+// Mock Vue Router
+vi.mock('vue-router', () => ({
+  useRoute: () => ({
+    params: {
+      map: 'test-map'
+    }
+  })
+}));
+
 // Skip testing the dynamic import for now
 vi.mock('~/assets/config/test-map.json', () => ({
   default: {

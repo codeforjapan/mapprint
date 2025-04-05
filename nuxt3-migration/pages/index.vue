@@ -35,10 +35,42 @@
                   <img :src="`/images/${map.map_image || 'logo.png'}`" alt="" />
                   <div class="index-item-title">
                     <span>{{ getLocalizedTitle(map, locale) }}</span>
-                    <i class="index-arrow-icon fas fa-long-arrow-alt-right"></i>
                   </div>
                 </div>
               </NuxtLink>
+              <!-- Social sharing buttons -->
+              <div class="index-item-sns">
+                <div>
+                  <div class="fb-share-button" 
+                    :data-href="`https://kamimap.com/map/${map.map_id}`" 
+                    data-layout="button" 
+                    data-size="small">
+                    <a target="_blank" 
+                      :href="`https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fkamimap.com%2Fmap%2F${map.map_id}%2F&amp;src=sdkpreparse`" 
+                      class="fb-xfbml-parse-ignore">
+                      {{ $t('common.share') }}
+                    </a>
+                  </div>
+                </div>
+                <div>
+                  <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+                    class="twitter-share-button" 
+                    :data-text="`${getLocalizedTitle(map, locale)} - ${$t('common.site_name')}`" 
+                    :data-url="`https://kamimap.com/map/${map.map_id}`" 
+                    data-show-count="false">Tweet</a>
+                </div>
+                <div>
+                  <div class="line-it-button" 
+                    data-lang="ja" 
+                    data-type="share-a" 
+                    data-ver="3" 
+                    :data-url="`https://kamimap.com/map/${map.map_id}`" 
+                    data-color="default" 
+                    data-size="small" 
+                    data-count="false" 
+                    style="display: none;"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

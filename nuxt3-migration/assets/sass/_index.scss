@@ -29,9 +29,9 @@
 /* Debug classes to test media queries and grid layout */
 /* Check the lg-4 class specifically */
 @media (min-width: 75em) {
+  /* Apply to all col-12_xs-6_lg-4 elements */
   .col-12_xs-6_lg-4 {
     position: relative;
-    /* Remove the forced width to see if the issue returns */
     
     &::after {
       content: "LG-4 active";
@@ -44,6 +44,13 @@
       font-size: 10px;
       z-index: 999;
     }
+  }
+  
+  /* Target specifically the ones on the index page */
+  .index-grid > .col-12_xs-6_lg-4 {
+    flex-basis: 33.33333% !important;
+    max-width: 33.33333% !important;
+    background-color: rgba(0,255,0,0.1); /* Light green background to show it's working */
   }
 }
 .debug-grid {

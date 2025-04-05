@@ -1,5 +1,3 @@
-import { error } from "console";
-
 export default {
   common: {
     site_name: "KamiMap",
@@ -31,7 +29,9 @@ export default {
     desc_7: "",
     loading: "Loading map...",
     error_loading: "Error loading map",
-    printed_at: "Printed at: "
+    printed_at: "Printed at: ",
+    not_found: "Map not found",
+    back_to_maps: "Back to maps"
   },
   PrintableMap: {
     name: "Name: ",

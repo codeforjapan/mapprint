@@ -25,23 +25,25 @@
         <p>{{ $t('common.no_maps_available') || 'No maps available.' }}</p>
       </div>
       
-      <ul v-else class="index-list grid grid-center-equalHeight">
-        <li v-for="(map, index) in maps" :key="index" class="col-12_xs-6_lg-4">
-          <div class="index-item">
-            <div class="index-item-inner">
-              <NuxtLink :to="`/map/${map.map_id}`" :key="index">
-                <div class="index-link-inner">
-                  <img :src="`/images/${map.map_image || 'logo.png'}`" alt="" />
-                  <div class="index-item-title">
-                    <span>{{ getLocalizedTitle(map, locale) }}</span>
-                    <i class="index-arrow-icon fas fa-long-arrow-alt-right"></i>
+      <div v-else class="grid-equalHeight">
+        <ul class="index-list grid">
+          <li v-for="(map, index) in maps" :key="index" class="col-12_xs-6_lg-4">
+            <div class="index-item">
+              <div class="index-item-inner">
+                <NuxtLink :to="`/map/${map.map_id}`" :key="index">
+                  <div class="index-link-inner">
+                    <img :src="`/images/${map.map_image || 'logo.png'}`" alt="" />
+                    <div class="index-item-title">
+                      <span>{{ getLocalizedTitle(map, locale) }}</span>
+                      <i class="index-arrow-icon fas fa-long-arrow-alt-right"></i>
+                    </div>
                   </div>
-                </div>
-              </NuxtLink>
+                </NuxtLink>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
     </main>
     
     <footer class="index-footer">

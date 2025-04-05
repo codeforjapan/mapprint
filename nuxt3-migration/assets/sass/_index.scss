@@ -12,6 +12,12 @@
 
 .index-list {
   padding: 0;
+  width: 100%;
+}
+
+.grid-equalHeight {
+  display: flex;
+  width: 100%;
 }
 
 .index-item {

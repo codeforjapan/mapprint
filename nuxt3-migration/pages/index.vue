@@ -25,7 +25,7 @@
         <p>{{ $t('common.no_maps_available') || 'No maps available.' }}</p>
       </div>
       
-      <ul v-else class="index-list grid-center-equalHeight">
+      <ul v-else class="index-list grid grid-center-equalHeight">
         <li v-for="(map, index) in maps" :key="index" class="col-12_xs-6_lg-4">
           <div class="index-item">
             <div class="index-item-inner">

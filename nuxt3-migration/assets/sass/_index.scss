@@ -45,7 +45,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.5em;
+  padding: 1em;
+  min-height: 3em; /* Ensure minimum height for the title area */
 }
 
 .index-arrow-icon {

@@ -77,17 +77,7 @@
                   <i class="fab fa-github fa-lg"></i>
                   <a href="https://github.com/codeforjapan/mapprint">{{ $t('common.contribute') }}</a>
                 </div>
-                <div class="sub-button">
-                  <i class="fas fa-language fa-lg"></i>
-                  <select @change="handleLanguageChange">
-                    <option value="" disabled selected>
-                      Language: {{ locales.find(l => l.code === locale)?.name }}
-                    </option>
-                    <option v-for="localeOption in locales" :key="localeOption.code" :value="localeOption.code">
-                      {{ localeOption.name }}
-                    </option>
-                  </select>
-                </div>
+                <LanguageSwitcher />
               </div>
               <div class="title-outer">
                 <h1 class="title" v-if="mapConfig && locale === 'ja' && mapConfig.map_title">
@@ -154,6 +144,7 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
 import VueQrcode from '@chenfengyuan/vue-qrcode';
+import LanguageSwitcher from '~/components/LanguageSwitcher.vue';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -190,24 +181,6 @@ const availableLocales = computed(() => {
     .map(l => ({ code: l.code, name: l.name }));
 });
 
-// Function to handle language change
-const handleLanguageChange = (event: Event) => {
-  if (!process.client) return;
-  
-  const select = event.target as HTMLSelectElement;
-  const newLocale = select.value;
-  
-  // Only proceed with navigation if we actually want to change languages
-  if (newLocale && newLocale !== locale.value) {
-    // Get the path for the selected language using switchLocalePath
-    const path = switchLocalePath(newLocale);
-    
-    if (path) {
-      // Navigate to the new path (preserves hash automatically)
-      window.location.href = path;
-    }
-  }
-};
 
 // Handler for updating map configuration
 const updateMapConfig = (newConfig: any) => {

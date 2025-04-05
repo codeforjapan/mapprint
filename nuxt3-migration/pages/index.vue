@@ -91,17 +91,7 @@
     </footer>
     
     <footer class="index-footer">
-      <div class="sub-button">
-        <i class="fas fa-language fa-lg"></i>
-        <select @change="$event => handleLanguageChange($event.target.value)">
-          <option disabled selected>
-            Language: {{ locales.find(l => l.code === locale)?.name }}
-          </option>
-          <option v-for="localeOption in locales" :key="localeOption.code" :value="localeOption.code">
-            {{ localeOption.name }}
-          </option>
-        </select>
-      </div>
+      <LanguageSwitcher />
     </footer>
     
     <Modal :isOpen="isOpenExplain" @closeModal="closeModalMethod" />
@@ -112,11 +102,11 @@
 import { onMounted, ref, computed } from 'vue';
 import Logo from '~/components/Logo.vue';
 import Modal from '~/components/Modal.vue';
+import LanguageSwitcher from '~/components/LanguageSwitcher.vue';
 import type { MapConfig } from '@/types';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
-const switchLocalePath = useSwitchLocalePath(); // Use the correct function for language switching
 
 // Reactive state
 const loading = ref(false);
@@ -126,19 +116,6 @@ const isOpenExplain = ref(false);
 
 // Use our composable to get map configuration data
 const { loadAllMapConfigs, getLocalizedTitle } = useMapConfig();
-
-// Function to handle language change
-const handleLanguageChange = (newLocale: string) => {
-  if (!process.client || newLocale === locale.value) return;
-  
-  // Get the path for the selected language using switchLocalePath
-  const path = switchLocalePath(newLocale);
-  
-  if (path) {
-    // Navigate to the new path
-    window.location.href = path;
-  }
-};
 
 // Method to close modal
 const closeModalMethod = () => {

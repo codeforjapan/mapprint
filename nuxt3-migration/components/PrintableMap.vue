@@ -658,7 +658,6 @@ onMounted(async () => {
           </div>
 
           <div class="list-outer" :class="{ open: isOpenList }">
-            <h3 class="list-header">{{ t('PrintableMap.poi_list') || 'Points of Interest in this area' }}</h3>
             <section
               class="list-section"
               v-for="group in displayMarkersGroupByCategory"

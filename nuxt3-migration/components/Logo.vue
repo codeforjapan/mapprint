@@ -13,7 +13,7 @@ defineProps({
 
 <template>
   <img 
-    src="/images/logo.png" 
+    src="@/assets/images/logo.png" 
     :alt="alt" 
     :class="{ 'logo-small': size === 'small', 'logo-large': size === 'large' }"
   >

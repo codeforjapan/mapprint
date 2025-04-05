@@ -105,8 +105,8 @@
               </div>
             </div>
             <div class="qrcode print-only">
-              <!-- QR code canvas will be drawn here by script -->
-              <div id="qrcode-container"></div>
+              <!-- Use the Vue QR code component -->
+              <vue-qrcode v-if="currentUrl" :value="currentUrl" tag="img" :options="{width: 150}" />
             </div>
           </header>
 
@@ -150,10 +150,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUpdated, nextTick } from 'vue';
+import { ref, computed, onMounted, watch, nextTick } from 'vue';
 import { getNowYMD } from '~/lib/displayHelper';
 import type { MapConfig } from '@/types';
-import QRCode from 'qrcode';
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 // i18n setup
 const { locale, t, locales } = useI18n();
@@ -203,8 +203,10 @@ const updateMapConfig = (newConfig: any) => {
 
 // Handler for bounds changed event
 const handleBoundsChanged = () => {
-  // Update the QR code when map bounds change
-  generateQRCode();
+  // Update the QR code URL when map bounds change
+  if (process.client) {
+    currentUrl.value = window.location.href;
+  }
 };
 
 // Handler for setting layer settings
@@ -334,34 +336,7 @@ const loadMapData = async () => {
   }
 };
 
-// Generate QR Code with current URL
-const generateQRCode = () => {
-  if (process.client && document) {
-    // Use the current URL
-    currentUrl.value = window.location.href;
-    
-    // Get the QR code container
-    const container = document.getElementById('qrcode-container');
-    if (container) {
-      // Clear any existing QR code
-      container.innerHTML = '';
-      
-      // Generate the QR code and append to container
-      QRCode.toCanvas(container, currentUrl.value, {
-        width: 150,
-        margin: 2,
-        color: {
-          dark: '#000',
-          light: '#fff'
-        }
-      }, (error) => {
-        if (error) {
-          console.error('Error generating QR code:', error);
-        }
-      });
-    }
-  }
-};
+// We'll use the Vue-QRCode component instead of manually generating QR code
 
 // Close modal method
 const closeModalMethod = () => {
@@ -371,17 +346,19 @@ const closeModalMethod = () => {
 // Load map data on component mount
 onMounted(() => {
   loadMapData();
-  // Generate QR code after component is mounted
-  nextTick(() => {
-    generateQRCode();
-  });
+  // Set the current URL for QR code
+  if (process.client) {
+    currentUrl.value = window.location.href;
+  }
 });
 
-// Update QR code when component is updated
-onUpdated(() => {
-  // Generate QR code after component is updated
-  nextTick(() => {
-    generateQRCode();
-  });
-});
+// Watch for URL changes
+watch(
+  () => route.fullPath,
+  () => {
+    if (process.client) {
+      currentUrl.value = window.location.href;
+    }
+  }
+);
 </script>

@@ -79,11 +79,12 @@
                 </div>
                 <div class="sub-button">
                   <i class="fas fa-language fa-lg"></i>
-                  <select v-model="locale" @change="switchLanguage">
+                  <select @change="$event => languageChanged($event.target.value)">
                     <option disabled selected>
                       Language: {{ locales.find(l => l.code === locale)?.name }}
                     </option>
-                    <option v-for="localeOption in availableLocales" :key="localeOption.code" :value="localeOption.code">
+                    <option v-for="localeOption in locales" :key="localeOption.code" :value="localeOption.code" 
+                      :selected="localeOption.code === locale">
                       {{ localeOption.name }}
                     </option>
                   </select>
@@ -191,9 +192,14 @@ const availableLocales = computed(() => {
 });
 
 // Function to switch language
-const switchLanguage = () => {
-  const path = switchLocalePath(locale.value);
-  router.push(path);
+const languageChanged = (newLocale: string) => {
+  if (newLocale === locale.value) return;
+  
+  const path = switchLocalePath(newLocale);
+  if (path) {
+    console.log(`Switching to language: ${newLocale}, path: ${path}`);
+    navigateTo(path);
+  }
 };
 
 // Handler for updating map configuration

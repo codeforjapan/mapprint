@@ -131,12 +131,32 @@ const { loadAllMapConfigs, getLocalizedTitle } = useMapConfig();
 const handleLanguageChange = (newLocale: string) => {
   if (!process.client || newLocale === locale.value) return;
   
-  // Get the path for the selected language using switchLocalePath
+  console.log('Changing language to:', newLocale);
+  
+  // Special handling for Japanese (default language)
+  if (newLocale === 'ja') {
+    // Strip any language prefix from current path
+    const currentPath = window.location.pathname;
+    const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}\//, '/');
+    
+    console.log('Japanese path:', pathWithoutLang);
+    window.location.href = pathWithoutLang;
+    return;
+  }
+  
+  // For other languages, use switchLocalePath
   const path = switchLocalePath(newLocale);
+  console.log('Generated path:', path);
   
   if (path) {
     // Navigate to the new path
     window.location.href = path;
+  } else {
+    // Fallback for other languages
+    const currentPath = window.location.pathname;
+    // Strip any existing language prefix
+    const pathWithoutLang = currentPath.replace(/^\/[a-z]{2}\//, '/');
+    window.location.href = `/${newLocale}${pathWithoutLang}`;
   }
 };
 

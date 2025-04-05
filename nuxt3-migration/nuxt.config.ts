@@ -30,7 +30,8 @@ export default defineNuxtConfig({
   // Register plugins
   plugins: [
     '~/plugins/maplibre.ts',
-    '~/plugins/simplebar.ts'
+    '~/plugins/simplebar.ts',
+    '~/plugins/vue-qrcode.ts'
   ],
 
   i18n: {

@@ -156,10 +156,18 @@
     GRID BY NUMBER
 *************************/
 @include gridlex-mixins.makeGridByNumber(#{gridlex-vars.$gl-gridName});
+
+// Special handling for the XL breakpoint to ensure it's applied at 93em
+@media (min-width: 93em) {
+  @include gridlex-mixins.makeGridByNumber(_xl);
+}
+
+// Other media queries
 @each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
-  @include gridlex-mixins.bp(#{$mq-key}) {
-    //@media #{$mq-value} {
-    @include gridlex-mixins.makeGridByNumber(_#{$mq-key});
+  @if $mq-key != 'xl' {
+    @include gridlex-mixins.bp(#{$mq-key}) {
+      @include gridlex-mixins.makeGridByNumber(_#{$mq-key});
+    }
   }
 }
 
@@ -169,11 +177,21 @@
 @include gridlex-mixins.makeCol(#{gridlex-vars.$gl-colName});
 @include gridlex-mixins.makeOff(off);
 
+// Special handling for XL breakpoint
+@media (min-width: 93em) {
+  @include gridlex-mixins.makeCol(_xl);
+  @include gridlex-mixins.makeOff(_xl);
+  @include gridlex-mixins.makeFirstLast(_xl);
+}
+
+// Other media queries
 @each $mq-key, $mq-value in gridlex-vars.$gl-mq-list {
-  @include gridlex-mixins.bp(#{$mq-key}) {
-    @include gridlex-mixins.makeCol(_#{$mq-key});
-    @include gridlex-mixins.makeOff(_#{$mq-key});
-    @include gridlex-mixins.makeFirstLast(_#{$mq-key});
+  @if $mq-key != 'xl' {
+    @include gridlex-mixins.bp(#{$mq-key}) {
+      @include gridlex-mixins.makeCol(_#{$mq-key});
+      @include gridlex-mixins.makeOff(_#{$mq-key});
+      @include gridlex-mixins.makeFirstLast(_#{$mq-key});
+    }
   }
 }
 

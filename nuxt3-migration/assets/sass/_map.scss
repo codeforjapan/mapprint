@@ -1,9 +1,14 @@
 @use "mixin";
 @use "variables";
 
+.map-parent-container {
+  width: 100%;
+}
+
 .map-outer {
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 #map {
@@ -17,6 +22,19 @@
   .mapboxgl-popup {
     max-width: 200px;
     z-index: mixin.z(mapboxgl-popup);
+  }
+}
+
+/* Force the correct width at the XL breakpoint */
+@media (min-width: 93em) {
+  .main.col-12_md-9_xl-6 {
+    flex-basis: 50% !important;
+    max-width: 50% !important;
+  }
+  
+  .aside.col-12_md-3_xl-6 {
+    flex-basis: 50% !important;
+    max-width: 50% !important;
   }
 }
 

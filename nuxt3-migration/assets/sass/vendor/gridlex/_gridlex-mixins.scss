@@ -9,8 +9,15 @@
 @mixin bp($breakpoint) {
   $query: map.get(gridlex-vars.$gl-mq-list, $breakpoint);
   @if $query != null {
-    @media (#{gridlex-vars.$gl-mq-width}: #{list.nth($query, 1)}) {
-      @content;
+    @if $breakpoint == 'xl' {
+      // Force XL breakpoint to 93em to ensure it's properly applied
+      @media (min-width: 93em) {
+        @content;
+      }
+    } @else {
+      @media (#{gridlex-vars.$gl-mq-width}: #{list.nth($query, 1)}) {
+        @content;
+      }
     }
   }
 }

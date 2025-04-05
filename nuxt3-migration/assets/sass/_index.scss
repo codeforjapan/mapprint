@@ -20,6 +20,72 @@
   width: 100%;
 }
 
+/* Debug classes to test media queries and grid layout */
+/* Check the lg-4 class specifically */
+@media (min-width: 75em) {
+  .col-12_xs-6_lg-4 {
+    position: relative;
+    flex-basis: 33.33333% !important; /* Force 3-column layout */
+    max-width: 33.33333% !important;
+    
+    &::after {
+      content: "LG-4 active";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      background: blue;
+      color: white;
+      padding: 3px;
+      font-size: 10px;
+      z-index: 999;
+    }
+  }
+}
+.debug-grid {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 10px;
+  z-index: 9999;
+  
+  &::before {
+    content: "Default (Mobile)";
+  }
+  
+  @media (min-width: 35.5em) {
+    &::before {
+      content: "XS: > 35.5em";
+    }
+  }
+  
+  @media (min-width: 48em) {
+    &::before {
+      content: "SM: > 48em";
+    }
+  }
+  
+  @media (min-width: 52.625em) {
+    &::before {
+      content: "MD: > 52.625em";
+    }
+  }
+  
+  @media (min-width: 75em) {
+    &::before {
+      content: "LG: > 75em";
+    }
+  }
+  
+  @media (min-width: 93em) {
+    &::before {
+      content: "XL: > 93em";
+      background: red;
+    }
+  }
+}
+
 .index-item {
   padding: 0.8em;
   background-color: rgba(0, 0, 0, 0.2);

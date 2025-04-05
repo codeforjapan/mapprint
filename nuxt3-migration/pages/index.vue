@@ -1,6 +1,8 @@
 <template>
   <div class="layout-index">
     <div id="fb-root"></div>
+    <!-- Debug element to show current breakpoint -->
+    <div class="debug-grid"></div>
     <header>
       <h1 class="index-title">
         <NuxtLink to="/">

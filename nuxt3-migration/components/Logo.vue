@@ -28,8 +28,5 @@ img {
   height: 32px;
 }
 
-.logo-large {
-  width: 895px;
-  height: 160px;
-}
+
 </style>

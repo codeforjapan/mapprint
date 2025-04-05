@@ -29,7 +29,7 @@
       
       <div v-else class="grid-equalHeight">
         <ul class="index-list grid">
-          <li v-for="(map, index) in maps" :key="index" class="col-12_xs-6_lg-4">
+          <li v-for="(map, index) in maps" :key="index" class="col-12_xs-6_lg-4" :id="`map-item-${index}`">
             <div class="index-item">
               <div class="index-item-inner">
                 <NuxtLink :to="`/map/${map.map_id}`" :key="index">
@@ -45,6 +45,19 @@
             </div>
           </li>
         </ul>
+      </div>
+      
+      <!-- Style inspector for debugging -->
+      <div v-if="maps.length > 0 && process.client" class="style-inspector">
+        <div class="style-info">
+          <h4>Style Inspector</h4>
+          <div v-if="computedStyles">
+            <p>flex-basis: {{ computedStyles.flexBasis }}</p>
+            <p>max-width: {{ computedStyles.maxWidth }}</p>
+            <p>selector: {{ computedStyles.selector }}</p>
+          </div>
+          <button @click="inspectStyles">Inspect Item 0</button>
+        </div>
       </div>
     </main>
     
@@ -130,6 +143,52 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+
+// Add style inspector logic
+const computedStyles = ref<{flexBasis: string, maxWidth: string, selector: string} | null>(null);
+
+// Function to inspect computed styles of an element
+const inspectStyles = () => {
+  if (!process.client) return;
+  
+  // Get the first map item
+  const element = document.getElementById('map-item-0');
+  
+  if (element) {
+    // Get computed styles
+    const styles = window.getComputedStyle(element);
+    
+    // Extract the values we're interested in
+    computedStyles.value = {
+      flexBasis: styles.flexBasis,
+      maxWidth: styles.maxWidth,
+      selector: getAppliedSelector(element)
+    };
+  }
+};
+
+// Helper to find which selector was used to apply flex-basis
+const getAppliedSelector = (element: HTMLElement) => {
+  if (!element) return 'Not found';
+  
+  // Try to detect what selector is being applied
+  let result = [];
+  
+  // Check if element matches different possible selectors
+  if (window.matchMedia('(min-width: 93em)').matches) {
+    result.push('XL breakpoint active');
+  }
+  
+  if (window.matchMedia('(min-width: 75em)').matches) {
+    result.push('LG breakpoint active');
+  }
+  
+  if (element.matches('.col-12_xs-6_lg-4')) {
+    result.push('Has class col-12_xs-6_lg-4');
+  }
+  
+  return result.join(', ');
+};
 
 // Page title and meta setup
 useHead({

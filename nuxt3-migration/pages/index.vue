@@ -2,7 +2,9 @@
   <div class="layout-index">
     <div id="fb-root"></div>
     <!-- Debug element to show current breakpoint -->
-    <div class="debug-grid"></div>
+    <ClientOnly>
+      <div class="debug-grid"></div>
+    </ClientOnly>
     <header>
       <h1 class="index-title">
         <NuxtLink to="/">
@@ -48,17 +50,19 @@
       </div>
       
       <!-- Style inspector for debugging -->
-      <div v-if="maps.length > 0 && process.client" class="style-inspector">
-        <div class="style-info">
-          <h4>Style Inspector</h4>
-          <div v-if="computedStyles">
-            <p>flex-basis: {{ computedStyles.flexBasis }}</p>
-            <p>max-width: {{ computedStyles.maxWidth }}</p>
-            <p>selector: {{ computedStyles.selector }}</p>
+      <ClientOnly>
+        <div v-if="maps.length > 0" class="style-inspector">
+          <div class="style-info">
+            <h4>Style Inspector</h4>
+            <div v-if="computedStyles">
+              <p>flex-basis: {{ computedStyles.flexBasis }}</p>
+              <p>max-width: {{ computedStyles.maxWidth }}</p>
+              <p>selector: {{ computedStyles.selector }}</p>
+            </div>
+            <button @click="inspectStyles">Inspect Item 0</button>
           </div>
-          <button @click="inspectStyles">Inspect Item 0</button>
         </div>
-      </div>
+      </ClientOnly>
     </main>
     
     <footer class="index-footer">
@@ -149,7 +153,8 @@ const computedStyles = ref<{flexBasis: string, maxWidth: string, selector: strin
 
 // Function to inspect computed styles of an element
 const inspectStyles = () => {
-  if (!process.client) return;
+  // In Nuxt 3, we should use the appropriate way to check for client-side
+  if (typeof window === 'undefined') return;
   
   // Get the first map item
   const element = document.getElementById('map-item-0');
@@ -169,7 +174,7 @@ const inspectStyles = () => {
 
 // Helper to find which selector was used to apply flex-basis
 const getAppliedSelector = (element: HTMLElement) => {
-  if (!element) return 'Not found';
+  if (!element || typeof window === 'undefined') return 'Not found';
   
   // Try to detect what selector is being applied
   let result = [];

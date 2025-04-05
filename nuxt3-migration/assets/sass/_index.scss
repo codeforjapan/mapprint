@@ -1,0 +1,96 @@
+@use "variables";
+
+.index-title {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.index-main {
+  min-height: 70vh;
+  padding: 2em 0;
+}
+
+.index-list {
+  padding: 0;
+  width: 100%;
+}
+
+.index-grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.grid-equalHeight {
+  display: flex;
+  width: 100%;
+}
+
+/* Fix for grid layout at large screens */
+@media (min-width: 75em) {
+  /* Ensure proper 3-column layout on index page */
+  .index-grid > .col-12_xs-6_lg-4 {
+    flex-basis: 33.33333%;
+    max-width: 33.33333%;
+  }
+}
+
+.index-item {
+  padding: 0.8em;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  margin-bottom: 1em;
+  a {
+    color: variables.$color-base;
+    text-decoration: none;
+  }
+}
+
+.index-item-inner {
+  height: 90%;
+}
+
+.index-link-inner {
+  display: grid;
+  grid-template-rows: max-content;
+  grid-template-columns: auto;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px #868686;
+  img {
+    border-radius: 10px 10px 0 0;
+  }
+}
+
+.index-item-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em;
+  min-height: 3em; /* Ensure minimum height for the title area */
+}
+
+/* Arrow icon removed */
+
+.index-item-sns {
+  display: flex;
+  padding: 0.5em 0;
+  > div {
+    margin-right: 0.5em;
+  }
+}
+
+.fb_iframe_widget > span {
+  vertical-align: baseline !important;
+}
+
+.index-footer {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  > div {
+    margin: 0 0.5em;
+  }
+}

@@ -1,0 +1,21 @@
+{
+"type": "FeatureCollection",
+"name": "ghp_D",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::6668" } },
+"features": [
+{ "type": "Feature", "properties": { "latitude": 35.936056, "longitude": 139.567829, "address": "日本、〒331-0077 埼玉県さいたま市西区中釘１４３８−２", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 139.567829, 35.936056 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.989333, "longitude": 139.590853, "address": "日本、〒362-0005 埼玉県上尾市西門前６４７−４", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 139.590853, 35.989333 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.729583, "longitude": 139.791365, "address": "日本、〒110-0003 東京都台東区根岸５丁目１９−６ 三ノ輪駅", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 139.791365, 35.729583 ] } },
+{ "type": "Feature", "properties": { "latitude": 40.92408, "longitude": 140.451989, "address": "日本、〒037-0201 青森県五所川原市金木町川倉七夕野４０−１０", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 140.451989, 40.92408 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.762605, "longitude": 139.592008, "address": "日本、〒178-0061 東京都練馬区大泉学園町１丁目２０−１２", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 139.592008, 35.762605 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.840668, "longitude": 139.53774, "address": "日本、〒354-0025 埼玉県富士見市関沢２丁目２５−４", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 139.53774, 35.840668 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.765356, "longitude": 139.492103, "address": "日本、〒189-0002 東京都東村山市青葉町２丁目４０−１", "name": null, "name:en": null }, "geometry": { "type": "Point", "coordinates": [ 139.492103, 35.765356 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.756952, "longitude": 139.535516, "address": "日本、〒203-0053 東京都東久留米市本町１丁目１０−７", "name": "東久留米", "name:en": "Higashi Kurume" }, "geometry": { "type": "Point", "coordinates": [ 139.535516, 35.756952 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.94034, "longitude": 139.646552, "address": "日本、〒337-0051 埼玉県さいたま市見沼区東大宮７丁目６５−８", "name": "マルエツ大宮砂町", "name:en": "Maruetsu oomiya sunamachi" }, "geometry": { "type": "Point", "coordinates": [ 139.646552, 35.94034 ] } },
+{ "type": "Feature", "properties": { "latitude": 36.219689, "longitude": 139.667009, "address": "Unnamed Road, 藤岡町内野 栃木市 栃木県 323-1103 日本", "name": "渡良瀬遊水池", "name:en": "Watarase Lake" }, "geometry": { "type": "Point", "coordinates": [ 139.667009, 36.219689 ] } },
+{ "type": "Feature", "properties": { "latitude": 36.122848, "longitude": 139.595639, "address": "日本、〒347-0045 埼玉県加須市富士見町２−１８", "name": "加須駅", "name:en": "Kazo Station" }, "geometry": { "type": "Point", "coordinates": [ 139.595639, 36.122848 ] } },
+{ "type": "Feature", "properties": { "latitude": 36.568138, "longitude": 139.7552, "address": "日本、〒322-0034 栃木県鹿沼市府中町１９４−５", "name": "梅沢歯科", "name:en": "Umezawa Dental Clinic" }, "geometry": { "type": "Point", "coordinates": [ 139.7552, 36.568138 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.844767, "longitude": 139.654777, "address": "日本、〒336-0022 埼玉県さいたま市南区白幡３丁目１−３４ 白幡公園", "name": "白幡公園", "name:en": "Shirahata Park" }, "geometry": { "type": "Point", "coordinates": [ 139.654777, 35.844767 ] } },
+{ "type": "Feature", "properties": { "latitude": 35.793695, "longitude": 139.682442, "address": "日本、〒174-0041 東京都板橋区舟渡３丁目７−６", "name": "アディア", "name:en": "Adia" }, "geometry": { "type": "Point", "coordinates": [ 139.682442, 35.793695 ] } }
+]
+}

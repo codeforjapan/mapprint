@@ -1,0 +1,78 @@
+@use "mixin";
+@use "variables";
+
+.list-outer {
+  padding: 0 1em;
+  overflow-y: auto;
+  max-height: 0;
+  transition: max-height .5s;
+  &.open {
+    max-height: 40vh;
+  }
+  @include mixin.bp(md) {
+    padding: 0;
+    overflow: visible;
+    max-height: none;
+    &.open {
+      max-height: none;
+    }
+  }
+}
+
+.list-section {
+  display: none;
+  &.show {
+    display: block;
+    padding-bottom: 2em;
+    @include mixin.bp(md) {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.list-section-none {
+  padding-bottom: 2em;
+  @include mixin.bp(md) {
+    padding-bottom: 0;
+  }
+}
+
+.list-title {
+  display: flex;
+  align-items: center;
+  font-size: variables.$font-size-base;
+  color: #fff;
+  padding: .3em 1em;
+  margin-bottom: 0;
+  border-radius: 5px;
+}
+
+.list-title-mark {
+  padding-right: .5em;
+}
+
+.list-items {
+  padding: 0;
+  li {
+    display: flex;
+    font-size: variables.$font-size-sm;
+    margin: .3em 0;
+  }
+}
+
+.item-number {
+  flex: 0 0 3em;
+  padding: .3em 0;
+  text-align: center;
+  border-right: 1px solid variables.$color-gray;
+  @include mixin.bp(xs) {
+    padding: 0;
+  }
+}
+
+.item-name {
+  padding: .3em .5em;
+  @include mixin.bp(xs) {
+    padding: 0 .5em;
+  }
+}

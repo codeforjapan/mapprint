@@ -1,0 +1,101 @@
+@use "mixin";
+@use "variables";
+
+.legend-navi {
+  position: absolute;
+  z-index: mixin.z(legend-navi);
+  bottom: 0;
+  width: 100%;
+  background-color: #fff;
+  @include mixin.bp(md) {
+    position: relative;
+  }
+}
+
+.legend-close {
+  display: none;
+  position: absolute;
+  z-index: mixin.z(legend-close);
+  bottom: 0;
+  width: 100%;
+  background-color: variables.$color-alpha-black;
+  color: #fff;
+  font-size: variables.$font-size-xs;
+  text-align: right;
+  padding: .5em;
+  cursor: pointer;
+  &.open {
+    display: block;
+  }
+  @include mixin.bp(md) {
+    display: none;
+    position: relative;
+    &.open {
+      display: none;
+    }
+  }
+}
+
+.legend-navi-inner {
+  display: flex;
+  align-items: center;
+}
+
+.legend-navi-icon {
+  flex: 0 0 3.5em;
+  padding: .3em;
+  opacity: .5;
+  cursor: auto;
+  &.active {
+    opacity: 1;
+    cursor: pointer;
+  }
+}
+
+.legend-navi-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px variables.$color-gray;
+}
+
+.legend-navi-img {
+  padding: 3px;
+  vertical-align: middle;
+}
+
+.legend-list-outer {
+  flex: 1 1 auto;
+}
+
+.legend-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: .3em;
+  margin: .5em 0;
+}
+
+.legend-item {
+  margin-right: .5em;
+}
+
+.legend-mark {
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  line-height: 2.75rem;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 2px 2px 2px variables.$color-gray;
+  cursor: pointer;
+  i {
+    font-size: 1.25em;
+    color: #fff;
+  }
+  &:not(.open) {
+    opacity: .5;
+  }
+}

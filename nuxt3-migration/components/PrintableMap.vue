@@ -470,15 +470,48 @@ onMounted(async () => {
         updated_at.value = getNowYMD(new Date());
         
         console.log(`Fetching data from: ${source.url}`);
-        const data = await ky.get(source.url).text();
-        console.log(`Data fetched, parsing as ${source.type}`);
+        let data;
         
-        const [markers, source_updated_at] = helper.parse(
-          source.type,
-          data,
-          props.mapConfig.layer_settings || {},
-          source.updated_search_key
-        );
+        try {
+          // Handle local KML files
+          if (source.url.startsWith('/kml/')) {
+            console.log('Loading local KML file:', source.url);
+            try {
+              // First try direct path (for production build)
+              data = await ky.get(source.url).text();
+            } catch (e) {
+              console.warn(`Failed to load KML from ${source.url}, trying relative path`);
+              // Fallback for development environment
+              data = await ky.get(`.${source.url}`).text();
+            }
+          } else {
+            // Regular remote URL
+            data = await ky.get(source.url).text();
+          }
+          console.log(`Data fetched successfully from: ${source.url}`);
+        } catch (error) {
+          console.error(`Error fetching data from: ${source.url}`, error);
+          continue; // Skip this source on error
+        }
+        
+        console.log(`Parsing data as ${source.type}`);
+        
+        let markers = [];
+        let source_updated_at = '';
+        
+        try {
+          [markers, source_updated_at] = helper.parse(
+            source.type,
+            data,
+            props.mapConfig.layer_settings || {},
+            source.updated_search_key
+          );
+          
+          console.log(`Successfully parsed ${markers.length} markers from ${source.url}`);
+        } catch (parseError) {
+          console.error(`Error parsing ${source.type} data from ${source.url}:`, parseError);
+          // Continue with empty markers array
+        }
         
         console.log(`Parsed ${markers.length} markers`);
         

@@ -1,5 +1,11 @@
 import { vi } from 'vitest';
 
+// Mock process.env for Vue I18n
+if (!process.env) {
+  process.env = {};
+}
+process.env.NODE_ENV = 'test';
+
 // Mock window.URL.createObjectURL
 if (typeof window.URL.createObjectURL === 'undefined') {
   window.URL.createObjectURL = vi.fn(() => 'mock-blob-url');

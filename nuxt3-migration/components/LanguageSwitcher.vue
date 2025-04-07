@@ -13,6 +13,7 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from "vue-i18n";
 // i18n setup
 const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();

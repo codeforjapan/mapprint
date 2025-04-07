@@ -1,0 +1,71 @@
+@use "variables";
+@use "mixin";
+
+:root {
+  height: 100%;
+  background-color: variables.$root-background-color;
+  box-sizing: variables.$root-box-sizing;
+  color: variables.$root-color;
+  font: #{variables.$root-font-size}/#{variables.$root-line-height} variables.$root-font-family;
+  @include mixin.bp(xs) {
+    font-size: calc(1rem + ((1vw - 0.355rem) * 0.3165));
+  }
+  @include mixin.bp(lg) {
+    font-size: 1rem;
+  }
+}
+
+*,
+::before,
+::after {
+  box-sizing: variables.$root-box-sizing;
+}
+
+body {
+  position: relative;
+  font-size: variables.$font-size-base;
+}
+
+main {
+  flex: 1 1 auto;
+}
+
+h1 {
+  font-size: variables.$font-size-h1;
+}
+h2 {
+  font-size: variables.$font-size-h2;
+}
+h3 { font-size: variables.$font-size-h3; }
+h4,h5 { font-size: variables.$font-size-base; }
+
+img {
+  max-width:100%;
+  height:auto;
+  vertical-align: bottom;
+}
+
+figure {
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+ol {
+  list-style-position: inside;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+article {
+  margin: 1.5em 0;
+}
+
+button, input, optgroup, select, textarea {
+  font-family: variables.$font-family-sans-serif;
+}

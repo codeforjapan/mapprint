@@ -1,0 +1,60 @@
+// -----------------------------------------------------------------
+// Color
+// -----------------------------------------------------------------
+$color-base: #000;
+$color-light-gray: #626262;
+$color-gray: #b5b5b5;
+$color-accent: #263694;
+$color-alpha-black: rgba(0,0,0,.9);
+
+// -----------------------------------------------------------------
+// Font
+// -----------------------------------------------------------------
+$font-size-base: 1rem;
+$font-size-xl: ($font-size-base * 1.75);
+$font-size-lg: ($font-size-base * 1.25);
+$font-size-sm: ($font-size-base * .875);
+$font-size-xs: ($font-size-base * .75);
+$font-size-h1: ($font-size-base * 1.8);
+$font-size-h2: ($font-size-base * 1.5);
+$font-size-h3: ($font-size-base * 1.2);
+
+@font-face {
+  font-family: "MyYuGothic";
+  font-weight: normal;
+  src: local("YuGothic-Medium"), /* Postscript name */
+       local("Yu Gothic Medium"), /* for Chrome */
+       local("YuGothic-Regular"); /* Mediumがない場合 */
+}
+@font-face {
+  font-family: "MyYuGothic";
+  font-weight: bold;
+  src: local("YuGothic-Bold"), /* Postscript name */
+       local("Yu Gothic Bold"); /* for Chrome */
+}
+
+$font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Avenir Next", "Avenir", "Segoe UI", "Lucida Grande", "Helvetica Neue", "Helvetica", "Fira Sans", "Roboto", "Noto", "Droid Sans", "Cantarell", "Oxygen", "Ubuntu", "Franklin Gothic Medium", "Century Gothic", "Liberation Sans", MyYuGothic, YuGothic, "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", Arial, "メイリオ", Meiryo, sans-serif;
+
+// -----------------------------------------------------------------
+// Base
+// -----------------------------------------------------------------
+$root-background-color: #eee;
+$root-color: $color-base;
+$root-font-family: $font-family-sans-serif;
+$root-font-size: 100%;
+$root-line-height: 1.75;
+$root-box-sizing: border-box;
+
+// -----------------------------------------------------------------
+// Variables for gridlex
+// -----------------------------------------------------------------
+$gl-gutter: 1.5em;
+$gl-gutter-vertical: 1.5em;
+$gl-mq-width: 'min-width';
+$gl-mq-list: (
+  xl: 93em,
+  lg: 75em,
+  md: 52.625em,
+  sm: 48em,
+  xs: 35.5em
+);

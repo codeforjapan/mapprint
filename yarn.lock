@@ -2382,9 +2382,9 @@
   integrity sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==
 
 "@intlify/shared@^9.0.0":
-  version "9.8.0"
-  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.8.0.tgz#62adf8f6ef67c8eba6cf8d521e248f3503f237d3"
-  integrity sha512-TmgR0RCLjzrSo+W3wT0ALf9851iFMlVI9EYNGeWvZFUQTAJx0bvfsMlPdgVtV1tDNRiAfhkFsMKu6jtUY1ZLKQ==
+  version "9.14.4"
+  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.14.4.tgz#c54752b6f50fb7c205895db4a4ab52432efff3c1"
+  integrity sha512-P9zv6i1WvMc9qDBWvIgKkymjY2ptIiQ065PjDv7z7fDqH3J/HBRBN5IoiR46r/ujRcU7hCuSIZWvCAFCyuOYZA==
 
 "@intlify/vue-i18n-extensions@^1.0.2":
   version "1.0.2"

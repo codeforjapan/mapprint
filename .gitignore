@@ -95,3 +95,5 @@ sw.*
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+**/CLAUDE.local.md

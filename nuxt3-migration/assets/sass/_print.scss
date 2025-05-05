@@ -1,0 +1,84 @@
+@use "variables";
+
+@page {
+  size: A4;
+  margin: 15mm 5mm 15mm;
+}
+
+@media print {
+  .print-exclude {
+    display: none !important;
+  }
+  :root {
+    background-color: #fff;
+    font-size: variables.$font-size-sm;
+  }
+  .layout-container {
+    margin: 0 auto;
+  }
+  .layout-map-inner {
+    display: block;
+  }
+  .main {
+    flex-basis: 100% !important;
+    max-width: 100% !important;
+  }
+  .main-sheet {
+    box-shadow: none;
+    padding: 0;
+  }
+  .header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    color: variables.$color-base;
+    .title {
+      font-size: variables.$font-size-h2;
+    }
+    .datetime {
+      display: block;
+    }
+    .qrcode {
+      display: block;
+      flex: 0 0 20mm;
+      height: 20mm;
+    }
+  }
+  #map {
+    height: 140mm;
+  }
+  .marker {
+    span {
+      display: flex !important;
+    }
+  }
+  .area-select-button {
+    box-shadow: none;
+  }
+  .area-array {
+    white-space: normal;
+    overflow: auto;
+    max-width: 100%;
+  }
+  .legend-navi {
+    position: relative;
+  }
+  .list-outer {
+    max-height: none !important;
+  }
+  .list-section {
+    display: block !important;
+  }
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid variables.$color-base;
+    padding-top: 5mm;
+    margin-top: 10mm;
+  }
+  .footer-logo {
+    flex: 0 0 50mm;
+  }
+}

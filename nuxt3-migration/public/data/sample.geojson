@@ -1,0 +1,57 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "避難所 1",
+        "name:en": "Shelter 1",
+        "category": "避難所",
+        "marker-color": "#ff0000"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [135.48, 34.68]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "避難所 2",
+        "name:en": "Shelter 2",
+        "category": "避難所",
+        "marker-color": "#ff0000"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [135.51, 34.72]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "給水所 1",
+        "name:en": "Water Supply 1",
+        "category": "給水所",
+        "marker-color": "#0000ff"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [135.49, 34.71]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "携帯充電所 1",
+        "name:en": "Charging Station 1",
+        "category": "携帯充電",
+        "marker-color": "#00ff00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [135.52, 34.69]
+      }
+    }
+  ]
+}

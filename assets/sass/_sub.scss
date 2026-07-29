@@ -39,3 +39,14 @@
     border: none;
   }
 }
+
+.share-button {
+  display: flex;
+  align-items: center;
+  .share-link {
+    margin-left: 0.4em;
+    i {
+      padding-right: 0;
+    }
+  }
+}

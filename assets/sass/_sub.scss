@@ -4,6 +4,9 @@
 .sub-outer {
   display: flex;
   flex-direction: row;
+  // 小さい画面ではボタンが並びきらないので折り返す。
+  // md 以上は grid になるのでこの指定は効かない。
+  flex-wrap: wrap;
   align-items: center;
   @include mixin.bp(md) {
     display: grid;

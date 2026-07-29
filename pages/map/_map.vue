@@ -53,6 +53,17 @@ div.layout-map
               .sub-button.github-link
                 i.fab.fa-github.fa-lg
                 a(href="https://github.com/codeforjapan/mapprint") {{ $t('common.contribute') }}
+              .sub-button.share-button
+                i.fas.fa-share-nodes.fa-lg
+                a.share-link(
+                  v-for="link in shareLinks"
+                  :key="link.id"
+                  :href="link.href"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :aria-label="$t('common.share') + ' (' + link.label + ')'"
+                )
+                  i.fa-lg(:class="link.iconClass")
               .sub-button
                 i.fas.fa-language.fa-lg
                 select(onChange="location.href=value;")
@@ -81,6 +92,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode'
 import PrintableMap from '~/components/PrintableMap'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
+import { buildShareLinks, buildShareUrl } from '~/lib/shareHelper'
 if (process.client) {
   require('viewport-units-buggyfill').init()
 }
@@ -101,6 +113,19 @@ export default {
       isOpenExplain: false,
       fullURL: null,
       updated_at: null
+    }
+  },
+  computed: {
+    shareUrl () {
+      // fullURL は mounted 後にしか入らないので、静的生成時は表示中のルートから組み立てる
+      return buildShareUrl(this.fullURL, this.$route.path)
+    },
+    shareText () {
+      const title = this.$i18n.locale === 'ja' ? this.mapConfig.map_title : this.mapConfig.map_title_en
+      return title + ' - ' + this.$i18n.t('common.site_desc')
+    },
+    shareLinks () {
+      return buildShareLinks(this.shareUrl, this.shareText)
     }
   },
   head () {

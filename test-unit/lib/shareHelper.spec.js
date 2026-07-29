@@ -1,4 +1,4 @@
-import { buildShareLinks } from '~/lib/shareHelper';
+import { buildShareLinks, buildShareUrl } from '~/lib/shareHelper';
 
 describe('buildShareLinks', () => {
   const url = 'https://kamimap.com/map/2024-noto-earthquake#37.4,136.8-37.2,137.3';
@@ -31,6 +31,11 @@ describe('buildShareLinks', () => {
     links.forEach((link) => {
       expect(link.href).toContain('https%3A%2F%2Fexample.com%2F%3Fa%3D1%26b%3D2');
     });
+    links
+      .filter((link) => link.id !== 'facebook')
+      .forEach((link) => {
+        expect(link.href).toContain(encodeURIComponent('A & B'));
+      });
   });
 
   test('every link is an absolute https url', () => {
@@ -38,5 +43,26 @@ describe('buildShareLinks', () => {
     links.forEach((link) => {
       expect(link.href.startsWith('https://')).toBe(true);
     });
+  });
+});
+
+describe('buildShareUrl', () => {
+  test('uses the live url once it is available', () => {
+    const live = 'https://kamimap.com/en/map/2024-noto-earthquake#37.4,136.8-37.2,137.3';
+    expect(buildShareUrl(live, '/en/map/2024-noto-earthquake')).toBe(live);
+  });
+
+  test('keeps the locale prefix when falling back to the route', () => {
+    // strategy は prefix_except_default なので、日本語以外は接頭辞が付く。
+    // これを落とすと英語ページが日本語版の URL を共有してしまう
+    expect(buildShareUrl(null, '/en/map/2024-noto-earthquake')).toBe(
+      'https://kamimap.com/en/map/2024-noto-earthquake'
+    );
+  });
+
+  test('leaves the default locale unprefixed', () => {
+    expect(buildShareUrl(null, '/map/2024-noto-earthquake')).toBe(
+      'https://kamimap.com/map/2024-noto-earthquake'
+    );
   });
 });

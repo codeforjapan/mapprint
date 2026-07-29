@@ -1,3 +1,18 @@
+export const SITE_ORIGIN = 'https://kamimap.com';
+
+/**
+ * 共有する URL を決める。
+ *
+ * 通常は表示範囲がハッシュに載った location.href をそのまま使う。
+ * 静的生成の時点ではそれが取れないので、表示中のルートから組み立てる。
+ * nuxt-i18n の strategy が prefix_except_default なので、ここでルートを
+ * 使わずに地図 ID から組み立てると、日本語以外のページが日本語版の URL を
+ * 共有してしまう。
+ */
+export function buildShareUrl(fullUrl: string | null, routePath: string): string {
+  return fullUrl || SITE_ORIGIN + routePath;
+}
+
 export interface ShareLink {
   id: string;
   label: string;

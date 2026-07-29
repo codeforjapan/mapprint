@@ -92,7 +92,7 @@ import VueQrcode from '@chenfengyuan/vue-qrcode'
 import PrintableMap from '~/components/PrintableMap'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
-import { buildShareLinks } from '~/lib/shareHelper'
+import { buildShareLinks, buildShareUrl } from '~/lib/shareHelper'
 if (process.client) {
   require('viewport-units-buggyfill').init()
 }
@@ -117,8 +117,8 @@ export default {
   },
   computed: {
     shareUrl () {
-      // fullURL は mounted 後にしか入らないので、静的生成時は地図ページの正規 URL を使う
-      return this.fullURL || 'https://kamimap.com/map/' + this.mapConfig.map_id
+      // fullURL は mounted 後にしか入らないので、静的生成時は表示中のルートから組み立てる
+      return buildShareUrl(this.fullURL, this.$route.path)
     },
     shareText () {
       const title = this.$i18n.locale === 'ja' ? this.mapConfig.map_title : this.mapConfig.map_title_en

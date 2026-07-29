@@ -1,127 +1,29 @@
 import { mount } from '@vue/test-utils';
 
-// maplibre-gl は WebGL を要求するので Map / Marker / Popup / 各 Control を差し替える。
-// LngLat と LngLatBounds は MapHelper が bounds 計算に使うため本物を残す。
-const mapInstances = [];
-const markerInstances = [];
-const popupInstances = [];
-
-class MockMap {
-  constructor(options) {
-    this.options = options;
-    this.handlers = {};
-    this.controls = [];
-    this.fitBoundsCalls = [];
-    this.removed = false;
-    mapInstances.push(this);
-  }
-
-  on(event, cb) {
-    (this.handlers[event] = this.handlers[event] || []).push(cb);
-    return this;
-  }
-
-  fire(event) {
-    (this.handlers[event] || []).forEach((cb) => cb());
-  }
-
-  addControl(control) {
-    this.controls.push(control);
-    return this;
-  }
-
-  fitBounds(bounds, options) {
-    this.fitBoundsCalls.push({ bounds, options });
-    return this;
-  }
-
-  getBounds() {
-    const MapLibre = jest.requireActual('maplibre-gl');
-    return new MapLibre.LngLatBounds(
-      new MapLibre.LngLat(130.6, 32.5),
-      new MapLibre.LngLat(130.8, 32.7)
-    );
-  }
-
-  remove() {
-    this.removed = true;
-  }
-}
-
-class MockMarker {
-  constructor(options) {
-    this.options = options;
-    this.lngLat = null;
-    this.popup = null;
-    this.addedTo = null;
-    this.removed = false;
-    markerInstances.push(this);
-  }
-
-  setLngLat(lngLat) {
-    this.lngLat = lngLat;
-    return this;
-  }
-
-  setPopup(popup) {
-    this.popup = popup;
-    return this;
-  }
-
-  addTo(map) {
-    this.addedTo = map;
-    return this;
-  }
-
-  remove() {
-    this.removed = true;
-    return this;
-  }
-}
-
-class MockPopup {
-  constructor(options) {
-    this.options = options;
-    this.dom = null;
-    this.html = null;
-    popupInstances.push(this);
-  }
-
-  setDOMContent(dom) {
-    this.dom = dom;
-    return this;
-  }
-
-  setHTML(html) {
-    this.html = html;
-    return this;
-  }
-}
-
-class MockNavigationControl {}
-class MockGeolocateControl {
-  constructor(options) {
-    this.options = options;
-  }
-}
-
 // ky は ESM で配布されており node_modules は変換対象外のため require できない。
 // このテストでは sources を空にして通信を起こさないので、存在するだけでよい。
 jest.mock('ky', () => ({ default: { get: () => ({ text: async () => '' }) } }));
 
+// maplibre-gl は WebGL を要求するので Map / Marker / Popup / 各 Control を差し替える。
+// LngLat と LngLatBounds は MapHelper が bounds 計算に使うため本物を残す。
 jest.mock('maplibre-gl', () => {
   const actual = jest.requireActual('maplibre-gl');
-  return {
+  const m = require('../mocks/maplibreMock');
+  const mocked = {
     ...actual,
-    Map: MockMap,
-    Marker: MockMarker,
-    Popup: MockPopup,
-    NavigationControl: MockNavigationControl,
-    GeolocateControl: MockGeolocateControl,
+    Map: m.MockMap,
+    Marker: m.MockMarker,
+    Popup: m.MockPopup,
+    NavigationControl: m.MockNavigationControl,
+    GeolocateControl: m.MockGeolocateControl,
   };
+  // PrintableMap は `import MapLibre from` で default を、
+  // MapHelper は `import * as MapLibre` で名前空間を見るため両方を満たす形にする。
+  return { ...mocked, default: mocked, __esModule: true };
 });
 
-// eslint-disable-next-line import/first
+import { mapInstances, markerInstances, resetInstances } from '../mocks/maplibreMock';
+
 import PrintableMap from '~/components/PrintableMap.vue';
 
 const MAP_STYLE = 'https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json';
@@ -157,7 +59,7 @@ const factory = async (overrides = {}) => {
   const wrapper = mount(PrintableMap, {
     propsData: { mapConfig: mapConfig() },
     stubs: { 'client-only': { template: '<div><slot /></div>' }, simplebar: { template: '<div><slot /></div>' } },
-    mocks: { $i18n: { locale: 'ja', t: (key) => key } },
+    mocks: { $i18n: { locale: 'ja', t: (key) => key }, $t: (key) => key },
     ...overrides,
   });
   // layers が空だと地図コンテナが描画されない（template の v-if='layers.length'）。
@@ -168,9 +70,7 @@ const factory = async (overrides = {}) => {
 };
 
 beforeEach(() => {
-  mapInstances.length = 0;
-  markerInstances.length = 0;
-  popupInstances.length = 0;
+  resetInstances();
   window.location.hash = '';
 });
 

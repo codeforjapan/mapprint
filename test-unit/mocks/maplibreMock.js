@@ -42,12 +42,16 @@ export class MockMap {
     return this;
   }
 
+  // inBounds() は getNorthEast / getSouthWest、serializeBounds() は
+  // getNorthWest / getSouthEast を使う。この4つを満たせば maplibre の実物は不要
+  // （テストランナー非依存に保つため実物を持ち込まない）。
   getBounds() {
-    const MapLibre = jest.requireActual('maplibre-gl');
-    return new MapLibre.LngLatBounds(
-      new MapLibre.LngLat(130.6, 32.5),
-      new MapLibre.LngLat(130.8, 32.7)
-    );
+    return {
+      getNorthEast: () => ({ lng: 130.8, lat: 32.7 }),
+      getSouthWest: () => ({ lng: 130.6, lat: 32.5 }),
+      getNorthWest: () => ({ lng: 130.6, lat: 32.7 }),
+      getSouthEast: () => ({ lng: 130.8, lat: 32.5 }),
+    };
   }
 
   remove() {

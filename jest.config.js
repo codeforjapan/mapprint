@@ -8,7 +8,10 @@ module.exports = {
     '^.+\\.vue$': '@vue/vue2-jest',
   },
   moduleNameMapper: {
+    '\\.(css|scss|sass)$': '<rootDir>/test-unit/mocks/styleMock.js',
+    '\\.(svg|png|jpg|jpeg|gif|webp)$': '<rootDir>/test-unit/mocks/fileMock.js',
     '^~/(.*)$': '<rootDir>/$1',
+    '^@/(.*)$': '<rootDir>/$1',
   },
   testMatch: ['<rootDir>/test-unit/**/*.spec.js'],
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],

@@ -63,6 +63,53 @@ export default defineNuxtComponent({
   // vue-i18n 9 以降 locale と locales は ref なので、
   // テンプレートやスクリプトから直接使えない。setup で unwrap して公開する。
   setup() {
+    const { locale, t } = useI18n();
+
+    // head() は defineNuxtComponent では setup 経由で処理され、その時点では
+    // computed も setup の戻り値も this から参照できない。useHead に移す。
+    // 移さないと this.locale が undefined になって常に default 分岐に落ち、
+    // 日本語でもタイトルが "KamiMap" になってしまう。
+    useHead(() => {
+      let siteName, siteDesc;
+      switch (locale.value) {
+        // "kr" は移行前からの誤りで、ロケールコードは ko である。
+        // 挙動を変えないためそのまま残す
+        case "ja":
+        case "en":
+        case "kr":
+          siteName = t("common.site_name");
+          siteDesc = t("common.site_desc");
+          break;
+        default:
+          siteName = "KamiMap";
+          siteDesc = "Paper Map for printable map information";
+          break;
+      }
+      return {
+        title: siteName,
+        meta: [
+          { name: "description", content: siteDesc },
+          { property: "og:site_name", content: siteName },
+          { property: "og:title", content: siteName },
+          { property: "og:description", content: siteDesc },
+        ],
+        script: [
+          {
+            src: "https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v4.0",
+            async: true,
+            defer: true,
+            crossorigin: "anonymous",
+          },
+          { src: "https://platform.twitter.com/widgets.js", async: true },
+          {
+            src: "https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js",
+            async: true,
+            defer: true,
+          },
+        ],
+      };
+    });
+
     return { localePath: useLocalePath(), switchLocalePath: useSwitchLocalePath() };
   },
   computed: {
@@ -81,44 +128,6 @@ export default defineNuxtComponent({
     return {
       maps,
       isOpenExplain: false,
-    };
-  },
-  head() {
-    let siteName, siteDesc;
-    switch (this.locale) {
-      case "ja":
-      case "en":
-      case "kr":
-        siteName = this.$t("common.site_name");
-        siteDesc = this.$t("common.site_desc");
-        break;
-      default:
-        siteName = "KamiMap";
-        siteDesc = "Paper Map for printable map information";
-        break;
-    }
-    return {
-      title: siteName,
-      meta: [
-        { hid: "description", name: "description", content: siteDesc },
-        { hid: "og:site_name", property: "og:site_name", content: siteName },
-        { hid: "og:title", property: "og:title", content: siteName },
-        { hid: "og:description", property: "og:description", content: siteDesc },
-      ],
-      script: [
-        {
-          src: "https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v4.0",
-          async: true,
-          defer: true,
-          crossorigin: "anonymous",
-        },
-        { src: "https://platform.twitter.com/widgets.js", async: true },
-        {
-          src: "https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js",
-          async: true,
-          defer: true,
-        },
-      ],
     };
   },
   methods: {

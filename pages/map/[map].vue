@@ -68,11 +68,11 @@ div.layout-map
                 i.fas.fa-language.fa-lg
                 select(onChange="location.href=value;")
                   option.language(disabled selected)
-                    | Language: {{$i18n.locales.filter((i) => { return i.code === $i18n.locale })[0].name}}
-                  option(v-for="locale in $i18n.locales" :value="switchLocalePath(locale.code)")
+                    | Language: {{locales.filter((i) => { return i.code === locale })[0].name}}
+                  option(v-for="locale in locales" :value="switchLocalePath(locale.code)")
                     | {{ locale.name }}
             .title-outer
-              h1.title(v-if="mapConfig && $i18n.locale === 'ja'")
+              h1.title(v-if="mapConfig && locale === 'ja'")
                 | {{mapConfig.map_title}}
               h1.title(v-else)
                 | {{mapConfig.map_title_en}}
@@ -94,15 +94,41 @@ import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
 import { buildShareLinks, buildShareUrl } from '~/lib/shareHelper'
 import { getMapConfig } from '~/lib/mapConfigs'
-import viewportUnitsBuggyfill from 'viewport-units-buggyfill'
-
-if (import.meta.client) {
-  viewportUnitsBuggyfill.init()
-}
 
 export default defineNuxtComponent({
   components: {
     PrintableMap, VueQrcode, Modal
+  },
+  // @nuxtjs/i18n v9 以降 switchLocalePath は composable なので、
+  // Options API のテンプレートから使えるよう setup で公開する
+  // vue-i18n 9 以降 locale と locales は ref なので、
+  // テンプレートやスクリプトから直接使えない。setup で unwrap して公開する。
+  setup () {
+    const { locale, locales, t } = useI18n()
+    // data() から this.$route を参照すると Nuxt 3 以降は解決できないため、
+    // ルートパラメータは setup の useRoute() から取る
+    const route = useRoute()
+    const mapConfig = ref(getMapConfig(route.params.map))
+
+    // head() は defineNuxtComponent では setup 経由で処理され、その時点では
+    // setup の戻り値を this から参照できない。useHead に移す。
+    useHead(() => {
+      const c = mapConfig.value
+      const image = c.map_image ? c.map_image : 'logo.png'
+      const title = locale.value === 'ja' ? c.map_title : c.map_title_en
+      const description = locale.value === 'ja' ? c.map_description : c.map_description_en
+      return {
+        title: title + ' - ' + t('common.site_name'),
+        meta: [
+          { name: 'description', content: description },
+          { property: 'og:image', content: 'https://kamimap.com/images/' + image },
+          { name: 'og:description', content: description },
+          { name: 'og:title', content: title + t('common.site_name') }
+        ]
+      }
+    })
+
+    return { switchLocalePath: useSwitchLocalePath(), mapConfig }
   },
   asyncData () {
     const { $i18n } = useNuxtApp()
@@ -111,54 +137,40 @@ export default defineNuxtComponent({
   },
   data () {
     return {
-      mapConfig: getMapConfig(this.$route.params.map),
-      locale: null,
+      // locale は computed で $i18n から導出するため data には持たない
       isOpenExplain: false,
       fullURL: null,
       updated_at: null
     }
   },
   computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale () {
+      const l = this.$i18n.locale
+      return l && typeof l === 'object' && 'value' in l ? l.value : l
+    },
+    locales () {
+      const l = this.$i18n.locales
+      return l && typeof l === 'object' && 'value' in l ? l.value : l
+    },
     shareUrl () {
       // fullURL は mounted 後にしか入らないので、静的生成時は表示中のルートから組み立てる
       return buildShareUrl(this.fullURL, this.$route.path)
     },
     shareText () {
-      const title = this.$i18n.locale === 'ja' ? this.mapConfig.map_title : this.mapConfig.map_title_en
-      return title + ' - ' + this.$i18n.t('common.site_desc')
+      const title = this.locale === 'ja' ? this.mapConfig.map_title : this.mapConfig.map_title_en
+      return title + ' - ' + this.$t('common.site_desc')
     },
     shareLinks () {
       return buildShareLinks(this.shareUrl, this.shareText)
     }
   },
-  head () {
-    let title, description
-    const image = this.mapConfig.map_image ? this.mapConfig.map_image : 'logo.png'
-    switch (this.$i18n.locale) {
-      case 'ja':
-        title = this.mapConfig.map_title
-        description = this.mapConfig.map_description
-        break
-      case 'en':
-        title = this.mapConfig.map_title_en
-        description = this.mapConfig.map_description_en
-        break
-      default:
-        title = this.mapConfig.map_title_en
-        description = this.mapConfig.map_description_en
-        break
-    }
-    return {
-      title: title + ' - ' + this.$i18n.t('common.site_name'),
-      meta: [
-        { hid: 'description', name: 'description', content: description },
-        { hid: 'og:image', property: 'og:image', content: 'https://kamimap.com/images/' + image },
-        { hid: 'og:description', name: 'og:description', content: description },
-        { hid: 'og:title', name: 'og:title', content: title + this.$i18n.t('common.site_name') }
-      ]
-    }
-  },
-  mounted () {
+  async mounted () {
+    // viewport-units-buggyfill は import 時点で window を参照するため
+    // SSR では読み込めない。クライアントで動的に読む。
+    const { default: viewportUnitsBuggyfill } = await import('viewport-units-buggyfill')
+    viewportUnitsBuggyfill.init()
     this.fullURL = location.href
   },
   methods: {

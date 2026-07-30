@@ -28,9 +28,9 @@ div
                   :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
                 )
                 span.popup-poi-type
-                  | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, $i18n.locale)}}
+                  | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, locale)}}
               p
-                | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
+                | {{$t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, locale)}}
               div.popup-detail-content
                 p(
                   v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
@@ -81,8 +81,8 @@ div
               simplebar(data-simplebar-auto-hide="false")
                 ul.legend-list
                   li.legend-item(
-                    v-for='(setting, category) in mapConfig.layer_settings'
-                    v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
+                    v-for='({ category, setting }) in visibleLegendEntries'
+                    :key='category'
                   )
                     span.legend-mark(
                       :style="{backgroundColor:setting.color}"
@@ -103,7 +103,7 @@ div
         .list-outer(:class='{open: isOpenList}')
           section.list-section(
             v-for='group in displayMarkersGroupByCategory'
-            :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
+            :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, locale)}'
           )
             h2.list-title(
               :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color||group.markers[0]?.feature?.properties['marker-color']||'darkgreen'}"
@@ -112,11 +112,11 @@ div
                 i(
                   :class="mapConfig.layer_settings[group.category]?.icon_class"
                 )
-              span {{getMarkerCategoryText(mapConfig.layer_settings[group.category]?.name||group.category, $i18n.locale)}}
+              span {{getMarkerCategoryText(mapConfig.layer_settings[group.category]?.name||group.category, locale)}}
             ul.list-items.grid-noGutter
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
-                span.item-name {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
+                span.item-name {{getMarkerNameText(marker.feature.properties, locale)}}
           .list-section-none(
             v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0"
           )
@@ -160,7 +160,7 @@ export default {
   },
   data() {
     let locale = "en";
-    if (this.$i18n.locale === "ja") {
+    if (this.locale === "ja") {
       locale = "ja";
     }
     return {
@@ -181,6 +181,12 @@ export default {
     };
   },
   computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale() {
+      const l = this.$i18n.locale;
+      return l && typeof l === "object" && "value" in l ? l.value : l;
+    },
     center() {
       return this.mapConfig.center;
     },
@@ -207,6 +213,16 @@ export default {
           return helper.inBounds(marker.feature.geometry.coordinates, this.bounds);
         });
       return inBoundsMarkers;
+    },
+    // Vue 3 では同一要素の v-for と v-if を併用できない（v-if が先に評価される）。
+    // 表示対象のカテゴリだけを先に配列にしておく。
+    visibleLegendEntries() {
+      const settings = this.mapConfig.layer_settings || {};
+      return Object.keys(settings)
+        .filter((category) =>
+          this.displayMarkersGroupByCategory.some((elm) => elm.category === category)
+        )
+        .map((category) => ({ category, setting: settings[category] }));
     },
     displayMarkersGroupByCategory() {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
@@ -239,10 +255,15 @@ export default {
     this.markerCache = {};
   },
   watch: {
-    layers() {
-      if (this.layers.length && !this.map) {
-        this.$nextTick(this.initMap);
-      }
+    // Vue 3 では配列への push は親プロパティの watcher を発火させないため deep が必要。
+    // Vue 2 は配列メソッドを介入していたので不要だった。
+    layers: {
+      deep: true,
+      handler() {
+        if (this.layers.length && !this.map) {
+          this.$nextTick(this.initMap);
+        }
+      },
     },
     inBoundsMarkers() {
       this.$nextTick(this.syncMarkers);
@@ -428,7 +449,7 @@ export default {
         category = "未分類";
       }
       const key = "category." + category;
-      const categoryText = this.$i18n.t(key);
+      const categoryText = this.$t(key);
       if (categoryText !== key) {
         return categoryText;
       } else {

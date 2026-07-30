@@ -13,7 +13,7 @@
             nuxt-link(:to="localePath('/map/' + map.map_id)", v-bind:key='index')
               .index-link-inner
                 img(:src='"https://kamimap.com/images/" + (map.map_image ? map.map_image : "logo.png")' alt='')
-                .index-item-title(v-if="$i18n.locale === 'ja'")
+                .index-item-title(v-if="locale === 'ja'")
                   span
                     | {{map.map_title}}
                 .index-item-title(v-else)
@@ -41,8 +41,8 @@
       i.fas.fa-language.fa-lg
       select(onChange="location.href=value;")
         option.language(disabled selected)
-          | Language: {{$i18n.locales.filter((i) => { return i.code === $i18n.locale })[0].name}}
-        option(v-for="locale in $i18n.locales" :value="switchLocalePath(locale.code)")
+          | Language: {{locales.filter((i) => { return i.code === locale })[0].name}}
+        option(v-for="locale in locales" :value="switchLocalePath(locale.code)")
           | {{ locale.name }}
   modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>
@@ -58,6 +58,25 @@ export default defineNuxtComponent({
   components: {
     Modal,
   },
+  // @nuxtjs/i18n v9 以降 localePath は composable なので、
+  // Options API のテンプレートから使えるよう setup で公開する
+  // vue-i18n 9 以降 locale と locales は ref なので、
+  // テンプレートやスクリプトから直接使えない。setup で unwrap して公開する。
+  setup() {
+    return { localePath: useLocalePath(), switchLocalePath: useSwitchLocalePath() };
+  },
+  computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale() {
+      const l = this.$i18n.locale;
+      return l && typeof l === "object" && "value" in l ? l.value : l;
+    },
+    locales() {
+      const l = this.$i18n.locales;
+      return l && typeof l === "object" && "value" in l ? l.value : l;
+    },
+  },
   data() {
     return {
       maps,
@@ -66,12 +85,12 @@ export default defineNuxtComponent({
   },
   head() {
     let siteName, siteDesc;
-    switch (this.$i18n.locale) {
+    switch (this.locale) {
       case "ja":
       case "en":
       case "kr":
-        siteName = this.$i18n.t("common.site_name");
-        siteDesc = this.$i18n.t("common.site_desc");
+        siteName = this.$t("common.site_name");
+        siteDesc = this.$t("common.site_desc");
         break;
       default:
         siteName = "KamiMap";

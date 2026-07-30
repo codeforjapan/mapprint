@@ -6,7 +6,7 @@ import MapHelper from '~/lib/MapHelper';
 // @mapbox/togeojson の import 形が変わると、例外を出さずにマーカー0件になる。
 // 静かに壊れる経路なので固定する。
 const kml = fs.readFileSync(
-  path.join(process.cwd(), 'static/data/kml/2024-noto.kml'),
+  path.join(process.cwd(), 'public/data/kml/2024-noto.kml'),
   'utf-8'
 );
 

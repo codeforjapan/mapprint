@@ -3,11 +3,11 @@
 div
   .modal(v-bind:class='{open: isOpen}')
     p(v-if="mapConfig")
-      span(v-if="$i18n.locale === 'ja' || !mapConfig.map_description_en") {{mapConfig.map_description}}
+      span(v-if="locale === 'ja' || !mapConfig.map_description_en") {{mapConfig.map_description}}
       span(v-else) {{mapConfig.map_description_en}}
     p
       //- Remove this v-if conditional branching and just use the i18n tag when the translation is complete.
-      span(v-if="$i18n.locale === 'ja' || $i18n.locale === 'en'")
+      span(v-if="locale === 'ja' || locale === 'en'")
         i18n(path="about.desc")
           template(#githubRepo)
             a(href="https://github.com/codeforjapan/mapprint") {{$t('about.github_repository')}}
@@ -25,15 +25,24 @@ div
 import { getMapConfig } from '~/lib/mapConfigs'
 
 export default {
+  // vue-i18n 9 以降 locale と locales は ref なので、
+  // テンプレートやスクリプトから直接使えない。setup で unwrap して公開する。
   props: {
     isOpen: {
       type: Boolean,
       default: false
     }
   },
-  data() {
-    return {
-      mapConfig: this.$route.params.map ? getMapConfig(this.$route.params.map) : '',
+  computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale () {
+      const l = this.$i18n.locale
+      return l && typeof l === 'object' && 'value' in l ? l.value : l
+    },
+    mapConfig () {
+      const id = this.$route?.params?.map
+      return id ? getMapConfig(id) : ''
     }
   },
   methods: {

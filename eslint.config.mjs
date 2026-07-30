@@ -42,6 +42,12 @@ const config = async () => {
         useRouter: 'readonly',
         useHead: 'readonly',
         definePageMeta: 'readonly',
+        useLocalePath: 'readonly',
+        useSwitchLocalePath: 'readonly',
+        useI18n: 'readonly',
+        ref: 'readonly',
+        computed: 'readonly',
+        useHead: 'readonly',
       },
       parserOptions: {
         ecmaFeatures: {

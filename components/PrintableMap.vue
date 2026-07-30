@@ -231,16 +231,18 @@ export default {
     const MapHelper = require("~/lib/MapHelper.ts").default;
     const ky = require("ky").default;
     helper = new MapHelper();
-    const area = [];
     const categories = {};
     const self = this;
-    this.mapConfig.sources.forEach((source) => {
+    // 取得の完了順ではなく mapConfig.sources の順序で並べる。印刷される一覧の
+    // 番号は layers を順に辿って振られるので、完了順に入れると回線の速さで
+    // 同じ地点に違う番号が付き、刷り直した紙どうしが食い違う。
+    this.layers = this.mapConfig.sources.map((source) => ({ source, markers: [] }));
+    this.checkedArea = this.mapConfig.sources
+      .filter((source) => source.show)
+      .map((source) => source.title);
+    this.updated_at = getNowYMD(new Date());
+    this.mapConfig.sources.forEach((source, index) => {
       (async () => {
-        if (source.show) {
-          area.push(source.title);
-        }
-        self.checkedArea = area;
-        self.updated_at = getNowYMD(new Date());
         const data = await ky.get(source.url).text();
         const [markers, updated_at] = helper.parse(
           source.type,
@@ -274,7 +276,8 @@ export default {
             })
           }
         });
-        self.layers.push({
+        // 位置は取得を始めた時点で決まっているので、完了順に影響されない
+        self.$set(self.layers, index, {
           source,
           markers,
         });

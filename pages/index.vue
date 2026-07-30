@@ -51,6 +51,7 @@
 import mapList from "~/assets/config/list.json";
 import Modal from "~/components/Modal.vue";
 import { getMapConfig } from "~/lib/mapConfigs";
+import { getSiteMeta } from "~/lib/siteMeta";
 
 const maps = mapList.map((name) => getMapConfig(name));
 
@@ -70,21 +71,7 @@ export default defineNuxtComponent({
     // 移さないと this.locale が undefined になって常に default 分岐に落ち、
     // 日本語でもタイトルが "KamiMap" になってしまう。
     useHead(() => {
-      let siteName, siteDesc;
-      switch (locale.value) {
-        // "kr" は移行前からの誤りで、ロケールコードは ko である。
-        // 挙動を変えないためそのまま残す
-        case "ja":
-        case "en":
-        case "kr":
-          siteName = t("common.site_name");
-          siteDesc = t("common.site_desc");
-          break;
-        default:
-          siteName = "KamiMap";
-          siteDesc = "Paper Map for printable map information";
-          break;
-      }
+      const { siteName, siteDesc } = getSiteMeta(locale.value, t);
       return {
         title: siteName,
         meta: [

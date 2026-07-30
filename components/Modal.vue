@@ -8,7 +8,9 @@ div
     p
       //- Remove this v-if conditional branching and just use the i18n tag when the translation is complete.
       span(v-if="locale === 'ja' || locale === 'en'")
-        i18n(path="about.desc")
+        //- vue-i18n 9 以降 <i18n> は <i18n-t> に、path は keypath に変わった。
+        //- 旧名のままだと未知のコンポーネント扱いで本文が丸ごと消える（例外は出ない）
+        i18n-t(keypath="about.desc" tag="span")
           template(#githubRepo)
             a(href="https://github.com/codeforjapan/mapprint") {{$t('about.github_repository')}}
       span(v-else) 

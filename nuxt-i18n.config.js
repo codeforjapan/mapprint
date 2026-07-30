@@ -86,5 +86,13 @@ export default {
   bundle: {
     optimizeTranslationDirective: false
   },
-  detectBrowserLanguage: false
+  // 接頭辞なしの / に来たときだけブラウザの言語で振り分ける。
+  // /en/ のように明示された接頭辞は尊重する（redirectOn: 'root'）。
+  // nuxt-i18n v6 の既定は全ルートで振り分けるため、日本語端末で /en/ を開くと
+  // 日本語になっていた。これは i18n を導入した #299 の受け入れ条件に反する。
+  detectBrowserLanguage: {
+    useCookie: true,
+    cookieKey: 'i18n_redirected',
+    redirectOn: 'root'
+  }
 }

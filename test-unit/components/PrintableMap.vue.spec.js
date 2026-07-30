@@ -1,16 +1,21 @@
+import { vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 // ky は ESM で配布されており node_modules は変換対象外のため require できない。
 // このテストでは sources を空にして通信を起こさないので、存在するだけでよい。
-jest.mock('ky', () => ({ default: { get: () => ({ text: async () => '' }) } }));
+vi.mock('ky', () => ({ default: { get: () => ({ text: async () => '' }) } }));
 
 // maplibre-gl は WebGL を要求するので Map / Marker / Popup / 各 Control を差し替える。
 // LngLat と LngLatBounds は MapHelper が bounds 計算に使うため本物を残す。
-jest.mock('maplibre-gl', () => {
-  const actual = jest.requireActual('maplibre-gl');
-  const m = require('../mocks/maplibreMock');
+// vi.mock のファクトリは巻き上げられるため、モックは別モジュールから await import する。
+vi.mock('maplibre-gl', async () => {
+  const actual = await vi.importActual('maplibre-gl');
+  // maplibre-gl 1.x は UMD なので、実体は default の下に来ることがある。
+  // 素通しに失敗すると LngLatBounds が消えて deserializeBounds が黙って undefined を返す。
+  const base = actual.default ?? actual;
+  const m = await import('../mocks/maplibreMock');
   const mocked = {
-    ...actual,
+    ...base,
     Map: m.MockMap,
     Marker: m.MockMarker,
     Popup: m.MockPopup,
@@ -19,7 +24,7 @@ jest.mock('maplibre-gl', () => {
   };
   // PrintableMap は `import MapLibre from` で default を、
   // MapHelper は `import * as MapLibre` で名前空間を見るため両方を満たす形にする。
-  return { ...mocked, default: mocked, __esModule: true };
+  return { ...mocked, default: mocked };
 });
 
 import { mapInstances, markerInstances, resetInstances } from '../mocks/maplibreMock';
@@ -57,9 +62,14 @@ const LAYER = {
 
 const factory = async (overrides = {}) => {
   const wrapper = mount(PrintableMap, {
-    propsData: { mapConfig: mapConfig() },
-    stubs: { 'client-only': { template: '<div><slot /></div>' }, simplebar: { template: '<div><slot /></div>' } },
-    mocks: { $i18n: { locale: 'ja', t: (key) => key }, $t: (key) => key },
+    props: { mapConfig: mapConfig() },
+    global: {
+      stubs: {
+        'client-only': { template: '<div><slot /></div>' },
+        simplebar: { template: '<div><slot /></div>' },
+      },
+      mocks: { $i18n: { locale: 'ja', t: (key) => key }, $t: (key) => key },
+    },
     ...overrides,
   });
   // layers が空だと地図コンテナが描画されない（template の v-if='layers.length'）。
@@ -163,7 +173,7 @@ describe('PrintableMap のマーカー', () => {
 describe('PrintableMap の破棄', () => {
   test('コンポーネント破棄時に map.remove() される', async () => {
     const wrapper = await factory();
-    wrapper.destroy();
+    wrapper.unmount();
     expect(mapInstances[0].removed).toBe(true);
   });
 });

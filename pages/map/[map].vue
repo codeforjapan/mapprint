@@ -93,22 +93,25 @@ import PrintableMap from '~/components/PrintableMap'
 import { getNowYMD } from '~/lib/displayHelper.ts'
 import Modal from '~/components/Modal'
 import { buildShareLinks, buildShareUrl } from '~/lib/shareHelper'
-if (process.client) {
-  require('viewport-units-buggyfill').init()
+import { getMapConfig } from '~/lib/mapConfigs'
+import viewportUnitsBuggyfill from 'viewport-units-buggyfill'
+
+if (import.meta.client) {
+  viewportUnitsBuggyfill.init()
 }
 
-export default {
+export default defineNuxtComponent({
   components: {
     PrintableMap, VueQrcode, Modal
   },
-  asyncData ({ app }) {
-    const locale = app.i18n.locale
-    const updated_at = getNowYMD(new Date(), locale)
+  asyncData () {
+    const { $i18n } = useNuxtApp()
+    const updated_at = getNowYMD(new Date(), $i18n.locale.value)
     return { updated_at }
   },
   data () {
     return {
-      mapConfig: require('~/assets/config/' + (this.$nuxt.$route.params.map)),
+      mapConfig: getMapConfig(this.$route.params.map),
       locale: null,
       isOpenExplain: false,
       fullURL: null,
@@ -166,5 +169,5 @@ export default {
       this.isOpenExplain = false
     }
   }
-}
+})
 </script>

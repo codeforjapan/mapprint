@@ -11,6 +11,7 @@ const config = async () => {
       'node_modules/**',
       'dist/**',
       '.nuxt/**',
+      '.output/**',
       'coverage/**',
       '*.min.js',
     ],
@@ -31,7 +32,16 @@ const config = async () => {
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.jest,
+        ...globals.vitest,
+        // Nuxt が自動 import するもの。実体は .nuxt/imports.d.ts にある
+        defineNuxtConfig: 'readonly',
+        defineNuxtPlugin: 'readonly',
+        defineNuxtComponent: 'readonly',
+        useNuxtApp: 'readonly',
+        useRoute: 'readonly',
+        useRouter: 'readonly',
+        useHead: 'readonly',
+        definePageMeta: 'readonly',
       },
       parserOptions: {
         ecmaFeatures: {

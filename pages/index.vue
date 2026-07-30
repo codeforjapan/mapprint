@@ -50,14 +50,11 @@
 <script lang="ts">
 import mapList from "~/assets/config/list.json";
 import Modal from "~/components/Modal.vue";
+import { getMapConfig } from "~/lib/mapConfigs";
 
-const maps = [];
+const maps = mapList.map((name) => getMapConfig(name));
 
-mapList.forEach((name) => {
-  maps.push(require("~/assets/config/" + name));
-});
-
-export default {
+export default defineNuxtComponent({
   components: {
     Modal,
   },
@@ -110,6 +107,5 @@ export default {
       this.isOpenExplain = false;
     },
   },
-};
+});
 </script>
-

@@ -1,150 +1,91 @@
 import * as fs from "fs";
-import sortCSSmq from "sort-css-media-queries";
 import i18n from "./nuxt-i18n.config";
+import list from "./assets/config/list.json";
 
-let router = {
-  base: "/",
-};
-try {
-  if (fs.existsSync("./nuxt-router-override.config.js")) {
-    router = require("./nuxt-router-override.config").default;
-  }
-// eslint-disable-next-line no-empty
-} finally {
+let baseURL = "/";
+if (fs.existsSync("./nuxt-router-override.config.js")) {
+  // eslint-disable-next-line
+  baseURL = require("./nuxt-router-override.config").default.base || "/";
 }
 
-export default {
-  /*
-   ** Headers of the page
-   */
-  head: {
-    htmlAttrs: {
-      prefix: "og: http://ogp.me/ns#",
-    },
-    meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "og:type", property: "og:type", content: "website" },
-      {
-        hid: "og:image",
-        property: "og:image",
-        content: "https://kamimap.com/images/ogp_main.png",
-      },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    link: [
-      {
-        rel: "apple-touch-icon",
-        type: "image/png",
-        href: "/apple-touch-icon.png",
-      },
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css?family=Open+Sans",
-      },
-    ],
-    script: [
-      { src: "https://www.googletagmanager.com/gtag/js?id=UA-45275834-9" },
-      { src: "/ga.js" },
-    ],
-  },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: "#fff" },
-  /*
-   ** Global CSS
-   */
-  css: [
-    {
-      src: "~/assets/fonts/fontawesome/css/all.css",
-      "data-viewport-units-buggyfill": "ignore",
-    },
-    { src: "~/assets/sass/styles.scss", lang: "scss" },
-  ],
-  /*
-   ** Plugins to load before mounting the App
-   */
-  plugins: [
-    { src: "~/plugins/simplebar", mode: "client" },
-  ],
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    // '@nuxtjs/eslint-module'
-    "@nuxt/typescript-build",
-  ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
-    ["nuxt-i18n", i18n],
-  ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
+// 静的生成するルート。Nuxt 2 の generate.routes() の置き換え。
+// strategy が prefix_except_default なので、既定ロケール（ja）は接頭辞なし、
+// それ以外は /{locale}/ を付ける。トップと各災害の地図ページを全ロケール分並べる。
+const prefixes = i18n.locales
+  .map((l) => (l.code === i18n.defaultLocale ? "" : "/" + l.code));
+const mapIds = list.map((name) => name.replace(".json", ""));
+const prerenderRoutes = prefixes.flatMap((prefix) => [
+  prefix === "" ? "/" : prefix,
+  ...mapIds.map((id) => prefix + "/map/" + id),
+]);
 
-  i18n: {
-    vueI18n: {
-      silentTranslationWarn: true,
+export default defineNuxtConfig({
+  // Nuxt 4 の既定 srcDir は app/ だが、既存の配置を維持する
+  srcDir: ".",
+  dir: {
+    app: "app",
+  },
+
+  app: {
+    baseURL,
+    head: {
+      htmlAttrs: {
+        prefix: "og: http://ogp.me/ns#",
+      },
+      meta: [
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { property: "og:type", content: "website" },
+        {
+          property: "og:image",
+          content: "https://kamimap.com/images/ogp_main.png",
+        },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
+      link: [
+        {
+          rel: "apple-touch-icon",
+          type: "image/png",
+          href: "/apple-touch-icon.png",
+        },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css?family=Open+Sans",
+        },
+      ],
+      script: [
+        { src: "https://www.googletagmanager.com/gtag/js?id=UA-45275834-9" },
+        { src: "/ga.js" },
+      ],
     },
   },
-  /*
-   ** Build configuration
-   */
-  generate: {
-    routes() {
-      const list = require("./assets/config/list.json");
-      const mapped = list.map((name) => {
-        return [
-          "/map/" + name.replace(".json", ""),
-          "/en/map/" + name.replace(".json", ""),
-        ];
-      });
-      return [].concat(...mapped);
+
+  css: [
+    "~/assets/fonts/fontawesome/css/all.css",
+    "~/assets/sass/styles.scss",
+  ],
+
+  plugins: [{ src: "~/plugins/simplebar", mode: "client" }],
+
+  modules: ["@nuxtjs/i18n"],
+
+  i18n,
+
+  nitro: {
+    prerender: {
+      routes: prerenderRoutes,
+      failOnError: true,
     },
-    fallback: true,
   },
-  router,
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(config, ctx) {
-      config.resolve.alias["mapbox-gl"] = "maplibre-gl";
-      if (ctx.isDev) {
-        config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
-      }
-    },
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          "css-mqpacker": {
-            sort: sortCSSmq,
-          },
-          cssnano: {
-            reduceIdents: false,
-            zindex: false,
-          },
-        },
-        preset: {
-          autoprefixer: {
-            grid: "autoplace",
-          },
-        },
+
+  vite: {
+    resolve: {
+      alias: {
+        "mapbox-gl": "maplibre-gl",
       },
     },
   },
-  watchers: {
-    webpack: {
-      ignored: /node_modules/,
-    },
-  },
-};
+
+  compatibilityDate: "2026-07-30",
+});

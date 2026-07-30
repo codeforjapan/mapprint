@@ -132,11 +132,24 @@ div
 
 <script lang="js">
 import "maplibre-gl/dist/maplibre-gl.css";
-import "simplebar/dist/simplebar.min.css";
+import "simplebar-vue/dist/simplebar.min.css";
 import MapLibre from "maplibre-gl";
+import ky from "ky";
+// js-crc は CommonJS なので named import は SSR で解決できない
+import jsCrc from "js-crc";
 import { getNowYMD } from "~/lib/displayHelper";
+import MapHelper from "~/lib/MapHelper";
+// Vite では require が使えないため、ロケール別の画像は静的に import する
+import fukidashiJa from "~/assets/images/fukidashi_obj_ja.svg";
+import fukidashiEn from "~/assets/images/fukidashi_obj_en.svg";
+import activeTxtJa from "~/assets/images/active_txt_ja.svg";
+import activeTxtEn from "~/assets/images/active_txt_en.svg";
 
-const crc16 = require("js-crc").crc16;
+const FUKIDASHI = { ja: fukidashiJa, en: fukidashiEn };
+const ACTIVE_TXT = { ja: activeTxtJa, en: activeTxtEn };
+
+const { crc16 } = jsCrc;
+
 let helper;
 export default {
   props: {
@@ -163,8 +176,8 @@ export default {
       isOpenList: false,
       isDisplayAllCategory: true,
       mapStyle: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
-      legendMark: require(`@/assets/images/fukidashi_obj_${locale}.svg`),
-      legendActive: require(`@/assets/images/active_txt_${locale}.svg`),
+      legendMark: FUKIDASHI[locale],
+      legendActive: ACTIVE_TXT[locale],
     };
   },
   computed: {
@@ -243,7 +256,7 @@ export default {
       this.$nextTick(this.rebuildMarkers);
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     Object.keys(this.markerCache).forEach((key) => {
       this.markerCache[key].remove();
       delete this.markerCache[key];
@@ -254,8 +267,6 @@ export default {
     }
   },
   mounted() {
-    const MapHelper = require("~/lib/MapHelper.ts").default;
-    const ky = require("ky").default;
     helper = new MapHelper();
     const area = [];
     const categories = {};

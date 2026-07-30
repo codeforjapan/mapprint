@@ -22,6 +22,8 @@ div
 </template>
 
 <script lang="js">
+import { getMapConfig } from '~/lib/mapConfigs'
+
 export default {
   props: {
     isOpen: {
@@ -31,7 +33,7 @@ export default {
   },
   data() {
     return {
-      mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : '',
+      mapConfig: this.$route.params.map ? getMapConfig(this.$route.params.map) : '',
     }
   },
   methods: {

@@ -4,8 +4,14 @@ span 存在しないページ、またはエラーが発生したページです
 
 <script>
 export default {
+  props: {
+    error: {
+      type: Object,
+      default: null
+    }
+  },
   mounted () {
-    if (process.env.NODE_ENV === 'production') {
+    if (import.meta.env.PROD) {
       setTimeout(() => {
         location.href = '/'
       }, 5000)

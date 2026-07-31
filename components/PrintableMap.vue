@@ -138,6 +138,7 @@ import ky from "ky";
 // js-crc は CommonJS なので named import は SSR で解決できない
 import jsCrc from "js-crc";
 import { getNowYMD } from "~/lib/displayHelper";
+import { filterMarkers } from "~/lib/sourceFilter";
 import MapHelper from "~/lib/MapHelper";
 // Vite では require が使えないため、ロケール別の画像は静的に import する
 import fukidashiJa from "~/assets/images/fukidashi_obj_ja.svg";
@@ -309,12 +310,13 @@ export default {
     this.mapConfig.sources.forEach((source, index) => {
       (async () => {
         const data = await ky.get(source.url).text();
-        const [markers, updated_at] = helper.parse(
+        const [parsedMarkers, updated_at] = helper.parse(
           source.type,
           data,
           self.mapConfig.layer_settings,
           source.updated_search_key
         );
+        const markers = filterMarkers(parsedMarkers, source.filter);
         // eslint-disable-next-line array-callback-return
         markers.map((marker) => {
           categories[marker.category] = true;

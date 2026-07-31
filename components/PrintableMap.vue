@@ -7,9 +7,9 @@ div
         //- maplibre の Marker / Popup に渡す DOM は Vue 側で描画しておく。
         //- 元の要素をそのまま渡すと Vue の管理下から DOM が移動して patch が壊れるため、
         //- 地図へ渡すのは複製（cloneNode）にする。装飾のロジックはここに残す。
-        .marker-sources(v-show="false")
+        .marker-sources(v-show="false" ref="markerSources")
           div(v-for="(marker, index) in inBoundsMarkers" :key="markerKey(marker)")
-            div.marker(ref="markerEls")
+            div.marker(:data-marker-key="markerKey(marker)")
               span(
                 :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
                 :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
@@ -21,16 +21,16 @@ div
                 b.number(
                   :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
                 ) {{index + 1}}
-            div(ref="popupEls")
+            div(:data-popup-key="markerKey(marker)")
               div.popup-type
                 i(
                   :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
                   :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
                 )
                 span.popup-poi-type
-                  | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, $i18n.locale)}}
+                  | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, locale)}}
               p
-                | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
+                | {{$t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, locale)}}
               div.popup-detail-content
                 p(
                   v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
@@ -81,8 +81,8 @@ div
               simplebar(data-simplebar-auto-hide="false")
                 ul.legend-list
                   li.legend-item(
-                    v-for='(setting, category) in mapConfig.layer_settings'
-                    v-if="displayMarkersGroupByCategory.some((elm) => elm.category === category)"
+                    v-for='({ category, setting }) in visibleLegendEntries'
+                    :key='category'
                   )
                     span.legend-mark(
                       :style="{backgroundColor:setting.color}"
@@ -103,7 +103,7 @@ div
         .list-outer(:class='{open: isOpenList}')
           section.list-section(
             v-for='group in displayMarkersGroupByCategory'
-            :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, $i18n.locale)}'
+            :class='{show: isDisplayAllCategory || activeCategory === getMarkerCategoryText(group.category, locale)}'
           )
             h2.list-title(
               :style="{backgroundColor:mapConfig.layer_settings[group.category]?.color||group.markers[0]?.feature?.properties['marker-color']||'darkgreen'}"
@@ -112,11 +112,11 @@ div
                 i(
                   :class="mapConfig.layer_settings[group.category]?.icon_class"
                 )
-              span {{getMarkerCategoryText(mapConfig.layer_settings[group.category]?.name||group.category, $i18n.locale)}}
+              span {{getMarkerCategoryText(mapConfig.layer_settings[group.category]?.name||group.category, locale)}}
             ul.list-items.grid-noGutter
               li.col-12_xs-6(v-for="marker in group.markers")
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
-                span.item-name {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
+                span.item-name {{getMarkerNameText(marker.feature.properties, locale)}}
           .list-section-none(
             v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0"
           )
@@ -132,11 +132,24 @@ div
 
 <script lang="js">
 import "maplibre-gl/dist/maplibre-gl.css";
-import "simplebar/dist/simplebar.min.css";
+import "simplebar-vue/dist/simplebar.min.css";
 import MapLibre from "maplibre-gl";
+import ky from "ky";
+// js-crc は CommonJS なので named import は SSR で解決できない
+import jsCrc from "js-crc";
 import { getNowYMD } from "~/lib/displayHelper";
+import MapHelper from "~/lib/MapHelper";
+// Vite では require が使えないため、ロケール別の画像は静的に import する
+import fukidashiJa from "~/assets/images/fukidashi_obj_ja.svg";
+import fukidashiEn from "~/assets/images/fukidashi_obj_en.svg";
+import activeTxtJa from "~/assets/images/active_txt_ja.svg";
+import activeTxtEn from "~/assets/images/active_txt_en.svg";
 
-const crc16 = require("js-crc").crc16;
+const FUKIDASHI = { ja: fukidashiJa, en: fukidashiEn };
+const ACTIVE_TXT = { ja: activeTxtJa, en: activeTxtEn };
+
+const { crc16 } = jsCrc;
+
 let helper;
 export default {
   props: {
@@ -147,7 +160,7 @@ export default {
   },
   data() {
     let locale = "en";
-    if (this.$i18n.locale === "ja") {
+    if (this.locale === "ja") {
       locale = "ja";
     }
     return {
@@ -163,11 +176,17 @@ export default {
       isOpenList: false,
       isDisplayAllCategory: true,
       mapStyle: "https://tile.openstreetmap.jp/styles/maptiler-basic-ja/style.json",
-      legendMark: require(`@/assets/images/fukidashi_obj_${locale}.svg`),
-      legendActive: require(`@/assets/images/active_txt_${locale}.svg`),
+      legendMark: FUKIDASHI[locale],
+      legendActive: ACTIVE_TXT[locale],
     };
   },
   computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale() {
+      const l = this.$i18n.locale;
+      return l && typeof l === "object" && "value" in l ? l.value : l;
+    },
     center() {
       return this.mapConfig.center;
     },
@@ -194,6 +213,16 @@ export default {
           return helper.inBounds(marker.feature.geometry.coordinates, this.bounds);
         });
       return inBoundsMarkers;
+    },
+    // Vue 3 では同一要素の v-for と v-if を併用できない（v-if が先に評価される）。
+    // 表示対象のカテゴリだけを先に配列にしておく。
+    visibleLegendEntries() {
+      const settings = this.mapConfig.layer_settings || {};
+      return Object.keys(settings)
+        .filter((category) =>
+          this.displayMarkersGroupByCategory.some((elm) => elm.category === category)
+        )
+        .map((category) => ({ category, setting: settings[category] }));
     },
     displayMarkersGroupByCategory() {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
@@ -226,10 +255,15 @@ export default {
     this.markerCache = {};
   },
   watch: {
-    layers() {
-      if (this.layers.length && !this.map) {
-        this.$nextTick(this.initMap);
-      }
+    // Vue 3 では配列への push は親プロパティの watcher を発火させないため deep が必要。
+    // Vue 2 は配列メソッドを介入していたので不要だった。
+    layers: {
+      deep: true,
+      handler() {
+        if (this.layers.length && !this.map) {
+          this.$nextTick(this.initMap);
+        }
+      },
     },
     inBoundsMarkers() {
       this.$nextTick(this.syncMarkers);
@@ -243,7 +277,7 @@ export default {
       this.$nextTick(this.rebuildMarkers);
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     Object.keys(this.markerCache).forEach((key) => {
       this.markerCache[key].remove();
       delete this.markerCache[key];
@@ -254,8 +288,6 @@ export default {
     }
   },
   mounted() {
-    const MapHelper = require("~/lib/MapHelper.ts").default;
-    const ky = require("ky").default;
     helper = new MapHelper();
     const area = [];
     const categories = {};
@@ -358,21 +390,37 @@ export default {
       if (!this.map) {
         return;
       }
-      const markerEls = this.$refs.markerEls || [];
-      const popupEls = this.$refs.popupEls || [];
+      // Vue 3 は v-for の template ref の配列順序を保証しないため、添字では引けない。
+      // 表示範囲が変わって DOM が再利用されると、別の地点の吹き出しが付いてしまう。
+      // 鍵を DOM 側に持たせて、鍵で引く。
+      const byKey = (attr) => {
+        const found = {};
+        const root = this.$refs.markerSources;
+        if (root) {
+          root.querySelectorAll("[" + attr + "]").forEach((el) => {
+            found[el.getAttribute(attr)] = el;
+          });
+        }
+        return found;
+      };
+      const markerEls = byKey("data-marker-key");
+      const popupEls = byKey("data-popup-key");
       const wanted = {};
       this.inBoundsMarkers.forEach((marker, index) => {
         const key = this.markerKey(marker);
         wanted[key] = true;
         if (this.markerCache[key]) {
+          // 番号は表示範囲によって変わる。複製を作り直さずに書き換える。
+          // 放置すると地図の番号と印刷される一覧の番号が食い違う。
+          this.updateMarkerNumber(this.markerCache[key], index + 1);
           return;
         }
-        const markerEl = markerEls[index];
+        const markerEl = markerEls[key];
         if (!markerEl) {
           return;
         }
         const popup = new MapLibre.Popup({ offset: 12 });
-        const popupEl = popupEls[index];
+        const popupEl = popupEls[key];
         if (popupEl) {
           popup.setDOMContent(popupEl.cloneNode(true));
         }
@@ -390,6 +438,14 @@ export default {
           delete this.markerCache[key];
         }
       });
+    },
+    // 複製した DOM のうち、表示範囲で変わるのは番号だけ。そこだけ書き換える。
+    updateMarkerNumber(mapMarker, number) {
+      const el = mapMarker.getElement ? mapMarker.getElement() : null;
+      const numberEl = el ? el.querySelector(".number") : null;
+      if (numberEl) {
+        numberEl.textContent = String(number);
+      }
     },
     rebuildMarkers() {
       Object.keys(this.markerCache).forEach((key) => {
@@ -417,7 +473,7 @@ export default {
         category = "未分類";
       }
       const key = "category." + category;
-      const categoryText = this.$i18n.t(key);
+      const categoryText = this.$t(key);
       if (categoryText !== key) {
         return categoryText;
       } else {

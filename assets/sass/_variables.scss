@@ -51,10 +51,11 @@ $root-box-sizing: border-box;
 $gl-gutter: 1.5em;
 $gl-gutter-vertical: 1.5em;
 $gl-mq-width: 'min-width';
+// 並び順の意味は vendor/gridlex/_gridlex-vars.scss のコメントを参照（昇順であること）
 $gl-mq-list: (
-  xl: 93em,
-  lg: 75em,
-  md: 52.625em,
+  xs: 35.5em,
   sm: 48em,
-  xs: 35.5em
+  md: 52.625em,
+  lg: 75em,
+  xl: 93em
 );

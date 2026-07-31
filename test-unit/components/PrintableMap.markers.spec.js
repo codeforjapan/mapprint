@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import PrintableMap from '~/components/PrintableMap.vue';
 
@@ -5,17 +6,16 @@ import PrintableMap from '~/components/PrintableMap.vue';
 // 表示範囲での絞り込みとカテゴリ分類は、印刷される POI 一覧の中身を決めているので、
 // ここが壊れると紙の内容が変わる。地図の生成方法とは独立している。
 
-jest.mock('ky', () => ({ default: { get: () => ({ text: async () => '' }) } }));
+vi.mock('ky', () => ({ default: { get: () => ({ text: async () => '' }) } }));
 
 // vue-mapbox を撤去したので、このコンポーネントは自分で maplibre の Map を作る。
 // この spec は地図に関心がないが、モックしないと jsdom で WebGL 初期化が失敗して
 // 未処理のリジェクトになる（jest は落とさないが vitest は落とす）。
-jest.mock('maplibre-gl', () => {
-  const actual = jest.requireActual('maplibre-gl');
+vi.mock('maplibre-gl', async () => {
+  const actual = await vi.importActual('maplibre-gl');
   // maplibre-gl 1.x は UMD なので実体が default の下に来ることがある
   const base = actual.default ?? actual;
-  // eslint-disable-next-line global-require
-  const m = require('../mocks/maplibreMock');
+  const m = await import('../mocks/maplibreMock');
   const mocked = {
     ...base,
     Map: m.MockMap,
@@ -81,9 +81,11 @@ const LAYERS = [
 
 const factory = async (data = {}) => {
   const wrapper = mount(PrintableMap, {
-    propsData: { mapConfig: mapConfig() },
-    stubs: MAP_STUBS,
-    mocks: { $i18n: { locale: 'ja', t: (key) => key }, $t: (key) => key },
+    props: { mapConfig: mapConfig() },
+    global: {
+      stubs: MAP_STUBS,
+      mocks: { $i18n: { locale: 'ja', t: (key) => key }, $t: (key) => key },
+    },
   });
   await wrapper.setData({ layers: LAYERS, checkedArea: ['水', '避難'], ...data });
   await wrapper.vm.$nextTick();
@@ -131,13 +133,15 @@ describe('PrintableMap のカテゴリ分類', () => {
   // 無ければカテゴリ名をそのまま返す。両方の分岐を確認する。
   test('翻訳があれば翻訳を、無ければカテゴリ名をそのまま返す', async () => {
     const wrapper = mount(PrintableMap, {
-      propsData: { mapConfig: mapConfig() },
-      stubs: MAP_STUBS,
-      mocks: {
-        // 実装が $i18n.t / $t のどちらを使っても同じ結果になるよう両方に入れる。
-        // category.給水所 だけ翻訳がある状態を作る。
-        $i18n: { locale: 'ja', t: translate },
-        $t: translate,
+      props: { mapConfig: mapConfig() },
+      global: {
+        stubs: MAP_STUBS,
+        mocks: {
+          // 実装が $i18n.t / $t のどちらを使っても同じ結果になるよう両方に入れる。
+          // category.給水所 だけ翻訳がある状態を作る。
+          $i18n: { locale: 'ja', t: translate },
+          $t: translate,
+        },
       },
     });
     expect(wrapper.vm.getMarkerCategoryText('給水所', 'ja')).toBe('給水ポイント');

@@ -13,7 +13,7 @@
             nuxt-link(:to="localePath('/map/' + map.map_id)", v-bind:key='index')
               .index-link-inner
                 img(:src='"https://kamimap.com/images/" + (map.map_image ? map.map_image : "logo.png")' alt='')
-                .index-item-title(v-if="$i18n.locale === 'ja'")
+                .index-item-title(v-if="locale === 'ja'")
                   span
                     | {{map.map_title}}
                 .index-item-title(v-else)
@@ -41,8 +41,8 @@
       i.fas.fa-language.fa-lg
       select(onChange="location.href=value;")
         option.language(disabled selected)
-          | Language: {{$i18n.locales.filter((i) => { return i.code === $i18n.locale })[0].name}}
-        option(v-for="locale in $i18n.locales" :value="switchLocalePath(locale.code)")
+          | Language: {{locales.filter((i) => { return i.code === locale })[0].name}}
+        option(v-for="locale in locales" :value="switchLocalePath(locale.code)")
           | {{ locale.name }}
   modal(v-bind:isOpen='isOpenExplain' v-on:closeModal="closeModalMethod")
 </template>
@@ -50,16 +50,66 @@
 <script lang="ts">
 import mapList from "~/assets/config/list.json";
 import Modal from "~/components/Modal.vue";
+import { getMapConfig } from "~/lib/mapConfigs";
+import { getSiteMeta } from "~/lib/siteMeta";
 
-const maps = [];
+const maps = mapList.map((name) => getMapConfig(name));
 
-mapList.forEach((name) => {
-  maps.push(require("~/assets/config/" + name));
-});
-
-export default {
+export default defineNuxtComponent({
   components: {
     Modal,
+  },
+  // @nuxtjs/i18n v9 以降 localePath は composable なので、
+  // Options API のテンプレートから使えるよう setup で公開する
+  // vue-i18n 9 以降 locale と locales は ref なので、
+  // テンプレートやスクリプトから直接使えない。setup で unwrap して公開する。
+  setup() {
+    const { locale, t } = useI18n();
+
+    // head() は defineNuxtComponent では setup 経由で処理され、その時点では
+    // computed も setup の戻り値も this から参照できない。useHead に移す。
+    // 移さないと this.locale が undefined になって常に default 分岐に落ち、
+    // 日本語でもタイトルが "KamiMap" になってしまう。
+    useHead(() => {
+      const { siteName, siteDesc } = getSiteMeta(locale.value, t);
+      return {
+        title: siteName,
+        meta: [
+          { name: "description", content: siteDesc },
+          { property: "og:site_name", content: siteName },
+          { property: "og:title", content: siteName },
+          { property: "og:description", content: siteDesc },
+        ],
+        script: [
+          {
+            src: "https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v4.0",
+            async: true,
+            defer: true,
+            crossorigin: "anonymous",
+          },
+          { src: "https://platform.twitter.com/widgets.js", async: true },
+          {
+            src: "https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js",
+            async: true,
+            defer: true,
+          },
+        ],
+      };
+    });
+
+    return { localePath: useLocalePath(), switchLocalePath: useSwitchLocalePath() };
+  },
+  computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale() {
+      const l = this.$i18n.locale;
+      return l && typeof l === "object" && "value" in l ? l.value : l;
+    },
+    locales() {
+      const l = this.$i18n.locales;
+      return l && typeof l === "object" && "value" in l ? l.value : l;
+    },
   },
   data() {
     return {
@@ -67,49 +117,10 @@ export default {
       isOpenExplain: false,
     };
   },
-  head() {
-    let siteName, siteDesc;
-    switch (this.$i18n.locale) {
-      case "ja":
-      case "en":
-      case "kr":
-        siteName = this.$i18n.t("common.site_name");
-        siteDesc = this.$i18n.t("common.site_desc");
-        break;
-      default:
-        siteName = "KamiMap";
-        siteDesc = "Paper Map for printable map information";
-        break;
-    }
-    return {
-      title: siteName,
-      meta: [
-        { hid: "description", name: "description", content: siteDesc },
-        { hid: "og:site_name", property: "og:site_name", content: siteName },
-        { hid: "og:title", property: "og:title", content: siteName },
-        { hid: "og:description", property: "og:description", content: siteDesc },
-      ],
-      script: [
-        {
-          src: "https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v4.0",
-          async: true,
-          defer: true,
-          crossorigin: "anonymous",
-        },
-        { src: "https://platform.twitter.com/widgets.js", async: true },
-        {
-          src: "https://d.line-scdn.net/r/web/social-plugin/js/thirdparty/loader.min.js",
-          async: true,
-          defer: true,
-        },
-      ],
-    };
-  },
   methods: {
     closeModalMethod() {
       this.isOpenExplain = false;
     },
   },
-};
+});
 </script>
-

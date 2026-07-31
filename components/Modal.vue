@@ -3,12 +3,14 @@
 div
   .modal(v-bind:class='{open: isOpen}')
     p(v-if="mapConfig")
-      span(v-if="$i18n.locale === 'ja' || !mapConfig.map_description_en") {{mapConfig.map_description}}
+      span(v-if="locale === 'ja' || !mapConfig.map_description_en") {{mapConfig.map_description}}
       span(v-else) {{mapConfig.map_description_en}}
     p
       //- Remove this v-if conditional branching and just use the i18n tag when the translation is complete.
-      span(v-if="$i18n.locale === 'ja' || $i18n.locale === 'en'")
-        i18n(path="about.desc")
+      span(v-if="locale === 'ja' || locale === 'en'")
+        //- vue-i18n 9 以降 <i18n> は <i18n-t> に、path は keypath に変わった。
+        //- 旧名のままだと未知のコンポーネント扱いで本文が丸ごと消える（例外は出ない）
+        i18n-t(keypath="about.desc" tag="span")
           template(#githubRepo)
             a(href="https://github.com/codeforjapan/mapprint") {{$t('about.github_repository')}}
       span(v-else) 
@@ -22,16 +24,27 @@ div
 </template>
 
 <script lang="js">
+import { getMapConfig } from '~/lib/mapConfigs'
+
 export default {
+  // vue-i18n 9 以降 locale と locales は ref なので、
+  // テンプレートやスクリプトから直接使えない。setup で unwrap して公開する。
   props: {
     isOpen: {
       type: Boolean,
       default: false
     }
   },
-  data() {
-    return {
-      mapConfig: this.$nuxt.$route.params.map ? require('~/assets/config/' + (this.$nuxt.$route.params.map)) : '',
+  computed: {
+    // vue-i18n 9 以降 $i18n.locale は ref なのでテンプレートから直接使えない。
+    // ref でも素の値でも動くように unwrap した computed を用意する。
+    locale () {
+      const l = this.$i18n.locale
+      return l && typeof l === 'object' && 'value' in l ? l.value : l
+    },
+    mapConfig () {
+      const id = this.$route?.params?.map
+      return id ? getMapConfig(id) : ''
     }
   },
   methods: {

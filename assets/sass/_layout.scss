@@ -7,7 +7,8 @@
 }
 
 .layout-index {
-  background-image: url("~assets/images/index_body_bg.png");
+  // ~assets は webpack のエイリアスで Vite は解釈しない。相対パスにする
+  background-image: url("../images/index_body_bg.png");
   background-size: 500px 500px;
   min-height: 100vh;
   padding: 2em;

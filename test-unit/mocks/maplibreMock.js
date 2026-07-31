@@ -74,6 +74,11 @@ export class MockMarker {
     return this;
   }
 
+  // 本物の Marker と同じく、渡された要素をそのまま返す
+  getElement() {
+    return this.options.element;
+  }
+
   setPopup(popup) {
     this.popup = popup;
     return this;

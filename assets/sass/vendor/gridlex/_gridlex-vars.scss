@@ -9,10 +9,14 @@ $gl-attributeName: class !default;
 $gl-gutter: 1.5em;
 $gl-gutter-vertical: 1.5em;
 $gl-mq-width: 'min-width';
+// min-width のメディアクエリはこの並び順のまま出力されるため、昇順でなければならない。
+// 降順だと広い画面で xs の指定が lg より後に来て後勝ちし、
+// col-12_xs-6_lg-4 が PC で 3 列ではなく 2 列になる。
+// Nuxt 2 のビルドはメディアクエリを昇順にまとめ直していたため症状が出ていなかった。
 $gl-mq-list: (
-  xl: 93em,
-  lg: 75em,
-  md: 52.625em,
+  xs: 35.5em,
   sm: 48em,
-  xs: 35.5em
+  md: 52.625em,
+  lg: 75em,
+  xl: 93em
 );

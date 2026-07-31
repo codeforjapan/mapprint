@@ -7,9 +7,9 @@ div
         //- maplibre の Marker / Popup に渡す DOM は Vue 側で描画しておく。
         //- 元の要素をそのまま渡すと Vue の管理下から DOM が移動して patch が壊れるため、
         //- 地図へ渡すのは複製（cloneNode）にする。装飾のロジックはここに残す。
-        .marker-sources(v-show="false")
+        .marker-sources(v-show="false" ref="markerSources")
           div(v-for="(marker, index) in inBoundsMarkers" :key="markerKey(marker)")
-            div.marker(ref="markerEls")
+            div.marker(:data-marker-key="markerKey(marker)")
               span(
                 :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
                 :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
@@ -21,7 +21,7 @@ div
                 b.number(
                   :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
                 ) {{index + 1}}
-            div(ref="popupEls")
+            div(:data-popup-key="markerKey(marker)")
               div.popup-type
                 i(
                   :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
@@ -390,21 +390,37 @@ export default {
       if (!this.map) {
         return;
       }
-      const markerEls = this.$refs.markerEls || [];
-      const popupEls = this.$refs.popupEls || [];
+      // Vue 3 は v-for の template ref の配列順序を保証しないため、添字では引けない。
+      // 表示範囲が変わって DOM が再利用されると、別の地点の吹き出しが付いてしまう。
+      // 鍵を DOM 側に持たせて、鍵で引く。
+      const byKey = (attr) => {
+        const found = {};
+        const root = this.$refs.markerSources;
+        if (root) {
+          root.querySelectorAll("[" + attr + "]").forEach((el) => {
+            found[el.getAttribute(attr)] = el;
+          });
+        }
+        return found;
+      };
+      const markerEls = byKey("data-marker-key");
+      const popupEls = byKey("data-popup-key");
       const wanted = {};
       this.inBoundsMarkers.forEach((marker, index) => {
         const key = this.markerKey(marker);
         wanted[key] = true;
         if (this.markerCache[key]) {
+          // 番号は表示範囲によって変わる。複製を作り直さずに書き換える。
+          // 放置すると地図の番号と印刷される一覧の番号が食い違う。
+          this.updateMarkerNumber(this.markerCache[key], index + 1);
           return;
         }
-        const markerEl = markerEls[index];
+        const markerEl = markerEls[key];
         if (!markerEl) {
           return;
         }
         const popup = new MapLibre.Popup({ offset: 12 });
-        const popupEl = popupEls[index];
+        const popupEl = popupEls[key];
         if (popupEl) {
           popup.setDOMContent(popupEl.cloneNode(true));
         }
@@ -422,6 +438,14 @@ export default {
           delete this.markerCache[key];
         }
       });
+    },
+    // 複製した DOM のうち、表示範囲で変わるのは番号だけ。そこだけ書き換える。
+    updateMarkerNumber(mapMarker, number) {
+      const el = mapMarker.getElement ? mapMarker.getElement() : null;
+      const numberEl = el ? el.querySelector(".number") : null;
+      if (numberEl) {
+        numberEl.textContent = String(number);
+      }
     },
     rebuildMarkers() {
       Object.keys(this.markerCache).forEach((key) => {

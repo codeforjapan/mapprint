@@ -1,0 +1,1 @@
+import{E as e,t,w as n,y as r}from"#entry";var i={},a={class:`layout-container`};function o(t,i){return n(),r(`div`,a,[e(t.$slots,`default`)])}var s=t(i,[[`render`,o]]);export{s as default};

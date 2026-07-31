@@ -50,12 +50,14 @@ const mapConfig = () => ({
   center: [130.72, 32.62],
   default_hash: '32.7,130.6-32.5,130.8',
   type: 'geojson',
-  sources: [{ id: 'a', title: '水', type: 'geojson', show: true, url: 'http://test/a' }],
+  // layers は setData で直接注入する。sources に書くと mounted() の取得が
+  // 同じ位置を上書きして、注入したデータと取得結果が競合する（markers.spec と同じ流儀）
+  sources: [],
   layer_settings: { 給水: { name: '給水所', color: '#285797', bg_color: '#A3BBDA' } },
 });
 
 const layersOf = (markers) => [
-  { source: mapConfig().sources[0], markers },
+  { source: { id: 'a', title: '水', type: 'geojson', show: true, url: 'http://test/a' }, markers },
 ];
 
 const factory = async (markers) => {

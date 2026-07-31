@@ -3,46 +3,38 @@ div
   client-only
     div(v-if='layers.length')
       .map-outer
-        MglMap(:mapStyle.sync="mapStyle"
-          :center='center', :zoom='15', @load="load"
-          preserveDrawingBuffer=true
-          sourceId="basemap", ref="map_obj"
-        )#map
-          MglGeolocateControl
-          MglMarker(
-            v-for="(marker, index) in inBoundsMarkers"
-            :key="String(index)"
-            :coordinates="marker.feature.geometry.coordinates"
-            anchor="top-left"
-          )
-            template(slot="marker")
-              div.marker
-                span(
-                  :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
-                  :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
+        #map(ref="map_container")
+        //- maplibre の Marker / Popup に渡す DOM は Vue 側で描画しておく。
+        //- 元の要素をそのまま渡すと Vue の管理下から DOM が移動して patch が壊れるため、
+        //- 地図へ渡すのは複製（cloneNode）にする。装飾のロジックはここに残す。
+        .marker-sources(v-show="false")
+          div(v-for="(marker, index) in inBoundsMarkers" :key="markerKey(marker)")
+            div.marker(ref="markerEls")
+              span(
+                :style="{background:mapConfig.layer_settings[marker.category]?.color||marker.feature.properties['marker-color']||'red'}"
+                :class="{show: isDisplayAllCategory || activeCategory === marker.category}"
+              )
+                i(
+                  :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
+                  :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color, display:mapConfig.layer_settings[marker.category]?'inline':'none'}"
                 )
-                  i(
-                    :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
-                    :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color, display:mapConfig.layer_settings[marker.category]?'inline':'none'}"
-                  )
-                  b.number(
-                    :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
-                  ) {{index + 1}}
-            MglPopup
-              div
-                div.popup-type
-                  i(
-                    :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
-                    :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
-                  )
-                  span.popup-poi-type
-                    | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, $i18n.locale)}}
-                p
-                  | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
-                div.popup-detail-content
-                  p(
-                    v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
-                  )
+                b.number(
+                  :style="{background:mapConfig.layer_settings[marker.category]?.bg_color}"
+                ) {{index + 1}}
+            div(ref="popupEls")
+              div.popup-type
+                i(
+                  :class="[mapConfig.layer_settings[marker.category]?.icon_class, mapConfig.layer_settings[marker.category]?.class]"
+                  :style="{backgroundColor:mapConfig.layer_settings[marker.category]?.color}"
+                )
+                span.popup-poi-type
+                  | {{getMarkerCategoryText(mapConfig.layer_settings[marker.category]?.name||marker.category, $i18n.locale)}}
+              p
+                | {{$i18n.t("PrintableMap.name")}} {{getMarkerNameText(marker.feature.properties, $i18n.locale)}}
+              div.popup-detail-content
+                p(
+                  v-html="marker.feature.properties.description ? marker.feature.properties.description : ''"
+                )
       .legend-navi
         .area-select(:class='{open: isOpenAreaSelect}')
           .area-close(@click="isOpenAreaSelect=false")
@@ -159,8 +151,9 @@ export default {
       locale = "ja";
     }
     return {
+      // maplibre の Map と Marker は data に置かない。Vue 2 が深くリアクティブ化して
+      // WebGL 由来のオブジェクトを走査してしまうため、created で非リアクティブに持つ。
       layers: [],
-      map: null,
       bounds: null,
       updated_at: null,
       previous_hash: "",
@@ -227,6 +220,39 @@ export default {
       },
     },
   },
+  created() {
+    // 非リアクティブに保持する。key は markerKey()、値は MapLibre.Marker。
+    this.map = null;
+    this.markerCache = {};
+  },
+  watch: {
+    layers() {
+      if (this.layers.length && !this.map) {
+        this.$nextTick(this.initMap);
+      }
+    },
+    inBoundsMarkers() {
+      this.$nextTick(this.syncMarkers);
+    },
+    // 凡例のカテゴリ選択はマーカーの見た目（show クラス）を変える。
+    // 複製を地図に渡しているので作り直す。クリック起点なのでちらつきは問題にならない。
+    activeCategory() {
+      this.$nextTick(this.rebuildMarkers);
+    },
+    isDisplayAllCategory() {
+      this.$nextTick(this.rebuildMarkers);
+    },
+  },
+  beforeDestroy() {
+    Object.keys(this.markerCache).forEach((key) => {
+      this.markerCache[key].remove();
+      delete this.markerCache[key];
+    });
+    if (this.map) {
+      this.map.remove();
+      this.map = null;
+    }
+  },
   mounted() {
     const MapHelper = require("~/lib/MapHelper.ts").default;
     const ky = require("ky").default;
@@ -282,26 +308,95 @@ export default {
     });
   },
   methods: {
+    // 地図コンテナは template の v-if='layers.length' の内側にあるため、
+    // mounted の時点では存在しない。layers が埋まってから呼ばれる。
+    initMap() {
+      const container = this.$refs.map_container;
+      if (!container || this.map) {
+        return;
+      }
+      this.map = new MapLibre.Map({
+        container,
+        style: this.mapStyle,
+        center: this.center,
+        zoom: 15,
+        // 印刷時に canvas を読み戻すため必須。落とすと画面では正常に見えるのに
+        // 印刷結果の地図が白くなる。
+        preserveDrawingBuffer: true,
+      });
+      this.map.addControl(new MapLibre.NavigationControl());
+      this.map.addControl(new MapLibre.GeolocateControl({ trackUserLocation: false }));
+      this.load();
+      this.$nextTick(this.syncMarkers);
+    },
     load() {
       const locationhash = window.location.hash.substr(1);
       let initbounds = helper.deserializeBounds(locationhash);
-      this.map = this.$refs.map_obj;
       if (initbounds !== undefined) {
-        this.map.map.fitBounds(initbounds, { linear: false });
+        this.map.fitBounds(initbounds, { linear: false });
       } else {
         initbounds = helper.deserializeBounds(this.mapConfig.default_hash);
         if (initbounds !== undefined) {
-          this.map.map.fitBounds(initbounds, { linear: false });
+          this.map.fitBounds(initbounds, { linear: false });
         }
       }
-      this.map.map.on("moveend", this.etmitBounds);
+      this.map.on("moveend", this.etmitBounds);
       this.etmitBounds();
-      this.map.map.addControl(new MapLibre.NavigationControl());
     },
     etmitBounds() {
-      this.bounds = this.map.map.getBounds();
+      this.bounds = this.map.getBounds();
       this.setHash(this.bounds);
       this.$emit("bounds-changed");
+    },
+    // 座標・カテゴリ・名称で一意にする。地図移動のたびに全消しせず差分更新するための鍵。
+    markerKey(marker) {
+      const coordinates = marker.feature.geometry.coordinates.join(",");
+      const name = marker.feature.properties.name || "";
+      return marker.category + "|" + coordinates + "|" + name;
+    },
+    syncMarkers() {
+      if (!this.map) {
+        return;
+      }
+      const markerEls = this.$refs.markerEls || [];
+      const popupEls = this.$refs.popupEls || [];
+      const wanted = {};
+      this.inBoundsMarkers.forEach((marker, index) => {
+        const key = this.markerKey(marker);
+        wanted[key] = true;
+        if (this.markerCache[key]) {
+          return;
+        }
+        const markerEl = markerEls[index];
+        if (!markerEl) {
+          return;
+        }
+        const popup = new MapLibre.Popup({ offset: 12 });
+        const popupEl = popupEls[index];
+        if (popupEl) {
+          popup.setDOMContent(popupEl.cloneNode(true));
+        }
+        this.markerCache[key] = new MapLibre.Marker({
+          element: markerEl.cloneNode(true),
+          anchor: "top-left",
+        })
+          .setLngLat(marker.feature.geometry.coordinates)
+          .setPopup(popup)
+          .addTo(this.map);
+      });
+      Object.keys(this.markerCache).forEach((key) => {
+        if (!wanted[key]) {
+          this.markerCache[key].remove();
+          delete this.markerCache[key];
+        }
+      });
+    },
+    rebuildMarkers() {
+      Object.keys(this.markerCache).forEach((key) => {
+        this.markerCache[key].remove();
+        delete this.markerCache[key];
+      });
+      this.syncMarkers();
     },
     setHash(bounds) {
       const s = helper.serializeBounds(bounds);

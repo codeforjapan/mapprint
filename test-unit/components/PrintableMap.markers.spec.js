@@ -3,18 +3,33 @@ import PrintableMap from '~/components/PrintableMap.vue';
 
 // PrintableMap のうち、地図ライブラリに依存しない部分を固定する。
 // 表示範囲での絞り込みとカテゴリ分類は、印刷される POI 一覧の中身を決めているので、
-// ここが壊れると紙の内容が変わる。地図の生成方法とは独立しているため、
-// 地図コンポーネントはスタブに置き換えてマウントする。
+// ここが壊れると紙の内容が変わる。地図の生成方法とは独立している。
 
 jest.mock('ky', () => ({ default: { get: () => ({ text: async () => '' }) } }));
+
+// vue-mapbox を撤去したので、このコンポーネントは自分で maplibre の Map を作る。
+// この spec は地図に関心がないが、モックしないと jsdom で WebGL 初期化が失敗して
+// 未処理のリジェクトになる（jest は落とさないが vitest は落とす）。
+jest.mock('maplibre-gl', () => {
+  const actual = jest.requireActual('maplibre-gl');
+  // maplibre-gl 1.x は UMD なので実体が default の下に来ることがある
+  const base = actual.default ?? actual;
+  // eslint-disable-next-line global-require
+  const m = require('../mocks/maplibreMock');
+  const mocked = {
+    ...base,
+    Map: m.MockMap,
+    Marker: m.MockMarker,
+    Popup: m.MockPopup,
+    NavigationControl: m.MockNavigationControl,
+    GeolocateControl: m.MockGeolocateControl,
+  };
+  return { ...mocked, default: mocked };
+});
 
 const MAP_STUBS = {
   'client-only': { template: '<div><slot /></div>' },
   simplebar: { template: '<div><slot /></div>' },
-  MglMap: { template: '<div><slot /></div>' },
-  MglMarker: { template: '<div><slot /></div>' },
-  MglPopup: { template: '<div><slot /></div>' },
-  MglGeolocateControl: { template: '<div />' },
 };
 
 const mapConfig = () => ({
@@ -76,8 +91,10 @@ const factory = async (data = {}) => {
 };
 
 describe('PrintableMap の表示対象の絞り込み', () => {
+  // 地図が出来ると load() が bounds を入れるので、明示的に null に戻して確認する
   test('bounds が無いときは全てのマーカーを対象にする', async () => {
     const wrapper = await factory();
+    await wrapper.setData({ bounds: null });
     expect(wrapper.vm.inBoundsMarkers).toHaveLength(4);
   });
 

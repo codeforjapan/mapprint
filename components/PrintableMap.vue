@@ -118,7 +118,7 @@ div
                 span.item-number {{inBoundsMarkers.indexOf(marker) +1}}
                 span.item-name {{getMarkerNameText(marker.feature.properties, locale)}}
           .list-section-none(
-            v-if="isDisplayAllCategory && displayMarkersGroupByCategory.length === 0"
+            v-if="isDisplayAllCategory && allSourcesLoaded && displayMarkersGroupByCategory.length === 0"
           )
             p
               | {{$t("PrintableMap.no_point_in_map")}}
@@ -167,6 +167,7 @@ export default {
       // maplibre の Map と Marker は data に置かない。Vue 2 が深くリアクティブ化して
       // WebGL 由来のオブジェクトを走査してしまうため、created で非リアクティブに持つ。
       layers: [],
+      loadedSourceCount: 0,
       bounds: null,
       updated_at: null,
       previous_hash: "",
@@ -223,6 +224,12 @@ export default {
           this.displayMarkersGroupByCategory.some((elm) => elm.category === category)
         )
         .map((category) => ({ category, setting: settings[category] }));
+    },
+    // 位置の確保で layers は最初から埋まるので、length では読み込み中かどうか
+    // 分からない。「該当する地点がありません」は全ソースの取得が終わるまで
+    // 判定できないため、取得が完了した数を別に数える。
+    allSourcesLoaded() {
+      return this.loadedSourceCount >= this.mapConfig.sources.length;
     },
     displayMarkersGroupByCategory() {
       const resultGroupBy = this.inBoundsMarkers.reduce((groups, current) => {
@@ -289,16 +296,18 @@ export default {
   },
   mounted() {
     helper = new MapHelper();
-    const area = [];
     const categories = {};
     const self = this;
-    this.mapConfig.sources.forEach((source) => {
+    // 取得の完了順ではなく mapConfig.sources の順序で並べる。印刷される一覧の
+    // 番号は layers を順に辿って振られるので、完了順に入れると回線の速さで
+    // 同じ地点に違う番号が付き、刷り直した紙どうしが食い違う。
+    this.layers = this.mapConfig.sources.map((source) => ({ source, markers: [] }));
+    this.checkedArea = this.mapConfig.sources
+      .filter((source) => source.show)
+      .map((source) => source.title);
+    this.updated_at = getNowYMD(new Date());
+    this.mapConfig.sources.forEach((source, index) => {
       (async () => {
-        if (source.show) {
-          area.push(source.title);
-        }
-        self.checkedArea = area;
-        self.updated_at = getNowYMD(new Date());
         const data = await ky.get(source.url).text();
         const [markers, updated_at] = helper.parse(
           source.type,
@@ -332,10 +341,12 @@ export default {
             })
           }
         });
-        self.layers.push({
+        // 位置は取得を始めた時点で決まっているので、完了順に影響されない
+        self.layers[index] = {
           source,
           markers,
-        });
+        };
+        self.loadedSourceCount += 1;
       })();
     });
   },

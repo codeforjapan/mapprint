@@ -2,7 +2,7 @@
 
 紙マップ
 ===
-![kamimap](static/images/logo.png)
+![kamimap](public/images/logo.png)
 
 Google マイマップ や、umap の情報を取り込んで、印刷向けに最適化して表示できるサイトのソースコードです。
 
